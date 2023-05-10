@@ -11,6 +11,7 @@ export default async function Home() {
       <Main
         pageBuilder={data.homeAppearance.homePage.pageBuilder}
         allTestimonials={data.allTestimonial}
+        allServices={data.allServices}
         // CONTACT
         email={data?.profileSettings?.contact_information?.email}
         phone_number={data?.profileSettings?.contact_information?.phone_number}

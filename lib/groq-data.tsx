@@ -73,7 +73,7 @@ export const pageBuilderData = groq`
 const homeOtherDocumentSections = groq`
 'allServices': *[_type == 'services'][0..6] {
   ...,
-  'imageData': headerImage {
+  'imageData': featuredImage {
     asset->{
       'altText':altText,
       'lqip':metadata.lqip,
@@ -106,6 +106,42 @@ const homeOtherDocumentSections = groq`
 },
 `
 
+const otherDocumentSections = groq`
+'allServices': *[_type == 'services'] {
+  ...,
+  'imageData': featuredImage {
+    asset->{
+      'altText':altText,
+      'lqip':metadata.lqip,
+      url
+    }
+  },
+},
+'allTeam': *[_type == 'team'] {
+  ...,
+  'imageData': image {
+    asset->{
+      'altText':altText,
+      'lqip':metadata.lqip,
+      url
+    }
+  },
+},
+'allBlog': *[_type == 'blog'] {
+  ...,
+  'coverImageData': coverImage {
+    asset->{
+      'altText':altText,
+      'lqip':metadata.lqip,
+      url
+    }
+  },
+},
+'allTestimonial': *[_type == 'testimonials']{
+  ...
+},
+`
+
 const profile = groq`
 'profileSettings': *[_type == 'profile'][0]{
   ...,
@@ -126,18 +162,166 @@ export const homePageData = groq`
   ${profile}
 }
 `
+// app/blog/page.tsx
+export const blogPage = groq`
+  {
+    'blog': *[_type == 'blog']{
+      _id,
+      title,
+      date,
+      'slug': slug.current,
+      'imageData': coverImage {
+        asset-> {
+          altText,
+          'lqip':metadata.lqip,
+          url
+        }
+      },
+    }
+  }
+`
 
+// FOR app/services/page.tsx
+export const servicesPage = groq`
+  {
+    'services': *[_type == 'services']{
+      ...,
+      'imageData': featuredImage {
+        asset-> {
+          altText,
+          'lqip':metadata.lqip,
+          url
+        }
+      },
+    }
+  }
+`
+//  app/team/page.tsx
+export const teamPage = groq`
+  {
+    'team': *[_type == 'team']{
+      ...,
+      'imageData': image {
+        asset-> {
+          altText,
+          'lqip':metadata.lqip,
+          url
+        }
+      },
+    }
+  }
+`
+
+
+// 
+// FOR /app/[slug]/page.tsx
+// 
 export async function getPage(slug: string) {
   return client.fetch(groq`
     *[_type == "pages" && slug.current == $slug][0]{
       _id,
       title,
       "slug": slug.current,
+      'featuredImageData': featuredImage {
+        asset->{
+          'altText':altText,
+          'lqip':metadata.lqip,
+          url
+        }
+      },
       ${profile}
+      ${otherDocumentSections}
       pageBuilder[]{
         ...,
         ${pageBuilderData}
     }
+    }`,
+    { slug }
+  )
+}
+
+// 
+// FOR /app/services/[slug]/page.tsx
+// 
+export async function getServices(slug: string) {
+  return client.fetch(groq`
+    *[_type == "services" && slug.current == $slug][0]{
+      _id,
+      title,
+      "slug": slug.current,
+      ${profile}
+      ${otherDocumentSections}
+      pageBuilder[]{
+        ...,
+        ${pageBuilderData}
+    }
+    }`,
+    { slug }
+  )
+}
+
+// 
+// FOR /app/team/[slug]/page.tsx
+// 
+export async function getTeam(slug: string) {
+  return client.fetch(groq`
+    *[_type == "team" && slug.current == $slug][0]{
+      _id,
+      name,
+      about,
+      "slug": slug.current,
+      position,
+      contactInformation {
+        ...
+      },
+      socialAccounts {
+        ...
+      },
+      seo {
+        ...
+      },
+      'imageData': image {
+        asset->{
+          url,
+          altText,
+          lqip
+        }
+      }
+    }`,
+    { slug }
+  )
+}
+
+// 
+// FOR /app/blog/[slug]/page.tsx
+// 
+export async function getBlog(slug: string) {
+  return client.fetch(groq`
+    *[_type == "blog" && slug.current == $slug][0]{
+      _id,
+      title,
+      content,
+      "slug": slug.current,
+      seo {
+        ...
+      },
+      "author": author->{
+        name,
+        'avatar': picture{
+          asset->{
+            url,
+            altText,
+            lqip
+          }
+        }
+      },
+      'imageData': coverImage {
+        asset->{
+          url,
+          altText,
+          lqip
+        }
+      }
     }`,
     { slug }
   )

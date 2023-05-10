@@ -10,13 +10,6 @@ export default defineType({
       ],
     fields: [
         {
-            title: 'Heading',
-            name: 'heading',
-            type: 'string',
-            group: 'content',
-            description: 'Services are automatically pulled from the services sidebar'
-        },
-        {
             title: 'Content',
             name: 'content',
             type: 'contentEditor',
@@ -35,17 +28,21 @@ export default defineType({
             group: 'content'
         },
         {
-            title: 'Enable Carousel',
-            name: 'carousel',
-            type: 'boolean',
-            description: 'Displayed grid view by default',
-            group: 'settings',
-        },
-        {
             title: 'Background Options',
             name: 'background',
             group: 'settings',
             type: 'backgroundOptions',
         }
-    ]
+    ],
+    preview: {
+        select: {
+            content: 'content',
+        },
+        prepare({content}) {
+            const text = content[0]?.children[0]?.text; // Extract the first block's text
+            return {
+                title: text ? text : 'No content',
+            };
+        }
+    }
 })

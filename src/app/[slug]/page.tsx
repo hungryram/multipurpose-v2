@@ -17,8 +17,6 @@ export default async function Page({ params }: Props) {
     const slug = params.slug;
 
     const page = await getPage(slug)
-    console.log(page)
-
     return (
         <>
             <Main
@@ -38,10 +36,10 @@ export default async function Page({ params }: Props) {
                 emailBcc={page?.profileSettings?.settings?.emailBcc}
                 emailCc={page?.profileSettings?.settings?.emailCc}
                 // PAGE FOLDERS
-                // allServices={page?.allServices}
+                allServices={page?.allServices}
                 allTestimonials={page?.allTestimonial}
                 // allBlog={page?.allBlog}
-                // allTeam={page?.allTeam}
+                allTeam={page?.allTeam}
             />
         </>
     )

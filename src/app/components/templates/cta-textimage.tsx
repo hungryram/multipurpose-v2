@@ -22,7 +22,7 @@ export default function CalltoActionTextImage({
         <div className="section">
             <div className="container">
                 <div className={`${Styles.ctaTextImageWrapper} ${reverseColumn ? 'flex-row-reverse' : ''}`}>
-                    <div className={Styles.ctaContent}>
+                    <div className={`${Styles.ctaContent} lg:w-1/2`}>
                         <div className="content">
                             {content ?
                                 <ContentEditor

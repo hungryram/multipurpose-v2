@@ -66,11 +66,6 @@ export default defineType({
                     name: 'email',
                     type: 'string'
                 },
-                {
-                    title: 'Website Link',
-                    name: 'websiteLink',
-                    type: 'url'
-                }
             ]
         },
         {

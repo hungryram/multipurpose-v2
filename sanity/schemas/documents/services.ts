@@ -28,44 +28,16 @@ export default defineType({
               source: "title",
             },
             group: 'settings',
-            validation: (Rule) => Rule.required(),
+            validation: Rule => Rule.required().error('Required to create pages'),
         },
         {
-            title: 'Header Image',
-            name: 'headerImage',
+            title: 'Featured Image',
+            name: 'featuredImage',
             type: 'image',
             group: 'settings',
             options: {
-                hotspot: true
+                hotspot: false
             },
-            fields: [
-                {
-                    title: 'Hide Header',
-                    name: 'hideHeader',
-                    type: 'boolean'
-                },
-                {
-                    title: 'Spacing',
-                    name: 'spacing',
-                    type: 'string',
-                    description: 'The spacing between the header and main website body',
-                    hidden: ({ parent }) => parent?.hideHeader !== true,
-                    options: {
-                        list: [
-                            {title: 'None', value: 'none'},
-                            {title: 'Small', value: 'small'},
-                            {title: 'Medium', value: 'medium'},
-                            {title: 'Large', value: 'large'},
-                        ]
-                    },
-                    group: 'settings'
-                },
-            ]
-        },
-        {
-            title: 'Hide on Services Page',
-            name: 'hideService',
-            type: 'boolean'
         },
         {
             title: 'Page Builder',
@@ -95,7 +67,6 @@ export default defineType({
             title: 'Search Engine Optimization',
             name: 'seo',
             type: 'seo',
-            validation: Rule => Rule.required().error('Required for search engines'),
             group: 'seo'
         }
     ]

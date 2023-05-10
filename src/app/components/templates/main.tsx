@@ -9,10 +9,12 @@ import PricingSection from "./pricing-section";
 import TestimonialSection from "./testimonials-section";
 import ContactPage from "./contact-page";
 import ContentSimple from "./content-simple";
+import ServiceGrid from "./services-grid";
 
 interface Props {
     pageBuilder: any[];
     allTestimonials: any[];
+    allServices: any[];
     // CONTACT
     email: string;
     phone_number: string;
@@ -30,6 +32,7 @@ interface Props {
 export default function Main({
     pageBuilder,
     allTestimonials,
+    allServices,
     // CONTACT
     email,
     phone_number,
@@ -167,6 +170,22 @@ export default function Main({
                             blocks={section?.childBlocks}
                             backgroundStyles={backgroundStyles}
                         />
+                    );
+                }
+
+                if (section._type === 'servicesDisplay') {
+                    return (
+                        <ServiceGrid 
+                            key={section?._key}
+                            services={allServices}
+                            content={section?.content}
+                        />
+                    );
+                }
+
+                if (section._type === 'teamDisplay') {
+                    return (
+                        <h1>TEAM</h1>
                     );
                 }
 
