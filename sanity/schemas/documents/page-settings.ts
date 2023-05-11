@@ -20,9 +20,9 @@ export default defineType({
                     type: 'string',
                 },
                 {
-                    title: 'Header Image',
-                    name: 'headerImage',
-                    type: 'image',
+                    title: 'Content',
+                    name: 'content',
+                    type: 'contentEditor',
                 },
                 {
                     title: 'Search Engine Optimization',
@@ -46,9 +46,9 @@ export default defineType({
                     type: 'string'
                 },
                 {
-                    title: 'Header Image',
-                    name: 'headerImage',
-                    type: 'image',
+                    title: 'Content',
+                    name: 'content',
+                    type: 'contentEditor',
                 },
                 {
                     title: 'Search Engine Optimization',
@@ -72,61 +72,9 @@ export default defineType({
                     type: 'string'
                 },
                 {
-                    title: 'Header Image',
-                    name: 'headerImage',
-                    type: 'image',
-                },
-                {
-                    title: 'Search Engine Optimization',
-                    name: 'seo',
-                    type: 'seo'
-                }
-            ]
-        },
-        {
-            title: 'Portfolio',
-            name: 'portfolio',
-            type: 'object',
-            options: {
-                collapsible: true,
-                collapsed: true,
-            },
-            fields: [
-                {
-                    title: 'Title',
-                    name: 'title',
-                    type: 'string'
-                },
-                {
-                    title: 'Header Image',
-                    name: 'headerImage',
-                    type: 'image',
-                },
-                {
-                    title: 'Search Engine Optimization',
-                    name: 'seo',
-                    type: 'seo'
-                }
-            ]
-        },
-        {
-            title: 'Locations',
-            name: 'locations',
-            type: 'object',
-            options: {
-                collapsible: true,
-                collapsed: true,
-            },
-            fields: [
-                {
-                    title: 'Title',
-                    name: 'title',
-                    type: 'string'
-                },
-                {
-                    title: 'Header Image',
-                    name: 'headerImage',
-                    type: 'image',
+                    title: 'Content',
+                    name: 'content',
+                    type: 'contentEditor',
                 },
                 {
                     title: 'Search Engine Optimization',
@@ -150,9 +98,9 @@ export default defineType({
                     type: 'string'
                 },
                 {
-                    title: 'Header Image',
-                    name: 'headerImage',
-                    type: 'image',
+                    title: 'Content',
+                    name: 'content',
+                    type: 'contentEditor',
                 },
                 {
                     title: 'Search Engine Optimization',

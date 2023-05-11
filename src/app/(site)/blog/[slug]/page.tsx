@@ -14,7 +14,7 @@ export default async function BlogSlug({ params }: Props) {
     const slug = params.slug
     const post = await getBlog(slug)
 
-    if(!post) {
+    if(!post?.blog) {
         notFound()
     }
 
@@ -58,11 +58,11 @@ export default async function BlogSlug({ params }: Props) {
                         content={post?.blog?.content}
                     />
                 </div>
-                {/* <div className="mt-6">
+                <div className="mt-6">
                     <ShareSocial 
-                        url={post?.profileSettings?.settings?.websiteName}
+                        url={post?.profileSettings?.settings?.websiteName + '/blog/' + post?.blog?.slug}
                     />
-                </div> */}
+                </div>
             </div>
         </div>
     )

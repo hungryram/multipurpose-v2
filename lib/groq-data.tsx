@@ -212,6 +212,26 @@ export const teamPage = groq`
   }
 `
 
+//  app/legal/page.tsx
+export const legalPage = groq`
+  {
+    'pageSetting': *[_type == 'pageSetting'][0]{
+      legal {
+        title,
+        content,
+        seo {
+          ...
+        }
+      }
+    },
+    'legal': *[_type == 'legal']{
+      _id,
+      title,
+      'slug': slug.current
+    }
+  }
+`
+
 
 // 
 // FOR /app/[slug]/page.tsx
