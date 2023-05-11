@@ -21,8 +21,8 @@ export default async function BlogSlug({ params }: Props) {
     const postImage = post?.blog?.imageData?.asset
     const avatar = post?.blog?.author?.avatar?.asset
 
-    if(!slug) {
-        notFound()
+    if(post) {
+        <h1>Error</h1>
     }
 
     return (

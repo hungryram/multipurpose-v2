@@ -1,4 +1,5 @@
 'use client'
+import { notFound } from "next/navigation";
 import { getPage } from "../../../lib/groq-data";
 import Main from "../components/templates/main";
 
@@ -17,6 +18,11 @@ export default async function Page({ params }: Props) {
     const slug = params.slug;
 
     const page = await getPage(slug)
+
+    if(!page) {
+        notFound()
+    }
+
     return (
         <>
             <Main
