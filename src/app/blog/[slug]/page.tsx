@@ -1,7 +1,11 @@
+'use client'
 import React from 'react'
 import { getBlog } from '../../../../lib/groq-data'
 import Image from 'next/image'
 import ContentSimple from '@/app/components/templates/content-simple'
+import ShareSocial from '@/app/components/templates/share-social'
+import { usePathname } from 'next/navigation'
+import { notFound } from 'next/navigation'
 
 type Props = {
     params: {
@@ -10,18 +14,24 @@ type Props = {
 }
 
 export default async function BlogSlug({ params }: Props) {
+    const pathName = usePathname()
     const slug = params.slug
     const post = await getBlog(slug)
-    const postImage = post?.imageData?.asset
-    const avatar = post?.author?.avatar?.asset
+
+    const postImage = post?.blog?.imageData?.asset
+    const avatar = post?.blog?.author?.avatar?.asset
+
+    if(!slug) {
+        notFound()
+    }
 
     return (
         <div className="bg-white px-6 py-32 lg:px-8">
             <div className="mx-auto max-w-3xl leading-7 text-gray-800">
                 <div className="mb-10 text-center content">
-                    <h1>{post.title}</h1>
+                    <h1>{post?.blog?.title}</h1>
                 </div>
-                {post?.author?.name &&
+                {post?.blog?.author?.name &&
                     <div className="flex justify-center items-center mx-auto mb-20">
                         <div className="mr-4 flex-shrink-0">
                             <Image
@@ -35,7 +45,7 @@ export default async function BlogSlug({ params }: Props) {
                             />
                         </div>
                         <div>
-                            <h4 className="text-lg font-bold">{post.author.name}</h4>
+                            <h4 className="text-lg font-semibold">{post.blog.author.name}</h4>
                         </div>
                     </div>
                 }
@@ -49,7 +59,12 @@ export default async function BlogSlug({ params }: Props) {
                 />
                 <div className="content">
                     <ContentSimple
-                        content={post?.content}
+                        content={post?.blog?.content}
+                    />
+                </div>
+                <div className="mt-6">
+                    <ShareSocial 
+                        url={post?.profileSettings?.settings?.websiteName + pathName}
                     />
                 </div>
             </div>

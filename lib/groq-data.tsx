@@ -297,7 +297,13 @@ export async function getTeam(slug: string) {
 // 
 export async function getBlog(slug: string) {
   return client.fetch(groq`
-    *[_type == "blog" && slug.current == $slug][0]{
+  {
+    'profileSettings': *[_type == 'profile'][0]{
+      settings {
+        websiteName
+      }
+    },
+    'blog': *[_type == "blog" && slug.current == $slug][0]{
       _id,
       title,
       content,
@@ -322,7 +328,9 @@ export async function getBlog(slug: string) {
           lqip
         }
       }
-    }`,
+    }
+  }
+  `,
     { slug }
   )
 }
