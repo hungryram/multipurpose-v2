@@ -1,0 +1,6 @@
+/* SOCIAL */
+
+.socialComponent li {
+    @apply inline-block mr-2 text-2xl;
+    color: var(--secondary-color)
+  }

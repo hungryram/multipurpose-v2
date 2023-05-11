@@ -1,6 +1,138 @@
 import { groq } from "next-sanity";
 import { client } from "../sanity/lib/client";
 
+export const appearance = groq`
+{
+  'appearances': *[_type == 'appearances'][0]{
+    'loader': branding.loadingLogo.asset->url,
+    'loaderColor': branding.loadingBackground.hex,
+    'loaderImage': branding.loadingLogo.asset->url,
+    'navColor': header.navColor.hex,
+    'navBgColor': header.headerColor.hex,
+    'websiteTextColor': mainColors.websiteTextColor.hex,
+    'websiteBodyColor': mainColors.websiteBodyColor.hex,
+    'mobileIconColor': header.hamburgerMenuColor.hex,
+    'primaryButtonBg': mainColors.buttonBackgroundColor.hex,
+    'primaryButtonText': mainColors.buttonTextColor.hex,
+    'secondaryButtonBg': mainColors.secondaryButtonBackgroundColor.hex,
+    'secondaryButtonText': mainColors.secondaryButtonTextColor.hex,
+    'buttonRadius': globalButtonDesign.buttonCorner,
+    'buttonXPadding': globalButtonDesign.xPadding,
+    'buttonYPadding': globalButtonDesign.yPadding,
+    'footerHeader': footer.headerColor.hex,
+    'footerText': footer.textColor.hex,
+    'footerBg': footer.footerBackgroundColor.hex,
+    'primaryAccent': mainColors.primaryColor.hex,
+    'secondaryColor': mainColors.secondaryColor.hex,
+    'branding': branding {
+      logo {
+        asset-> {
+          url
+        }
+      },
+      logoWidth,
+      mobileLogoWidth
+    },
+    'announcementBar': announcementBar {
+      announcement,
+      'announcementBarLink': link {
+        newTab,
+        _key,
+        linkType,
+        externalUrl,
+        text,
+        internalLink->{
+          title,
+          'slug': slug.current,
+          _type
+        }
+      },
+      'announcementBgColor': backgroundColor.hex,
+      'announcementTextColor': textColor.hex
+    },
+    'topHeaderBar': topHeaderBar {
+      enableTopHeaderBar,
+      'topHeaderBarBgColor': topHeaderBarBgColor.hex,
+      'topHeaderBarTextColor': topHeaderBarTextColor.hex
+    },
+    'header': header {
+      'ctaLink': cta {
+        newTab,
+        _key,
+        linkType,
+        externalUrl,
+        text,
+        internalLink->{
+          title,
+          'slug': slug.current,
+          _type
+        }
+      },
+      'mainNav': mainNav->{
+        'navItems':items[]{
+          'subMenu':subMenu[]{
+            newTab,
+            _key,
+            linkType,
+            externalUrl,
+            text,
+            internalLink->{
+              title,
+              'slug': slug.current,
+              _type
+            }
+          },
+          linkType,
+          externalUrl,
+          text,
+          _key,
+          newTab,
+          internalLink->{
+            title,
+            'slug': slug.current,
+            _type
+          }
+        }
+      }
+    },
+    'footer': footer {
+      ...,
+      'quickLinks': quickLinks[]{
+        newTab,
+        linkType,
+        externalUrl,
+        text,
+        internalLink->{
+          title,
+          name,
+          'slug': slug.current,
+          _type
+        }
+      }
+    }
+  },
+  'legal': *[_type == 'legal']{
+    title,
+    'slug': slug.current,
+    _id
+  },
+  'profileSettings': *[_type == 'profile'][0]{
+    ...,
+    company_name,
+    social,
+    contact_information {
+      ...
+    },
+    address {
+      ...
+    },
+    settings {
+      ...
+    }
+  }
+}
+`
+
 export const pageBuilderData = groq`
 'backgroundImage': background.background {
   image {
@@ -349,6 +481,25 @@ export async function getBlog(slug: string) {
         }
       }
     }
+  }
+  `,
+    { slug }
+  )
+}
+
+// 
+// FOR /app/legal/[slug]/page.tsx
+// 
+export async function getLegal(slug: string) {
+  return client.fetch(groq`
+  *[_type == "legal" && slug.current == $slug][0]{
+    _id,
+    title,
+    content,
+    "slug": slug.current,
+    seo {
+      ...
+    },
   }
   `,
     { slug }
