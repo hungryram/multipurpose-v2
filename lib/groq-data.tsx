@@ -91,9 +91,9 @@ const homeOtherDocumentSections = groq`
     }
   },
 },
-'allBlog': *[_type == 'blog'][0...4] {
+'allBlog': *[_type == 'blog'][0...3] {
   ...,
-  'coverImageData': coverImage {
+  'imageData': coverImage {
     asset->{
       'altText':altText,
       'lqip':metadata.lqip,

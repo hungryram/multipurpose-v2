@@ -10,13 +10,6 @@ export default defineType({
       ],
     fields: [
         {
-            title: 'Heading',
-            name: 'heading',
-            type: 'string',
-            group: 'content',
-            description: 'Blogs are automatically pulled from the blog sidebar'
-        },
-        {
             title: 'Content',
             name: 'content',
             type: 'contentEditor',
@@ -33,13 +26,6 @@ export default defineType({
             name: 'secondaryButton',
             type: 'secondaryButton',
             group: 'content'
-        },
-        {
-            title: 'Enable Carousel',
-            name: 'carousel',
-            type: 'boolean',
-            description: 'Displayed grid view by default',
-            group: 'settings',
         },
         {
             title: 'Background Options',
