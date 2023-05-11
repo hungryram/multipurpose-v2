@@ -1,6 +1,7 @@
 import React from 'react'
 import { getServices } from '../../../../../lib/groq-data'
 import Main from '../../components/templates/main'
+import { notFound } from 'next/navigation'
 
 type Props = {
     params: {
@@ -12,6 +13,10 @@ export default async function servicesSlug({ params }: Props) {
 
     const slug = params.slug
     const services = await getServices(slug)
+
+    if(!services) {
+        notFound()
+    }
 
     return (
         <Main

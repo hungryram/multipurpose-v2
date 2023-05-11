@@ -1,11 +1,16 @@
 import { client } from "../../../../sanity/lib/client"
 import { teamPage } from "../../../../lib/groq-data"
 import TeamCard from "../components/templates/team-card"
+import { notFound } from "next/navigation"
 
 export default async function TeamSection() {
     
     const team = await client.fetch(teamPage)
 
+    if(!team) {
+        notFound()
+    }
+    
     return (
         <div className="section">
             <div className="mx-auto max-w-7xl px-6 lg:px-8">

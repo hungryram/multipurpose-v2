@@ -1,10 +1,8 @@
-'use client'
-import React from 'react'
 import { getBlog } from '../../../../../lib/groq-data'
 import Image from 'next/image'
 import ContentSimple from '../../components/templates/content-simple'
 import ShareSocial from '../../components/templates/share-social'
-import { usePathname } from 'next/navigation'
+import { notFound } from 'next/navigation'
 
 type Props = {
     params: {
@@ -13,16 +11,15 @@ type Props = {
 }
 
 export default async function BlogSlug({ params }: Props) {
-    const pathName = usePathname()
     const slug = params.slug
     const post = await getBlog(slug)
 
+    if(!post) {
+        notFound()
+    }
+
     const postImage = post?.blog?.imageData?.asset
     const avatar = post?.blog?.author?.avatar?.asset
-
-    if(post) {
-        <h1>Error</h1>
-    }
 
     return (
         <div className="bg-white px-6 py-32 lg:px-8">
@@ -61,11 +58,11 @@ export default async function BlogSlug({ params }: Props) {
                         content={post?.blog?.content}
                     />
                 </div>
-                <div className="mt-6">
+                {/* <div className="mt-6">
                     <ShareSocial 
-                        url={post?.profileSettings?.settings?.websiteName + pathName}
+                        url={post?.profileSettings?.settings?.websiteName}
                     />
-                </div>
+                </div> */}
             </div>
         </div>
     )

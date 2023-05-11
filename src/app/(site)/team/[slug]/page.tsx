@@ -4,6 +4,7 @@ import Styles from '../../components/templates/cta-textimage.module.css'
 import ContentEditor from '../../components/util/content-editor'
 import Image from 'next/image'
 import { DevicePhoneMobileIcon, EnvelopeIcon } from "@heroicons/react/24/outline";
+import { notFound } from 'next/navigation'
 
 type Props = {
     params: {
@@ -11,9 +12,14 @@ type Props = {
     }
 }
 
+
 export default async function TeamSlug({ params }: Props) {
     const slug = params.slug
     const team = await getTeam(slug)
+
+    if(!team) {
+        notFound()
+    }
     return (
         <div className="section">
             <div className="container">

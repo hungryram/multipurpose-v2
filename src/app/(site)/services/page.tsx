@@ -2,10 +2,15 @@ import { client } from "../../../../sanity/lib/client"
 import { servicesPage } from "../../../../lib/groq-data"
 import Image from "next/image"
 import Link from "next/link"
+import { notFound } from "next/navigation"
 
 export default async function ServicesSection() {
 
     const services = await client.fetch(servicesPage)
+
+    if(!services) {
+        notFound()
+    }
 
     return (
         <div className="section">

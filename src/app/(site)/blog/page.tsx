@@ -1,3 +1,4 @@
+import { notFound } from "next/navigation"
 import { blogPage } from "../../../../lib/groq-data"
 import { client } from "../../../../sanity/lib/client"
 import BlogCard from "../components/templates/blog-card"
@@ -7,6 +8,10 @@ import { format, parseISO } from 'date-fns'
 export default async function BlogPage() {
 
   const posts = await client.fetch(blogPage)
+
+  if(!posts) {
+    notFound()
+  }
 
   return (
     <div className="section">
