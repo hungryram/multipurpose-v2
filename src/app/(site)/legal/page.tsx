@@ -3,6 +3,38 @@ import { legalPage } from '../../../../lib/groq-data'
 import ContentEditor from '../components/util/content-editor'
 import Link from 'next/link'
 
+// GENERATES SEO
+export async function generateMetadata() {
+    const legal = await client.fetch(legalPage)
+
+    return {
+        title: legal?.pageSetting?.legal?.seo?.title_tag,
+        description: legal?.pageSetting?.legal?.seo?.meta_description,
+        alternates: {
+            canonical: 'legal/'
+        },
+        openGraph: {
+            title: legal?.legal?.seo?.title_tag,
+            description: legal?.legal?.seo?.meta_description,
+            url: 'legal/' + legal?.legal?.slug,
+            siteName: legal?.profileSettings?.company_name,
+            images: legal?.profileSettings?.seo?.defaultImageBanner?.asset?.url,
+            locale: 'en-US',
+            type: 'website',
+        },
+        twitter: {
+            title: legal?.legal?.seo?.title_tag,
+            description: legal?.legal?.seo?.meta_description,
+            creator: '@' + legal?.profileSettings?.seo?.twitterHandle,
+        },
+        icons: {
+            icon: legal.appearances?.branding?.favicon?.asset?.url,
+            shortcut: legal.appearances?.branding?.favicon?.asset?.url,
+            apple: legal.appearances?.branding?.favicon?.asset?.url,
+        },
+    }
+}
+
 export default async function LegalPage() {
 
     const legal = await client.fetch(legalPage)

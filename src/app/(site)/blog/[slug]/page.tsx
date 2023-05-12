@@ -3,6 +3,7 @@ import Image from 'next/image'
 import ContentSimple from '../../components/templates/content-simple'
 import ShareSocial from '../../components/templates/share-social'
 import { notFound } from 'next/navigation'
+import { Metadata } from 'next';
 
 type Props = {
     params: {
@@ -10,11 +11,50 @@ type Props = {
     }
 }
 
+type Meta = {
+    params: {
+        slug: string
+    }
+}
+
+// GENERATES SEO
+export async function generateMetadata({ params }: Meta): Promise<Metadata> {
+    const slug = params.slug
+    const post = await getBlog(slug)
+
+    return {
+        title: post?.blog?.seo?.title_tag,
+        description: post?.blog?.seo?.meta_description,
+        alternates: {
+            canonical: 'blog/' + post?.blog?.slug
+        },
+        openGraph: {
+            title: post?.blog?.seo?.title_tag,
+            description: post?.blog?.seo?.meta_description,
+            url: 'blog/' + post?.blog?.slug,
+            siteName: post?.profileSettings?.company_name,
+            images: post?.blog?.imageData?.asset?.url,
+            locale: 'en-US',
+            type: 'article',
+        },
+        twitter: {
+            title: post?.blog?.seo?.title_tag,
+            description: post?.blog?.seo?.meta_description,
+            creator: '@' + post?.profileSettings?.seo?.twitterHandle,
+        },
+        icons: {
+            icon: post.appearances?.branding?.favicon?.asset?.url,
+            shortcut: post.appearances?.branding?.favicon?.asset?.url,
+            apple: post.appearances?.branding?.favicon?.asset?.url,
+        },
+    }
+}
+
 export default async function BlogSlug({ params }: Props) {
     const slug = params.slug
     const post = await getBlog(slug)
 
-    if(!post?.blog) {
+    if (!post?.blog) {
         notFound()
     }
 
@@ -59,7 +99,7 @@ export default async function BlogSlug({ params }: Props) {
                     />
                 </div>
                 <div className="mt-6">
-                    <ShareSocial 
+                    <ShareSocial
                         url={post?.profileSettings?.settings?.websiteName + '/blog/' + post?.blog?.slug}
                     />
                 </div>

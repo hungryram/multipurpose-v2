@@ -4,6 +4,38 @@ import Image from "next/image"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 
+// GENERATES SEO
+export async function generateMetadata() {
+    const serviceMeta = await client.fetch(servicesPage)
+
+    return {
+        title: serviceMeta?.pageSetting?.services?.seo?.title_tag,
+        description: serviceMeta?.pageSetting?.services?.seo?.meta_description,
+        alternates: {
+            canonical: 'services/'
+        },
+        openGraph: {
+            title: serviceMeta?.pageSetting?.services?.seo?.title_tag,
+            description: serviceMeta?.pageSetting?.services?.seo?.meta_description,
+            url: 'services/' + serviceMeta?.services?.slug,
+            siteName: serviceMeta?.profileSettings?.company_name,
+            images: serviceMeta?.profileSettings?.seo?.defaultImageBanner?.asset?.url,
+            locale: 'en-US',
+            type: 'website',
+        },
+        twitter: {
+            title: serviceMeta?.pageSetting?.services?.seo?.title_tag,
+            description: serviceMeta?.pageSetting?.services?.seo?.meta_description,
+            creator: '@' + serviceMeta?.profileSettings?.seo?.twitterHandle,
+        },
+        icons: {
+            icon: serviceMeta.appearances?.branding?.favicon?.asset?.url,
+            shortcut: serviceMeta.appearances?.branding?.favicon?.asset?.url,
+            apple: serviceMeta.appearances?.branding?.favicon?.asset?.url,
+        },
+    }
+}
+
 export default async function ServicesSection() {
 
     const services = await client.fetch(servicesPage)

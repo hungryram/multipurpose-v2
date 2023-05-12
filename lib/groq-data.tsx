@@ -274,9 +274,77 @@ const otherDocumentSections = groq`
 },
 `
 
-const profile = groq`
+export const profile = groq`
 'profileSettings': *[_type == 'profile'][0]{
   ...,
+},
+`
+
+export const mainLayoutProfile = groq`
+{
+  'profileSettings': *[_type == 'profile'][0]{
+    company_name,
+    seo {
+      title_tag,
+      meta_description,
+      twitterHandle,
+      defaultImageBanner {
+        asset->{
+          url
+        }
+      }
+    },
+    settings {
+      googleVerification,
+      websiteName
+    }
+  },
+  'appearances': *[_type == "appearances"][0]{
+    branding {
+      favicon {
+        asset->{
+          url
+        }
+      }
+    },
+    mainColors {
+      primaryColor{
+        hex
+      }
+    }
+  }
+}
+`
+
+const metaDataProfile = groq`
+'profileSettings': *[_type == 'profile'][0]{
+  company_name,
+  seo {
+    twitterHandle,
+    defaultImageBanner {
+      asset->{
+        url
+      }
+    }
+  },
+  settings {
+    googleVerification,
+    websiteName
+  },
+},
+'appearances': *[_type == "appearances"][0]{
+  branding {
+    favicon {
+      asset->{
+        url
+      }
+    }
+  },
+  mainColors {
+    primaryColor{
+      hex
+    }
+  }
 },
 `
 
@@ -294,9 +362,16 @@ export const homePageData = groq`
   ${profile}
 }
 `
+
 // app/blog/page.tsx
 export const blogPage = groq`
   {
+    ${metaDataProfile}
+    'pageSetting': *[_type == 'pageSetting'][0]{
+      blog {
+        ...
+      }
+    },
     'blog': *[_type == 'blog']{
       _id,
       title,
@@ -316,6 +391,12 @@ export const blogPage = groq`
 // FOR app/services/page.tsx
 export const servicesPage = groq`
   {
+    ${metaDataProfile}
+    'pageSetting': *[_type == 'pageSetting'][0]{
+      services {
+        ...
+      }
+    },
     'services': *[_type == 'services']{
       ...,
       'imageData': featuredImage {
@@ -347,6 +428,12 @@ export const teamPage = groq`
 //  app/legal/page.tsx
 export const legalPage = groq`
   {
+    ${metaDataProfile}
+    'pageSetting': *[_type == 'pageSetting'][0]{
+      legal {
+        ...
+      }
+    },
     'pageSetting': *[_type == 'pageSetting'][0]{
       legal {
         title,
@@ -370,24 +457,23 @@ export const legalPage = groq`
 // 
 export async function getPage(slug: string) {
   return client.fetch(groq`
-    *[_type == "pages" && slug.current == $slug][0]{
-      _id,
-      title,
-      "slug": slug.current,
-      'featuredImageData': featuredImage {
-        asset->{
-          'altText':altText,
-          'lqip':metadata.lqip,
-          url
-        }
-      },
-      ${profile}
+    {
+      ${metaDataProfile}
       ${otherDocumentSections}
-      pageBuilder[]{
-        ...,
-        ${pageBuilderData}
+      'pages': *[_type == "pages" && slug.current == $slug][0]{
+        _id,
+        title,
+        "slug": slug.current,
+        seo {
+          ...
+        },
+        pageBuilder[]{
+          ...,
+          ${pageBuilderData}
+      }
+      }
     }
-    }`,
+    `,
     { slug }
   )
 }
@@ -397,17 +483,23 @@ export async function getPage(slug: string) {
 // 
 export async function getServices(slug: string) {
   return client.fetch(groq`
-    *[_type == "services" && slug.current == $slug][0]{
+  {
+    ${metaDataProfile}
+    ${otherDocumentSections}
+    'services': *[_type == "services" && slug.current == $slug][0]{
       _id,
       title,
+      seo {
+        ...
+      },
       "slug": slug.current,
-      ${profile}
-      ${otherDocumentSections}
       pageBuilder[]{
         ...,
         ${pageBuilderData}
     }
-    }`,
+    }
+  }
+  `,
     { slug }
   )
 }
@@ -417,29 +509,33 @@ export async function getServices(slug: string) {
 // 
 export async function getTeam(slug: string) {
   return client.fetch(groq`
-    *[_type == "team" && slug.current == $slug][0]{
-      _id,
-      name,
-      about,
-      "slug": slug.current,
-      position,
-      contactInformation {
-        ...
-      },
-      socialAccounts {
-        ...
-      },
-      seo {
-        ...
-      },
-      'imageData': image {
-        asset->{
-          url,
-          altText,
-          lqip
+    {
+      ${metaDataProfile}
+      'team': *[_type == "team" && slug.current == $slug][0]{
+        _id,
+        name,
+        about,
+        "slug": slug.current,
+        position,
+        contactInformation {
+          ...
+        },
+        socialAccounts {
+          ...
+        },
+        seo {
+          ...
+        },
+        'imageData': image {
+          asset->{
+            url,
+            altText,
+            lqip
+          }
         }
       }
-    }`,
+    }
+    `,
     { slug }
   )
 }
@@ -450,11 +546,7 @@ export async function getTeam(slug: string) {
 export async function getBlog(slug: string) {
   return client.fetch(groq`
   {
-    'profileSettings': *[_type == 'profile'][0]{
-      settings {
-        websiteName
-      }
-    },
+    ${metaDataProfile}
     'blog': *[_type == "blog" && slug.current == $slug][0]{
       _id,
       title,
@@ -492,7 +584,9 @@ export async function getBlog(slug: string) {
 // 
 export async function getLegal(slug: string) {
   return client.fetch(groq`
-  *[_type == "legal" && slug.current == $slug][0]{
+{
+  ${metaDataProfile}
+  'legal': *[_type == "legal" && slug.current == $slug][0]{
     _id,
     title,
     content,
@@ -501,6 +595,7 @@ export async function getLegal(slug: string) {
       ...
     },
   }
+}
   `,
     { slug }
   )

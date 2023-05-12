@@ -6,6 +6,9 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+  --top-header-background: #000;
+  --top-header-text-color: #ccc;
+  --header-background: #fff
 }
 
 @media (prefers-color-scheme: dark) {

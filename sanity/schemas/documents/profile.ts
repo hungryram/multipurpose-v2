@@ -160,6 +160,12 @@ export default {
                     description: 'Only include the Google ID, not the code. Ex. G-4XXXXXXX'
                 },
                 {
+                    title: 'Google Verification',
+                    name: 'googleVerification',
+                    type: 'string',
+                    description: 'Verify with Google Console'
+                },
+                {
                     title: 'Facebook Pixel ID',
                     name: 'facebookPixel',
                     type: 'string',

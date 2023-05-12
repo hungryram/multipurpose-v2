@@ -5,6 +5,7 @@ import { Bars3Icon, XMarkIcon, ChevronDownIcon } from '@heroicons/react/24/outli
 import Link from 'next/link'
 import Image from 'next/image'
 import { Fragment } from 'react'
+import Styles from "./navbar.module.css"
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(' ')
@@ -16,7 +17,10 @@ interface Props {
   navItems: any;
   logoWidth: number;
   phone: string;
-  email: string
+  email: string;
+  office: string;
+  backgroundColor: string;
+  enableTopHeader: boolean
 }
 
 const navigation = [
@@ -32,7 +36,10 @@ export default function Example({
   navItems,
   logoWidth,
   phone,
-  email
+  email,
+  office,
+  backgroundColor,
+  enableTopHeader
 }: Props) {
 
 
@@ -40,23 +47,22 @@ export default function Example({
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
-    <header className="inset-x-0 top-0 z-50">
-      <div className="bg-gray-900">
-        <div className="mx-auto flex h-10 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-          {/* Currency selector */}
-          <div>
-            test
-          </div>
-
-          <div className="flex items-center space-x-6">
-            {email && <a href={`mailto:${email}`} className="text-sm font-medium text-white hover:text-gray-100">{email}</a>}
-            {phone && <a href={`tel:${phone}`} className="text-sm font-medium text-white hover:text-gray-100">{phone}</a>}
+    <header className={`${Styles.header}`}>
+      {enableTopHeader &&
+        <div className={Styles.topHeader}>
+          <div className={Styles.topHeaderContainer}>
+            <div />
+            <div className="flex items-center space-x-6 text-white">
+              {email && <a href={`mailto:${email}`} className="text-sm">{email}</a>}
+              {phone && <a href={`tel:${phone}`} className="text-sm">Direct: {phone}</a>}
+              {office && <a href={`tel:${office}`} className="text-sm">Office: {office}</a>}
+            </div>
           </div>
         </div>
-      </div>
-      <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
-        <div className="flex lg:flex-1">
-          <Link href="/" className="relative cursor-pointer inline-block">
+      }
+      <nav className={Styles.navWrapper} aria-label="Global">
+        <div className={Styles.desktopLogoContainer}>
+          <Link href="/">
             {logo ?
               <img
                 src={logo}
@@ -69,10 +75,10 @@ export default function Example({
             }
           </Link>
         </div>
-        <div className="flex lg:hidden">
+        <div className={Styles.toggleMenu}>
           <button
             type="button"
-            className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+            className={Styles.toggleMenuButton}
             onClick={() => setMobileMenuOpen(true)}
           >
             <span className="sr-only">Open main menu</span>
@@ -81,6 +87,7 @@ export default function Example({
         </div>
         <div className="hidden lg:flex lg:gap-x-12">
           {navItems.map((link: any) => {
+
             const menuLinks =
               (link.internalLink?._type === "pages" && `/${link.internalLink.slug}`) ||
               (link.internalLink?._type === "blog" && `/blog/${link.internalLink.slug}`) ||
@@ -90,7 +97,7 @@ export default function Example({
 
             if (link?.subMenu?.length > 0) {
               return (
-                <Popover className="relative">
+                <Popover className="relative" key={link._key}>
                   {({ open }) => (
                     <>
                       <Popover.Button
@@ -118,7 +125,7 @@ export default function Example({
                         leaveFrom="opacity-100 translate-y-0"
                         leaveTo="opacity-0 translate-y-1"
                       >
-                        <Popover.Panel className="absolute z-50 -ml-4 mt-3 transform px-2 w-screen max-w-xs sm:px-0 lg:ml-0 lg:left-1/2 lg:-translate-x-1/2">
+                        <Popover.Panel className={Styles.desktopPopOverPanel}>
                           <div className="rounded-sm shadow-lg overflow-hidden">
                             <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
                               {link.subMenu.map((sub: any) => {
@@ -137,7 +144,6 @@ export default function Example({
                                       key={sub._id}
                                       href={subMenuLinks ?? '/'}
                                       target={sub.newTab && '_blank'}
-                                      className="py-1 block"
                                     >
                                       {sub.text}
                                     </Link>
@@ -155,7 +161,7 @@ export default function Example({
             } else {
               return (
                 <Link
-                  key={link.name}
+                  key={link._id}
                   href={menuLinks}
                   className="text-sm font-semibold leading-6 text-gray-900">
                   {link.text}
@@ -208,7 +214,7 @@ export default function Example({
 
                   if (link?.subMenu?.length > 0) {
                     return (
-                      <Popover className="relative">
+                      <Popover className="relative" key={link._key}>
                         {({ open }) => (
                           <>
                             <Popover.Button

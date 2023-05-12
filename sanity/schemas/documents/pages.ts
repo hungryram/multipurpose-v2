@@ -28,38 +28,6 @@ export default defineType({
             validation: (Rule) => Rule.required(),
         },
         {
-            title: 'Header Image',
-            name: 'headerImage',
-            type: 'image',
-            group: 'content',
-            options: {
-                hotspot: true
-            },
-            fields: [
-                {
-                    title: 'Hide Header',
-                    name: 'hideHeader',
-                    type: 'boolean'
-                },
-                {
-                    title: 'Spacing',
-                    name: 'spacing',
-                    type: 'string',
-                    description: 'The spacing between the header and main website body',
-                    hidden: ({ parent }) => parent?.hideHeader !== true,
-                    options: {
-                        list: [
-                            {title: 'None', value: 'none'},
-                            {title: 'Small', value: 'small'},
-                            {title: 'Medium', value: 'medium'},
-                            {title: 'Large', value: 'large'},
-                        ]
-                    },
-                    group: 'settings'
-                },
-            ]
-        },
-        {
             title: 'Page Builder',
             name: 'pageBuilder',
             type: 'array',
