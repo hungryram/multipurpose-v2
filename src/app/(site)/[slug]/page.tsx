@@ -58,7 +58,7 @@ export default async function Page({ params }: Props) {
     const slug = params.slug;
     const page = await getPage(slug)
 
-    if (!page) {
+    if (!page?.pages) {
         notFound()
     }
 

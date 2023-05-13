@@ -52,7 +52,7 @@ export default async function LegalSlug({ params }: Props) {
 
     const legal = await getLegal(params.slug)
 
-    if (!legal) {
+    if (!legal?.legal) {
         notFound()
     }
 

@@ -7,10 +7,10 @@ export default async function TeamSection() {
     
     const team = await client.fetch(teamPage)
 
-    if(!team) {
+    if(!team.team) {
         notFound()
     }
-    
+
     return (
         <div className="section">
             <div className="mx-auto max-w-7xl px-6 lg:px-8">

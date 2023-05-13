@@ -56,7 +56,7 @@ export default async function TeamSlug({ params }: Props) {
     const slug = params.slug
     const team = await getTeam(slug)
 
-    if(!team) {
+    if(!team?.team) {
         notFound()
     }
 

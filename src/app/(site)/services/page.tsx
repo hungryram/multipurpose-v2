@@ -40,7 +40,7 @@ export default async function ServicesSection() {
 
     const services = await client.fetch(servicesPage)
 
-    if(!services) {
+    if(!services.services) {
         notFound()
     }
 

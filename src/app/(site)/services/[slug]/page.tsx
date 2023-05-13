@@ -54,7 +54,7 @@ export default async function servicesSlug({ params }: Props) {
     const slug = params.slug
     const services = await getServices(slug)
 
-    if(!services) {
+    if(!services?.services) {
         notFound()
     }
 
