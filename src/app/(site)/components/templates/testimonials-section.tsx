@@ -1,5 +1,4 @@
 import Image from "next/image"
-import { testimonials } from "../../../../../sample/data"
 import ContentEditor from "../util/content-editor"
 import { urlForImage } from "../../../../../sanity/lib/image"
 

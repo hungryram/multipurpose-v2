@@ -10,6 +10,11 @@ export default defineType({
             name: 'content',
             type: 'contentEditor'
         },
+        {
+            title: 'Form Builder',
+            name: 'formBuilder',
+            type: 'formBuilder'
+        }
     ],
     preview: {
         select: {

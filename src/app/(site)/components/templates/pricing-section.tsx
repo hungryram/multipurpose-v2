@@ -78,9 +78,10 @@ export default function PricingSection({
                 </p>
                 <div className="mt-20 flow-root">
                     <div className={`${Styles.pricingGrid} grid lg:grid-cols-${columnNumber} grid-cols-1`}>
-                        {packages ? packages?.map((node: any) => {
+                        {packages ? packages?.map((node: any, i: any) => {
                             return (
                                 <PricingTable
+                                    key={i}
                                     name={node?.name}
                                     price={node?.price}
                                     packageType={node?.packageType}
@@ -92,9 +93,10 @@ export default function PricingSection({
                             )
                         })
                             :
-                            pricingTiers.map((node) => {
+                            pricingTiers.map((node, i) => {
                                 return (
                                     <PricingTable
+                                        key={i}
                                         name={node?.name}
                                         price={node?.price}
                                         packageType={node?.packageType}

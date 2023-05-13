@@ -66,24 +66,24 @@ export default async function Page({ params }: Props) {
         <Main
             pageBuilder={page?.pages?.pageBuilder}
             // CONTACT
-            email={page?.pages?.profileSettings?.contact_information?.email}
-            phone_number={page?.pages?.profileSettings?.contact_information?.phone_number}
-            office_number={page?.pages?.profileSettings?.contact_information?.office_number}
-            address={page?.pages?.profileSettings?.address?.address}
-            city={page?.pages?.profileSettings?.address?.city}
-            state={page?.pages?.profileSettings?.address?.state}
-            zip_code={page?.pages?.profileSettings?.address?.zip_code}
+            email={page?.profileSettings?.contact_information?.email}
+            phone_number={page?.profileSettings?.contact_information?.phone_number}
+            office_number={page?.profileSettings?.contact_information?.office_number}
+            address={page?.profileSettings?.address?.address}
+            city={page?.profileSettings?.address?.city}
+            state={page?.profileSettings?.address?.state}
+            zip_code={page?.profileSettings?.address?.zip_code}
 
             // FORMS
-            emailAlerts={page?.pages?.profileSettings?.settings?.emailAlerts}
-            sendFrom={page?.pages?.profileSettings?.settings?.sendFrom}
-            emailBcc={page?.pages?.profileSettings?.settings?.emailBcc}
-            emailCc={page?.pages?.profileSettings?.settings?.emailCc}
+            emailAlerts={page?.profileSettings?.settings?.emailAlerts}
+            sendFrom={page?.profileSettings?.settings?.sendFrom}
+            emailBcc={page?.profileSettings?.settings?.emailBcc}
+            emailCc={page?.profileSettings?.settings?.emailCc}
             // PAGE FOLDERS
-            allServices={page?.pages?.allServices}
-            allTestimonials={page?.pages?.allTestimonial}
-            allBlog={page?.pages?.allBlog}
-            allTeam={page?.pages?.allTeam}
+            allServices={page?.allServices}
+            allTestimonials={page?.allTestimonial}
+            allBlog={page?.allBlog}
+            allTeam={page?.allTeam}
         />
     )
 }

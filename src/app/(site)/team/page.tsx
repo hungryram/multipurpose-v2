@@ -28,6 +28,7 @@ export default async function TeamSection() {
                     {team?.team?.map((person: any) => {
                         return (
                             <TeamCard 
+                                key={person?._id}
                                 name={person.name}
                                 position={person.position}
                                 image={person?.imageData?.asset?.url}

@@ -194,6 +194,7 @@ export default function Main({
                 if (section._type === 'teamDisplay') {
                     return (
                         <TeamComponent
+                            key={section?._key}
                             team={allTeam}
                         />
                     );
@@ -202,6 +203,7 @@ export default function Main({
                 if (section._type === 'blogDisplay') {
                     return (
                         <BlogSection
+                            key={section?._key}
                             blog={allBlog}
                         />
                     );
@@ -221,6 +223,7 @@ export default function Main({
                             state={state}
                             zip_code={zip_code}
                             // FORMS
+                            formBuilder={section?.formBuilder}
                             emailAlerts={emailAlerts}
                             sendFrom={sendFrom}
                             emailBcc={emailBcc}

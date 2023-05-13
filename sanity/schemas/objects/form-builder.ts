@@ -37,11 +37,13 @@ export default defineType({
                                     { title: 'Text', value: 'text' },
                                     { title: 'Email', value: 'email' },
                                     { title: 'Checkbox', value: 'checkbox' },
+                                    { title: 'Select', value: 'select' },
+                                    { title: 'Radio Buttons', value: 'radio' },
+                                    { title: 'Textarea', value: 'textarea' }
                                     // Add more field types as needed
                                 ],
                             },
                         },
-                        // Add more fields specific to each form field type (e.g., options for select fields)
                     ],
                 },
             ],

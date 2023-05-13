@@ -7,7 +7,6 @@ import { appearance, mainLayoutProfile } from '../../../lib/groq-data'
 const inter = Inter({ subsets: ['latin'] })
 import { Metadata } from 'next';
 import GoogleAnalytics from './components/global/analytics'
-import Pixel from "./components/global/pixel"
 
 // GENERATES SEO
 export async function generateMetadata(): Promise<Metadata> {
@@ -56,13 +55,11 @@ export default async function RootLayout({
 
   const data = await client.fetch(appearance)
 
+
   return (
     <html lang="en">
       {data?.profileSettings?.settings?.googleID &&
         <GoogleAnalytics GA_TRACKING_ID={data?.profileSettings?.settings?.googleID} />
-      }
-      {data?.profileSettings?.settings?.facebookPixel &&
-        <Pixel facebookPixel={data?.profileSettings?.settings?.facebookPixel} />
       }
       <body className={inter.className}>
         <Navbar

@@ -200,6 +200,11 @@ export const pageBuilderData = groq`
     _type
   }
 },
+'form': formBuilder {
+  fields[] {
+    ...
+  }
+},
 `
 
 const homeOtherDocumentSections = groq`
@@ -223,7 +228,7 @@ const homeOtherDocumentSections = groq`
     }
   },
 },
-'allBlog': *[_type == 'blog'][0...3] {
+'allBlog': *[_type == 'blog'][0...2] {
   ...,
   'imageData': coverImage {
     asset->{
@@ -259,9 +264,9 @@ const otherDocumentSections = groq`
     }
   },
 },
-'allBlog': *[_type == 'blog'] {
+'allBlog': *[_type == 'blog'][0..2] {
   ...,
-  'coverImageData': coverImage {
+  'imageData': coverImage {
     asset->{
       'altText':altText,
       'lqip':metadata.lqip,
@@ -319,6 +324,9 @@ export const mainLayoutProfile = groq`
 const metaDataProfile = groq`
 'profileSettings': *[_type == 'profile'][0]{
   company_name,
+  contact_information {
+    ...
+  },
   seo {
     twitterHandle,
     defaultImageBanner {
