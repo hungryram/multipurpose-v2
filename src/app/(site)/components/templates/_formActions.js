@@ -12,10 +12,10 @@ export const submitForm = async (data) => {
         }
     }
     client.sendEmail({
-              "From": '<from_email>', // must match sender signature on postmark account
-              "To": "<to_email>",
-              "Subject": "<subject>",
-              "TextBody": JSON.stringify(formData),
+        "From": '<from_email>', // must match sender signature on postmark account
+        "To": "<to_email>",
+        "Subject": "<subject>",
+        "TextBody": JSON.stringify(formData),
     })
     .then((res) => console.log(res))
     .catch((err) => console.error(err))
