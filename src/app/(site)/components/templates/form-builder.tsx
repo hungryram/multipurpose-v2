@@ -14,6 +14,8 @@ interface FormField {
 interface FormSchema {
   subject: string;
   fields: FormField[];
+  emailCc: string;
+  emailBcc: string;
 }
 
 interface FormBuilderProps {
@@ -28,6 +30,8 @@ export default function FormBuilder({ formSchema }: FormBuilderProps) {
       <form action={submitForm}>
         <label className="hidden" htmlFor="name-honey"/>
         <input className="hidden" type="text" name="name-honey" />
+        <input className="hidden" type="text" name="bcc" value={formSchema.emailBcc} />
+        <input className="hidden" type="text" name="cc" value={formSchema.emailCc}/>
         {formSchema?.fields && (
           <>
             {formSchema.fields.map((field) => {
