@@ -26,6 +26,8 @@ export default function FormBuilder({ formSchema }: FormBuilderProps) {
     <div className="py-10 px-4">
       <h2>{formSchema?.subject}</h2>
       <form action={submitForm}>
+        <label className="hidden" htmlFor="name-honey"/>
+        <input className="hidden" type="text" name="name-honey" />
         {formSchema?.fields && (
           <>
             {formSchema.fields.map((field) => {
