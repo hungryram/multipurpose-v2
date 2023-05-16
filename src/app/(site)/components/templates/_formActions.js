@@ -1,14 +1,17 @@
 'use server'
 
 import { ServerClient } from 'postmark'
+import { redirect } from 'next/navigation';
 
 const client = new ServerClient(process.env.NEXT_PUBLIC_POSTMARK_API_TOKEN);
 
 export const submitForm = async (data) => {
   let formData = {}
   let email = '';
+  const honeypot = data.get('name-honey')
+  
   data.forEach((value, name) => {
-    if (!name.includes('$ACTION_ID')) {
+    if (!name.includes('$ACTION_ID') && !name.includes('name-honey')) {
       if (name === 'Email') {
         email = value;
       } else {
@@ -22,7 +25,7 @@ export const submitForm = async (data) => {
       }
     }
   });
-  
+
   const tableRows = Object.entries(formData).map(([key, value]) => {
     if (Array.isArray(value)) {
       return `
@@ -49,16 +52,26 @@ export const submitForm = async (data) => {
       </tbody>
     </table>
   `;
+
+    if (honeypot.length === 0) {
+
+        const response = await client.sendEmail({
+            "From": 'forms@hungryramwebdesign.com', // must match sender signature on postmark account
+            "To": "ram@hungryram.com",
+            "Bcc": '',
+            "Cc": '',
+            "ReplyTo": email,
+            "Subject": "Inquiry",
+            "HtmlBody": htmlBody,
+        })
+        .then((res) => res)
+        .catch((err) => console.error(err))
+
+        console.log(response)
+        
+        if (response.Message == 'OK') {
+            return redirect('/thank-you')
+        }
+    }
   
-  client.sendEmail({
-    "From": 'forms@hungryramwebdesign.com', // must match sender signature on postmark account
-    "To": "ram@hungryram.com",
-    "Bcc": '',
-    "Cc": '',
-    "ReplyTo": email,
-    "Subject": "Inquiry",
-    "HtmlBody": htmlBody,
-  })
-    .then((res) => console.log(res))
-    .catch((err) => console.error(err))
 }
