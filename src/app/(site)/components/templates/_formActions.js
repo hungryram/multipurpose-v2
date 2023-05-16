@@ -6,14 +6,19 @@ const client = new ServerClient(process.env.NEXT_PUBLIC_POSTMARK_API_TOKEN);
 
 export const submitForm = async (data) => {
   let formData = {}
+  let email = '';
   data.forEach((value, name) => {
     if (!name.includes('$ACTION_ID')) {
-      if (formData[name]) {
-        formData[name] = Array.isArray(formData[name])
-          ? [...formData[name], value]
-          : [formData[name], value];
+      if (name === 'Email') {
+        email = value;
       } else {
-        formData[name] = value;
+        if (formData[name]) {
+          formData[name] = Array.isArray(formData[name])
+            ? [...formData[name], value]
+            : [formData[name], value];
+        } else {
+          formData[name] = value;
+        }
       }
     }
   });
@@ -48,6 +53,9 @@ export const submitForm = async (data) => {
   client.sendEmail({
     "From": 'forms@hungryramwebdesign.com', // must match sender signature on postmark account
     "To": "ram@hungryram.com",
+    "Bcc": '',
+    "Cc": '',
+    "ReplyTo": email,
     "Subject": "Inquiry",
     "HtmlBody": htmlBody,
   })

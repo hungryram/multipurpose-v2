@@ -12,6 +12,28 @@ export default defineType({
             description: 'The subject of the form',
         },
         {
+            title: 'Send To',
+            name: 'sendTo',
+            type: 'string',
+            description: 'What email would you like to receive these alerts to',
+        },
+        {
+            title: 'Cc',
+            name: 'emailCc',
+            type: 'string',
+        },
+        {
+            title: 'Bcc',
+            name: 'emailBcc',
+            type: 'string',
+        },
+        {
+            title: 'Send Email From',
+            name: 'sendFrom',
+            type: 'string',
+            description: 'What email you want to send from. Must be verified.',
+        },
+        {
             title: 'Form Fields',
             name: 'fields',
             type: 'array',

@@ -29,7 +29,6 @@ export default function FormBuilder({ formSchema }: FormBuilderProps) {
         {formSchema?.fields && (
           <>
             {formSchema.fields.map((field) => {
-              console.log(field)
               return (
                 <div key={field._key} className="mb-4">
                   <label
