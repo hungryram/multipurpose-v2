@@ -6,12 +6,18 @@ import { redirect } from 'next/navigation';
 const client = new ServerClient(process.env.NEXT_PUBLIC_POSTMARK_API_TOKEN);
 
 export const submitForm = async (data) => {
+
   let formData = {}
   let email = '';
   const honeypot = data.get('name-honey')
   
   data.forEach((value, name) => {
-    if (!name.includes('$ACTION_ID') && !name.includes('name-honey')) {
+    if (
+        !name.includes('$ACTION_ID') &&
+        name !== 'bcc' &&
+        name !== 'cc' &&
+        name !== 'name-honey'
+    ){
       if (name === 'Email') {
         email = value;
       } else {
@@ -58,8 +64,8 @@ export const submitForm = async (data) => {
         const response = await client.sendEmail({
             "From": 'forms@hungryramwebdesign.com', // must match sender signature on postmark account
             "To": "ram@hungryram.com",
-            "Bcc": '',
-            "Cc": '',
+            "Bcc": data.get('bcc'),
+            "Cc": data.get('cc'),
             "ReplyTo": email,
             "Subject": "Inquiry",
             "HtmlBody": htmlBody,
@@ -67,11 +73,10 @@ export const submitForm = async (data) => {
         .then((res) => res)
         .catch((err) => console.error(err))
 
-        console.log(response)
-        
         if (response.Message == 'OK') {
             return redirect('/thank-you')
         }
+
     }
   
 }
