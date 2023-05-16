@@ -6,19 +6,34 @@ const client = new ServerClient(process.env.NEXT_PUBLIC_POSTMARK_API_TOKEN);
 
 export const submitForm = async (data) => {
   let formData = {}
-  for (let [name] of data.entries()) {
+  data.forEach((value, name) => {
     if (!name.includes('$ACTION_ID')) {
-      formData[name] = data.get(name)
+      if (formData[name]) {
+        formData[name] = Array.isArray(formData[name])
+          ? [...formData[name], value]
+          : [formData[name], value];
+      } else {
+        formData[name] = value;
+      }
     }
-  }
+  });
   
   const tableRows = Object.entries(formData).map(([key, value]) => {
-    return `
-      <tr>
-        <td>${key}</td>
-        <td>${value}</td>
-      </tr>
-    `;
+    if (Array.isArray(value)) {
+      return `
+        <tr>
+          <td><strong>${key}</strong></td>
+          <td>${value.join(', ')}</td>
+        </tr>
+      `;
+    } else {
+      return `
+        <tr>
+          <td><strong>${key}</strong></td>
+          <td>${value}</td>
+        </tr>
+      `;
+    }
   });
 
   const htmlBody = `

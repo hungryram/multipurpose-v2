@@ -6,31 +6,31 @@ export default defineType({
     type: 'object',
     fields: [
         {
-            name: 'title',
+            title: 'Subject',
+            name: 'subject',
             type: 'string',
-            title: 'Title',
-            description: 'The title of the form',
+            description: 'The subject of the form',
         },
         {
+            title: 'Form Fields',
             name: 'fields',
             type: 'array',
-            title: 'Form Fields',
             of: [
                 {
+                    title: 'Form Field',
                     type: 'object',
                     name: 'formField',
-                    title: 'Form Field',
                     fields: [
                         {
+                            title: 'Label',
                             name: 'label',
                             type: 'string',
-                            title: 'Label',
                             description: 'The label for the form field',
                         },
                         {
+                            title: 'Type',
                             name: 'type',
                             type: 'string',
-                            title: 'Type',
                             description: 'The type of form field (e.g., text, email, checkbox, etc.)',
                             options: {
                                 list: [
@@ -43,6 +43,33 @@ export default defineType({
                                     // Add more field types as needed
                                 ],
                             },
+                        },
+                        {
+                            title: 'Checkbox Values',
+                            name: 'checkBoxValue',
+                            type: 'array',
+                            hidden: ({ parent }) => parent?.type !== "checkbox",
+                            of: [
+                                {type: 'string'}
+                            ]
+                        },
+                        {
+                            title: 'Radio Values',
+                            name: 'radioValue',
+                            type: 'array',
+                            hidden: ({ parent }) => parent?.type !== "radio",
+                            of: [
+                                {type: 'string'}
+                            ]
+                        },
+                        {
+                            title: 'Select Dropdown Values',
+                            name: 'selectValue',
+                            type: 'array',
+                            hidden: ({ parent }) => parent?.type !== "select",
+                            of: [
+                                {type: 'string'}
+                            ]
                         },
                     ],
                 },
