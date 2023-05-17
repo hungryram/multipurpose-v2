@@ -31,7 +31,7 @@ export default function ServiceGrid({
     return (
         <div className="section" style={backgroundStyles}>
             <div className="container">
-            {(content || primaryButtonLink || secondaryButtonLink) && (
+                {(content || primaryButtonLink || secondaryButtonLink) && (
                     <HeaderSection
                         content={content}
                         textAlign={textAlign}
@@ -45,7 +45,7 @@ export default function ServiceGrid({
                         secondaryButtonStyle={secondaryButtonStyle}
                     />
                 )}
-                <ul role="list" className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
+                <ul role="list" className={`grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-3 xl:gap-x-8 ${content && 'mt-20'}`}>
                     {services?.map((node: any) => {
                         return (
                             <li key={node._id} className="relative">
@@ -63,7 +63,10 @@ export default function ServiceGrid({
                                             <div></div>
                                         }
                                     </div>
-                                    <p className="pointer-events-none mt-2 block">{node.title}</p>
+                                    <h3 className="mt-6 text-lg font-semibold leading-8 tracking-tight text-gray-900">{node.title}</h3>
+                                    <p className="mt-2 text-sm text-gray-500">
+                                        {node?.detail}
+                                    </p>
                                 </Link>
                             </li>
                         )

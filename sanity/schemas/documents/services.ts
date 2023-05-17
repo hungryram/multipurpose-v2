@@ -31,6 +31,12 @@ export default defineType({
             validation: Rule => Rule.required().error('Required to create pages'),
         },
         {
+            title: 'Quick Detail',
+            name: 'detail',
+            type: 'string',
+            group: 'content',
+        },
+        {
             title: 'Featured Image',
             name: 'featuredImage',
             type: 'image',

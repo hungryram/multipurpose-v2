@@ -54,7 +54,7 @@ export default function DisclosureSection({
                 )}
                 {disclosure.map((node: any) => {
                     return (
-                        <div className="w-full" key={node._key}>
+                        <div className={`w-full ${content && 'mt-20'}`} key={node._key}>
                             <div className="mx-auto w-full md:max-w-2xl rounded-2xl p-2">
                                 <Disclosure>
                                     {({ open }) => (

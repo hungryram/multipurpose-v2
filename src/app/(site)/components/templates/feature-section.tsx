@@ -47,7 +47,7 @@ export default function FeatureSection({
                     />
                 )}
                 <div className={Styles.featureGridWrap}>
-                    <dl className={`${Styles.featureGridContainer} grid grid-cols-1 lg:grid-cols-${columnNumber}`}>
+                    <dl className={`${Styles.featureGridContainer} grid grid-cols-1 lg:grid-cols-${columnNumber} ${content && 'mt-20'}`}>
                         {blocks?.map((node: any) => {
 
                             const IconComponent = HeroIcons[node.icon as keyof typeof HeroIcons];

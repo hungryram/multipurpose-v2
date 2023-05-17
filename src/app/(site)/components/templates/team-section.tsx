@@ -46,7 +46,7 @@ export default function TeamComponent({
                 )}
                 <ul
                     role="list"
-                    className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-3"
+                    className={`mx-auto grid grid-cols-1 gap-x-8 gap-y-16 sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-3 ${content && 'mt-20'}`}
                 >
                     {team?.map((person: any) => {
                         return (

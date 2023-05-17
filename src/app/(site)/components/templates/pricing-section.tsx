@@ -101,7 +101,7 @@ export default function PricingSection({
                         secondaryButtonStyle={secondaryButtonStyle}
                     />
                 )}
-                <div className="mt-20 flow-root">
+                <div className={`flow-root ${content && 'mt-20'}`}>
                     <div className={`${Styles.pricingGrid} grid lg:grid-cols-${columnNumber} grid-cols-1`}>
                         {packages ? packages?.map((node: any, i: any) => {
                             return (

@@ -57,10 +57,46 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
+
       {data?.profileSettings?.settings?.googleID &&
         <GoogleAnalytics GA_TRACKING_ID={data?.profileSettings?.settings?.googleID} />
       }
+
       <body className={inter.className}>
+        <style>
+          {`
+              :root {
+
+                  --primary-accent: ${data.appearances?.primaryAccent ?? '#cccccc'};
+
+                  --footer-background-color: ${data.appearances?.footerBg ?? '#0d1321'};
+                  --footer-header-color: ${data.appearances?.footerHeader ?? '#ffffff'};
+                  --footer-text-color: ${data.appearances?.footerText ?? '#9b9b9b'};
+                  --primary-button-background: ${data.appearances?.primaryButtonBg ?? 'transparent'};
+                  --primary-button-text: ${data.appearances?.primaryButtonText ?? '#000000'};
+                  --secondary-button-background: ${data.appearances?.secondaryButtonBg ?? 'transparent'};
+                  --secondary-button-text: ${data.appearances?.secondaryButtonText ?? '#cccccc'};
+                  --secondary-color: ${data.appearances?.secondaryColor ?? '#cccccc'};
+
+                  --header-background-color: ${data.appearances?.navBgColor ? data.appearances?.navBgColor : 'transparent'};
+                  --header-navigation-color: ${data.appearances?.navColor ?? '#ffffff'};
+                  --mobile-icon-color: ${data.appearances?.mobileIconColor ?? '#ffffff'};
+
+                  --loading-background-color: ${data.appearances?.loaderColor ?? '#0e0e0e'};
+                  --loading-image: url(${data.appearances?.loaderImage});
+
+                  --website-body-color: ${data.appearances?.websiteBodyColor ?? '#fff'};
+                  --website-text-color: ${data.appearances?.websiteTextColor ?? '#222'};
+
+                  --button-radius: ${`${data.appearances?.buttonRadius ?? 4}px`};
+                  --button-y-padding: ${`${data.appearances?.buttonYPadding ?? 16}px`};
+                  --button-x-padding: ${`${data.appearances?.buttonXPadding ?? 50}px`};
+                  
+                  --announcementbar-background-color: ${data.appearances?.announcementBar?.announcementBgColor};
+                  --announcementbar-text-color: ${data.appearances?.announcementBar?.announcementTextColor};
+              }
+          `}
+        </style>
         <Navbar
           company_name={data.profileSettings.company_name}
           logo={data.appearances.branding.logo.asset.url}
@@ -77,6 +113,7 @@ export default async function RootLayout({
           company_name={data.profileSettings.company_name}
           image={data.appearances?.footer?.footerLogo?.asset?.url}
           quickLinksHeading={data.appearances?.footer?.quickLinksHeading}
+          quickLinksTwoHeading={data.appearances?.footer?.quickLinksTwoHeading}
           altText={data.ablurDatappearances?.footer?.footerLogo?.asset?.url}
           blurData={data.ablurDatappearances?.footer?.footerLogo?.asset?.lqip}
           email={data.profileSettings?.contact_information?.email}
@@ -86,6 +123,23 @@ export default async function RootLayout({
           city={data.profileSettings?.address?.city}
           state={data.profileSettings?.address?.state}
           zip_code={data.profileSettings?.address?.zip_code}
+          footerDisclaimer={data.appearances?.footer?.footerDisclaimer}
+          legal={data.legal}
+          links={data.appearances?.footer?.quickLinks}
+          secondLinks={data.appearances?.footer?.secondQuickLinks}
+          // SOCIAL
+          googleBusiness={data.profileSettings?.social?.googleBusiness}
+          facebook={data.profileSettings?.social?.facebook}
+          youtube={data.profileSettings?.social?.youtube}
+          instagram={data.profileSettings?.social?.instagram}
+          twitter={data.profileSettings?.social?.twitter}
+          reddit={data.profileSettings?.social?.reddit}
+          linkedin={data.profileSettings?.social?.linkedin}
+          yelp={data.profileSettings?.social?.yelp}
+          pinterest={data.profileSettings?.social?.pinterest}
+          tiktok={data.profileSettings?.social?.tiktok}
+          zillow={data.profileSettings?.social?.zillow}
+          size={data.profileSettings?.social?.size}
         />
       </body>
     </html>

@@ -4,15 +4,6 @@ import { FiChevronUp } from 'react-icons/fi'
 import ContentEditor from '../util/content-editor'
 import HeaderSection from './header-section'
 
-const faqs = [
-    {
-        question: 'How do you make holy water?',
-        answer:
-            'You boil the hell out of it. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.',
-    },
-    // More questions...
-]
-
 interface Props {
     disclosure: any;
     disclosureBackgroundColor: any;
@@ -64,7 +55,7 @@ export default function DisclosureGrid({
                             />
                         )}
                     </div>
-                    <div className="mt-10 lg:col-span-7 lg:mt-0">
+                    <div className={`lg:col-span-7`}>
                             {disclosure.map((node: any) => {
                                 return (
                                     <div className="w-full" key={node._key}>

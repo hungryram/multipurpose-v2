@@ -106,6 +106,20 @@ export const appearance = groq`
       },
       'quickLinks': quickLinks[]{
         newTab,
+        _key,
+        linkType,
+        externalUrl,
+        text,
+        internalLink->{
+          title,
+          name,
+          'slug': slug.current,
+          _type
+        }
+      },
+      'secondQuickLinks': secondQuickLinks[]{
+        newTab,
+        _key,
         linkType,
         externalUrl,
         text,
@@ -216,7 +230,10 @@ export const pageBuilderData = groq`
 
 const homeOtherDocumentSections = groq`
 'allServices': *[_type == 'services'][0..6] {
-  ...,
+  _id,
+  title,
+  slug,
+  detail,
   'imageData': featuredImage {
     asset->{
       'altText':altText,
@@ -226,7 +243,17 @@ const homeOtherDocumentSections = groq`
   },
 },
 'allTeam': *[_type == 'team'][0...4] {
-  ...,
+  _id,
+  name,
+  position,
+  seo {
+    ...
+  },
+  slug,
+  socialAccounts {
+    ...
+  },
+  about,
   'imageData': image {
     asset->{
       'altText':altText,
@@ -236,7 +263,15 @@ const homeOtherDocumentSections = groq`
   },
 },
 'allBlog': *[_type == 'blog'][0...2] {
-  ...,
+  _id,
+  title,
+  slug,
+  content,
+  excerpt,
+  date,
+  seo {
+    ...
+  },
   'imageData': coverImage {
     asset->{
       'altText':altText,
@@ -246,13 +281,19 @@ const homeOtherDocumentSections = groq`
   },
 },
 'allTestimonial': *[_type == 'testimonials'][0..5]{
-  ...
+  _id,
+  image,
+  name,
+  testimonial
 },
 `
 
 const otherDocumentSections = groq`
 'allServices': *[_type == 'services'] {
-  ...,
+  _id,
+  title,
+  slug,
+  detail,
   'imageData': featuredImage {
     asset->{
       'altText':altText,
@@ -262,7 +303,17 @@ const otherDocumentSections = groq`
   },
 },
 'allTeam': *[_type == 'team'] {
-  ...,
+  _id,
+  name,
+  position,
+  seo {
+    ...
+  },
+  slug,
+  socialAccounts {
+    ...
+  },
+  about,
   'imageData': image {
     asset->{
       'altText':altText,
@@ -272,7 +323,15 @@ const otherDocumentSections = groq`
   },
 },
 'allBlog': *[_type == 'blog'][0..2] {
-  ...,
+  _id,
+  title,
+  slug,
+  content,
+  excerpt,
+  date,
+  seo {
+    ...
+  },
   'imageData': coverImage {
     asset->{
       'altText':altText,
@@ -282,7 +341,10 @@ const otherDocumentSections = groq`
   },
 },
 'allTestimonial': *[_type == 'testimonials']{
-  ...
+  _id,
+  image,
+  name,
+  testimonial
 },
 `
 

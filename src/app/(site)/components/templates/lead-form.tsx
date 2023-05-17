@@ -43,7 +43,7 @@ export default function LeadForm({
                         secondaryButtonStyle={secondaryButtonStyle}
                     />
                 )}
-                <div className="mt-10">
+                <div className={`${content && 'mt-20'}`}>
                     <FormBuilder
                         formSchema={formSchema}
                     />

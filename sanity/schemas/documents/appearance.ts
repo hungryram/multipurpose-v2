@@ -182,7 +182,18 @@ export default defineType({
                     title: "Quick links",
                     name: "quickLinks",
                     type: "array",
-                    of: [{ type: "navigationItem" }]
+                    of: [{ type: "links" }]
+                },
+                {
+                    title: 'Quick Links 2 Heading',
+                    name: 'quickLinksTwoHeading',
+                    type: 'string',
+                },
+                {
+                    title: "Second Quick links",
+                    name: "secondQuickLinks",
+                    type: "array",
+                    of: [{ type: "links" }]
                 },
                 {
                     title: 'Footer Background Color',

@@ -15,6 +15,7 @@ import BlogSection from "./blog-section";
 import DisclosureSection from "./disclosure-section";
 import DisclosureGrid from "./disclosure-grid";
 import LeadForm from "./lead-form";
+import ServicesNoImage from "./services-no-image";
 
 interface Props {
     pageBuilder: any[];
@@ -347,22 +348,44 @@ export default function Main({
 
                 if (section._type === 'servicesDisplay') {
                     return (
-                        <ServiceGrid
-                            key={section?._key}
-                            services={allServices}
-                            content={section?.content}
-                            imageData={section?.imageData?.asset?.url}
-                            textAlign={section?.textAlign}
-                            backgroundStyles={backgroundStyles}
-                            // PRIMARY BUTTON
-                            primaryButtonText={section?.buttonLinking?.buttonText}
-                            primaryButtonLink={section?.buttonLinking}
-                            primaryButtonStyle={primaryButton}
-                            // SECONDARY BUTTON
-                            secondaryButtonLink={section?.secondButtonLinking}
-                            secondaryButtonText={section?.secondButtonLinking?.buttonText}
-                            secondaryButtonStyle={secondaryButton}
-                        />
+                        <>
+                            {section?.layoutType === 'noImage' ?
+                                <ServicesNoImage
+                                    key={section?._key}
+                                    services={allServices}
+                                    columnNumber={section?.columnNumber}
+                                    content={section?.content}
+                                    imageData={section?.imageData?.asset?.url}
+                                    textAlign={section?.textAlign}
+                                    backgroundStyles={backgroundStyles}
+                                    // PRIMARY BUTTON
+                                    primaryButtonText={section?.buttonLinking?.buttonText}
+                                    primaryButtonLink={section?.buttonLinking}
+                                    primaryButtonStyle={primaryButton}
+                                    // SECONDARY BUTTON
+                                    secondaryButtonLink={section?.secondButtonLinking}
+                                    secondaryButtonText={section?.secondButtonLinking?.buttonText}
+                                    secondaryButtonStyle={secondaryButton}
+                                />
+                                :
+                                <ServiceGrid
+                                    key={section?._key}
+                                    services={allServices}
+                                    content={section?.content}
+                                    imageData={section?.imageData?.asset?.url}
+                                    textAlign={section?.textAlign}
+                                    backgroundStyles={backgroundStyles}
+                                    // PRIMARY BUTTON
+                                    primaryButtonText={section?.buttonLinking?.buttonText}
+                                    primaryButtonLink={section?.buttonLinking}
+                                    primaryButtonStyle={primaryButton}
+                                    // SECONDARY BUTTON
+                                    secondaryButtonLink={section?.secondButtonLinking}
+                                    secondaryButtonText={section?.secondButtonLinking?.buttonText}
+                                    secondaryButtonStyle={secondaryButton}
+                                />
+                            }
+                        </>
                     );
                 }
 
