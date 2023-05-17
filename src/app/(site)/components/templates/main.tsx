@@ -106,7 +106,6 @@ export default function Main({
 
 
                 if (section._type === 'hero') {
-                    console.log(section?.imageOverlayColor.rgb)
                     return (
                         <Hero
                             key={section?._key}
