@@ -16,6 +16,18 @@ export default defineType({
             group: 'content',
         },
         {
+            title: 'Text Align',
+            name: 'textAlign',
+            type: 'string',
+            options: {
+                list: [
+                    {title: 'Left', value: 'text-left'},
+                    {title: 'Center', value: 'text-center mx-auto'},
+                    {title: 'Right', value: 'mx-auto mr-0 text-right'},
+                ]
+            }
+        },
+        {
             title: 'Primary Button',
             name: 'button',
             type: 'buttonSettings',
@@ -33,5 +45,16 @@ export default defineType({
             group: 'settings',
             type: 'backgroundOptions',
         }
-    ]
+    ],
+    preview: {
+        select: {
+            content: 'content',
+        },
+        prepare({content}) {
+            const text = content[0]?.children[0]?.text; // Extract the first block's text
+            return {
+                title: text ? text : 'No content',
+            };
+        }
+    }
 })

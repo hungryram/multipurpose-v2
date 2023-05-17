@@ -1,18 +1,49 @@
 import BlogCard from "./blog-card"
 import { format, parseISO } from 'date-fns'
+import HeaderSection from "./header-section"
+
+interface Props {
+    blog: any;
+    content: any;
+    textAlign: string;
+    primaryButtonLink: string;
+    primaryButtonText: string;
+    primaryButtonStyle: any;
+    secondaryButtonText: string;
+    secondaryButtonLink: string;
+    secondaryButtonStyle: any;
+    backgroundStyles: any
+}
 
 export default function BlogSection({
-    blog
-}: any) {
+    blog,
+    content,
+    textAlign,
+    primaryButtonLink,
+    primaryButtonText,
+    primaryButtonStyle,
+    secondaryButtonLink,
+    secondaryButtonText,
+    secondaryButtonStyle,
+    backgroundStyles
+}: Props) {
     return (
-        <div className="section">
-            <div className="mx-auto max-w-7xl px-6 lg:px-8">
-                <div className="mx-auto max-w-2xl text-center">
-                    <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">From the blog</h2>
-                    <p className="mt-2 text-lg leading-8 text-gray-600">
-                        Learn how to grow your business with our expert advice.
-                    </p>
-                </div>
+        <div className="section" style={backgroundStyles}>
+            <div className="container">
+            {(content || primaryButtonLink || secondaryButtonLink) && (
+                    <HeaderSection
+                        content={content}
+                        textAlign={textAlign}
+                        // PRIMARY
+                        buttonLink={primaryButtonLink}
+                        primaryButtonText={primaryButtonText}
+                        primaryButtonStyle={primaryButtonStyle}
+                        // SECONDARY
+                        secondaryButtonLink={secondaryButtonLink}
+                        secondaryButtonText={secondaryButtonText}
+                        secondaryButtonStyle={secondaryButtonStyle}
+                    />
+                )}
                 <div className="mx-auto mt-16 grid max-w-2xl auto-rows-fr grid-cols-1 gap-8 sm:mt-20 lg:mx-0 lg:max-w-none lg:grid-cols-3">
                     {blog?.map((post: any) => {
 

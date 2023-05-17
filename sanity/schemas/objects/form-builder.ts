@@ -10,12 +10,14 @@ export default defineType({
             name: 'subject',
             type: 'string',
             description: 'The subject of the form',
+            validation: (Rule) => Rule.required().error('Subject Required'),
         },
         {
             title: 'Send To',
             name: 'sendTo',
             type: 'string',
             description: 'What email would you like to receive these alerts to',
+            validation: (Rule) => Rule.required().error('Email Required'),
         },
         {
             title: 'Cc',
@@ -32,6 +34,27 @@ export default defineType({
             name: 'sendFrom',
             type: 'string',
             description: 'What email you want to send from. Must be verified.',
+        },
+        {
+            title: 'Redirect To',
+            name: 'redirectTo',
+            type: 'string',
+            description: 'Enter the URL the form redirects to after submitting',
+        },
+        {
+            title: 'Button Label',
+            name: 'buttonLabel',
+            type: 'string',
+        },
+        {
+            title: 'Button Background Color',
+            name: 'buttonBackgroundColor',
+            type: 'color',
+        },
+        {
+            title: 'Button Text Color',
+            name: 'buttonTextColor',
+            type: 'color',
         },
         {
             title: 'Form Fields',

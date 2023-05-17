@@ -12,6 +12,9 @@ import ContentSimple from "./content-simple";
 import ServiceGrid from "./services-grid";
 import TeamComponent from "./team-section";
 import BlogSection from "./blog-section";
+import DisclosureSection from "./disclosure-section";
+import DisclosureGrid from "./disclosure-grid";
+import LeadForm from "./lead-form";
 
 interface Props {
     pageBuilder: any[];
@@ -56,8 +59,10 @@ export default function Main({
         <>
             {pageBuilder?.map((section: any) => {
                 const bg = section?.background?.background;
+                const textColor = section?.background?.contentColor?.hex;
 
                 const backgroundStyles = {
+                    color: textColor,
                     backgroundColor:
                         bg?.backgroundType === 'color' && bg?.color?.hex,
                     backgroundImage:
@@ -77,14 +82,49 @@ export default function Main({
                             url(${section?.backgroundImage?.image?.asset?.url})`,
                 };
 
+                // PRIMARY BUTTON STYLES
+                const primaryButton = {
+                    backgroundColor: `rgba(
+                        ${section?.button?.buttonBackground?.rgb.r}, 
+                        ${section?.button?.buttonBackground?.rgb.g}, 
+                        ${section?.button?.buttonBackground?.rgb.b}, 
+                        ${section?.button?.buttonBackground?.rgb.a})`,
+                    color: `${section?.button?.buttonTextColor?.hex}`,
+                    border: `1px solid ${section?.button?.buttonBorderColor?.hex}`
+                }
+
+                // SECONDARY BUTTON STYLES
+                const secondaryButton = {
+                    backgroundColor: `rgba(
+                        ${section?.secondaryButton?.buttonBackground?.rgb.r}, 
+                        ${section?.secondaryButton?.buttonBackground?.rgb.g}, 
+                        ${section?.secondaryButton?.buttonBackground?.rgb.b}, 
+                        ${section?.secondaryButton?.buttonBackground?.rgb.a})`,
+                    color: `${section?.secondaryButton?.buttonTextColor?.hex}`,
+                    border: `1px solid ${section?.secondaryButton?.buttonBorderColor?.hex}`
+                }
+
+
                 if (section._type === 'hero') {
+                    console.log(section?.imageOverlayColor.rgb)
                     return (
                         <Hero
                             key={section?._key}
                             content={section?.content}
-                            image={section?.image}
+                            image={section?.imageData?.asset?.url}
                             altText={section?.imageData?.asset?.altText}
-                            blurData={section?.imageData?.asset?.blurData}
+                            blurData={section?.imageData?.asset?.lqip}
+                            textAlign={section?.textAlign}
+                            textColor={section?.textColor?.hex}
+                            // PRIMARY BUTTON
+                            primaryButtonText={section?.buttonLinking?.buttonText}
+                            primaryButtonLink={section?.buttonLinking}
+                            primaryButtonStyle={primaryButton}
+                            // SECONDARY BUTTON
+                            secondaryButtonLink={section?.secondButtonLinking}
+                            secondaryButtonText={section?.secondButtonLinking?.buttonText}
+                            secondaryButtonStyle={secondaryButton}
+                            imageOverlayColor={section?.imageOverlayColor}
                         />
                     );
                 }
@@ -96,6 +136,7 @@ export default function Main({
                             content={section?.content}
                             layoutType={section?.layoutType}
                             heading={section?.heading}
+                            backgroundStyles={backgroundStyles}
                         />
                     );
                 }
@@ -107,6 +148,15 @@ export default function Main({
                                 <CallToActionBanner
                                     key={section?._key}
                                     content={section?.content}
+                                    // PRIMARY BUTTON
+                                    primaryButtonText={section?.buttonLinking?.buttonText}
+                                    primaryButtonLink={section?.buttonLinking}
+                                    primaryButtonStyle={primaryButton}
+                                    // SECONDARY BUTTON
+                                    secondaryButtonLink={section?.secondButtonLinking}
+                                    secondaryButtonText={section?.secondButtonLinking?.buttonText}
+                                    secondaryButtonStyle={secondaryButton}
+                                    backgroundStyles={backgroundStyles}
                                 />
                             }
                             {section.layoutType === 'textAndImage' &&
@@ -117,6 +167,16 @@ export default function Main({
                                     reverseColumn={section?.reverseColumn}
                                     altText={section?.imageData?.asset?.altText}
                                     blurData={section?.imageData?.asset?.blurData}
+                                    // PRIMARY BUTTON
+                                    primaryButtonText={section?.buttonLinking?.buttonText}
+                                    primaryButtonLink={section?.buttonLinking}
+                                    primaryButtonStyle={primaryButton}
+                                    // SECONDARY BUTTON
+                                    secondaryButtonLink={section?.secondButtonLinking}
+                                    secondaryButtonText={section?.secondButtonLinking?.buttonText}
+                                    secondaryButtonStyle={secondaryButton}
+                                    backgroundStyles={backgroundStyles}
+                                    textAlign={section?.textAlign}
                                 />
                             }
                             {section.layoutType === 'fullWidthTextImage' &&
@@ -126,12 +186,32 @@ export default function Main({
                                     content={section?.content}
                                     reverseColumn={section?.reverseColumn}
                                     altText={section?.imageData?.asset?.altText}
-                                    blurData={section?.imageData?.asset?.blurData} />
+                                    blurData={section?.imageData?.asset?.blurData}
+                                    textAlign={section?.textAlign}
+                                    backgroundStyles={backgroundStyles}
+                                    // PRIMARY BUTTON
+                                    primaryButtonText={section?.buttonLinking?.buttonText}
+                                    primaryButtonLink={section?.buttonLinking}
+                                    primaryButtonStyle={primaryButton}
+                                    // SECONDARY BUTTON
+                                    secondaryButtonLink={section?.secondButtonLinking}
+                                    secondaryButtonText={section?.secondButtonLinking?.buttonText}
+                                    secondaryButtonStyle={secondaryButton}
+                                />
                             }
                             {section.layoutType === 'ButtonRightTextLeft' &&
                                 <CalltoActionLeftText
                                     key={section?._key}
                                     content={section?.content}
+                                    // PRIMARY BUTTON
+                                    primaryButtonText={section?.buttonLinking?.buttonText}
+                                    buttonLink={section?.buttonLinking}
+                                    primaryButtonStyle={primaryButton}
+                                    // SECONDARY BUTTON
+                                    secondaryButtonLink={section?.secondButtonLinking}
+                                    secondaryButtonText={section?.secondButtonLinking?.buttonText}
+                                    secondaryButtonStyle={secondaryButton}
+                                    backgroundStyles={backgroundStyles}
                                 />
                             }
                         </>
@@ -145,6 +225,15 @@ export default function Main({
                             content={section?.content}
                             backgroundStyles={backgroundStyles}
                             images={section?.childImage}
+                            textAlign={section?.textAlign}
+                            // PRIMARY BUTTON
+                            primaryButtonText={section?.buttonLinking?.buttonText}
+                            primaryButtonLink={section?.buttonLinking}
+                            primaryButtonStyle={primaryButton}
+                            // SECONDARY BUTTON
+                            secondaryButtonLink={section?.secondButtonLinking}
+                            secondaryButtonText={section?.secondButtonLinking?.buttonText}
+                            secondaryButtonStyle={secondaryButton}
                         />
                     );
                 }
@@ -155,6 +244,17 @@ export default function Main({
                             key={section?._key}
                             packages={section?.packages}
                             columnNumber={section?.columnNumber}
+                            content={section?.content}
+                            textAlign={section?.textAlign}
+                            backgroundStyles={backgroundStyles}
+                            // PRIMARY BUTTON
+                            primaryButtonText={section?.buttonLinking?.buttonText}
+                            primaryButtonLink={section?.buttonLinking}
+                            primaryButtonStyle={primaryButton}
+                            // SECONDARY BUTTON
+                            secondaryButtonLink={section?.secondButtonLinking}
+                            secondaryButtonText={section?.secondButtonLinking?.buttonText}
+                            secondaryButtonStyle={secondaryButton}
                         />
                     );
                 }
@@ -164,6 +264,17 @@ export default function Main({
                         <TestimonialSection
                             key={section?._key}
                             testimonials={allTestimonials}
+                            content={section?.content}
+                            textAlign={section?.textAlign}
+                            backgroundStyles={backgroundStyles}
+                            // PRIMARY BUTTON
+                            primaryButtonText={section?.buttonLinking?.buttonText}
+                            primaryButtonLink={section?.buttonLinking}
+                            primaryButtonStyle={primaryButton}
+                            // SECONDARY BUTTON
+                            secondaryButtonLink={section?.secondButtonLinking}
+                            secondaryButtonText={section?.secondButtonLinking?.buttonText}
+                            secondaryButtonStyle={secondaryButton}
                         />
                     );
                 }
@@ -175,7 +286,63 @@ export default function Main({
                             columnNumber={section?.columnNumber}
                             blocks={section?.childBlocks}
                             backgroundStyles={backgroundStyles}
+                            content={section?.content}
+                            textAlign={section?.textAlign}
+                            // PRIMARY BUTTON
+                            primaryButtonText={section?.buttonLinking?.buttonText}
+                            primaryButtonLink={section?.buttonLinking}
+                            primaryButtonStyle={primaryButton}
+                            // SECONDARY BUTTON
+                            secondaryButtonLink={section?.secondButtonLinking}
+                            secondaryButtonText={section?.secondButtonLinking?.buttonText}
+                            secondaryButtonStyle={secondaryButton}
                         />
+                    );
+                }
+
+                if (section._type === 'disclosureSection') {
+                    return (
+                        <>
+                            {section?.layoutType === 'twoColumn' ?
+                                <DisclosureGrid
+                                    key={section?._key}
+                                    disclosure={section?.disclosures}
+                                    disclosureBackgroundColor={section?.disclosureBackgroundColor}
+                                    disclosureTextColor={section?.disclosureTextColor}
+                                    disclosureContentColor={section?.disclosureContentColor}
+                                    backgroundStyles={backgroundStyles}
+                                    content={section?.content}
+                                    textAlign={section?.textAlign}
+                                    // PRIMARY BUTTON
+                                    primaryButtonText={section?.buttonLinking?.buttonText}
+                                    primaryButtonLink={section?.buttonLinking}
+                                    primaryButtonStyle={primaryButton}
+                                    // SECONDARY BUTTON
+                                    secondaryButtonLink={section?.secondButtonLinking}
+                                    secondaryButtonText={section?.secondButtonLinking?.buttonText}
+                                    secondaryButtonStyle={secondaryButton}
+                                />
+                                :
+                                <DisclosureSection
+                                    key={section?._key}
+                                    disclosure={section?.disclosures}
+                                    disclosureBackgroundColor={section?.disclosureBackgroundColor}
+                                    disclosureTextColor={section?.disclosureTextColor}
+                                    disclosureContentColor={section?.disclosureContentColor}
+                                    backgroundStyles={backgroundStyles}
+                                    content={section?.content}
+                                    textAlign={section?.textAlign}
+                                    // PRIMARY BUTTON
+                                    primaryButtonText={section?.buttonLinking?.buttonText}
+                                    primaryButtonLink={section?.buttonLinking}
+                                    primaryButtonStyle={primaryButton}
+                                    // SECONDARY BUTTON
+                                    secondaryButtonLink={section?.secondButtonLinking}
+                                    secondaryButtonText={section?.secondButtonLinking?.buttonText}
+                                    secondaryButtonStyle={secondaryButton}
+                                />
+                            }
+                        </>
                     );
                 }
 
@@ -186,7 +353,16 @@ export default function Main({
                             services={allServices}
                             content={section?.content}
                             imageData={section?.imageData?.asset?.url}
-
+                            textAlign={section?.textAlign}
+                            backgroundStyles={backgroundStyles}
+                            // PRIMARY BUTTON
+                            primaryButtonText={section?.buttonLinking?.buttonText}
+                            primaryButtonLink={section?.buttonLinking}
+                            primaryButtonStyle={primaryButton}
+                            // SECONDARY BUTTON
+                            secondaryButtonLink={section?.secondButtonLinking}
+                            secondaryButtonText={section?.secondButtonLinking?.buttonText}
+                            secondaryButtonStyle={secondaryButton}
                         />
                     );
                 }
@@ -196,6 +372,17 @@ export default function Main({
                         <TeamComponent
                             key={section?._key}
                             team={allTeam}
+                            content={section?.content}
+                            textAlign={section?.textAlign}
+                            backgroundStyles={backgroundStyles}
+                            // PRIMARY BUTTON
+                            primaryButtonText={section?.buttonLinking?.buttonText}
+                            primaryButtonLink={section?.buttonLinking}
+                            primaryButtonStyle={primaryButton}
+                            // SECONDARY BUTTON
+                            secondaryButtonLink={section?.secondButtonLinking}
+                            secondaryButtonText={section?.secondButtonLinking?.buttonText}
+                            secondaryButtonStyle={secondaryButton}
                         />
                     );
                 }
@@ -205,6 +392,17 @@ export default function Main({
                         <BlogSection
                             key={section?._key}
                             blog={allBlog}
+                            content={section?.content}
+                            textAlign={section?.textAlign}
+                            backgroundStyles={backgroundStyles}
+                            // PRIMARY BUTTON
+                            primaryButtonText={section?.buttonLinking?.buttonText}
+                            primaryButtonLink={section?.buttonLinking}
+                            primaryButtonStyle={primaryButton}
+                            // SECONDARY BUTTON
+                            secondaryButtonLink={section?.secondButtonLinking}
+                            secondaryButtonText={section?.secondButtonLinking?.buttonText}
+                            secondaryButtonStyle={secondaryButton}
                         />
                     );
                 }
@@ -214,6 +412,7 @@ export default function Main({
                         <ContactPage
                             key={section?._key}
                             content={section?.content}
+                            backgroundStyles={backgroundStyles}
                             // CONTACT
                             email={email}
                             phone_number={phone_number}
@@ -228,6 +427,26 @@ export default function Main({
                             sendFrom={sendFrom}
                             emailBcc={emailBcc}
                             emailCc={emailCc}
+                        />
+                    );
+                }
+
+                if (section._type === 'leadForm') {
+                    return (
+                        <LeadForm
+                            key={section?._key}
+                            formSchema={section?.formBuilder}
+                            content={section?.content}
+                            backgroundStyles={backgroundStyles}
+                            textAlign={section?.textAlign}
+                            // PRIMARY BUTTON
+                            primaryButtonText={section?.buttonLinking?.buttonText}
+                            primaryButtonLink={section?.buttonLinking}
+                            primaryButtonStyle={primaryButton}
+                            // SECONDARY BUTTON
+                            secondaryButtonLink={section?.secondButtonLinking}
+                            secondaryButtonText={section?.secondButtonLinking?.buttonText}
+                            secondaryButtonStyle={secondaryButton}
                         />
                     );
                 }

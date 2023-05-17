@@ -1,5 +1,5 @@
 .heroInnerContainer {
-    @apply mx-auto max-w-4xl py-32 sm:py-48 lg:py-56 relative
+    @apply py-32 sm:py-48 lg:py-56 relative
 }
 
 .heroImage {
@@ -8,8 +8,4 @@
 
 .heroImageFullScreen {
     @apply absolute inset-0 -z-10 h-screen w-full object-cover
-}
-
-.heroContent {
-    @apply text-center
 }

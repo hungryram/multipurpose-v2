@@ -50,7 +50,6 @@ import formBuilderObject from './sanity/schemas/objects/form-builder'
 
 //  PAGEBUILDER
 import heroBuilder from './sanity/schemas/pagebuilder/hero'
-import customPortfolioBuilder from './sanity/schemas/pagebuilder/custom-portfolio'
 import contactBuilder from './sanity/schemas/pagebuilder/contact'
 import fullWidthTextImageBuilder from './sanity/schemas/pagebuilder/fullwidth-text-image'
 import bannerBuilder from './sanity/schemas/pagebuilder/call-to-action'
@@ -135,7 +134,6 @@ export default defineConfig({
       contentBuilder,
       customReviewBuilder,
       logosBuilder,
-      customPortfolioBuilder
     ]
   },
   plugins: [

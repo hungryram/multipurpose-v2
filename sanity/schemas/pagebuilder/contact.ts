@@ -14,6 +14,11 @@ export default defineType({
             title: 'Form Builder',
             name: 'formBuilder',
             type: 'formBuilder'
+        },
+        {
+            title: 'Color Options',
+            name: 'background',
+            type: 'backgroundOptions',
         }
     ],
     preview: {

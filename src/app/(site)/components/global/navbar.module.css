@@ -13,7 +13,7 @@
 }
 
 .navWrapper {
-    @apply mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8
+    @apply mx-auto flex max-w-7xl items-center justify-between py-6 lg:px-0 px-4
 }
 
 .desktopLogoContainer {

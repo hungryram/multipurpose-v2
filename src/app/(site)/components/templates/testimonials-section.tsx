@@ -1,19 +1,52 @@
 import Image from "next/image"
 import ContentEditor from "../util/content-editor"
 import { urlForImage } from "../../../../../sanity/lib/image"
+import HeaderSection from "./header-section"
 
 interface Props {
-    testimonials: any[]
+    testimonials: any[];
+    content: any;
+    textAlign: string;
+    primaryButtonLink: string;
+    primaryButtonText: string;
+    primaryButtonStyle: any;
+    secondaryButtonText: string;
+    secondaryButtonLink: string;
+    backgroundStyles: any;
+    secondaryButtonStyle: any
 }
 
 export default function TestimonialSection({
-    testimonials
+    testimonials,
+    content,
+    textAlign,
+    primaryButtonLink,
+    primaryButtonText,
+    primaryButtonStyle,
+    secondaryButtonLink,
+    secondaryButtonText,
+    secondaryButtonStyle,
+    backgroundStyles
 }: Props) {
     return (
-        <div className="container">
-            <div className="py-24 sm:py-32">
+        <div className="section" style={backgroundStyles}>
+            <div className="container">
+                {(content || primaryButtonLink || secondaryButtonLink) && (
+                    <HeaderSection
+                        content={content}
+                        textAlign={textAlign}
+                        // PRIMARY
+                        buttonLink={primaryButtonLink}
+                        primaryButtonText={primaryButtonText}
+                        primaryButtonStyle={primaryButtonStyle}
+                        // SECONDARY
+                        secondaryButtonLink={secondaryButtonLink}
+                        secondaryButtonText={secondaryButtonText}
+                        secondaryButtonStyle={secondaryButtonStyle}
+                    />
+                )}
                 <div className="mx-auto px-6 lg:px-8">
-                    <div className="mx-auto mt-16 flow-root max-w-2xl sm:mt-20 lg:mx-0 lg:max-w-none">
+                    <div className="mx-auto flow-root max-w-2xl sm:mt-20 lg:mx-0 lg:max-w-none">
                         <div className="-mt-8 sm:-mx-4 sm:columns-2 sm:text-[0] lg:columns-3">
                             {testimonials?.map((testimonial: any) => (
                                 <div key={testimonial._id} className="pt-8 sm:inline-block sm:w-full sm:px-4">

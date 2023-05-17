@@ -174,6 +174,11 @@ export default defineType({
                     type: 'boolean',
                 },
                 {
+                    title: 'Quick Links Heading',
+                    name: 'quickLinksHeading',
+                    type: 'string',
+                },
+                {
                     title: "Quick links",
                     name: "quickLinks",
                     type: "array",

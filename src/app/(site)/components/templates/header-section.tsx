@@ -1,15 +1,57 @@
-export default function HeaderSection() {
-    return (
-      <div className="bg-white px-6 py-24 sm:py-32 lg:px-8">
-        <div className="mx-auto max-w-2xl text-center">
-          <p className="text-base font-semibold leading-7 text-indigo-600">Get the help you need</p>
-          <h2 className="mt-2 text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">Support center</h2>
-          <p className="mt-6 text-lg leading-8 text-gray-600">
-            Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet
-            fugiat veniam occaecat fugiat aliqua.
-          </p>
+import Link from "next/link"
+import ContentEditor from "../util/content-editor"
+
+export default function HeaderSection({
+  content,
+  textAlign,
+  // PRIMARY
+  buttonLink,
+  primaryButtonText,
+  primaryButtonStyle,
+  // SECONDARY
+  secondaryButtonLink,
+  secondaryButtonText,
+  secondaryButtonStyle
+}: any) {
+
+  const primaryButtonLinking =
+    (buttonLink?.internalLink?._type === "pages" && `/${buttonLink?.internalLink.slug}`) ||
+    (buttonLink?.internalLink?._type === "blog" && `/blog/${buttonLink?.internalLink.slug}`) ||
+    (buttonLink?.internalLink?._type === "legal" && `/legal/${buttonLink?.internalLink.slug}`) ||
+    (buttonLink?.internalLink?._type === "services" && `/services/${buttonLink?.internalLink.slug}`) ||
+    (buttonLink?.externalUrl && `${buttonLink?.externalUrl}`)
+
+  const secondaryButtonLinking =
+    (secondaryButtonLink?.internalLink?._type === "pages" && `/${secondaryButtonLink?.internalLink.slug}`) ||
+    (secondaryButtonLink?.internalLink?._type === "blog" && `/blog/${secondaryButtonLink?.internalLink.slug}`) ||
+    (secondaryButtonLink?.internalLink?._type === "legal" && `/legal/${secondaryButtonLink?.internalLink.slug}`) ||
+    (secondaryButtonLink?.internalLink?._type === "services" && `/services/${secondaryButtonLink?.internalLink.slug}`) ||
+    (secondaryButtonLink?.externalUrl && `${buttonLink?.externalUrl}`)
+
+  return (
+    <>
+      {primaryButtonLinking || secondaryButtonLinking ? (
+        <div className={`content max-w-2xl ${textAlign}`}>
+          <ContentEditor content={content} />
+          <div className={`mt-10 flex items-center gap-x-6 ${textAlign}`}>
+            {primaryButtonLinking && (
+              <Link href={primaryButtonLinking} className="primary-button" style={primaryButtonStyle} target={buttonLink?.externalUrl && '_blank'}>
+                {primaryButtonText}
+              </Link>
+            )}
+            {secondaryButtonLinking && (
+              <Link href={secondaryButtonLinking} className="secondary-button" style={secondaryButtonStyle} target={secondaryButtonLink.externalUrl && '_blank'}>
+                {secondaryButtonText} <span aria-hidden="true">→</span>
+              </Link>
+            )}
+          </div>
         </div>
-      </div>
-    )
-  }
-  
+      ) : (
+        <div className={`content max-w-2xl ${textAlign}`}>
+          <ContentEditor content={content} />
+        </div>
+      )}
+
+    </>
+  )
+}

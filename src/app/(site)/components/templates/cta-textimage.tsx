@@ -2,13 +2,22 @@ import Image from "next/image";
 import ContentEditor from "../util/content-editor";
 import { ctaData } from "../../../../../sample/data";
 import Styles from "./cta-textimage.module.css"
+import HeaderSection from "./header-section";
 
 interface Props {
     image: string;
-    altText: string
-    blurData: string
-    content: string
-    reverseColumn: boolean
+    altText: string;
+    blurData: string;
+    content: string;
+    reverseColumn: boolean;
+    backgroundStyles: any;
+    primaryButtonLink: string;
+    primaryButtonText: string;
+    primaryButtonStyle: any;
+    secondaryButtonText: string;
+    secondaryButtonLink: string;
+    secondaryButtonStyle: any;
+    textAlign: string;
 }
 
 export default function CalltoActionTextImage({
@@ -16,33 +25,35 @@ export default function CalltoActionTextImage({
     altText,
     blurData,
     content,
-    reverseColumn
+    reverseColumn,
+    backgroundStyles,
+    primaryButtonLink,
+    primaryButtonText,
+    primaryButtonStyle,
+    secondaryButtonLink,
+    secondaryButtonText,
+    secondaryButtonStyle,
+    textAlign
 }: Props) {
     return (
-        <div className="section">
+        <div className="section" style={backgroundStyles}>
             <div className="container">
                 <div className={`${Styles.ctaTextImageWrapper} ${reverseColumn ? 'flex-row-reverse' : ''}`}>
                     <div className={`${Styles.ctaContent} lg:w-1/2`}>
-                        <div className="content">
-                            {content ?
-                                <ContentEditor
-                                    content={content}
-                                />
-                                :
-                                <div dangerouslySetInnerHTML={{ __html: ctaData.content }} />
-                            }
-                        </div>
-                        <div className="mt-10 flex items-center gap-x-6 ustify-start">
-                            <a
-                                href="#"
-                                className="rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-                            >
-                                Get started
-                            </a>
-                            <a href="#" className="text-sm font-semibold leading-6 text-white">
-                                Learn more <span aria-hidden="true">→</span>
-                            </a>
-                        </div>
+                        {(content || primaryButtonLink || secondaryButtonLink) && (
+                            <HeaderSection
+                                content={content}
+                                textAlign={textAlign}
+                                // PRIMARY
+                                buttonLink={primaryButtonLink}
+                                primaryButtonText={primaryButtonText}
+                                primaryButtonStyle={primaryButtonStyle}
+                                // SECONDARY
+                                secondaryButtonLink={secondaryButtonLink}
+                                secondaryButtonText={secondaryButtonText}
+                                secondaryButtonStyle={secondaryButtonStyle}
+                            />
+                        )}
                     </div>
                     <div className="lg:w-1/2">
                         {image ?
@@ -56,7 +67,7 @@ export default function CalltoActionTextImage({
                             />
                             :
                             <img src={ctaData.image} alt="placeholder" />
-                    }
+                        }
                     </div>
                 </div>
             </div>

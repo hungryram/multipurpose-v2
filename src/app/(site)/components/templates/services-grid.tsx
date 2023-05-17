@@ -1,27 +1,50 @@
 import Image from "next/image"
 import Link from "next/link"
-import ContentEditor from "../util/content-editor";
+import HeaderSection from "./header-section";
 
 interface Props {
     content: string;
     services: any
     imageData: string
+    textAlign: string;
+    primaryButtonLink: string;
+    primaryButtonText: string;
+    primaryButtonStyle: any;
+    secondaryButtonText: string;
+    secondaryButtonLink: string;
+    secondaryButtonStyle: any;
+    backgroundStyles: any
 }
 
 export default function ServiceGrid({
-    content,
     services,
+    content,
+    textAlign,
+    primaryButtonLink,
+    primaryButtonText,
+    primaryButtonStyle,
+    secondaryButtonLink,
+    secondaryButtonText,
+    secondaryButtonStyle,
+    backgroundStyles
 }: Props) {
     return (
-        <div className="section">
+        <div className="section" style={backgroundStyles}>
             <div className="container">
-                {content &&
-                    <div className="content pb-14">
-                        <ContentEditor
-                            content={content}
-                        />
-                    </div>
-                }
+            {(content || primaryButtonLink || secondaryButtonLink) && (
+                    <HeaderSection
+                        content={content}
+                        textAlign={textAlign}
+                        // PRIMARY
+                        buttonLink={primaryButtonLink}
+                        primaryButtonText={primaryButtonText}
+                        primaryButtonStyle={primaryButtonStyle}
+                        // SECONDARY
+                        secondaryButtonLink={secondaryButtonLink}
+                        secondaryButtonText={secondaryButtonText}
+                        secondaryButtonStyle={secondaryButtonStyle}
+                    />
+                )}
                 <ul role="list" className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
                     {services?.map((node: any) => {
                         return (

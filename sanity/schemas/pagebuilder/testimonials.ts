@@ -10,17 +10,22 @@ export default defineType({
       ],
     fields: [
         {
-            title: 'Heading',
-            name: 'heading',
-            type: 'string',
-            group: 'content',
-            description: 'The testimonials are automatically pulled from the testimonials sidebar'
-        },
-        {
             title: 'Content',
             name: 'content',
             type: 'contentEditor',
             group: 'content',
+        },
+        {
+            title: 'Text Align',
+            name: 'textAlign',
+            type: 'string',
+            options: {
+                list: [
+                    {title: 'Left', value: 'text-left'},
+                    {title: 'Center', value: 'text-center mx-auto justify-center'},
+                    {title: 'Right', value: 'mx-auto mr-0 text-right'},
+                ]
+            }
         },
         {
             title: 'Primary Button',
@@ -33,37 +38,6 @@ export default defineType({
             name: 'secondaryButton',
             type: 'secondaryButton',
             group: 'content'
-        },
-        {
-            title: 'Enable Carousel',
-            name: 'carousel',
-            type: 'boolean',
-            description: 'Displayed grid view by default',
-            group: 'settings',
-        },
-        {
-            title: 'Text Left',
-            name: 'textLeft',
-            type: 'boolean',
-            group: 'settings',
-        },
-        {
-            title: 'Testimonial Card Background Color',
-            name: 'cardBackground',
-            group: 'settings',
-            type: 'color',
-            options: {
-                disableAlpha: true
-            }
-        },
-        {
-            title: 'Testimonial Card Text Color',
-            name: 'cardTextColor',
-            group: 'settings',
-            type: 'color',
-            options: {
-                disableAlpha: true
-            }
         },
         {
             title: 'Background Options',

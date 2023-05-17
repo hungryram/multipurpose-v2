@@ -16,23 +16,22 @@ export default defineType({
             group: 'content'
         },
         {
+            title: 'Text Align',
+            name: 'textAlign',
+            type: 'string',
+            options: {
+                list: [
+                    {title: 'Left', value: 'text-left'},
+                    {title: 'Center', value: 'text-center mx-auto justify-center'},
+                    {title: 'Right', value: 'mx-auto mr-0 text-right'},
+                ]
+            }
+        },
+        {
             title: 'Image',
             name: 'image',
             type: 'image',
             group: 'content',
-        },
-        {
-            title: 'Image Height',
-            name: 'imageHeight',
-            type: 'string',
-            options: {
-                list: [
-                    {title: 'Small', value: 'small'},
-                    {title: 'Medium', value: 'medium'},
-                    {title: 'Large', value: 'large'},
-                ]
-            },
-            group: 'settings'
         },
         {
             title: 'Image Overlay Color',
@@ -54,7 +53,7 @@ export default defineType({
         {
             title: 'Text Color',
             name: 'textColor',
-            type: 'textColor',
+            type: 'color',
             group: 'settings'
         },
     ],

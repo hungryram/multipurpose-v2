@@ -30,9 +30,8 @@ export default defineType({
             hidden: ({ parent }) => parent?.linkType !== "internal",
             to: [
                 { type: 'blog' },
-                { type: 'author' },
                 { type: 'pages' },
-                { type: 'location' },
+                { type: 'legal' },
                 { type: 'services' },
             ],
         },
@@ -42,11 +41,6 @@ export default defineType({
             description: "Use this field to link to an external website or paste URL",
             hidden: ({ parent }) => parent?.linkType !== "external", // hidden if link type is not external
             type: 'string',
-        },
-        {
-            name: 'newTab',
-            title: 'Open in new tab',
-            type: 'boolean',
         },
     ]
 })

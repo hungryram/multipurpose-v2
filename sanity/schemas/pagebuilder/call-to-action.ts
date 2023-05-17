@@ -29,6 +29,18 @@ export default defineType({
             group: 'content',
         },
         {
+            title: 'Text Align',
+            name: 'textAlign',
+            type: 'string',
+            options: {
+                list: [
+                    {title: 'Left', value: 'text-left'},
+                    {title: 'Center', value: 'text-center mx- justify-center'},
+                    {title: 'Right', value: 'mx-auto mr-0 text-right'},
+                ]
+            }
+        },
+        {
             title: 'Image',
             name: 'image',
             type: 'image',
@@ -53,16 +65,10 @@ export default defineType({
             group: 'content'
         },
         {
-            title: 'Background Options',
+            title: 'Color Options',
             name: 'background',
             group: 'settings',
             type: 'backgroundOptions',
-        },
-        {
-            title: 'Text Color',
-            name: 'textColor',
-            group: 'settings',
-            type: 'color',
         },
     ],
     preview: {

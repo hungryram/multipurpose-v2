@@ -10,17 +10,23 @@ export default defineType({
     ],
     fields: [
         {
-          title: 'Heading',
-          name: 'heading',
-          type: 'string',
-          group: 'content'
-        },
-        {
             title: 'Content',
             name: 'content',
             type: 'contentEditor',
             group: 'content'
         },
+        {
+          title: 'Text Align',
+          name: 'textAlign',
+          type: 'string',
+          options: {
+              list: [
+                  {title: 'Left', value: 'text-left'},
+                  {title: 'Center', value: 'text-center mx-auto justify-center'},
+                  {title: 'Right', value: 'mx-auto mr-0 text-right'},
+              ]
+          }
+      },
         {
           title: 'Images',
           name: 'images',
@@ -37,34 +43,21 @@ export default defineType({
           },
         },
         {
-            title: 'Animation',
-            name: 'animation',
-            type: 'string',
-            options: {
-                list: [
-                    {title: 'Fade', value: 'fade'},
-                    {title: 'Slide', value: 'slide'},
-                ]
-            },
-            group: 'settings',
-        },
-        {
-            title: 'Disable Navigation Arrows',
-            name: 'disableNavigation',
-            type: 'boolean',
-            group: 'settings',
-        },
-        {
-          title: 'Remove Padding',
-          name: 'removePadding',
-          type: 'boolean',
-          group: 'settings',
-      },
-        {
-          title: 'Background Options',
+          title: 'Color Options',
           name: 'background',
           group: 'settings',
           type: 'backgroundOptions',
       }
       ],
+      preview: {
+        select: {
+            content: 'content',
+        },
+        prepare({content}) {
+            const text = content[0]?.children[0]?.text; // Extract the first block's text
+            return {
+                title: text ? text : 'No content',
+            };
+        }
+    }
 })

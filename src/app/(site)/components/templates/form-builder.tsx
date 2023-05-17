@@ -16,6 +16,12 @@ interface FormSchema {
   fields: FormField[];
   emailCc: string;
   emailBcc: string;
+  sendTo: string;
+  sendFrom: string;
+  redirectTo: string;
+  buttonLabel: string;
+  buttonBackgroundColor: any;
+  buttonTextColor: any;
 }
 
 interface FormBuilderProps {
@@ -23,15 +29,17 @@ interface FormBuilderProps {
 }
 
 export default function FormBuilder({ formSchema }: FormBuilderProps) {
-
   return (
     <div className="py-10 px-4">
-      <h2>{formSchema?.subject}</h2>
       <form action={submitForm}>
         <label className="hidden" htmlFor="name-honey"/>
         <input className="hidden" type="text" name="name-honey" />
-        <input className="hidden" type="text" name="bcc" value={formSchema.emailBcc} />
-        <input className="hidden" type="text" name="cc" value={formSchema.emailCc}/>
+        <input className="hidden" type="hidden" name="bcc" value={formSchema?.emailBcc} />
+        <input className="hidden" type="hidden" name="cc" value={formSchema?.emailCc}/>
+        <input className="hidden" type="hidden" name="sendFrom" value={formSchema?.sendFrom ? formSchema.sendFrom : 'forms@hungryramwebdesign.com'}/>
+        <input className="hidden" type="hidden" name="sendTo" value={formSchema?.sendTo}/>
+        <input className="hidden" type="hidden" name="subject" value={formSchema?.subject}/>
+        <input className="hidden" type="hidden" name="redirectTo" value={formSchema?.redirectTo}/>
         {formSchema?.fields && (
           <>
             {formSchema.fields.map((field) => {
@@ -128,8 +136,11 @@ export default function FormBuilder({ formSchema }: FormBuilderProps) {
             })}
           </>
         )}
-        <button type="submit" className="primary-button">
-          Save
+        <button type="submit" className="primary-button" style={{
+          backgroundColor: formSchema?.buttonBackgroundColor?.hex,
+          color: formSchema?.buttonTextColor?.hex
+        }}>
+          {formSchema?.buttonLabel ?? 'Submit'}
         </button>
       </form>
     </div>

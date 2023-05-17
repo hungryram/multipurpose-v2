@@ -10,5 +10,10 @@ export default defineType({
             name: 'background',
             type: 'imageColor',
         },
+        {
+            title: 'Content Color',
+            name: 'contentColor',
+            type: 'color'
+        }
     ]
 })

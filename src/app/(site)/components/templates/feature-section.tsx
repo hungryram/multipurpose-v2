@@ -1,31 +1,51 @@
-// import { features } from "../../../../sample/data"
 import Styles from "./feature-section.module.css"
 import * as HeroIcons from '@heroicons/react/24/outline';
+import HeaderSection from "./header-section";
 
 interface Props {
     backgroundStyles: any;
     columnNumber: number;
-    blocks: any
+    blocks: any;
+    content: any;
+    textAlign: string;
+    primaryButtonLink: string;
+    primaryButtonText: string;
+    primaryButtonStyle: any;
+    secondaryButtonText: string;
+    secondaryButtonLink: string;
+    secondaryButtonStyle: any
 }
 
 export default function FeatureSection({
     backgroundStyles,
     columnNumber,
-    blocks
+    blocks,
+    content,
+    textAlign,
+    primaryButtonLink,
+    primaryButtonText,
+    primaryButtonStyle,
+    secondaryButtonLink,
+    secondaryButtonText,
+    secondaryButtonStyle
 }: Props) {
     return (
         <div className="section" style={backgroundStyles}>
             <div className="container">
-                <div className="mx-auto max-w-2xl lg:text-center">
-                    <h2 className="text-base font-semibold leading-7 text-indigo-600">Deploy faster</h2>
-                    <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-                        Everything you need to deploy your app
-                    </p>
-                    <p className="mt-6 text-lg leading-8 text-gray-600">
-                        Quis tellus eget adipiscing convallis sit sit eget aliquet quis. Suspendisse eget egestas a elementum
-                        pulvinar et feugiat blandit at. In mi viverra elit nunc.
-                    </p>
-                </div>
+                {(content || primaryButtonLink || secondaryButtonLink) && (
+                    <HeaderSection
+                        content={content}
+                        textAlign={textAlign}
+                        // PRIMARY
+                        buttonLink={primaryButtonLink}
+                        primaryButtonText={primaryButtonText}
+                        primaryButtonStyle={primaryButtonStyle}
+                        // SECONDARY
+                        secondaryButtonLink={secondaryButtonLink}
+                        secondaryButtonText={secondaryButtonText}
+                        secondaryButtonStyle={secondaryButtonStyle}
+                    />
+                )}
                 <div className={Styles.featureGridWrap}>
                     <dl className={`${Styles.featureGridContainer} grid grid-cols-1 lg:grid-cols-${columnNumber}`}>
                         {blocks?.map((node: any) => {
@@ -49,7 +69,7 @@ export default function FeatureSection({
                                             <IconComponent className="h-5 w-5 flex-none" style={{
                                                 color: node?.iconColor?.hex
                                             }} aria-hidden="true" />
-                                        )}                                        
+                                        )}
                                         {node.value}
                                     </dt>
                                     <dd className={Styles.featureCardContent}>

@@ -97,6 +97,13 @@ export const appearance = groq`
     },
     'footer': footer {
       ...,
+      'footerLogo': footerLogo {
+        asset->{
+          url,
+          altText,
+          lqip
+        }
+      },
       'quickLinks': quickLinks[]{
         newTab,
         linkType,

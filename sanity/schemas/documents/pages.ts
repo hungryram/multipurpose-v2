@@ -47,6 +47,7 @@ export default defineType({
                 {type: 'teamDisplay'},
                 {type: 'blogDisplay'},
                 {type: 'servicesDisplay'},
+                {type: 'formBuilder'},
             ]
         },
         {

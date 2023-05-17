@@ -1,6 +1,7 @@
 import { CheckCircleIcon } from '@heroicons/react/20/solid'
 import { pricingTiers } from '../../../../../sample/data';
 import Styles from "./pricing.module.css"
+import HeaderSection from './header-section';
 
 interface Props {
     name: string;
@@ -14,7 +15,16 @@ interface Props {
 
 interface Pricing {
     packages: any;
-    columnNumber: number
+    columnNumber: number;
+    content: any;
+    textAlign: string;
+    primaryButtonLink: string;
+    primaryButtonText: string;
+    primaryButtonStyle: any;
+    secondaryButtonText: string;
+    secondaryButtonLink: string;
+    secondaryButtonStyle: any;
+    backgroundStyles: any;
 }
 
 export function PricingTable({
@@ -24,7 +34,7 @@ export function PricingTable({
     features,
     description,
     packageType,
-    ctaText
+    ctaText,
 }: Props) {
     return (
         <div className="pt-16 lg:px-8 lg:pt-0 xl:px-14">
@@ -47,12 +57,14 @@ export function PricingTable({
             {description && <p className="mt-10 text-sm font-semibold leading-6 text-gray-900">{description}</p>}
             {features &&
                 <ul role="list" className="mt-6 space-y-3 text-sm leading-6 text-gray-600">
-                    {features?.map((feature: string) => (
-                        <li key={feature} className="flex gap-x-3">
-                            <CheckCircleIcon className="h-6 w-5 flex-none accent" aria-hidden="true" />
-                            {feature}
-                        </li>
-                    ))}
+                    {features?.map((feature: string) => {
+                        return (
+                            <li key={feature.replace(/ /g, '')} className="flex gap-x-3">
+                                <CheckCircleIcon className="h-6 w-5 flex-none accent" aria-hidden="true" />
+                                {feature}
+                            </li>
+                        )
+                    })}
                 </ul>
             }
         </div>
@@ -61,21 +73,34 @@ export function PricingTable({
 
 export default function PricingSection({
     packages,
-    columnNumber
+    columnNumber,
+    content,
+    textAlign,
+    primaryButtonLink,
+    primaryButtonText,
+    primaryButtonStyle,
+    secondaryButtonLink,
+    secondaryButtonText,
+    secondaryButtonStyle,
+    backgroundStyles
 }: Pricing) {
     return (
-        <div className="bg-white py-24 sm:py-32">
+        <div className="section" style={backgroundStyles}>
             <div className="mx-auto max-w-7xl px-6 lg:px-8">
-                <div className="mx-auto max-w-4xl sm:text-center">
-                    <h2 className="text-base font-semibold leading-7 text-indigo-600">Pricing</h2>
-                    <p className="mt-2 text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
-                        Choose the right plan for&nbsp;you
-                    </p>
-                </div>
-                <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-gray-600 sm:text-center">
-                    Distinctio et nulla eum soluta et neque labore quibusdam. Saepe et quasi iusto modi velit ut non voluptas in.
-                    Explicabo id ut laborum.
-                </p>
+                {(content || primaryButtonLink || secondaryButtonLink) && (
+                    <HeaderSection
+                        content={content}
+                        textAlign={textAlign}
+                        // PRIMARY
+                        buttonLink={primaryButtonLink}
+                        primaryButtonText={primaryButtonText}
+                        primaryButtonStyle={primaryButtonStyle}
+                        // SECONDARY
+                        secondaryButtonLink={secondaryButtonLink}
+                        secondaryButtonText={secondaryButtonText}
+                        secondaryButtonStyle={secondaryButtonStyle}
+                    />
+                )}
                 <div className="mt-20 flow-root">
                     <div className={`${Styles.pricingGrid} grid lg:grid-cols-${columnNumber} grid-cols-1`}>
                         {packages ? packages?.map((node: any, i: any) => {

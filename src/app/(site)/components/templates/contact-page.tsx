@@ -17,7 +17,8 @@ interface Props {
     sendFrom: string;
     emailBcc: string;
     emailCc: string;
-    formBuilder: any
+    formBuilder: any;
+    backgroundStyles: any
 }
 
 export default function ContactPage({
@@ -31,18 +32,13 @@ export default function ContactPage({
     state,
     zip_code,
     formBuilder,
-    emailAlerts,
-    sendFrom,
-    emailBcc,
-    emailCc,
+    backgroundStyles
 }: Props) {
     return (
-        <div className="relative isolate bg-white">
-            <div className="mx-auto grid max-w-7xl grid-cols-1 lg:grid-cols-2">
-                <div className="relative px-6 pb-20 pt-24 sm:pt-32 lg:static lg:px-8 lg:py-48">
-                    <div className="mx-auto max-w-xl lg:mx-0 lg:max-w-lg">
-                        <div className="absolute inset-y-0 left-0 -z-10 w-full overflow-hidden bg-gray-100 ring-1 ring-gray-900/10 lg:w-1/2">
-                        </div>
+        <div className="relative">
+            <div className="mx-auto grid grid-cols-1 lg:grid-cols-2 items-center">
+                <div className="relative px-6 pb-20 pt-24 sm:pt-32 lg:static lg:px-8 lg:py-48" style={backgroundStyles}>
+                    <div className="mx-auto max-w-xl lg:max-w-lg">
                         <div className="content">
                             {content ?
                                 <ContentEditor
@@ -52,14 +48,14 @@ export default function ContactPage({
                                 <div dangerouslySetInnerHTML={{ __html: contactData.content }} />
                             }
                         </div>
-                        <dl className="mt-10 space-y-4 text-base leading-7 text-gray-600">
+                        <dl className="mt-10 space-y-4 text-base leading-7">
                             {address || city || state || zip_code ? (
-                                <div className="flex gap-x-4">
+                                <div className="flex gap-x-4 ">
                                     <dt className="flex-none">
                                         <span className="sr-only">Address</span>
-                                        <MapPinIcon className="h-7 w-6 text-gray-400" aria-hidden="true" />
+                                        <MapPinIcon className="h-7 w-6  opacity-60" aria-hidden="true" />
                                     </dt>
-                                    <dd>
+                                    <dd className='text-inherit'>
                                         {address && (
                                             <>
                                                 {address}
@@ -80,25 +76,21 @@ export default function ContactPage({
                                 <div className="flex gap-x-4">
                                     <dt className="flex-none">
                                         <span className="sr-only">Direct</span>
-                                        <DevicePhoneMobileIcon className="h-7 w-6 text-gray-400" aria-hidden="true" />
+                                        <DevicePhoneMobileIcon className="h-7 w-6  opacity-60" aria-hidden="true" />
                                     </dt>
                                     <dd>
-                                        <a className="hover:text-gray-900" href={`tel:${phone_number}`}>
-                                            {phone_number}
-                                        </a>
+                                        <a href={`tel:${phone_number}`}>{phone_number}</a>
                                     </dd>
                                 </div>
                             }
                             {office_number &&
                                 <div className="flex gap-x-4">
                                     <dt className="flex-none">
-                                        <span className="sr-only">Phone</span>
-                                        <PhoneIcon className="h-7 w-6 text-gray-400" aria-hidden="true" />
+                                        <span className="sr-only">Office</span>
+                                        <PhoneIcon className="h-7 w-6  opacity-60" aria-hidden="true" />
                                     </dt>
                                     <dd>
-                                        <a className="hover:text-gray-900" href={`tel:${office_number}`}>
-                                            {office_number}
-                                        </a>
+                                        <a href={`tel:${office_number}`}>{office_number}</a>
                                     </dd>
                                 </div>
                             }
@@ -106,23 +98,22 @@ export default function ContactPage({
                                 <div className="flex gap-x-4">
                                     <dt className="flex-none">
                                         <span className="sr-only">Email</span>
-                                        <EnvelopeIcon className="h-7 w-6 text-gray-400" aria-hidden="true" />
+                                        <EnvelopeIcon className="h-7 w-6  opacity-60" aria-hidden="true" />
                                     </dt>
                                     <dd>
-                                        <a className="hover:text-gray-900" href={`mailto:${email}`}>
-                                            {email}
-                                        </a>
+                                        <a href={`mailto:${email}`}>{email}</a>
                                     </dd>
                                 </div>
                             }
                         </dl>
                     </div>
-
                 </div>
                 <div>
-                    <FormBuilder 
-                        formSchema={formBuilder}
-                    />
+                    <div className="mx-auto max-w-2xl">
+                        <FormBuilder
+                            formSchema={formBuilder}
+                        />
+                    </div>
                 </div>
             </div>
         </div>

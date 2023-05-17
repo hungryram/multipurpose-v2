@@ -10,16 +10,32 @@ export default defineType({
     ],
     fields: [
         {
-            title: 'Heading',
-            name: 'heading',
-            type: 'string',
-            group: 'content'
+            title: "Layout Type",
+            name: "layoutType",
+            type: "string",
+            options: {
+                list: [
+                    { title: "Two Column", value: "twoColumn" },
+                ],
+            },
         },
         {
             title: 'Content',
             name: 'content',
             group: 'content',
             type: 'contentEditor',
+        },
+        {
+            title: 'Text Align',
+            name: 'textAlign',
+            type: 'string',
+            options: {
+                list: [
+                    {title: 'Left', value: 'text-left'},
+                    {title: 'Center', value: 'text-center mx-auto justify-center'},
+                    {title: 'Right', value: 'mx-auto mr-0 text-right'},
+                ]
+            }
         },
         {
             title: 'Primary Button',
@@ -38,7 +54,7 @@ export default defineType({
             name: 'disclosures',
             group: 'content',
             type: 'array',
-            description: 'This section works best for drop downs, like a brief FAQ.',
+            description: 'This section works best for drop downs like FAQ',
             of: [
                 {
                     title: 'Disclosure Block',
@@ -58,18 +74,6 @@ export default defineType({
                     ]
                 }
             ]
-        },
-        {
-            title: 'Two Column',
-            name: 'twoColumn',
-            type: 'boolean',
-            group: 'settings'
-        },
-        {
-            title: 'Text Left',
-            name: 'textLeft',
-            type: 'boolean',
-            group: 'settings'
         },
         {
             title: 'Disclosure Background Color',

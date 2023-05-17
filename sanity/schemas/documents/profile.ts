@@ -133,27 +133,6 @@ export default {
                     validation: Rule => Rule.required().error('Needed for website configuration')
                 },
                 {
-                    title: 'Email Alerts',
-                    name: 'emailAlerts',
-                    type: 'string',
-                    description: 'Enter in the email to receive email alerts. Separate multiple emails with commas.'
-                },
-                {
-                    title: 'Email CC',
-                    name: 'emailCc',
-                    type: 'string',
-                },
-                {
-                    title: 'Email Bcc',
-                    name: 'emailBcc',
-                    type: 'string',
-                },
-                {
-                    title: 'Send From',
-                    name: 'sendFrom',
-                    type: 'string',
-                },
-                {
                     title: 'Google Analytics ID',
                     name: 'googleID',
                     type: 'string',

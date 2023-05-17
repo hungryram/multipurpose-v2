@@ -55,7 +55,6 @@ export default async function RootLayout({
 
   const data = await client.fetch(appearance)
 
-
   return (
     <html lang="en">
       {data?.profileSettings?.settings?.googleID &&
@@ -74,7 +73,20 @@ export default async function RootLayout({
           enableTopHeader={data?.appearances?.topHeaderBar?.enableTopHeaderBar}
         />
         {children}
-        <Footer />
+        <Footer
+          company_name={data.profileSettings.company_name}
+          image={data.appearances?.footer?.footerLogo?.asset?.url}
+          quickLinksHeading={data.appearances?.footer?.quickLinksHeading}
+          altText={data.ablurDatappearances?.footer?.footerLogo?.asset?.url}
+          blurData={data.ablurDatappearances?.footer?.footerLogo?.asset?.lqip}
+          email={data.profileSettings?.contact_information?.email}
+          phone_number={data.profileSettings?.contact_information?.phone_number}
+          office_number={data.profileSettings?.contact_information?.office_number}
+          address={data.profileSettings?.address?.address}
+          city={data.profileSettings?.address?.city}
+          state={data.profileSettings?.address?.state}
+          zip_code={data.profileSettings?.address?.zip_code}
+        />
       </body>
     </html>
   )

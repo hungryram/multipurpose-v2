@@ -10,12 +10,6 @@ export default defineType({
     ],
     fields: [
         {
-            title: 'Heading',
-            name: 'heading',
-            type: 'string',
-            group: 'content'
-        },
-        {
             title: 'Content',
             name: 'content',
             type: 'contentEditor',

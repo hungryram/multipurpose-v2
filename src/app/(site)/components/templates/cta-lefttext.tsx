@@ -1,17 +1,48 @@
 import ContentEditor from "../util/content-editor";
 import { ctaData } from "../../../../../sample/data";
+import Link from "next/link";
 
 interface Props {
-    content: string
+    content: string;
+    backgroundStyles: any;
+    buttonLink: any;
+    secondaryButtonLink: any;
+    primaryButtonText: string;
+    primaryButtonStyle: any;
+    secondaryButtonStyle: any;
+    secondaryButtonText: string;
+
 }
 
 export default function CalltoActionLeftText({
-    content
+    content,
+    backgroundStyles,
+    buttonLink,
+    secondaryButtonLink,
+    primaryButtonText,
+    primaryButtonStyle,
+    secondaryButtonStyle,
+    secondaryButtonText
 }: Props) {
+
+    const primaryButtonLinking =
+        (buttonLink?.internalLink?._type === "pages" && `/${buttonLink?.internalLink.slug}`) ||
+        (buttonLink?.internalLink?._type === "blog" && `/blog/${buttonLink?.internalLink.slug}`) ||
+        (buttonLink?.internalLink?._type === "legal" && `/legal/${buttonLink?.internalLink.slug}`) ||
+        (buttonLink?.internalLink?._type === "services" && `/services/${buttonLink?.internalLink.slug}`) ||
+        (buttonLink?.externalUrl && `${buttonLink?.externalUrl}`)
+
+    const secondaryButtonLinking =
+        (secondaryButtonLink?.internalLink?._type === "pages" && `/${secondaryButtonLink?.internalLink.slug}`) ||
+        (secondaryButtonLink?.internalLink?._type === "blog" && `/blog/${secondaryButtonLink?.internalLink.slug}`) ||
+        (secondaryButtonLink?.internalLink?._type === "legal" && `/legal/${secondaryButtonLink?.internalLink.slug}`) ||
+        (secondaryButtonLink?.internalLink?._type === "services" && `/services/${secondaryButtonLink?.internalLink.slug}`) ||
+        (secondaryButtonLink?.externalUrl && `${buttonLink?.externalUrl}`)
+
     return (
-        <div>
-            <div className="container px-6 py-24 sm:py-32 lg:flex lg:items-center lg:justify-between">
-                <div className="content lg:w-1/3">
+        <div className="section" style={backgroundStyles}>
+            <div className="container lg:flex lg:items-center lg:justify-between">
+                <div className="content lg:w-1/2">
                     {content ?
                         <ContentEditor
                             content={content}
@@ -21,15 +52,18 @@ export default function CalltoActionLeftText({
                     }
                 </div>
                 <div className="mt-10 flex items-center gap-x-6 lg:mt-0 lg:flex-shrink-0">
-                    <a
-                        href="#"
-                        className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                    >
-                        Get started
-                    </a>
-                    <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
-                        Learn more <span aria-hidden="true">→</span>
-                    </a>
+                    <div className={`flex items-center gap-x-6`}>
+                        {primaryButtonLinking && (
+                            <Link href={primaryButtonLinking} className="primary-button" style={primaryButtonStyle} target={buttonLink?.externalUrl && '_blank'}>
+                                {primaryButtonText}
+                            </Link>
+                        )}
+                        {secondaryButtonLinking && (
+                            <Link href={secondaryButtonLinking} className="secondary-button" style={secondaryButtonStyle} target={secondaryButtonLink.externalUrl && '_blank'}>
+                                {secondaryButtonText} <span aria-hidden="true">→</span>
+                            </Link>
+                        )}
+                    </div>
                 </div>
             </div>
         </div>

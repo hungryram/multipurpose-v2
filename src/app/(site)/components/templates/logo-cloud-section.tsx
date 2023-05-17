@@ -1,11 +1,18 @@
 import Image from "next/image";
-import ContentEditor from "../util/content-editor"
 import Styles from "./logo-cloud.module.css"
+import HeaderSection from "./header-section";
 
 interface Props {
     images: any;
-    content: string[];
     backgroundStyles: any
+    content: any;
+    textAlign: string;
+    primaryButtonLink: string;
+    primaryButtonText: string;
+    primaryButtonStyle: any;
+    secondaryButtonText: string;
+    secondaryButtonLink: string;
+    secondaryButtonStyle: any
 }
 
 function SampleData() {
@@ -25,16 +32,32 @@ function SampleData() {
 export default function LogoCloudSection({
     images,
     content,
-    backgroundStyles
+    backgroundStyles,
+    textAlign,
+    primaryButtonLink,
+    primaryButtonText,
+    primaryButtonStyle,
+    secondaryButtonLink,
+    secondaryButtonText,
+    secondaryButtonStyle
 }: Props) {
     return (
         <div className="section" style={backgroundStyles}>
             <div className="container">
-                <div className="content text-center">
-                    <ContentEditor 
+                {(content || primaryButtonLink || secondaryButtonLink) && (
+                    <HeaderSection
                         content={content}
+                        textAlign={textAlign}
+                        // PRIMARY
+                        buttonLink={primaryButtonLink}
+                        primaryButtonText={primaryButtonText}
+                        primaryButtonStyle={primaryButtonStyle}
+                        // SECONDARY
+                        secondaryButtonLink={secondaryButtonLink}
+                        secondaryButtonText={secondaryButtonText}
+                        secondaryButtonStyle={secondaryButtonStyle}
                     />
-                </div>
+                )}
                 <div className={Styles.gridWrapper}>
                     {images ? images?.map((node: any) => {
                         return (
