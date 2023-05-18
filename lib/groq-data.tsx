@@ -701,3 +701,34 @@ export async function getLegal(slug: string) {
     { slug }
   )
 }
+
+// USED FOR SITEMAP
+export const getAllPages = groq`
+{
+  'profileSettings': *[_type == 'profile'][0]{
+    settings {
+      websiteName
+    }
+  },
+  'legal': *[_type == "legal"]{
+    'slug': slug.current,
+    _updatedAt
+  },
+  'pages': *[_type == "pages"]{
+    'slug': slug.current,
+    _updatedAt
+  },
+  'blog': *[_type == "blog"]{
+    'slug': slug.current,
+    _updatedAt
+  },
+  'services': *[_type == "services"]{
+    'slug': slug.current,
+    _updatedAt
+  },
+  'team': *[_type == "team"]{
+    'slug': slug.current,
+    _updatedAt
+  },
+}
+`
