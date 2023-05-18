@@ -62,15 +62,16 @@ export default async function servicesSlug({ params }: Props) {
         "@context": "https://schema.org",
         "@type": "Service",
         ...(services?.services?.title && { "name": services?.services?.title }),
-        ...(services?.services?.description && { "description": services?.services?.description }),
+        ...(services?.services?.seo?.meta_description && { "description": services?.services?.seo?.meta_description }),
         "url": `${services?.profileSettings?.settings?.websiteName}/services/${services?.services?.slug}`,
         ...(services?.services?.imageData?.asset?.url && { "image": services?.services?.imageData?.asset?.url }),
         "provider": {
             "@type": "Organization",
             ...(services?.profileSettings?.company_name && { "name": services?.profileSettings?.company_name }),
-            ...(services?.profileSettings?.settings?.websiteUrl && { "url": services?.profileSettings?.settings?.websiteUrl })
+            ...(services?.profileSettings?.settings?.websiteName && { "url": services?.profileSettings?.settings?.websiteName })
         },
     }
+
     return (
         <>
             <script
