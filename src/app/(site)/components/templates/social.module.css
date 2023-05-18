@@ -1,6 +1,13 @@
 /* SOCIAL */
 
+ul.socialComponent {
+  @apply ml-0
+}
+
 .socialComponent li {
     @apply inline-block mr-2 text-2xl;
-    color: var(--secondary-color)
   }
+
+.socialComponent svg {
+  color: var(--primary-accent);
+}

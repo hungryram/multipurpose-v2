@@ -4,7 +4,7 @@
 
 .footer h3 {
     color: var(--footer-header-color);
-    @apply text-sm font-semibold leading-6
+    @apply text-sm font-semibold leading-6 lg:mb-6 mb-4
 }
 
 .footer * {

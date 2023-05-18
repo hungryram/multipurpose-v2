@@ -33,7 +33,9 @@ interface Props {
   legal: any;
   links: any;
   secondLinks: any;
-  quickLinksTwoHeading: string
+  quickLinksTwoHeading: string;
+  footerText: any;
+  shortText: string
 }
 
 export default function Footer({
@@ -66,13 +68,15 @@ export default function Footer({
   legal,
   links,
   quickLinksTwoHeading,
-  secondLinks
+  secondLinks,
+  footerText,
+  shortText
 }: Props) {
   return (
     <footer className={Styles.footer} aria-labelledby="footer-heading">
       <div className="section">
         <div className="container">
-          <div className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-1 xl:gap-8">
+          <div className={`grid ${footerText ? 'lg:grid-cols-5' : 'lg:grid-cols-4'} md:grid-cols-3 grid-cols-1 xl:gap-8 gap-y-10`}>
             <div className="space-y-8">
               {image ?
                 <div className="flex md:justify-start justify-center">
@@ -89,9 +93,11 @@ export default function Footer({
                 :
                 <h3 className="uppercase font-semibold mb-4">{company_name}</h3>
               }
-              <p className="text-sm leading-6">
-                Making the world a better place through constructing elegant hierarchies.
-              </p>
+              {shortText &&
+                <p className="text-sm leading-6">
+                  {shortText}
+                </p>
+              }
               <div className="flex space-x-6">
                 <Social
                   facebook={facebook}
@@ -110,7 +116,7 @@ export default function Footer({
             </div>
             <div>
               <div>
-                <h3 className="mb-6">Contact Information</h3>
+                <h3>Contact Information</h3>
                 <dl className="space-y-4 text-base leading-7">
                   {address || city || state || zip_code ? (
                     <div className={Styles.contactInfo}>
@@ -175,7 +181,7 @@ export default function Footer({
             </div>
             <div>
               <div>
-                {quickLinksHeading && <h3 className="mb-6">{quickLinksHeading}</h3>}
+                {quickLinksHeading && <h3>{quickLinksHeading}</h3>}
                 <ul role="list" className="space-y-4">
                   {links?.map((link: any) => {
 
@@ -201,7 +207,7 @@ export default function Footer({
               </div>
             </div>
             <div>
-              {quickLinksTwoHeading && <h3 className="mb-6">{quickLinksTwoHeading}</h3>}
+              {quickLinksTwoHeading && <h3>{quickLinksTwoHeading}</h3>}
               <ul role="list" className="space-y-4">
                 {secondLinks?.map((link: any) => {
 
@@ -225,6 +231,13 @@ export default function Footer({
                 })}
               </ul>
             </div>
+            {footerText &&
+              <div className="text-sm">
+                <ContentEditor
+                  content={footerText}
+                />
+              </div>
+            }
           </div>
           <div className="border-t border-white/10 pt-8 mt-16">
             {footerDisclaimer &&

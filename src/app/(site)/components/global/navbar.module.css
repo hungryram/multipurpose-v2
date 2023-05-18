@@ -1,6 +1,7 @@
 .header {
     @apply inset-x-0 top-0 z-50;
-    background-color: var(--header-background)
+    background-color: var(--header-background-color);
+    color: var(--header-navigation-color);
 }
 
 .topHeader {
@@ -8,20 +9,43 @@
     color: var(--top-header-text-color);
 }
 
+.navLinks {
+    @apply text-sm font-semibold leading-6 block py-2 lg:py-0;
+}
+
+.desktopDropDown {
+    @apply relative grid bg-white px-3 py-2 divide-y
+}
+
 .topHeaderContainer {
     @apply mx-auto flex h-10 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8
 }
 
 .navWrapper {
-    @apply mx-auto flex max-w-7xl items-center justify-between py-6 lg:px-0 px-4
+    @apply mx-auto flex max-w-7xl items-center justify-between py-6 lg:px-2 md:px-4 px-4
 }
 
 .desktopLogoContainer {
     @apply flex lg:flex-1
 }
 
+.desktopMenuContainer {
+    @apply lg:flex lg:gap-x-8
+}
+
 .toggleMenu {
     @apply flex lg:hidden
+}
+
+.mobileHeaderMenu {
+    @apply shadow lg:hidden block;
+    background-color: var(--header-background-color);
+    color: var(--header-navigation-color);
+}
+
+.mobileDisclosureButton {
+    @apply inline-flex items-center justify-center rounded-md p-2;
+    color: var(--top-header-text-color);
 }
 
 .toggleMenuButton {
@@ -30,4 +54,8 @@
 
 .desktopPopOverPanel {
     @apply absolute z-50 -ml-4 mt-3 transform px-2 w-screen max-w-xs sm:px-0 lg:ml-0 lg:left-1/2 lg:-translate-x-1/2
+}
+
+.mobileDropDownContact {
+    @apply pb-3 pt-4 block;
 }

@@ -90,6 +90,11 @@ export default defineType({
                             },
                         },
                         {
+                            title: 'Required',
+                            name: 'required',
+                            type: 'boolean'
+                        },
+                        {
                             title: 'Checkbox Values',
                             name: 'checkBoxValue',
                             type: 'array',

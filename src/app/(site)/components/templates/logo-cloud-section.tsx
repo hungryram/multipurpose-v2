@@ -12,21 +12,7 @@ interface Props {
     primaryButtonStyle: any;
     secondaryButtonText: string;
     secondaryButtonLink: string;
-    secondaryButtonStyle: any
-}
-
-function SampleData() {
-    return (
-        <div>
-            <img
-                className="col-span-2 max-h-12 w-full object-contain lg:col-span-1"
-                src="https://tailwindui.com/img/logos/158x48/transistor-logo-white.svg"
-                alt="Transistor"
-                width={158}
-                height={48}
-            />
-        </div>
-    )
+    secondaryButtonStyle: any;
 }
 
 export default function LogoCloudSection({
@@ -39,7 +25,7 @@ export default function LogoCloudSection({
     primaryButtonStyle,
     secondaryButtonLink,
     secondaryButtonText,
-    secondaryButtonStyle
+    secondaryButtonStyle,
 }: Props) {
     return (
         <div className="section" style={backgroundStyles}>
@@ -58,26 +44,22 @@ export default function LogoCloudSection({
                         secondaryButtonStyle={secondaryButtonStyle}
                     />
                 )}
-                <div className={Styles.gridWrapper}>
-                    {images ? images?.map((node: any) => {
+                <div className={`${Styles.gridWrapper} ${content && 'mt-12'}`}>
+                    {images && images?.map((node: any, i: number) => {
                         return (
-                            <div key={node?._id}>
+                            <div key={i}>
                                 <Image
                                     className={Styles.logoImage}
                                     src={node?.asset?.url}
                                     alt={node?.asset?.altText}
                                     width={200}
                                     height={48}
+                                    placeholder={node?.asset?.lqip ? 'blur' : 'empty'}
+                                    blurDataURL={node?.asset?.lqip}
                                 />
                             </div>
                         )
                     })
-                        :
-                        <>
-                            <SampleData />
-                            <SampleData />
-                            <SampleData />
-                        </>
                     }
                 </div>
             </div>

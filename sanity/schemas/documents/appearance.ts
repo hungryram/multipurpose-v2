@@ -169,9 +169,10 @@ export default defineType({
                     type: 'contentEditor',
                 },
                 {
-                    title: 'Display Hours',
-                    name: 'hours',
-                    type: 'boolean',
+                    title: 'Short Text',
+                    name: 'shortText',
+                    type: 'text',
+                    description: 'A brief summary of your business.'
                 },
                 {
                     title: 'Quick Links Heading',

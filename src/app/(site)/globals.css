@@ -26,12 +26,29 @@
   @apply px-4
 }
 
-.primary-button {
-  @apply rounded-md px-3 py-2 text-sm font-semibold text-white shadow-sm  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
+.accent {
+  color: var(--primary-accent)
 }
 
+.primary-button {
+  @apply px-3 py-2 text-sm font-semibold shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2;
+  background-color: var(--primary-button-background);
+  color: var(--primary-button-text);
+  border-radius: var(--button-radius);
+  padding-left: var(--button-x-padding);
+  padding-right: var(--button-x-padding);
+  padding-top: var(--button-y-padding);
+  padding-bottom: var(--button-y-padding);}
+
 .secondary-button {
-  @apply rounded-md px-3 py-2 text-sm font-semibold text-white shadow-sm  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
+  @apply px-3 py-2 text-sm font-semibold shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2;
+  background-color: var(--secondary-button-background);
+  color: var(--secondary-button-text);
+  border-radius: var(--button-radius);
+  padding-left: var(--button-x-padding);
+  padding-right: var(--button-x-padding);
+  padding-top: var(--button-y-padding);
+  padding-bottom: var(--button-y-padding);
 }
 
 /* CONTENT */

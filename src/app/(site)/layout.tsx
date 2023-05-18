@@ -55,6 +55,7 @@ export default async function RootLayout({
 
   const data = await client.fetch(appearance)
 
+
   return (
     <html lang="en">
 
@@ -88,9 +89,9 @@ export default async function RootLayout({
                   --website-body-color: ${data.appearances?.websiteBodyColor ?? '#fff'};
                   --website-text-color: ${data.appearances?.websiteTextColor ?? '#222'};
 
-                  --button-radius: ${`${data.appearances?.buttonRadius ?? 4}px`};
-                  --button-y-padding: ${`${data.appearances?.buttonYPadding ?? 16}px`};
-                  --button-x-padding: ${`${data.appearances?.buttonXPadding ?? 50}px`};
+                  --button-radius: ${`${data.appearances?.buttonRadius ?? 6}px`};
+                  --button-y-padding: ${`${data.appearances?.buttonYPadding ?? 8}px`};
+                  --button-x-padding: ${`${data.appearances?.buttonXPadding ?? 12}px`};
                   
                   --announcementbar-background-color: ${data.appearances?.announcementBar?.announcementBgColor};
                   --announcementbar-text-color: ${data.appearances?.announcementBar?.announcementTextColor};
@@ -107,9 +108,12 @@ export default async function RootLayout({
           email={data.profileSettings?.contact_information?.email}
           backgroundColor={data.appearances?.navBgColor}
           enableTopHeader={data?.appearances?.topHeaderBar?.enableTopHeaderBar}
+          ctaLink={data?.appearances?.header?.ctaLink}
+          ctaText={data.appearances?.header?.ctaText}
         />
         {children}
         <Footer
+          footerText={data.appearances?.footer?.footerText}
           company_name={data.profileSettings.company_name}
           image={data.appearances?.footer?.footerLogo?.asset?.url}
           quickLinksHeading={data.appearances?.footer?.quickLinksHeading}
@@ -124,6 +128,7 @@ export default async function RootLayout({
           state={data.profileSettings?.address?.state}
           zip_code={data.profileSettings?.address?.zip_code}
           footerDisclaimer={data.appearances?.footer?.footerDisclaimer}
+          shortText={data.appearances?.footer?.shortText}
           legal={data.legal}
           links={data.appearances?.footer?.quickLinks}
           secondLinks={data.appearances?.footer?.secondQuickLinks}
