@@ -120,7 +120,7 @@ export default function Example({
                                   return (
                                     <>
                                       <Link
-                                        key={sub._id}
+                                        key={sub._key}
                                         href={subMenuLinks ?? '/'}
                                         target={sub.newTab && '_blank'}
                                         className={`${Styles.navLinks} text-black py-2`}
