@@ -1,15 +1,10 @@
 'use client'
-import { useState } from 'react'
-import { Dialog, Popover, Transition, Disclosure, Menu } from '@headlessui/react'
+import { Popover, Transition, Disclosure, Menu } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon, ChevronDownIcon, BellIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Fragment } from 'react'
 import Styles from "./navbar.module.css"
-
-function classNames(...classes: any) {
-  return classes.filter(Boolean).join(' ')
-}
 
 interface Props {
   company_name: string
@@ -22,15 +17,7 @@ interface Props {
   backgroundColor: string;
   enableTopHeader: boolean;
   ctaLink: any;
-  ctaText: string
 }
-
-const navigation = [
-  { name: 'Product', href: '#' },
-  { name: 'Features', href: '#' },
-  { name: 'Marketplace', href: '#' },
-  { name: 'Company', href: '#' },
-]
 
 export default function Example({
   company_name,
@@ -40,15 +27,12 @@ export default function Example({
   phone,
   email,
   office,
-  backgroundColor,
   enableTopHeader,
   ctaLink,
-  ctaText
 }: Props) {
 
 
 
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   const ctaLinking =
     (ctaLink?.internalLink?._type === "pages" && `/${ctaLink?.internalLink.slug}`) ||
@@ -76,7 +60,7 @@ export default function Example({
           <div className={Styles.desktopLogoContainer}>
             <Link href="/">
               {logo ?
-                <img
+                <Image
                   src={logo}
                   width={logoWidth ? logoWidth : '150'}
                   height={10}
@@ -86,16 +70,6 @@ export default function Example({
                 <h1 className="text-3xl">{company_name}</h1>
               }
             </Link>
-          </div>
-          <div className={Styles.toggleMenu}>
-            <button
-              type="button"
-              className={Styles.toggleMenuButton}
-              onClick={() => setMobileMenuOpen(true)}
-            >
-              <span className="sr-only">Open main menu</span>
-              <Bars3Icon className="h-6 w-6" aria-hidden="true" />
-            </button>
           </div>
           <div className={Styles.desktopMenuContainer}>
             {navItems.map((link: any) => {
@@ -186,8 +160,6 @@ export default function Example({
         </nav>
       </header>
 
-
-
       {/* MOBILE */}
 
       <Disclosure as="nav" className={Styles.mobileHeaderMenu}>
@@ -199,7 +171,7 @@ export default function Example({
                   <div className="flex flex-shrink-0 items-center">
                     <Link href="/">
                       {logo ?
-                        <img
+                        <Image
                           src={logo}
                           width={logoWidth ? logoWidth : '150'}
                           height={10}
@@ -275,7 +247,7 @@ export default function Example({
                                       return (
                                         <>
                                           <Link
-                                            key={sub._id}
+                                            key={sub._key}
                                             href={subMenuLinks ?? '/'}
                                             target={sub.newTab && '_blank'}
                                             className={Styles.navLinks}
