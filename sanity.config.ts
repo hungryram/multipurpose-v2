@@ -70,6 +70,8 @@ import blogSectionBuilder from './sanity/schemas/pagebuilder/blog-section'
 import iconSectionBuilder from './sanity/schemas/pagebuilder/icon-section'
 import servicesSectionBuilder from './sanity/schemas/pagebuilder/service-section'
 import contentBuilder from './sanity/schemas/pagebuilder/content'
+import { CustomActions } from './sanity/actions';
+import { settingsPlugin } from './sanity/settings';
 
 
 export default defineConfig({
@@ -175,20 +177,28 @@ export default defineConfig({
             )
 
         // The default root list items (except custom ones)
-        const defaultListItems = S.documentTypeListItems().filter(
-          (listItem) => ![appearanceDocument.name, pageSettingsDocument.name, profileDocument.name].includes(listItem.getId())
-        )
+        const defaultListItems = S.documentTypeListItems().filter((listItem) => {
+          const listItemID = listItem.getId();
+          return (
+            listItemID &&
+            ![appearanceDocument.name, pageSettingsDocument.name, 'media.tag', profileDocument.name].includes(listItemID)
+          );
+        });
+        
+        
 
         return S.list()
           .title('Content')
           .items([profileListItem, appearanceListItem, PageSettingsListItem, S.divider(), ...defaultListItems])
       },
-
     }),
+    settingsPlugin({ type: appearanceDocument.name }),
+    settingsPlugin({ type: profileDocument.name }),
+    settingsPlugin({ type: pageSettingsDocument.name }),
     colorInput(),
-    media(),
     // Vision is a tool that lets you query your content with GROQ in the studio
     // https://www.sanity.io/docs/the-vision-plugin
     visionTool({defaultApiVersion: apiVersion}),
-  ],
+    media(),
+  ]
 })

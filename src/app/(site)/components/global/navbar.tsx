@@ -118,16 +118,15 @@ export default function Example({
                                     (sub.externalUrl && `${sub.externalUrl}`)
 
                                   return (
-                                    <>
-                                      <Link
-                                        key={sub._key}
-                                        href={subMenuLinks ?? '/'}
-                                        target={sub.newTab && '_blank'}
-                                        className={`${Styles.navLinks} text-black py-2`}
-                                      >
-                                        {sub.text}
-                                      </Link>
-                                    </>
+                                    <Popover.Button
+                                      as={Link}
+                                      key={sub._key}
+                                      href={subMenuLinks ?? '/'}
+                                      target={sub.newTab && '_blank'}
+                                      className={`${Styles.navLinks} text-black py-2`}
+                                    >
+                                      {sub.text}
+                                    </Popover.Button>
                                   )
                                 })}
                               </div>
@@ -245,16 +244,9 @@ export default function Example({
                                         (sub.externalUrl && `${sub.externalUrl}`)
 
                                       return (
-                                        <>
-                                          <Link
-                                            key={sub._key}
-                                            href={subMenuLinks ?? '/'}
-                                            target={sub.newTab && '_blank'}
-                                            className={Styles.navLinks}
-                                          >
-                                            {sub.text}
-                                          </Link>
-                                        </>
+                                        <Disclosure.Button as={Link} href={subMenuLinks ?? '/'} className={Styles.navLinks} target={sub.newTab && '_blank'} key={sub._key}>
+                                          {sub.text}
+                                        </Disclosure.Button>
                                       )
                                     })}
                                   </div>
@@ -267,12 +259,9 @@ export default function Example({
                     )
                   } else {
                     return (
-                      <Link
-                        key={link.name}
-                        href={menuLinks}
-                        className={Styles.navLinks}>
+                      <Disclosure.Button as={Link} href={menuLinks ?? '/'} className={Styles.navLinks} target={link.newTab && '_blank'}>
                         {link.text}
-                      </Link>
+                      </Disclosure.Button>
                     )
                   }
                 })}
@@ -280,9 +269,9 @@ export default function Example({
               <div className={Styles.mobileDropDownContact}>
                 {ctaLinking &&
                   <div className="mb-6">
-                    <Link href={ctaLinking ?? '/'} className="primary-button block text-center mx-4">
+                    <Disclosure.Button as={Link} href={ctaLinking ?? '/'} className="primary-button block text-center mx-4">
                       {ctaLink?.text} <span aria-hidden="true">&rarr;</span>
-                    </Link>
+                    </Disclosure.Button>
                   </div>
                 }
                 <div className="px-4">

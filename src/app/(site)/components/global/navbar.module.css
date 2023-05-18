@@ -10,7 +10,7 @@
 }
 
 .navLinks {
-    @apply text-sm font-semibold leading-6 py-2;
+    @apply text-sm font-semibold leading-6 py-2 lg:inline-block block;
 }
 
 .desktopDropDown {
@@ -45,7 +45,7 @@
 
 .mobileDisclosureButton {
     @apply inline-flex items-center justify-center rounded-md p-2;
-    color: var(--top-header-text-color);
+    color: var(--header-navigation-color);
 }
 
 .toggleMenuButton {
