@@ -38,18 +38,18 @@ export async function generateMetadata({ params }: Meta): Promise<Metadata> {
             siteName: page?.profileSettings?.company_name,
             locale: 'en-US',
             type: 'website',
-          },
-          twitter: {
+        },
+        twitter: {
             card: 'summary_large_image',
             title: page?.pages?.seo?.title_tag,
             description: page?.pages?.seo?.meta_description,
             creator: '@' + page?.profileSettings?.seo?.twitterHandle,
-          },
-          icons: {
+        },
+        icons: {
             icon: page.appearances.branding.favicon.asset.url,
             shortcut: page.appearances.branding.favicon.asset.url,
             apple: page.appearances.branding.favicon.asset.url,
-          },
+        },
     }
 }
 
@@ -62,28 +62,51 @@ export default async function Page({ params }: Props) {
         notFound()
     }
 
-    return (
-        <Main
-            pageBuilder={page?.pages?.pageBuilder}
-            // CONTACT
-            email={page?.profileSettings?.contact_information?.email}
-            phone_number={page?.profileSettings?.contact_information?.phone_number}
-            office_number={page?.profileSettings?.contact_information?.office_number}
-            address={page?.profileSettings?.address?.address}
-            city={page?.profileSettings?.address?.city}
-            state={page?.profileSettings?.address?.state}
-            zip_code={page?.profileSettings?.address?.zip_code}
+    const schemaMarkup = {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        ...page?.pages?.title && { "name": page.pages.title },
+        ...page?.profileSettings?.settings?.websiteName && { "url": page.profileSettings.settings.websiteName },
+        ...page?.pages?.seo?.meta_description && { "description": page.pages.seo.meta_description },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": `${page?.profileSettings?.settings?.websiteName}/${slug}`
+        },
+        "publisher": {
+          "@type": "Organization",
+          ...page?.profileSettings?.company_name && { "name": page.profileSettings.company_name },
+          ...page?.profileSettings?.settings?.websiteName && { "url": page.profileSettings.settings.websiteName }
+        }
+      };
 
-            // FORMS
-            emailAlerts={page?.profileSettings?.settings?.emailAlerts}
-            sendFrom={page?.profileSettings?.settings?.sendFrom}
-            emailBcc={page?.profileSettings?.settings?.emailBcc}
-            emailCc={page?.profileSettings?.settings?.emailCc}
-            // PAGE FOLDERS
-            allServices={page?.allServices}
-            allTestimonials={page?.allTestimonial}
-            allBlog={page?.allBlog}
-            allTeam={page?.allTeam}
-        />
+    return (
+        <>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaMarkup) }}
+            />
+            <Main
+                pageBuilder={page?.pages?.pageBuilder}
+                // CONTACT
+                email={page?.profileSettings?.contact_information?.email}
+                phone_number={page?.profileSettings?.contact_information?.phone_number}
+                office_number={page?.profileSettings?.contact_information?.office_number}
+                address={page?.profileSettings?.address?.address}
+                city={page?.profileSettings?.address?.city}
+                state={page?.profileSettings?.address?.state}
+                zip_code={page?.profileSettings?.address?.zip_code}
+
+                // FORMS
+                emailAlerts={page?.profileSettings?.settings?.emailAlerts}
+                sendFrom={page?.profileSettings?.settings?.sendFrom}
+                emailBcc={page?.profileSettings?.settings?.emailBcc}
+                emailCc={page?.profileSettings?.settings?.emailCc}
+                // PAGE FOLDERS
+                allServices={page?.allServices}
+                allTestimonials={page?.allTestimonial}
+                allBlog={page?.allBlog}
+                allTeam={page?.allTeam}
+            />
+        </>
     )
 }

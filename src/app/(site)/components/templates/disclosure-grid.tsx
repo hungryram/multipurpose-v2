@@ -20,6 +20,15 @@ interface Props {
     secondaryButtonStyle: any
 }
 
+interface Block {
+    _type: string;
+    children?: BlockChild[];
+}
+
+interface BlockChild {
+    text: string;
+}
+
 export default function DisclosureGrid({
     disclosure,
     disclosureBackgroundColor,
@@ -35,27 +44,60 @@ export default function DisclosureGrid({
     secondaryButtonText,
     secondaryButtonStyle
 }: Props) {
+
+    function toPlainText(blocks: Block[] = []): string {
+        return blocks
+            .map((block: Block) => {
+                if (block._type !== 'block' || !block.children) {
+                    return '';
+                }
+                return block.children.map((child: BlockChild) => child.text).join('');
+            })
+            .join('\n\n');
+    }
+
+
+    const schemaMarkup = {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": disclosure.map((node: any) => ({
+            ...{
+                "@type": "Question",
+                "name": node?.heading || "",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": toPlainText(node?.content) || ""
+                }
+            }
+        }))
+    };
+
     return (
-        <div className="section" style={backgroundStyles}>
-            <div className="container">
-                <div className="lg:grid lg:grid-cols-12 lg:gap-8">
-                    <div className="lg:col-span-5">
-                        {(content || primaryButtonLink || secondaryButtonLink) && (
-                            <HeaderSection
-                                content={content}
-                                textAlign={textAlign}
-                                // PRIMARY
-                                buttonLink={primaryButtonLink}
-                                primaryButtonText={primaryButtonText}
-                                primaryButtonStyle={primaryButtonStyle}
-                                // SECONDARY
-                                secondaryButtonLink={secondaryButtonLink}
-                                secondaryButtonText={secondaryButtonText}
-                                secondaryButtonStyle={secondaryButtonStyle}
-                            />
-                        )}
-                    </div>
-                    <div className={`lg:col-span-7`}>
+        <>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaMarkup) }}
+            />
+            <div className="section" style={backgroundStyles}>
+                <div className="container">
+                    <div className="lg:grid lg:grid-cols-12 lg:gap-8">
+                        <div className="lg:col-span-5">
+                            {(content || primaryButtonLink || secondaryButtonLink) && (
+                                <HeaderSection
+                                    content={content}
+                                    textAlign={textAlign}
+                                    // PRIMARY
+                                    buttonLink={primaryButtonLink}
+                                    primaryButtonText={primaryButtonText}
+                                    primaryButtonStyle={primaryButtonStyle}
+                                    // SECONDARY
+                                    secondaryButtonLink={secondaryButtonLink}
+                                    secondaryButtonText={secondaryButtonText}
+                                    secondaryButtonStyle={secondaryButtonStyle}
+                                />
+                            )}
+                        </div>
+                        <div className={`lg:col-span-7`}>
                             {disclosure.map((node: any) => {
                                 return (
                                     <div className="w-full" key={node._key}>
@@ -92,9 +134,10 @@ export default function DisclosureGrid({
                                     </div>
                                 )
                             })}
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </>
     )
 }

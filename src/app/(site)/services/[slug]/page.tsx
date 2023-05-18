@@ -54,30 +54,49 @@ export default async function servicesSlug({ params }: Props) {
     const slug = params.slug
     const services = await getServices(slug)
 
-    if(!services?.services) {
+    if (!services?.services) {
         notFound()
     }
 
+    const schemaMarkup = {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        ...(services?.services?.title && { "name": services?.services?.title }),
+        ...(services?.services?.description && { "description": services?.services?.description }),
+        "url": `${services?.profileSettings?.settings?.websiteName}/services/${services?.services?.slug}`,
+        ...(services?.services?.imageData?.asset?.url && { "image": services?.services?.imageData?.asset?.url }),
+        "provider": {
+            "@type": "Organization",
+            ...(services?.profileSettings?.company_name && { "name": services?.profileSettings?.company_name }),
+            ...(services?.profileSettings?.settings?.websiteUrl && { "url": services?.profileSettings?.settings?.websiteUrl })
+        },
+    }
     return (
-        <Main
-            pageBuilder={services?.services?.pageBuilder}
-            allTestimonials={services?.allTestimonial}
-            allServices={services?.allServices}
-            allBlog={services?.allBlog}
-            allTeam={services?.allTeam}
-            // CONTACT
-            email={services?.profileSettings?.contact_information?.email}
-            phone_number={services?.profileSettings?.contact_information?.phone_number}
-            office_number={services?.profileSettings?.contact_information?.office_number}
-            address={services?.profileSettings?.address?.address}
-            city={services?.profileSettings?.address?.city}
-            state={services?.profileSettings?.address?.state}
-            zip_code={services?.profileSettings?.address?.zip_code}
-            // FORM
-            emailAlerts={services?.profileSettings?.settings?.emailAlerts}
-            sendFrom={services?.profileSettings?.settings?.sendFrom}
-            emailBcc={services?.profileSettings?.settings?.emailBcc}
-            emailCc={services?.profileSettings?.settings?.emailCc}
-        />
+        <>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaMarkup) }}
+            />
+            <Main
+                pageBuilder={services?.services?.pageBuilder}
+                allTestimonials={services?.allTestimonial}
+                allServices={services?.allServices}
+                allBlog={services?.allBlog}
+                allTeam={services?.allTeam}
+                // CONTACT
+                email={services?.profileSettings?.contact_information?.email}
+                phone_number={services?.profileSettings?.contact_information?.phone_number}
+                office_number={services?.profileSettings?.contact_information?.office_number}
+                address={services?.profileSettings?.address?.address}
+                city={services?.profileSettings?.address?.city}
+                state={services?.profileSettings?.address?.state}
+                zip_code={services?.profileSettings?.address?.zip_code}
+                // FORM
+                emailAlerts={services?.profileSettings?.settings?.emailAlerts}
+                sendFrom={services?.profileSettings?.settings?.sendFrom}
+                emailBcc={services?.profileSettings?.settings?.emailBcc}
+                emailCc={services?.profileSettings?.settings?.emailCc}
+            />
+        </>
     )
 }

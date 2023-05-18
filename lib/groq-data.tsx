@@ -101,7 +101,7 @@ export const appearance = groq`
         asset->{
           url,
           altText,
-          lqip
+          'lqip': metadata.lqip
         }
       },
       'quickLinks': quickLinks[]{
@@ -453,7 +453,19 @@ export const blogPage = groq`
       _id,
       title,
       date,
+      _updatedAt,
       'slug': slug.current,
+      "author": author->{
+        name,
+        'avatar': picture{
+          asset->{
+            url,
+          }
+        }
+      },
+      seo {
+        meta_description
+      },
       'imageData': coverImage {
         asset-> {
           altText,
@@ -489,6 +501,11 @@ export const servicesPage = groq`
 //  app/team/page.tsx
 export const teamPage = groq`
   {
+    'profileSettings': *[_type == 'profile'][0]{
+      settings {
+        websiteName
+      }
+    },
     'team': *[_type == 'team']{
       ...,
       'imageData': image {
@@ -566,6 +583,11 @@ export async function getServices(slug: string) {
     'services': *[_type == "services" && slug.current == $slug][0]{
       _id,
       title,
+      'imageData': featuredImage {
+        asset->{
+          url,
+        }
+      },
       seo {
         ...
       },
@@ -607,7 +629,7 @@ export async function getTeam(slug: string) {
           asset->{
             url,
             altText,
-            lqip
+            'lqip': metadata.lqip
           }
         }
       }
@@ -628,6 +650,8 @@ export async function getBlog(slug: string) {
       _id,
       title,
       content,
+      _updatedAt,
+      date,
       "slug": slug.current,
       seo {
         ...
@@ -638,7 +662,7 @@ export async function getBlog(slug: string) {
           asset->{
             url,
             altText,
-            lqip
+            'lqip': metadata.lqip
           }
         }
       },
@@ -646,7 +670,7 @@ export async function getBlog(slug: string) {
         asset->{
           url,
           altText,
-          lqip
+          'lqip': metadata.lqip
         }
       }
     }

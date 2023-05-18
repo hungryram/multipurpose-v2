@@ -12,7 +12,6 @@ import GoogleAnalytics from './components/global/analytics'
 export async function generateMetadata(): Promise<Metadata> {
   const data = await client.fetch(mainLayoutProfile)
 
-
   return {
     title: data?.profileSettings?.seo?.title_tag,
     description: data?.profileSettings?.seo?.meta_description,
@@ -55,6 +54,51 @@ export default async function RootLayout({
 
   const data = await client.fetch(appearance)
 
+  const localBusiness = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    ...(data?.profileSettings?.company_name && { "name": data?.profileSettings?.company_name }),
+    ...(data?.profileSettings?.seo?.meta_description && { "description": data?.profileSettings?.seo?.meta_description }),
+    ...(data?.profileSettings?.settings?.websiteUrl && { "url": data?.profileSettings?.settings?.websiteUrl }),
+    ...(data.appearances.branding.logo.asset.url && { "logo": data.appearances.branding.logo.asset.url }),
+    ...(data?.profileSettings?.seo?.imageData?.asset?.url && { "image": data?.profileSettings?.seo?.imageData?.asset?.url }),
+    "address": {
+      "@type": "PostalAddress",
+      ...(data?.profileSettings?.address?.address && { "streetAddress": data?.profileSettings?.address?.address }),
+      ...(data?.profileSettings?.address?.city && { "addressLocality": data?.profileSettings?.address?.city }),
+      ...(data?.profileSettings?.address?.state && { "addressRegion": data?.profileSettings?.address?.state }),
+      ...(data?.profileSettings?.address?.zip_code && { "postalCode": data?.profileSettings?.address?.zip_code }),
+      ...(data?.profileSettings?.address?.addressCountry && { "addressCountry": data?.profileSettings?.address?.addressCountry })
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      ...(data?.profileSettings?.contact_information?.office_number && { "officeNumber": data?.profileSettings?.contact_information?.office_number }),
+      ...(data?.profileSettings?.contact_information?.phone_number && { "directNumber": data?.profileSettings?.contact_information?.phone_number }),
+      ...(data?.profileSettings?.contact_information?.email && { "email": data?.profileSettings?.contact_information?.email }),
+      "contactType": "Customer Support"
+    },
+    "sameAs": [
+      ...(data?.profileSettings?.social?.facebook ? [data.profileSettings.social.facebook] : []),
+      ...(data?.profileSettings?.social?.twitter ? [data.profileSettings.social.twitter] : []),
+      ...(data?.profileSettings?.social?.instagram ? [data.profileSettings.social.instagram] : []),
+      ...(data?.profileSettings?.social?.youtube ? [data.profileSettings.social.youtube] : []),
+      ...(data?.profileSettings?.social?.reddit ? [data.profileSettings.social.reddit] : []),
+      ...(data?.profileSettings?.social?.linkedin ? [data.profileSettings.social.linkedin] : []),
+      ...(data?.profileSettings?.social?.yelp ? [data.profileSettings.social.yelp] : []),
+      ...(data?.profileSettings?.social?.pinterest ? [data.profileSettings.social.pinterest] : []),
+      ...(data?.profileSettings?.social?.tiktok ? [data.profileSettings.social.tiktok] : []),
+      ...(data?.profileSettings?.social?.zillow ? [data.profileSettings.social.zillow] : [])
+    ]
+  };
+
+  const websiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    // Fill the website schema based on localBusiness schema
+    ...(data?.profileSettings?.company_name && { "name": data?.profileSettings?.company_name }),
+    ...(data?.profileSettings?.settings?.websiteName && { "url": data?.profileSettings?.settings?.websiteName }),
+    ...(data?.profileSettings?.seo?.meta_description && { "description": data?.profileSettings?.seo?.meta_description }),
+  };
 
   return (
     <html lang="en">
@@ -62,8 +106,15 @@ export default async function RootLayout({
       {data?.profileSettings?.settings?.googleID &&
         <GoogleAnalytics GA_TRACKING_ID={data?.profileSettings?.settings?.googleID} />
       }
-
       <body className={inter.className}>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusiness) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+        />
         <style>
           {`
               :root {

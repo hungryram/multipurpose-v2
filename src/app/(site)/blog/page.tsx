@@ -49,37 +49,83 @@ export default async function BlogPage() {
     notFound()
   }
 
+  const schemaMarkup = {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "name": posts?.pageSetting?.blog?.title,
+    "url": `${posts?.profileSettings?.settings?.websiteName}/blog`,
+    "description": posts?.pageSetting?.blog?.seo?.meta_description,
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": `${posts?.profileSettings?.settings?.websiteName}/blog`
+    },
+    "publisher": {
+      "@type": "Organization",
+      ...(posts?.profileSettings?.company_name && { "name": posts?.profileSettings?.company_name }),
+      ...(posts?.profileSettings?.settings?.websiteName && { "url": posts?.profileSettings?.settings?.websiteName })
+    },
+    "blogPost": posts?.blog?.map((post: any) => ({
+      "@type": "BlogPosting",
+      "headline": post?.title,
+      "url": `${posts?.profileSettings?.settings?.websiteName}/blog/${post?.slug}`,
+      "datePublished": post?.date,
+      "dateModified": post?._updatedAt,
+      "description": post?.seo?.meta_description,
+      "image": {
+        "@type": "ImageObject",
+        "url": post?.imageData?.asset.url,
+      },
+      "author": {
+        "@type": "Person",
+        "name": post?.author?.name
+      },
+      "publisher": {
+        "@type": "Organization",
+        ...(posts?.profileSettings?.company_name && { "name": posts?.profileSettings?.company_name }),
+        ...(posts?.profileSettings?.settings?.websiteName && { "url": posts?.profileSettings?.settings?.websiteName })
+      }
+    }))
+  };
+  
+
+
   return (
-    <div className="section">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">{posts?.pageSetting?.blog?.title}</h2>
-          {posts?.pageSetting?.blog?.content &&
-            <div className="mt-10">
-              <ContentEditor
-                content={posts?.pageSetting?.blog?.content}
-              />
-            </div>
-          }
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaMarkup) }}
+      />
+      <div className="section">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="mx-auto max-w-2xl text-center">
+            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">{posts?.pageSetting?.blog?.title}</h2>
+            {posts?.pageSetting?.blog?.content &&
+              <div className="mt-10">
+                <ContentEditor
+                  content={posts?.pageSetting?.blog?.content}
+                />
+              </div>
+            }
+          </div>
+          <div className="mx-auto mt-16 grid max-w-2xl auto-rows-fr grid-cols-1 gap-8 sm:mt-20 lg:mx-0 lg:max-w-none lg:grid-cols-3">
+            {posts?.blog?.map((post: any) => {
+              const parsedDate = parseISO(post?.date)
+              const postImage = post?.imageData?.asset
+              return (
+                <BlogCard
+                  key={post?._id}
+                  title={post?.title}
+                  slug={`blog/${post.slug}`}
+                  date={format(parsedDate, 'LLLL	d, yyyy')}
+                  image={postImage?.url}
+                  blurData={postImage?.lqip}
+                  altText={postImage?.altText}
+                />
+              )
+            })}
+          </div>
         </div>
-        <div className="mx-auto mt-16 grid max-w-2xl auto-rows-fr grid-cols-1 gap-8 sm:mt-20 lg:mx-0 lg:max-w-none lg:grid-cols-3">
-          {posts?.blog?.map((post: any) => {
-            const parsedDate = parseISO(post?.date)
-            const postImage = post?.imageData?.asset
-            return (
-              <BlogCard
-                key={post?._id}
-                title={post?.title}
-                slug={`blog/${post.slug}`}
-                date={format(parsedDate, 'LLLL	d, yyyy')}
-                image={postImage?.url}
-                blurData={postImage?.lqip}
-                altText={postImage?.altText}
-              />
-            )
-          })}
-        </div>
-      </div>
-    </div >
+      </div >
+    </>
   )
 }
