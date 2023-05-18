@@ -59,7 +59,7 @@ export default async function RootLayout({
     "@type": "LocalBusiness",
     ...(data?.profileSettings?.company_name && { "name": data?.profileSettings?.company_name }),
     ...(data?.profileSettings?.seo?.meta_description && { "description": data?.profileSettings?.seo?.meta_description }),
-    ...(data?.profileSettings?.settings?.websiteUrl && { "url": data?.profileSettings?.settings?.websiteUrl }),
+    ...(data?.profileSettings?.settings?.websiteName && { "url": data?.profileSettings?.settings?.websiteName }),
     ...(data.appearances.branding.logo.asset.url && { "logo": data.appearances.branding.logo.asset.url }),
     ...(data?.profileSettings?.seo?.imageData?.asset?.url && { "image": data?.profileSettings?.seo?.imageData?.asset?.url }),
     "address": {
