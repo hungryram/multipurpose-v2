@@ -160,7 +160,6 @@ export default async function RootLayout({
           backgroundColor={data.appearances?.navBgColor}
           enableTopHeader={data?.appearances?.topHeaderBar?.enableTopHeaderBar}
           ctaLink={data?.appearances?.header?.ctaLink}
-          ctaText={data.appearances?.header?.ctaText}
         />
         {children}
         <Footer
