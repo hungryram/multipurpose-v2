@@ -3,9 +3,41 @@ import { teamPage } from "../../../../lib/groq-data"
 import TeamCard from "../components/templates/team-card"
 import { notFound } from "next/navigation"
 
+// GENERATES SEO
+export async function generateMetadata() {
+    const teamMeta = await client.fetch(teamPage, { next: { revalidate: 60 } })
+    console.log(teamMeta.appearances?.branding?.favicon?.asset?.url)
+    return {
+        title: teamMeta?.pageSetting?.team?.seo?.title_tag,
+        description: teamMeta?.pageSetting?.team?.seo?.meta_description,
+        alternates: {
+            canonical: 'team/'
+        },
+        openGraph: {
+            title: teamMeta?.pageSetting?.team?.seo?.title_tag,
+            description: teamMeta?.pageSetting?.team?.seo?.meta_description,
+            url: 'team/',
+            siteName: teamMeta?.profileSettings?.company_name,
+            images: teamMeta?.profileSettings?.seo?.defaultImageBanner?.asset?.url,
+            locale: 'en-US',
+            type: 'website',
+        },
+        twitter: {
+            title: teamMeta?.pageSetting?.team?.seo?.title_tag,
+            description: teamMeta?.pageSetting?.team?.seo?.meta_description,
+            creator: '@' + teamMeta?.profileSettings?.seo?.twitterHandle,
+        },
+        icons: {
+            icon: teamMeta.appearances?.branding?.favicon?.asset?.url,
+            shortcut: teamMeta.appearances?.branding?.favicon?.asset?.url,
+            apple: teamMeta.appearances?.branding?.favicon?.asset?.url,
+        },
+    }
+}
+
 export default async function TeamSection() {
 
-    const team = await client.fetch(teamPage)
+    const team = await client.fetch(teamPage, { next: { revalidate: 60 } })
 
     if (!team.team) {
         notFound()

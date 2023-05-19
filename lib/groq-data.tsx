@@ -501,9 +501,19 @@ export const servicesPage = groq`
 //  app/team/page.tsx
 export const teamPage = groq`
   {
+    ${metaDataProfile}
     'profileSettings': *[_type == 'profile'][0]{
       settings {
         websiteName
+      }
+    },
+    'pageSetting': *[_type == 'pageSetting'][0]{
+      team {
+        title,
+        content,
+        seo {
+          ...
+        }
       }
     },
     'team': *[_type == 'team']{

@@ -5,7 +5,7 @@ import Link from 'next/link'
 
 // GENERATES SEO
 export async function generateMetadata() {
-    const legal = await client.fetch(legalPage)
+    const legal = await client.fetch(legalPage, { next: { revalidate: 60 } })
 
     return {
         title: legal?.pageSetting?.legal?.seo?.title_tag,
@@ -16,7 +16,7 @@ export async function generateMetadata() {
         openGraph: {
             title: legal?.legal?.seo?.title_tag,
             description: legal?.legal?.seo?.meta_description,
-            url: 'legal/' + legal?.legal?.slug,
+            url: 'legal/',
             siteName: legal?.profileSettings?.company_name,
             images: legal?.profileSettings?.seo?.defaultImageBanner?.asset?.url,
             locale: 'en-US',
@@ -37,7 +37,7 @@ export async function generateMetadata() {
 
 export default async function LegalPage() {
 
-    const legal = await client.fetch(legalPage)
+    const legal = await client.fetch(legalPage, { next: { revalidate: 60 } })
 
     const pageSettings = legal?.pageSetting?.legal
 

@@ -8,7 +8,7 @@ import ContentEditor from "../components/util/content-editor"
 
 // GENERATES SEO
 export async function generateMetadata(): Promise<Metadata> {
-  const post = await client.fetch(blogPage)
+  const post = await client.fetch(blogPage, { next: { revalidate: 60 } })
 
   return {
     title: post?.pageSetting?.blog?.seo?.title_tag,
@@ -16,12 +16,12 @@ export async function generateMetadata(): Promise<Metadata> {
     themeColor: post?.appearances?.mainColors?.primaryColor?.hex,
     metadataBase: new URL(post?.profileSettings?.settings?.websiteName),
     alternates: {
-      canonical: 'blog/' + post?.blog?.slug
+      canonical: 'blog/'
     },
     openGraph: {
       title: post?.blog?.seo?.title_tag,
       description: post?.blog?.seo?.meta_description,
-      url: 'blog/' + post?.blog?.slug,
+      url: 'blog/',
       siteName: post?.profileSettings?.company_name,
       images: post?.blog?.imageData?.asset?.url,
       locale: 'en-US',
@@ -43,7 +43,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function BlogPage() {
 
-  const posts = await client.fetch(blogPage)
+  const posts = await client.fetch(blogPage, { next: { revalidate: 60 } })
 
   if (!posts) {
     notFound()

@@ -52,7 +52,7 @@ export default async function RootLayout({
   children: React.ReactNode
 }) {
 
-  const data = await client.fetch(appearance)
+  const data = await client.fetch(appearance, { next: { revalidate: 60 } })
 
   const localBusiness = {
     "@context": "https://schema.org",

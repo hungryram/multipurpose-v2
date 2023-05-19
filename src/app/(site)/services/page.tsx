@@ -6,7 +6,7 @@ import { notFound } from "next/navigation"
 
 // GENERATES SEO
 export async function generateMetadata() {
-    const serviceMeta = await client.fetch(servicesPage)
+    const serviceMeta = await client.fetch(servicesPage, { next: { revalidate: 60 } })
 
     return {
         title: serviceMeta?.pageSetting?.services?.seo?.title_tag,
@@ -17,7 +17,7 @@ export async function generateMetadata() {
         openGraph: {
             title: serviceMeta?.pageSetting?.services?.seo?.title_tag,
             description: serviceMeta?.pageSetting?.services?.seo?.meta_description,
-            url: 'services/' + serviceMeta?.services?.slug,
+            url: 'services/',
             siteName: serviceMeta?.profileSettings?.company_name,
             images: serviceMeta?.profileSettings?.seo?.defaultImageBanner?.asset?.url,
             locale: 'en-US',
@@ -38,7 +38,7 @@ export async function generateMetadata() {
 
 export default async function ServicesSection() {
 
-    const services = await client.fetch(servicesPage)
+    const services = await client.fetch(servicesPage, { next: { revalidate: 60 } })
 
     if (!services.services) {
         notFound()

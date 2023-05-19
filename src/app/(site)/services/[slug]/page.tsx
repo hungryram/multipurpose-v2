@@ -20,25 +20,24 @@ type Meta = {
 export async function generateMetadata({ params }: Meta): Promise<Metadata> {
     const slug = params.slug
     const servicesMeta = await getServices(slug)
-
     return {
         title: servicesMeta?.services?.seo?.title_tag,
-        description: servicesMeta?.blog?.seo?.meta_description,
+        description: servicesMeta?.services?.seo?.meta_description,
         alternates: {
-            canonical: 'services/' + servicesMeta?.blog?.slug
+            canonical: 'services/' + servicesMeta?.services?.slug
         },
         openGraph: {
-            title: servicesMeta?.blog?.seo?.title_tag,
-            description: servicesMeta?.blog?.seo?.meta_description,
-            url: 'services/' + servicesMeta?.blog?.slug,
+            title: servicesMeta?.services?.seo?.title_tag,
+            description: servicesMeta?.services?.seo?.meta_description,
+            url: 'services/' + servicesMeta?.services?.slug,
             siteName: servicesMeta?.profileSettings?.company_name,
-            images: servicesMeta?.blog?.imageData?.asset?.url,
+            images: servicesMeta?.services?.imageData?.asset?.url,
             locale: 'en-US',
             type: 'website',
         },
         twitter: {
-            title: servicesMeta?.blog?.seo?.title_tag,
-            description: servicesMeta?.blog?.seo?.meta_description,
+            title: servicesMeta?.services?.seo?.title_tag,
+            description: servicesMeta?.services?.seo?.meta_description,
             creator: '@' + servicesMeta?.profileSettings?.seo?.twitterHandle,
         },
         icons: {
@@ -82,8 +81,8 @@ export default async function servicesSlug({ params }: Props) {
                 pageBuilder={services?.services?.pageBuilder}
                 allTestimonials={services?.allTestimonial}
                 allServices={services?.allServices}
-                allBlog={services?.allBlog}
                 allTeam={services?.allTeam}
+                allBlog={services.allBlog}
                 // CONTACT
                 email={services?.profileSettings?.contact_information?.email}
                 phone_number={services?.profileSettings?.contact_information?.phone_number}
