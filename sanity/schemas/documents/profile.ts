@@ -1,5 +1,6 @@
+import { defineType } from "sanity";
 
-export default {
+export default defineType({
     name: 'profile',
     title: 'Profile Settings',
     type: 'document',
@@ -113,4 +114,4 @@ export default {
             }
         }
     }
-}
+})

@@ -2,6 +2,8 @@ import { client } from '../../../sanity/lib/client';
 import Main from './components/templates/main';
 import { homePageData } from '../../../lib/groq-data';
 
+export const revalidate = 10
+
 export default async function Home() {
   const data = await client.fetch(homePageData)
 

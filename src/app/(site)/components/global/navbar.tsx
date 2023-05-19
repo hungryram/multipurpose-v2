@@ -259,7 +259,7 @@ export default function Example({
                     )
                   } else {
                     return (
-                      <Disclosure.Button as={Link} href={menuLinks ?? '/'} className={Styles.navLinks} target={link.newTab && '_blank'}>
+                      <Disclosure.Button as={Link} href={menuLinks ?? '/'} className={Styles.navLinks} target={link.newTab && '_blank'} key={link._key}>
                         {link.text}
                       </Disclosure.Button>
                     )
