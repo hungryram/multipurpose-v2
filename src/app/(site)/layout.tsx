@@ -98,7 +98,7 @@ export default async function RootLayout({
     ...(data?.profileSettings?.settings?.websiteName && { "url": data?.profileSettings?.settings?.websiteName }),
     ...(data?.profileSettings?.seo?.meta_description && { "description": data?.profileSettings?.seo?.meta_description }),
   };
-
+  
   return (
     <html lang="en">
 
@@ -154,7 +154,8 @@ export default async function RootLayout({
           company_name={data.profileSettings.company_name}
           logo={data.appearances.branding.logo.asset.url}
           navItems={data.appearances.header?.mainNav?.navItems}
-          logoWidth={data.appearances.branding?.logo?.logoWidth}
+          logoWidth={data.appearances.branding?.logoWidth}
+          mobileLogoWidth={data.appearances.branding?.mobileLogoWidth}
           phone={data.profileSettings?.contact_information?.phone_number}
           office={data.profileSettings?.contact_information?.office_number}
           email={data.profileSettings?.contact_information?.email}

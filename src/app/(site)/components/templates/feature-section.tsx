@@ -58,7 +58,7 @@ export default function FeatureSection({
                                 (blockLink?._type === "legal" && `/legal/${node.blockLinking?.internalLink.slug}`) ||
                                 (blockLink?._type === "services" && `/services/${node.blockLinking?.internalLink.slug}`) ||
                                 (blockLink?._type === "team" && `/team/${node.blockLinking?.internalLink.slug}`) ||
-                                (blockLink?._type === "locations" && `/locations/${node.blockLinking?.internalLink.slug}`) ||
+                                (blockLink?._type === "team" && `/team/${node.blockLinking?.internalLink.slug}`) ||
                                 (node.blockLinking?.externalUrl && `${node.blockLinking?.externalUrl}`);
                             return (
                                 <div key={node._key} className={Styles.featureCardContainer}>

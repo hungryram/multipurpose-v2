@@ -4,6 +4,8 @@
 
 body {
   font-family: 'Inter', sans-serif;
+  background-color: var(--website-body-color);
+  color: var(--website-text-color);
 }
 
 .section {

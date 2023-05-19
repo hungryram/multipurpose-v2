@@ -25,19 +25,6 @@ export default defineType({
             type: 'number'
         },
         {
-            title: 'Loading Screen Logo',
-            name: 'loadingLogo',
-            type: 'image'
-        },
-        {
-            title: 'Loading Background Color',
-            name: 'loadingBackground',
-            type: 'color',
-            options: {
-                disableAlpha: true
-            },
-        },
-        {
             title: 'Favicon',
             name: 'favicon',
             type: 'image'

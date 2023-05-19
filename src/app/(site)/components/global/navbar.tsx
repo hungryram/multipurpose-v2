@@ -17,6 +17,7 @@ interface Props {
   backgroundColor: string;
   enableTopHeader: boolean;
   ctaLink: any;
+  mobileLogoWidth: number
 }
 
 export default function Example({
@@ -29,6 +30,7 @@ export default function Example({
   office,
   enableTopHeader,
   ctaLink,
+  mobileLogoWidth
 }: Props) {
 
 
@@ -39,6 +41,7 @@ export default function Example({
     (ctaLink?.internalLink?._type === "blog" && `/blog/${ctaLink?.internalLink.slug}`) ||
     (ctaLink?.internalLink?._type === "legal" && `/legal/${ctaLink?.internalLink.slug}`) ||
     (ctaLink?.internalLink?._type === "services" && `/services/${ctaLink?.internalLink.slug}`) ||
+    (ctaLink?.internalLink?._type === "team" && `/team/${ctaLink?.internalLink.slug}`) ||
     (ctaLink?.externalUrl && `${ctaLink?.externalUrl}`)
 
   return (
@@ -62,7 +65,7 @@ export default function Example({
               {logo ?
                 <Image
                   src={logo}
-                  width={logoWidth ? logoWidth : '150'}
+                  width={logoWidth ? logoWidth : '200'}
                   height={10}
                   alt={company_name}
                 />
@@ -79,6 +82,7 @@ export default function Example({
                 (link.internalLink?._type === "blog" && `/blog/${link.internalLink.slug}`) ||
                 (link.internalLink?._type === "legal" && `/legal/${link.internalLink.slug}`) ||
                 (link.internalLink?._type === "services" && `/services/${link.internalLink.slug}`) ||
+                (link.internalLink?._type === "team" && `/team/${link.internalLink.slug}`) ||
                 (link.externalUrl && `${link.externalUrl}`)
 
               if (link?.subMenu?.length > 0) {
@@ -115,6 +119,7 @@ export default function Example({
                                     (sub.internalLink?._type === "legal" && `/legal/${sub.internalLink.slug}`) ||
                                     (sub.internalLink?._type === "pages" && `/${sub.internalLink.slug}`) ||
                                     (sub.internalLink?._type === "services" && `/services/${sub.internalLink.slug}`) ||
+                                    (sub.internalLink?._type === "team" && `/team/${sub.internalLink.slug}`) ||
                                     (sub.externalUrl && `${sub.externalUrl}`)
 
                                   return (
@@ -164,15 +169,15 @@ export default function Example({
       <Disclosure as="nav" className={Styles.mobileHeaderMenu}>
         {({ open }) => (
           <>
-            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-              <div className="flex h-16 justify-between">
+            <div className="mx-auto max-w-7xl py-2 px-4 sm:px-6 lg:px-8">
+              <div className="flex justify-between">
                 <div className="flex items-center">
                   <div className="flex flex-shrink-0 items-center">
                     <Link href="/">
                       {logo ?
                         <Image
                           src={logo}
-                          width={logoWidth ? logoWidth : '150'}
+                          width={mobileLogoWidth ? mobileLogoWidth : '130'}
                           height={10}
                           alt={company_name}
                         />
@@ -204,6 +209,7 @@ export default function Example({
                     (link.internalLink?._type === "blog" && `/blog/${link.internalLink.slug}`) ||
                     (link.internalLink?._type === "legal" && `/legal/${link.internalLink.slug}`) ||
                     (link.internalLink?._type === "services" && `/services/${link.internalLink.slug}`) ||
+                    (link.internalLink?._type === "team" && `/team/${link.internalLink.slug}`) ||
                     (link.externalUrl && `${link.externalUrl}`)
 
                   if (link?.subMenu?.length > 0) {
@@ -240,7 +246,7 @@ export default function Example({
                                         (sub.internalLink?._type === "legal" && `/legal/${sub.internalLink.slug}`) ||
                                         (sub.internalLink?._type === "pages" && `/${sub.internalLink.slug}`) ||
                                         (sub.internalLink?._type === "services" && `/services/${sub.internalLink.slug}`) ||
-                                        (sub.internalLink?._type === "locations" && `/locations${sub.internalLink.slug}`) ||
+                                        (sub.internalLink?._type === "team" && `/team${sub.internalLink.slug}`) ||
                                         (sub.externalUrl && `${sub.externalUrl}`)
 
                                       return (

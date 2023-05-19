@@ -189,6 +189,7 @@ export default function Footer({
                       (link.internalLink?._type === "blog" && `/blog/${link.internalLink.slug}`) ||
                       (link.internalLink?._type === "legal" && `/legal/${link.internalLink.slug}`) ||
                       (link.internalLink?._type === "services" && `/services/${link.internalLink.slug}`) ||
+                      (link.internalLink?._type === "team" && `/team/${link.internalLink.slug}`) ||
                       (link.externalUrl && `${link.externalUrl}`)
 
                     return (
@@ -215,6 +216,7 @@ export default function Footer({
                     (link.internalLink?._type === "blog" && `/blog/${link.internalLink.slug}`) ||
                     (link.internalLink?._type === "legal" && `/legal/${link.internalLink.slug}`) ||
                     (link.internalLink?._type === "services" && `/services/${link.internalLink.slug}`) ||
+                    (link.internalLink?._type === "team" && `/team/${link.internalLink.slug}`) ||
                     (link.externalUrl && `${link.externalUrl}`)
 
                   return (

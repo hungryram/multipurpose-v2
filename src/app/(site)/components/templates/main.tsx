@@ -16,6 +16,8 @@ import DisclosureSection from "./disclosure-section";
 import DisclosureGrid from "./disclosure-grid";
 import LeadForm from "./lead-form";
 import ServicesNoImage from "./services-no-image";
+import GalleryMasonry from "./gallery-masonry";
+import GallerySwiper from "./gallery-swiper";
 
 interface Props {
     pageBuilder: any[];
@@ -138,6 +140,45 @@ export default function Main({
                             heading={section?.heading}
                             backgroundStyles={backgroundStyles}
                         />
+                    );
+                }
+
+                if (section._type === 'gallery') {
+                    return (
+                        <>
+                            {section?.layoutType === 'masonryGallery' ?
+                                <GalleryMasonry
+                                    content={section?.content}
+                                    images={section?.childImage}
+                                    textAlign={section?.textAlign}
+                                    backgroundStyles={backgroundStyles}
+                                    // PRIMARY BUTTON
+                                    primaryButtonText={section?.buttonLinking?.buttonText}
+                                    primaryButtonLink={section?.buttonLinking}
+                                    primaryButtonStyle={primaryButton}
+                                    // SECONDARY BUTTON
+                                    secondaryButtonLink={section?.secondButtonLinking}
+                                    secondaryButtonText={section?.secondButtonLinking?.buttonText}
+                                    secondaryButtonStyle={secondaryButton}
+                                />
+                                :
+                                <GallerySwiper
+                                    content={section?.content}
+                                    images={section?.childImage}
+                                    disablePagination={section?.disablePagination}
+                                    textAlign={section?.textAlign}
+                                    backgroundStyles={backgroundStyles}
+                                    // PRIMARY BUTTON
+                                    primaryButtonText={section?.buttonLinking?.buttonText}
+                                    primaryButtonLink={section?.buttonLinking}
+                                    primaryButtonStyle={primaryButton}
+                                    // SECONDARY BUTTON
+                                    secondaryButtonLink={section?.secondButtonLinking}
+                                    secondaryButtonText={section?.secondButtonLinking?.buttonText}
+                                    secondaryButtonStyle={secondaryButton}
+                                />
+                            }
+                        </>
                     );
                 }
 

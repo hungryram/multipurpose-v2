@@ -46,10 +46,5 @@ export default defineType({
             name: "cta",
             type: "subMenu",
         },
-        {
-            title: 'Default Page Header Image',
-            name: 'defaultHeaderImage',
-            type: 'image',
-        },
     ]
 })

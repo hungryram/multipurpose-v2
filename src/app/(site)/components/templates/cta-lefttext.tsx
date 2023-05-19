@@ -30,6 +30,7 @@ export default function CalltoActionLeftText({
         (buttonLink?.internalLink?._type === "blog" && `/blog/${buttonLink?.internalLink.slug}`) ||
         (buttonLink?.internalLink?._type === "legal" && `/legal/${buttonLink?.internalLink.slug}`) ||
         (buttonLink?.internalLink?._type === "services" && `/services/${buttonLink?.internalLink.slug}`) ||
+        (buttonLink?.internalLink?._type === "team" && `/team/${buttonLink?.internalLink.slug}`) ||
         (buttonLink?.externalUrl && `${buttonLink?.externalUrl}`)
 
     const secondaryButtonLinking =
@@ -37,6 +38,7 @@ export default function CalltoActionLeftText({
         (secondaryButtonLink?.internalLink?._type === "blog" && `/blog/${secondaryButtonLink?.internalLink.slug}`) ||
         (secondaryButtonLink?.internalLink?._type === "legal" && `/legal/${secondaryButtonLink?.internalLink.slug}`) ||
         (secondaryButtonLink?.internalLink?._type === "services" && `/services/${secondaryButtonLink?.internalLink.slug}`) ||
+        (secondaryButtonLink?.internalLink?._type === "team" && `/team/${secondaryButtonLink?.internalLink.slug}`) ||
         (secondaryButtonLink?.externalUrl && `${buttonLink?.externalUrl}`)
 
     return (

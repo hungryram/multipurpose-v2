@@ -23,6 +23,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/components/util/content-editor.js", "src/app/api/form/route.js", "src/app/api/form.js", "src/app/sitemap.xml.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/components/util/content-editor.js", "src/app/api/form/route.js", "src/app/api/form.js", "src/app/sitemap.xml.js", "src/app/(site)/api/revalidate/route.js"],
   "exclude": ["node_modules"]
 }

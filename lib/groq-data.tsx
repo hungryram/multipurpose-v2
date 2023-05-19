@@ -4,9 +4,6 @@ import { client } from "../sanity/lib/client";
 export const appearance = groq`
 {
   'appearances': *[_type == 'appearances'][0]{
-    'loader': branding.loadingLogo.asset->url,
-    'loaderColor': branding.loadingBackground.hex,
-    'loaderImage': branding.loadingLogo.asset->url,
     'navColor': header.navColor.hex,
     'navBgColor': header.headerColor.hex,
     'websiteTextColor': mainColors.websiteTextColor.hex,
