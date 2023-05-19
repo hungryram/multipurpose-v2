@@ -150,6 +150,7 @@ export default function Main({
                                 <GalleryMasonry
                                     content={section?.content}
                                     images={section?.childImage}
+                                    disablePagination={section?.disablePagination}
                                     textAlign={section?.textAlign}
                                     backgroundStyles={backgroundStyles}
                                     // PRIMARY BUTTON
@@ -166,6 +167,8 @@ export default function Main({
                                     content={section?.content}
                                     images={section?.childImage}
                                     disablePagination={section?.disablePagination}
+                                    disableNavigation={section?.disableNavigation}
+                                    slideNumber={section?.slideNumber}
                                     textAlign={section?.textAlign}
                                     backgroundStyles={backgroundStyles}
                                     // PRIMARY BUTTON

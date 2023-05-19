@@ -4,7 +4,7 @@ import Image from "next/image";
 import HeaderSection from "./header-section";
 import React, { useState, useEffect, useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import SwiperCore, { Navigation, Pagination } from "swiper";
+import SwiperCore, { Navigation, Pagination, A11y } from "swiper";
 
 // Import Swiper styles
 import 'swiper/css';
@@ -12,7 +12,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
 // Initialize Swiper modules
-SwiperCore.use([Navigation, Pagination]);
+SwiperCore.use([Navigation, Pagination, A11y]);
 
 interface Props {
     content: string;
@@ -25,7 +25,9 @@ interface Props {
     secondaryButtonLink: string;
     secondaryButtonStyle: any;
     backgroundStyles: any;
-    disablePagination: boolean
+    disablePagination: boolean;
+    disableNavigation: boolean;
+    slideNumber: number
 }
 
 const GallerySwiper = ({
@@ -39,7 +41,9 @@ const GallerySwiper = ({
     secondaryButtonStyle,
     backgroundStyles,
     images,
-    disablePagination
+    disablePagination,
+    disableNavigation,
+    slideNumber
 }: Props) => {
     const [lightboxOpen, setLightboxOpen] = useState(false);
     const [selectedImage, setSelectedImage] = useState("");
@@ -95,11 +99,21 @@ const GallerySwiper = ({
                         secondaryButtonStyle={secondaryButtonStyle}
                     />
                 )}
+                <style jsx global>
+                    {`
+                        /* Custom styles for swiper navigation arrows */
+                        .swiper-button-prev,
+                        .swiper-button-next {
+                        color: #ffffff; /* Replace with your desired color */
+                        }
+                    `}
+                </style>
                 <Swiper
-                    slidesPerView={2}
+                    slidesPerView={slideNumber ? slideNumber : 1}
                     spaceBetween={10}
-                    navigation
-                    disablePagination
+                    effect={"slide"}
+                    pagination={disablePagination ? false : true}
+                    navigation={disableNavigation ? false : true}
                     className={`md:columns-3 columns-2 gap-4 ${content && 'mt-10'}`}
                 >
                     {images.map((image: any, index: number) => (
@@ -114,7 +128,7 @@ const GallerySwiper = ({
                                 alt={image?.asset?.altText}
                                 width={1000}
                                 height={800}
-                                className={`w-full ${index % 2 === 0 ? 'aspect-video' : 'aspect-square'
+                                className={`w-full object-cover ${index % 2 === 0 ? 'aspect-video' : 'aspect-square'
                                     }`}
                             />
                         </SwiperSlide>

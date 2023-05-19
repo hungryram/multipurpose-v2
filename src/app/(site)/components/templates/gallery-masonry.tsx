@@ -28,7 +28,7 @@ interface Props {
     disablePagination: boolean
 }
 
-const GalleryMasonry = ({ 
+const GalleryMasonry = ({
     content,
     textAlign,
     primaryButtonLink,
@@ -40,7 +40,7 @@ const GalleryMasonry = ({
     backgroundStyles,
     images,
     disablePagination
- }: Props) => {
+}: Props) => {
     const [lightboxOpen, setLightboxOpen] = useState(false);
     const [selectedImage, setSelectedImage] = useState("");
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -95,6 +95,15 @@ const GalleryMasonry = ({
                         secondaryButtonStyle={secondaryButtonStyle}
                     />
                 )}
+                <style jsx global>
+                    {`
+                        /* Custom styles for swiper navigation arrows */
+                        .swiper-button-prev,
+                        .swiper-button-next {
+                        color: #ffffff; /* Replace with your desired color */
+                        }
+                    `}
+                </style>
                 <div className={`md:columns-3 columns-2 gap-4 ${content && 'mt-10'}`}>
                     {images.map((image: any, index: number) => (
                         <button
