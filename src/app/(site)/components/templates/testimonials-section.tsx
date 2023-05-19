@@ -45,7 +45,7 @@ export default function TestimonialSection({
                         secondaryButtonStyle={secondaryButtonStyle}
                     />
                 )}
-                <div className="mx-auto px-6 lg:px-8">
+                <div className={`mx-auto px-6 lg:px-8 ${content && 'mt-10'}`}>
                     <div className="mx-auto flow-root max-w-2xl sm:mt-20 lg:mx-0 lg:max-w-none">
                         <div className="-mt-8 sm:-mx-4 sm:columns-2 sm:text-[0] lg:columns-3">
                             {testimonials?.map((testimonial: any) => (

@@ -95,7 +95,7 @@ export default function DisclosureSection({
                             secondaryButtonStyle={secondaryButtonStyle}
                         />
                     )}
-                    <div className={` ${content && 'mt-20'}`}>
+                    <div className={` ${content && 'mt-16'}`}>
                         {disclosure.map((node: any) => {
                             return (
                                 <div className={`w-full`} key={node._key}>

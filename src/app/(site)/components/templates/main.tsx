@@ -18,6 +18,7 @@ import LeadForm from "./lead-form";
 import ServicesNoImage from "./services-no-image";
 import GalleryMasonry from "./gallery-masonry";
 import GallerySwiper from "./gallery-swiper";
+import HeroSwiper from "./hero-swiper";
 
 interface Props {
     pageBuilder: any[];
@@ -110,24 +111,38 @@ export default function Main({
 
                 if (section._type === 'hero') {
                     return (
-                        <Hero
-                            key={section?._key}
-                            content={section?.content}
-                            image={section?.imageData?.asset?.url}
-                            altText={section?.imageData?.asset?.altText}
-                            blurData={section?.imageData?.asset?.lqip}
-                            textAlign={section?.textAlign}
-                            textColor={section?.textColor?.hex}
-                            // PRIMARY BUTTON
-                            primaryButtonText={section?.buttonLinking?.buttonText}
-                            primaryButtonLink={section?.buttonLinking}
-                            primaryButtonStyle={primaryButton}
-                            // SECONDARY BUTTON
-                            secondaryButtonLink={section?.secondButtonLinking}
-                            secondaryButtonText={section?.secondButtonLinking?.buttonText}
-                            secondaryButtonStyle={secondaryButton}
-                            imageOverlayColor={section?.imageOverlayColor}
-                        />
+                        <>
+                            {section?.layoutType === 'static' ?
+                                <Hero
+                                    key={section?._key}
+                                    content={section?.content}
+                                    image={section?.imageData?.asset?.url}
+                                    altText={section?.imageData?.asset?.altText}
+                                    blurData={section?.imageData?.asset?.lqip}
+                                    textAlign={section?.textAlign}
+                                    textColor={section?.textColor?.hex}
+                                    // PRIMARY BUTTON
+                                    primaryButtonText={section?.buttonLinking?.buttonText}
+                                    primaryButtonLink={section?.buttonLinking}
+                                    primaryButtonStyle={primaryButton}
+                                    // SECONDARY BUTTON
+                                    secondaryButtonLink={section?.secondButtonLinking}
+                                    secondaryButtonText={section?.secondButtonLinking?.buttonText}
+                                    secondaryButtonStyle={secondaryButton}
+                                    imageOverlayColor={section?.imageOverlayColor}
+                                />
+                                :
+                                <HeroSwiper
+                                    key={section?._key}
+                                    images={section?.childImage}
+                                    textAlign={section?.textAlign}
+                                    imageOverlayColor={section?.imageOverlayColor}
+                                    textColor={section?.textColor?.hex}
+                                    imageHeight={section?.imageHeight}
+                                    animation={section?.animation}
+                                />
+                            }
+                        </>
                     );
                 }
 
@@ -287,6 +302,8 @@ export default function Main({
                         <PricingSection
                             key={section?._key}
                             packages={section?.packages}
+                            packageTextColor={section?.packageTextColor?.hex}
+                            packageBackground={section?.packageBackground?.hex}
                             columnNumber={section?.columnNumber}
                             content={section?.content}
                             textAlign={section?.textAlign}

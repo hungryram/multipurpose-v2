@@ -94,6 +94,7 @@ export default defineType({
       title: 'Number of Slides',
       name: 'slideNumber',
       type: 'number',
+      validation: Rule => Rule.error().min(1).max(5),
       group: 'settings',
     },
     {

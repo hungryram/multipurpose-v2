@@ -20,7 +20,7 @@ export default function TeamCard({
                 <Image
                     className="aspect-[3/2] w-full rounded-sm object-cover"
                     src={image}
-                    alt=""
+                    alt={name}
                     width={800}
                     height={800}
                 />

@@ -110,9 +110,11 @@ export default function ContactPage({
                 </div>
                 <div>
                     <div className="mx-auto max-w-2xl">
-                        <FormBuilder
-                            formSchema={formBuilder}
-                        />
+                        <div className="py-10">
+                            <FormBuilder
+                                formSchema={formBuilder}
+                            />
+                        </div>
                     </div>
                 </div>
             </div>

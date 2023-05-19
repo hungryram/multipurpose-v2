@@ -104,7 +104,10 @@ const GallerySwiper = ({
                         /* Custom styles for swiper navigation arrows */
                         .swiper-button-prev,
                         .swiper-button-next {
-                        color: #ffffff; /* Replace with your desired color */
+                        color: #ffffff;
+                        }
+                        .swiper-pagination-bullet-active {
+                            background: #ffffff;
                         }
                     `}
                 </style>
@@ -114,22 +117,47 @@ const GallerySwiper = ({
                     effect={"slide"}
                     pagination={disablePagination ? false : true}
                     navigation={disableNavigation ? false : true}
-                    className={`md:columns-3 columns-2 gap-4 ${content && 'mt-10'}`}
+                    className={`md:columns-3 columns-2 gap-4 ${content && 'mt-16'}`}
+                    role="region"
+                    aria-label="Image Gallery"
+                    a11y={{
+                        prevSlideMessage: 'Previous slide',
+                        nextSlideMessage: 'Next slide',
+                        firstSlideMessage: 'This is the first slide',
+                        lastSlideMessage: 'This is the last slide',
+                        paginationBulletMessage: `Go to slide {{index}}`,
+                    }}
+                    breakpoints={{
+                        // When window width is >= 1024px (desktop)
+                        1024: {
+                            slidesPerView: slideNumber ? slideNumber : 1,
+                            spaceBetween: 30,
+                        },
+                        // When window width is >= 768px (iPad)
+                        768: {
+                            slidesPerView: slideNumber < 2 ? 1 : 2,
+                            spaceBetween: 20,
+                        },
+                        // When window width is < 768px (iPhone)
+                        0: {
+                            slidesPerView: 1,
+                            spaceBetween: 10,
+                        },
+                    }}
                 >
                     {images.map((image: any, index: number) => (
                         <SwiperSlide
                             key={image.id}
                             onClick={() => openLightbox(image?.asset?.url, index)}
                             className="mb-4 cursor-pointer"
-                            aria-label={`View Image ${index + 1} ${image?.asset?.altText ? `of ${image?.asset?.altText}` : ''}`}
+                            aria-label={`Click to view image ${index + 1}${image?.asset?.altText ? ` of ${image?.asset?.altText}` : ''}`}
                         >
                             <Image
                                 src={image?.asset?.url}
                                 alt={image?.asset?.altText}
                                 width={1000}
                                 height={800}
-                                className={`w-full object-cover ${index % 2 === 0 ? 'aspect-video' : 'aspect-square'
-                                    }`}
+                                className={`w-full object-cover aspect-square ${slideNumber < 2 ? 'md:h-[80vh] h-96' : 'h-96'}`}
                             />
                         </SwiperSlide>
                     ))}
@@ -143,7 +171,7 @@ const GallerySwiper = ({
                         {images.map((image: any, index: number) => (
                             <SwiperSlide key={image.id} className="mx-auto relative !flex !items-center !justify-center">
                                 <Image
-                                    src={image?.asset?.url}
+                                    src={selectedImage}
                                     alt={images[currentIndex]?.asset?.altText}
                                     width={1000}
                                     height={800}

@@ -46,7 +46,7 @@ export default function ServicesNoImage({
                         secondaryButtonStyle={secondaryButtonStyle}
                     />
                 )}
-                <div className={`divide-y divide-gray-200 overflow-hidden rounded-md shadow grid ${columnNumber} mx-auto sm:gap-px sm:divide-y-0 ${content && 'mt-20'}`}>
+                <div className={`divide-y divide-gray-200 overflow-hidden rounded-md shadow grid ${columnNumber} mx-auto sm:gap-px sm:divide-y-0 ${content && 'mt-16'}`}>
                     {services.map((node: any) => (
                         <div
                             key={node._id}

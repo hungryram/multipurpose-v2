@@ -98,7 +98,7 @@ export default async function RootLayout({
     ...(data?.profileSettings?.settings?.websiteName && { "url": data?.profileSettings?.settings?.websiteName }),
     ...(data?.profileSettings?.seo?.meta_description && { "description": data?.profileSettings?.seo?.meta_description }),
   };
-  
+
   return (
     <html lang="en">
 
@@ -117,7 +117,7 @@ export default async function RootLayout({
         <style>
           {`
               :root {
-
+                  --swiper-navigation-size: 30px;
                   --top-header-background: ${data.appearances?.topHeaderBar?.topHeaderBarBgColor};
                   --top-header-text-color: ${data.appearances?.topHeaderBar?.topHeaderBarTextColor};
                   --primary-accent: ${data.appearances?.primaryAccent ?? '#cccccc'};

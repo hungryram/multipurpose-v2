@@ -31,7 +31,7 @@ interface FormBuilderProps {
 
 export default function FormBuilder({ formSchema }: FormBuilderProps) {
   return (
-    <div className="py-10 px-4">
+    <div className="py-2 px-4">
       <form action={submitForm}>
         <label className="hidden" htmlFor="name-honey" />
         <input className="hidden" type="text" name="name-honey" />

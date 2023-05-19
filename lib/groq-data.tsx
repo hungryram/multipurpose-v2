@@ -173,10 +173,50 @@ export const pageBuilderData = groq`
   }
 },
 'childImage': images[] {
+  _key,
+  content,
+  'buttonLinking': button {
+    buttonBackground {
+      ...
+    },
+    buttonTextColor {
+      ...
+    },
+    '':button{
+      'buttonText': text,
+      linkType,
+      externalUrl,
+      newTab,
+      internalLink->{
+        title,
+        'slug': slug.current,
+        _type
+      }
+    },
+  },
+  'secondButtonLinking': secondaryButton {
+    buttonBackground {
+      ...
+    },
+    buttonTextColor {
+      ...
+    },
+    '':button{
+      'buttonText': text,
+      linkType,
+      externalUrl,
+      newTab,
+      internalLink->{
+        title,
+        'slug': slug.current,
+        _type
+      }
+    },
+  },
   asset->{
     'altText': altText,
     'lqip': metadata.lqip,
-    url
+    url,
   }
 },
 'buttonLinking': button.button{

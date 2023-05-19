@@ -6,7 +6,6 @@ import { notFound } from "next/navigation"
 // GENERATES SEO
 export async function generateMetadata() {
     const teamMeta = await client.fetch(teamPage, { next: { revalidate: 60 } })
-    console.log(teamMeta.appearances?.branding?.favicon?.asset?.url)
     return {
         title: teamMeta?.pageSetting?.team?.seo?.title_tag,
         description: teamMeta?.pageSetting?.team?.seo?.meta_description,

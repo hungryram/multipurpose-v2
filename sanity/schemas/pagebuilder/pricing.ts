@@ -105,6 +105,18 @@ export default defineType({
             group: 'settings'
         },
         {
+            title: 'Package Background Color',
+            name: 'packageBackground',
+            type: 'color',
+            group: 'settings',
+        },
+        {
+            title: 'Package Text Color',
+            name: 'packageTextColor',
+            type: 'color',
+            group: 'settings',
+        },
+        {
             title: 'Background Options',
             name: 'background',
             type: 'backgroundOptions',

@@ -97,7 +97,7 @@ export default function DisclosureGrid({
                                 />
                             )}
                         </div>
-                        <div className={`lg:col-span-7`}>
+                        <div className={`lg:col-span-7 ${content && 'mt-16'}`}>
                             {disclosure.map((node: any) => {
                                 return (
                                     <div className="w-full" key={node._key}>

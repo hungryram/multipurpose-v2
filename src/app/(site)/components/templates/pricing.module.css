@@ -1,5 +1,5 @@
 .pricingGrid {
-    @apply -mt-16 max-w-sm gap-y-16 divide-y divide-gray-100 sm:mx-auto lg:-mx-8 lg:mt-0 lg:max-w-none lg:divide-x lg:divide-y-0 xl:-mx-4
+    @apply max-w-sm gap-y-8 divide-y divide-gray-100 mx-auto lg:-mx-8 lg:mt-0 lg:max-w-none lg:divide-x lg:divide-y-0 xl:-mx-4
 }
 
 .pricingCta {

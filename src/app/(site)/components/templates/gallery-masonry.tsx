@@ -104,7 +104,7 @@ const GalleryMasonry = ({
                         }
                     `}
                 </style>
-                <div className={`md:columns-3 columns-2 gap-4 ${content && 'mt-10'}`}>
+                <div className={`md:columns-3 columns-2 gap-4 ${content && 'mt-16'}`}>
                     {images.map((image: any, index: number) => (
                         <button
                             key={image.id}
@@ -127,13 +127,14 @@ const GalleryMasonry = ({
                     <Swiper
                         slidesPerView={1}
                         modules={[EffectFade, Navigation]}
-                        pagination={disablePagination ? false : true}
+                        navigation
+                        pagination
                         className="!fixed !inset-0 !flex !items-center !justify-center z-50 bg-black bg-opacity-75"
                     >
                         {images.map((image: any, index: number) => (
                             <SwiperSlide key={image.id} className="mx-auto relative !flex !items-center !justify-center">
                                 <Image
-                                    src={image?.asset?.url}
+                                    src={selectedImage}
                                     alt={images[currentIndex]?.asset?.altText}
                                     width={1000}
                                     height={800}
