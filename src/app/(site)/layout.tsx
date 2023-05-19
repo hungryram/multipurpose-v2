@@ -1,12 +1,11 @@
 import { client } from '../../../sanity/lib/client'
 import Footer from './components/global/footer'
 import Navbar from './components/global/navbar'
-import { Inter } from 'next/font/google'
 import './globals.css'
 import { appearance, mainLayoutProfile } from '../../../lib/groq-data'
-const inter = Inter({ subsets: ['latin'] })
 import { Metadata } from 'next';
 import GoogleAnalytics from './components/global/analytics'
+
 
 // GENERATES SEO
 export async function generateMetadata(): Promise<Metadata> {
@@ -106,7 +105,7 @@ export default async function RootLayout({
       {data?.profileSettings?.settings?.googleID &&
         <GoogleAnalytics GA_TRACKING_ID={data?.profileSettings?.settings?.googleID} />
       }
-      <body className={inter.className}>
+      <body>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusiness) }}
@@ -119,6 +118,8 @@ export default async function RootLayout({
           {`
               :root {
 
+                  --top-header-background: ${data.appearances?.topHeaderBar?.topHeaderBarBgColor};
+                  --top-header-text-color: ${data.appearances?.topHeaderBar?.topHeaderBarTextColor};
                   --primary-accent: ${data.appearances?.primaryAccent ?? '#cccccc'};
 
                   --footer-background-color: ${data.appearances?.footerBg ?? '#0d1321'};

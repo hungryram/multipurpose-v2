@@ -25,45 +25,6 @@ export default defineType({
             group: 'branding'
         },
         {
-            title: 'Announcement Bar',
-            name: 'announcementBar',
-            type: 'object',
-            options: {
-                collapsible: true,
-                collapsed: true
-            },
-            fields: [
-                {
-                    title: 'Announcement',
-                    name: 'announcement',
-                    type: 'string'
-                },
-                {
-                    title: "Link",
-                    name: "link",
-                    type: "subMenu",
-                    description: 'Give your announcement a call to action and link to a page'
-                },
-                {
-                    title: 'Background Color',
-                    name: 'backgroundColor',
-                    type: 'color',
-                    options: {
-                        disableAlpha: true
-                    }
-                },
-                {
-                    title: 'Text Color',
-                    name: 'textColor',
-                    type: 'color',
-                    options: {
-                        disableAlpha: true
-                    }
-                }
-            ],
-            group: 'header'
-        },
-        {
             title: 'Top Header Bar',
             name: 'topHeaderBar',
             type: 'object',

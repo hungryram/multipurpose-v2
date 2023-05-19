@@ -33,23 +33,6 @@ export const appearance = groq`
       logoWidth,
       mobileLogoWidth
     },
-    'announcementBar': announcementBar {
-      announcement,
-      'announcementBarLink': link {
-        newTab,
-        _key,
-        linkType,
-        externalUrl,
-        text,
-        internalLink->{
-          title,
-          'slug': slug.current,
-          _type
-        }
-      },
-      'announcementBgColor': backgroundColor.hex,
-      'announcementTextColor': textColor.hex
-    },
     'topHeaderBar': topHeaderBar {
       enableTopHeaderBar,
       'topHeaderBarBgColor': topHeaderBarBgColor.hex,
