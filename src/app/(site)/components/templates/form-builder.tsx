@@ -43,10 +43,10 @@ export default function FormBuilder({ formSchema }: FormBuilderProps) {
         <input className="hidden" type="hidden" name="redirectTo" value={formSchema?.redirectTo} />
         {formSchema?.fields && (
           <>
-            {formSchema.fields.map((field) => {
+            {formSchema.fields.map((field, i) => {
               return (
                 <div key={field._key} className="mb-4">
-                  <label htmlFor={field.label.replace(/ /g, '')} className="block text-sm font-medium leading-6">
+                  <label htmlFor={field.label.replace(/ /g, '') + i} className="block text-sm font-medium leading-6">
                     {field.label}
                     {field.required && <span>*</span>}
                   </label>
@@ -55,7 +55,7 @@ export default function FormBuilder({ formSchema }: FormBuilderProps) {
                       type="text"
                       name={field.label}
                       className="border rounded-sm px-3 py-2 w-full"
-                      id={field.label.replace(/ /g, '')}
+                      id={field.label.replace(/ /g, '') + i}
                       required={field.required ? true : undefined}
                     />
                   )}
@@ -64,7 +64,7 @@ export default function FormBuilder({ formSchema }: FormBuilderProps) {
                       type="email"
                       name={field.label}
                       className="border rounded-sm px-3 py-2 w-full"
-                      id={field.label.replace(/ /g, '')}
+                      id={field.label.replace(/ /g, '') + i}
                       required={field.required ? true : undefined}
                     />
                   )}
@@ -76,11 +76,11 @@ export default function FormBuilder({ formSchema }: FormBuilderProps) {
                             <input
                               type="radio"
                               name={field.label}
-                              id={node.replace(/^[^A-Za-z0-9]+/g, '').replace(/[^A-Za-z0-9_\-:.]/g, '')}
+                              id={node.replace(/^[^A-Za-z0-9]+/g, '').replace(/[^A-Za-z0-9_\-:.]/g, '') + i}
                               className="h-4 w-4 rounded border-gray-300"
                               required={field.required ? true : undefined}
                             />
-                            <label htmlFor={node.replace(/^[^A-Za-z0-9]+/g, '').replace(/[^A-Za-z0-9_\-:.]/g, '')} className="block text-sm font-medium leading-6 text-gray-900">
+                            <label htmlFor={node.replace(/^[^A-Za-z0-9]+/g, '').replace(/[^A-Za-z0-9_\-:.]/g, '') + i} className="block text-sm font-medium leading-6 text-gray-900">
                               {node}
                             </label>
                           </>
@@ -96,12 +96,12 @@ export default function FormBuilder({ formSchema }: FormBuilderProps) {
                             <input
                               type="checkbox"
                               name={field.label}
-                              id={node.replace(/^[^A-Za-z0-9]+/g, '').replace(/[^A-Za-z0-9_\-:.]/g, '')}
+                              id={node.replace(/^[^A-Za-z0-9]+/g, '').replace(/[^A-Za-z0-9_\-:.]/g, '') + i}
                               className="h-4 w-4 rounded border-gray-300"
                               value={node}
                               required={field.required ? true : undefined}
                             />
-                            <label htmlFor={node.replace(/^[^A-Za-z0-9]+/g, '').replace(/[^A-Za-z0-9_\-:.]/g, '')} className="block text-sm font-medium leading-6 text-gray-900">
+                            <label htmlFor={node.replace(/^[^A-Za-z0-9]+/g, '').replace(/[^A-Za-z0-9_\-:.]/g, '') + i} className="block text-sm font-medium leading-6 text-gray-900">
                               {node}
                             </label>
                           </>
@@ -112,7 +112,7 @@ export default function FormBuilder({ formSchema }: FormBuilderProps) {
                   {field.type === 'select' && (
                     <div className="flex items-center gap-x-3 mt-4">
                       <select
-                        id={field.label.replace(/ /g, '')}
+                        id={field.label.replace(/ /g, '') + i}
                         name={field.label}
                         className="block w-full rounded-md border py-1.5 text-gray-900 shadow-sm sm:max-w-xs sm:text-sm sm:leading-6"
                         required={field.required ? true : undefined}
@@ -132,7 +132,7 @@ export default function FormBuilder({ formSchema }: FormBuilderProps) {
                       name={field.label}
                       className="border rounded-sm px-3 py-2 w-full"
                       rows={3}
-                      id={field.label.replace(/ /g, '')}
+                      id={field.label.replace(/ /g, '') + i}
                       required={field.required ? true : undefined}
                     />
                   )}
