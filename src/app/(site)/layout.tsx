@@ -168,7 +168,7 @@ export default async function RootLayout({
           image={data.appearances?.footer?.footerLogo?.asset?.url}
           quickLinksHeading={data.appearances?.footer?.quickLinksHeading}
           quickLinksTwoHeading={data.appearances?.footer?.quickLinksTwoHeading}
-          altText={data.ablurDatappearances?.footer?.footerLogo?.asset?.url}
+          altText={data.appearances?.footer?.footerLogo?.asset?.altText}
           blurData={data.ablurDatappearances?.footer?.footerLogo?.asset?.lqip}
           email={data.profileSettings?.contact_information?.email}
           phone_number={data.profileSettings?.contact_information?.phone_number}
