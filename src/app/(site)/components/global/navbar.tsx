@@ -87,7 +87,7 @@ export default function Example({
                     {({ open }) => (
                       <>
                         <Popover.Button
-                          className={`group rounded-md inline-flex items-center outline-none ${Styles.navLinks}`}
+                          className={`${Styles.navLinks}`}
                         >
                           {link?.text}
                           <ChevronDownIcon

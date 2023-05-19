@@ -10,7 +10,7 @@
 }
 
 .navLinks {
-    @apply text-sm font-semibold leading-6 py-2 lg:inline-block block;
+    @apply text-sm font-semibold leading-6 py-2 block rounded-md lg:inline-flex items-center outline-none;
 }
 
 .desktopDropDown {
