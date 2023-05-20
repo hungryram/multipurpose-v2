@@ -35,7 +35,9 @@ export default defineType({
                     {title: 'Center', value: 'text-center mx-auto justify-center'},
                     {title: 'Right', value: 'mx-auto mr-0 text-right'},
                 ]
-            }
+            },
+            initialValue: "text-center mx-auto justify-center"
+
         },
         {
             title: 'Primary Button',
@@ -111,8 +113,14 @@ export default defineType({
     ],
     preview: {
         select: {
-            title: 'content',
-            subtitle: 'disclosures.disclosureBlock'
+          content: 'content',
         },
-    }
+        prepare({ content }) {
+          const hasContent = content && content[0]?.children?.length > 0;
+      
+          return {
+            title: hasContent ? content[0].children[0].text : 'Disclosure Section',
+          };
+        },
+      },
 })

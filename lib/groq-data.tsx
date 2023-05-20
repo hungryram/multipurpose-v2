@@ -300,11 +300,12 @@ const homeOtherDocumentSections = groq`
     }
   },
 },
-'allTestimonial': *[_type == 'testimonials'][0..5]{
+'allTestimonial': *[_type == 'testimonials']{
   _id,
   image,
   name,
-  testimonial
+  testimonial,
+  position
 },
 `
 
@@ -364,7 +365,8 @@ const otherDocumentSections = groq`
   _id,
   image,
   name,
-  testimonial
+  testimonial,
+  position
 },
 `
 

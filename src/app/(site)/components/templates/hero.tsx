@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { heroData } from "../../../../../sample/data";
 import Styles from "./hero.module.css"
-import { urlForImage } from "../../../../../sanity/lib/image";
 import HeaderSection from "./header-section";
 
 interface Props {

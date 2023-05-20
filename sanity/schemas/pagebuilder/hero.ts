@@ -5,8 +5,8 @@ export default defineType({
     name: 'hero',
     type: 'object',
     groups: [
-        {name: 'content', title: 'Content'},
-        {name: 'settings', title: 'Settings'},
+        { name: 'content', title: 'Content' },
+        { name: 'settings', title: 'Settings' },
     ],
     fields: [
         {
@@ -19,6 +19,7 @@ export default defineType({
                     { title: "Static Hero", value: "static" },
                 ],
             },
+            initialValue: "static"
         },
         {
             title: "Image Height",
@@ -31,6 +32,7 @@ export default defineType({
                     { title: "Small", value: "h-[50vh]" },
                 ],
             },
+            initialValue: "h-[70vh]"
         },
         {
             title: 'Content',
@@ -45,11 +47,13 @@ export default defineType({
             type: 'string',
             options: {
                 list: [
-                    {title: 'Left', value: 'text-left'},
-                    {title: 'Center', value: 'text-center mx-auto justify-center'},
-                    {title: 'Right', value: 'mx-auto mr-0 text-right'},
+                    { title: 'Left', value: 'text-left' },
+                    { title: 'Center', value: 'text-center mx-auto justify-center' },
+                    { title: 'Right', value: 'mx-auto mr-0 text-right' },
                 ]
-            }
+            },
+            initialValue: "text-center mx-auto justify-center"
+
         },
         {
             title: 'Images',
@@ -80,9 +84,9 @@ export default defineType({
                 },
             ],
             options: {
-              layout: 'grid',
+                layout: 'grid',
             },
-          },
+        },
         //   {
         //     title: 'Animation',
         //     name: 'animation',
@@ -126,7 +130,14 @@ export default defineType({
             type: 'boolean',
             hidden: ({ parent }) => parent?.layoutType === 'static',
             group: 'settings',
-          },
+        },
+        {
+            title: 'Navigation Arrow Colors',
+            name: 'navigationColors',
+            hidden: ({ parent }) => parent?.layoutType === 'static',
+            type: 'color',
+            group: 'settings'
+        },
         {
             title: 'Text Color',
             name: 'textColor',
@@ -136,8 +147,14 @@ export default defineType({
     ],
     preview: {
         select: {
-            title: 'content',
-            media: 'image'
-        }
-    }
+          content: 'content',
+        },
+        prepare({ content }) {
+          const hasContent = content && content[0]?.children?.length > 0;
+      
+          return {
+            title: hasContent ? content[0].children[0].text : 'Hero Section',
+          };
+        },
+      },
 })

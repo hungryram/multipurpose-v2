@@ -19,6 +19,11 @@ export default defineType({
             type: 'string'
         },
         {
+            title: 'Position',
+            name: 'position',
+            type: 'string'
+        },
+        {
             title: 'Image',
             name: 'image',
             type: 'image'

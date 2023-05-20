@@ -1,15 +1,15 @@
 'use client'
 import React, { useState, useEffect, useRef } from "react";
-import { ChevronLeftIcon, ChevronRightIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { XMarkIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import HeaderSection from "./header-section";
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { EffectFade, Autoplay, Pagination, Navigation } from 'swiper'
 
 // Import Swiper styles
 import 'swiper/css';
-import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
 SwiperCore.use([Autoplay, Pagination, Navigation])
@@ -58,19 +58,6 @@ const GalleryMasonry = ({
         setCurrentIndex(0);
     };
 
-    const handlePrevImage = () => {
-        if (currentIndex > 0) {
-            setSelectedImage(images[currentIndex - 1]?.asset?.url);
-            setCurrentIndex(currentIndex - 1);
-        }
-    };
-
-    const handleNextImage = () => {
-        if (currentIndex < images.length - 1) {
-            setSelectedImage(images[currentIndex + 1]?.asset?.url);
-            setCurrentIndex(currentIndex + 1);
-        }
-    };
 
     useEffect(() => {
         if (lightboxOpen && lightboxRef.current) {
@@ -95,21 +82,12 @@ const GalleryMasonry = ({
                         secondaryButtonStyle={secondaryButtonStyle}
                     />
                 )}
-                <style jsx global>
-                    {`
-                        /* Custom styles for swiper navigation arrows */
-                        .swiper-button-prev,
-                        .swiper-button-next {
-                        color: #ffffff; /* Replace with your desired color */
-                        }
-                    `}
-                </style>
                 <div className={`md:columns-3 columns-2 gap-4 ${content && 'mt-16'}`}>
                     {images.map((image: any, index: number) => (
                         <button
                             key={image.id}
                             onClick={() => openLightbox(image?.asset?.url, index)}
-                            className="mb-4 cursor-pointer"
+                            className="w-full h-full cursor-pointer"
                             aria-label={`View Image ${index + 1} ${image?.asset?.altText ? `of ${image?.asset?.altText}` : ''}`}
                         >
                             <Image
@@ -117,7 +95,7 @@ const GalleryMasonry = ({
                                 alt={image?.asset?.altText}
                                 width={1000}
                                 height={800}
-                                className={`w-full ${index % 2 === 0 ? 'aspect-video' : 'aspect-square'
+                                className={`w-full mb-4 rounded-sm ${index % 2 === 0 ? 'aspect-video' : 'aspect-square'
                                     }`}
                             />
                         </button>
@@ -126,21 +104,25 @@ const GalleryMasonry = ({
                 {lightboxOpen && (
                     <Swiper
                         slidesPerView={1}
-                        modules={[EffectFade, Navigation]}
-                        navigation
-                        pagination
+                        navigation={{
+                            nextEl: ".image-swiper-button-next-lightbox",
+                            enabled: true,
+                            prevEl: ".image-swiper-button-prev-lightbox",
+                            disabledClass: "swiper-button-disabled"
+                        }}
                         className="!fixed !inset-0 !flex !items-center !justify-center z-50 bg-black bg-opacity-75"
+                        initialSlide={currentIndex} // Set the initial slide index
                     >
                         {images.map((image: any, index: number) => (
                             <SwiperSlide key={image.id} className="mx-auto relative !flex !items-center !justify-center">
                                 <Image
-                                    src={selectedImage}
-                                    alt={images[currentIndex]?.asset?.altText}
+                                    src={image?.asset?.url}
+                                    alt={image?.asset?.altText}
                                     width={1000}
                                     height={800}
                                     sizes="100vw"
-                                    placeholder={images[currentIndex]?.asset?.lqip ? 'blur' : 'empty'}
-                                    blurDataURL={images[currentIndex]?.asset?.lqip}
+                                    placeholder={image?.asset?.lqip ? 'blur' : 'empty'}
+                                    blurDataURL={image?.asset?.lqip}
                                 />
                             </SwiperSlide>
                         ))}
@@ -151,6 +133,16 @@ const GalleryMasonry = ({
                         >
                             <XMarkIcon className="h-8 w-8" />
                         </button>
+                        <div className="swiper-button image-swiper-button-next-lightbox absolute right-0 top-1/2 flex items-center justify-center z-50">
+                            <IoIosArrowForward className="text-3xl" style={{
+                                color: '#ffffff'
+                            }} />
+                        </div>
+                        <div className="swiper-button image-swiper-button-prev-lightbox absolute left-0 top-1/2 flex items-center justify-center z-50">
+                            <IoIosArrowBack className="text-3xl" style={{
+                                color: '#ffffff'
+                            }} />
+                        </div>
                     </Swiper>
                 )}
 

@@ -5,9 +5,9 @@ export default defineType({
     name: 'servicesDisplay',
     type: 'object',
     groups: [
-        {name: 'content', title: 'Content'},
-        {name: 'settings', title: 'Settings'},
-      ],
+        { name: 'content', title: 'Content' },
+        { name: 'settings', title: 'Settings' },
+    ],
     fields: [
         {
             title: "Layout Type",
@@ -32,11 +32,12 @@ export default defineType({
             type: 'string',
             options: {
                 list: [
-                    {title: 'Left', value: 'text-left'},
-                    {title: 'Center', value: 'text-center mx-auto justify-center'},
-                    {title: 'Right', value: 'mx-auto mr-0 text-right'},
+                    { title: 'Left', value: 'text-left' },
+                    { title: 'Center', value: 'text-center mx-auto justify-center' },
+                    { title: 'Right', value: 'mx-auto mr-0 text-right' },
                 ]
-            }
+            },
+            initialValue: "text-center mx-auto justify-center"
         },
         {
             title: "Number of Columns",
@@ -74,11 +75,13 @@ export default defineType({
         select: {
             content: 'content',
         },
-        prepare({content}) {
-            const text = content[0]?.children[0]?.text; // Extract the first block's text
+        prepare({ content }) {
+            const hasContent = content && content[0]?.children?.length > 0;
+
             return {
-                title: text ? text : 'No content',
+                title: hasContent ? content[0].children[0].text : 'Services Section',
             };
-        }
-    }
+        },
+    },
+
 })

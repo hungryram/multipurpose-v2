@@ -20,6 +20,7 @@ export default defineType({
           { title: "Masonry Gallery", value: "masonryGallery" },
         ],
       },
+      initialValue: "masonryGallery"
     },
     {
       title: 'Content',
@@ -37,7 +38,8 @@ export default defineType({
           { title: 'Center', value: 'text-center mx-auto justify-center' },
           { title: 'Right', value: 'mx-auto mr-0 text-right' },
         ]
-      }
+      },
+      initialValue: "text-center mx-auto justify-center"
     },
     {
       title: 'Primary Button',
@@ -68,6 +70,7 @@ export default defineType({
     },
     {
       title: 'Animation',
+      hidden: ({ parent }) => parent?.layoutType === 'masonryGallery',
       name: 'animation',
       type: 'string',
       options: {
@@ -82,19 +85,29 @@ export default defineType({
       title: 'Disable Pagination',
       name: 'disablePagination',
       type: 'boolean',
+      hidden: ({ parent }) => parent?.layoutType === 'masonryGallery',
       group: 'settings',
     },
     {
       title: 'Disable Navigation Arrows',
       name: 'disableNavigation',
+      hidden: ({ parent }) => parent?.layoutType === 'masonryGallery',
       type: 'boolean',
       group: 'settings',
     },
+    {
+      title: 'Navigation Arrow Colors',
+      name: 'navigationColors',
+      hidden: ({ parent }) => parent?.layoutType === 'masonryGallery',
+      type: 'color',
+      group: 'settings'
+  },
     {
       title: 'Number of Slides',
       name: 'slideNumber',
       type: 'number',
       validation: Rule => Rule.error().min(1).max(5),
+      hidden: ({ parent }) => parent?.layoutType === 'masonryGallery',
       group: 'settings',
     },
     {
@@ -106,14 +119,13 @@ export default defineType({
   ],
   preview: {
     select: {
-      images: 'images',
-      image: 'images',
+      content: 'content',
     },
-    prepare(selection) {
-      const { images, image } = selection;
+    prepare({ content }) {
+      const hasContent = content && content[0]?.children?.length > 0;
+  
       return {
-        title: `Gallery section of ${images.length} images`,
-        media: image[0].image,
+        title: hasContent ? content[0].children[0].text : 'Image Gallery',
       };
     },
   },

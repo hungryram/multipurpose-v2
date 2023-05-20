@@ -21,6 +21,7 @@ export default defineType({
                     { title: "Full Width Text & Image", value: "fullWidthTextImage" },
                 ],
             },
+            initialValue: "banner"
         },
         {
             title: 'Text',
@@ -38,7 +39,8 @@ export default defineType({
                     {title: 'Center', value: 'text-center mx- justify-center'},
                     {title: 'Right', value: 'mx-auto mr-0 text-right'},
                 ]
-            }
+            },
+            initialValue: "text-center mx-auto justify-center"
         },
         {
             title: 'Image',
@@ -73,16 +75,14 @@ export default defineType({
     ],
     preview: {
         select: {
-            content: 'content',
-            image: 'image'
+          content: 'content',
         },
-        prepare({content, image}) {
-            const text = content[0]?.children[0]?.text; // Extract the first block's text
-            const thumbNail = image
-            return {
-                title: text ? text : 'No content',
-                media: thumbNail
-            };
-        }
-    }
+        prepare({ content }) {
+          const hasContent = content && content[0]?.children?.length > 0;
+      
+          return {
+            title: hasContent ? content[0].children[0].text : 'Call to Action',
+          };
+        },
+      },
 })

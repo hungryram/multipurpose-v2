@@ -19,6 +19,7 @@ import ServicesNoImage from "./services-no-image";
 import GalleryMasonry from "./gallery-masonry";
 import GallerySwiper from "./gallery-swiper";
 import HeroSwiper from "./hero-swiper";
+import TestimonialSwiper from "./testimonial-swiper";
 
 interface Props {
     pageBuilder: any[];
@@ -140,6 +141,7 @@ export default function Main({
                                     textColor={section?.textColor?.hex}
                                     imageHeight={section?.imageHeight}
                                     animation={section?.animation}
+                                    navigationColors={section?.navigationColors?.hex}
                                 />
                             }
                         </>
@@ -194,6 +196,7 @@ export default function Main({
                                     secondaryButtonLink={section?.secondButtonLinking}
                                     secondaryButtonText={section?.secondButtonLinking?.buttonText}
                                     secondaryButtonStyle={secondaryButton}
+                                    navigationColors={section?.navigationColors?.hex}
                                 />
                             }
                         </>
@@ -322,21 +325,44 @@ export default function Main({
 
                 if (section._type === 'testimonialBuilder') {
                     return (
-                        <TestimonialSection
-                            key={section?._key}
-                            testimonials={allTestimonials}
-                            content={section?.content}
-                            textAlign={section?.textAlign}
-                            backgroundStyles={backgroundStyles}
-                            // PRIMARY BUTTON
-                            primaryButtonText={section?.buttonLinking?.buttonText}
-                            primaryButtonLink={section?.buttonLinking}
-                            primaryButtonStyle={primaryButton}
-                            // SECONDARY BUTTON
-                            secondaryButtonLink={section?.secondButtonLinking}
-                            secondaryButtonText={section?.secondButtonLinking?.buttonText}
-                            secondaryButtonStyle={secondaryButton}
-                        />
+                        <>
+                            {section?.layoutType == 'gridView' &&
+                                <TestimonialSection
+                                    key={section?._key}
+                                    testimonials={allTestimonials}
+                                    content={section?.content}
+                                    textAlign={section?.textAlign}
+                                    backgroundStyles={backgroundStyles}
+                                    // PRIMARY BUTTON
+                                    primaryButtonText={section?.buttonLinking?.buttonText}
+                                    primaryButtonLink={section?.buttonLinking}
+                                    primaryButtonStyle={primaryButton}
+                                    // SECONDARY BUTTON
+                                    secondaryButtonLink={section?.secondButtonLinking}
+                                    secondaryButtonText={section?.secondButtonLinking?.buttonText}
+                                    secondaryButtonStyle={secondaryButton}
+                                />
+                            }
+                            {section?.layoutType == 'slider' &&
+                                <TestimonialSwiper
+                                    key={section?._key}
+                                    testimonials={allTestimonials}
+                                    content={section?.content}
+                                    textAlign={section?.textAlign}
+                                    backgroundStyles={backgroundStyles}
+                                    // PRIMARY BUTTON
+                                    primaryButtonText={section?.buttonLinking?.buttonText}
+                                    primaryButtonLink={section?.buttonLinking}
+                                    primaryButtonStyle={primaryButton}
+                                    // SECONDARY BUTTON
+                                    secondaryButtonLink={section?.secondButtonLinking}
+                                    secondaryButtonText={section?.secondButtonLinking?.buttonText}
+                                    secondaryButtonStyle={secondaryButton}
+                                    slideNumber={section?.slideNumber}
+                                    navigationColors={section?.navigationColors.hex}
+                                />
+                            }
+                        </>
                     );
                 }
 

@@ -7,14 +7,12 @@ import {defineConfig} from 'sanity'
 import {deskTool} from 'sanity/desk'
 import { colorInput } from "@sanity/color-input";
 import { MdOutlineDesignServices, MdPersonOutline } from "react-icons/md"
-// Go to https://www.sanity.io/docs/api-versioning to learn how API versioning works
 import {apiVersion, dataset, projectId} from './sanity/env'
-import {schema} from './sanity/schema'
 import {media} from 'sanity-plugin-media'
-
+import { settingsPlugin } from './sanity/settings';
+import { PreviewPlugin } from './sanity/productionUrl';
 
 //  DOCUMENTS
-import appearance from './sanity/schemas/documents/appearance'
 import authorType from './sanity/schemas/documents/author'
 import postType from './sanity/schemas/documents/blog'
 import homeDocument from './sanity/schemas/documents/home'
@@ -40,12 +38,9 @@ import brandingObject from './sanity/schemas/objects/branding'
 import imagecolorObject from './sanity/schemas/objects/imagecolor'
 import submenuObject from './sanity/schemas/objects/submenu'
 import navigationObject from './sanity/schemas/objects/navigation'
-import textcolorObject from './sanity/schemas/objects/textcolor'
 import linksObject from './sanity/schemas/objects/links'
-import editorLinkObject from './sanity/schemas/objects/editorLink'
 import buttonSettingsObject from './sanity/schemas/objects/button-settings'
 import secondaryButtonObject from './sanity/schemas/objects/secondary-button'
-import imageObject from './sanity/schemas/objects/image'
 import codeBlockObject from './sanity/schemas/objects/codeBlock'
 import backgroundStylesObject from './sanity/schemas/objects/background-style'
 import formBuilderObject from './sanity/schemas/objects/form-builder'
@@ -53,25 +48,19 @@ import formBuilderObject from './sanity/schemas/objects/form-builder'
 //  PAGEBUILDER
 import heroBuilder from './sanity/schemas/pagebuilder/hero'
 import contactBuilder from './sanity/schemas/pagebuilder/contact'
-import fullWidthTextImageBuilder from './sanity/schemas/pagebuilder/fullwidth-text-image'
 import bannerBuilder from './sanity/schemas/pagebuilder/call-to-action'
 import disclosureBuilder from './sanity/schemas/pagebuilder/disclosure'
 import codeBuilder from './sanity/schemas/pagebuilder/code'
 import testimonialsBuilder from './sanity/schemas/pagebuilder/testimonials'
 import imageGalleryBuilder from './sanity/schemas/pagebuilder/image-gallery'
 import featuredGridBuilder from './sanity/schemas/pagebuilder/featured-grid'
-import textImageBuilder from './sanity/schemas/pagebuilder/text-and-image'
 import leadFormBuilder from './sanity/schemas/pagebuilder/lead-form'
 import pricingBuilder from './sanity/schemas/pagebuilder/pricing'
 import logosBuilder from './sanity/schemas/pagebuilder/logos'
-import customReviewBuilder from './sanity/schemas/pagebuilder/custom-review'
 import teamSectionBuilder from './sanity/schemas/pagebuilder/team-section'
 import blogSectionBuilder from './sanity/schemas/pagebuilder/blog-section'
-import iconSectionBuilder from './sanity/schemas/pagebuilder/icon-section'
 import servicesSectionBuilder from './sanity/schemas/pagebuilder/service-section'
 import contentBuilder from './sanity/schemas/pagebuilder/content'
-import { CustomActions } from './sanity/actions';
-import { settingsPlugin } from './sanity/settings';
 
 
 export default defineConfig({
@@ -97,13 +86,10 @@ export default defineConfig({
       authorType,
       legalDocument,
       // OBJECTS
-      textcolorObject,
       contentObject,
-      editorLinkObject,
       youtubeObject,
       buttonSettingsObject,
       secondaryButtonObject,
-      imageObject,
       seoObject,
       contactObject,
       locationObject,
@@ -128,15 +114,11 @@ export default defineConfig({
       blogSectionBuilder,
       contactBuilder,
       bannerBuilder,
-      iconSectionBuilder,
       disclosureBuilder,
-      fullWidthTextImageBuilder,
       leadFormBuilder,
-      textImageBuilder,
       featuredGridBuilder,
       servicesSectionBuilder,
       contentBuilder,
-      customReviewBuilder,
       logosBuilder,
     ]
   },
@@ -185,16 +167,13 @@ export default defineConfig({
           );
         });
         
-        
-
         return S.list()
           .title('Content')
           .items([profileListItem, appearanceListItem, PageSettingsListItem, S.divider(), ...defaultListItems])
       },
     }),
-    settingsPlugin({ type: appearanceDocument.name }),
-    settingsPlugin({ type: profileDocument.name }),
-    settingsPlugin({ type: pageSettingsDocument.name }),
+    settingsPlugin({types: [appearanceDocument.name, pageSettingsDocument.name, profileDocument.name]}),
+    PreviewPlugin({types: ['pages', 'team', 'legal', 'services', 'blog', 'home']}),
     colorInput(),
     // Vision is a tool that lets you query your content with GROQ in the studio
     // https://www.sanity.io/docs/the-vision-plugin

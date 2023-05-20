@@ -1,27 +1,26 @@
+import { definePlugin } from 'sanity';
+import { client } from './lib/client';
 
-import { definePlugin } from 'sanity'
+type SettingsPluginConfig = {
+  types: string[];
+};
 
-export const settingsPlugin = definePlugin<{ type: string }>(({ type }) => {
-    return {
-      name: 'settings',
-      document: {
-        // Hide 'Settings' from new document options
-        // https://user-images.githubusercontent.com/81981/195728798-e0c6cf7e-d442-4e58-af3a-8cd99d7fcc28.png
-        newDocumentOptions: (prev, { creationContext }) => {
-          if (creationContext.type === 'global') {
-            return prev.filter((templateItem) => templateItem.templateId !== type)
-          }
-  
-          return prev
-        },
-        // Removes the "duplicate" action on the "settings" singleton
-        actions: (prev, { schemaType }) => {
-          if (schemaType === type) {
-            return prev.filter(({ action }) => action !== 'delete' && action !== 'duplicate')
-          }
-  
-          return prev
-        },
+export const settingsPlugin = definePlugin<SettingsPluginConfig>(({ types }) => {
+  return {
+    name: 'settings',
+    document: {
+      newDocumentOptions: (prev, { creationContext }) => {
+        if (creationContext.type === 'global') {
+          return prev.filter((templateItem) => !types.includes(templateItem.templateId));
+        }
+        return prev;
       },
-    }
-  })
+      actions: (prev, { schemaType }) => {
+        if (types.includes(schemaType)) {
+          return prev.filter(({ action }) => action !== 'delete' && action !== 'duplicate');
+        }
+        return prev;
+      },
+    },
+  };
+});

@@ -1,7 +1,7 @@
 import { defineType } from "sanity";
 
 export default defineType({
-    title: 'Pricing',
+    title: 'Packages',
     name: 'pricing',
     type: 'object',
     groups: [
@@ -25,7 +25,8 @@ export default defineType({
                     {title: 'Center', value: 'text-center mx-auto justify-center'},
                     {title: 'Right', value: 'mx-auto mr-0 text-right'},
                 ]
-            }
+            },
+            initialValue: "text-center mx-auto justify-center"
         },
         {
             title: 'Primary Button',
@@ -125,13 +126,14 @@ export default defineType({
     ],
     preview: {
         select: {
-            content: 'content',
+          content: 'content',
         },
-        prepare({content}) {
-            const text = content[0]?.children[0]?.text; // Extract the first block's text
-            return {
-                title: text ? text : 'No content',
-            };
-        }
-    }
+        prepare({ content }) {
+          const hasContent = content && content[0]?.children?.length > 0;
+      
+          return {
+            title: hasContent ? content[0].children[0].text : 'Packages Section',
+          };
+        },
+      },
 })

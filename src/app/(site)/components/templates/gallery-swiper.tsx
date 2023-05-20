@@ -5,11 +5,8 @@ import HeaderSection from "./header-section";
 import React, { useState, useEffect, useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Navigation, Pagination, A11y } from "swiper";
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
-// Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
 
 // Initialize Swiper modules
 SwiperCore.use([Navigation, Pagination, A11y]);
@@ -28,6 +25,7 @@ interface Props {
     disablePagination: boolean;
     disableNavigation: boolean;
     slideNumber: number
+    navigationColors: string
 }
 
 const GallerySwiper = ({
@@ -42,6 +40,7 @@ const GallerySwiper = ({
     backgroundStyles,
     images,
     disablePagination,
+    navigationColors,
     disableNavigation,
     slideNumber
 }: Props) => {
@@ -99,24 +98,17 @@ const GallerySwiper = ({
                         secondaryButtonStyle={secondaryButtonStyle}
                     />
                 )}
-                <style jsx global>
-                    {`
-                        /* Custom styles for swiper navigation arrows */
-                        .swiper-button-prev,
-                        .swiper-button-next {
-                        color: #ffffff;
-                        }
-                        .swiper-pagination-bullet-active {
-                            background: #ffffff;
-                        }
-                    `}
-                </style>
                 <Swiper
                     slidesPerView={slideNumber ? slideNumber : 1}
                     spaceBetween={10}
                     effect={"slide"}
                     pagination={disablePagination ? false : true}
-                    navigation={disableNavigation ? false : true}
+                    navigation={{
+                        nextEl: ".image-swiper-button-next",
+                        enabled: disableNavigation ? false : true,
+                        prevEl: ".image-swiper-button-prev",
+                        disabledClass: "swiper-button-disabled"
+                    }}
                     className={`md:columns-3 columns-2 gap-4 ${content && 'mt-16'}`}
                     role="region"
                     aria-label="Image Gallery"
@@ -125,7 +117,6 @@ const GallerySwiper = ({
                         nextSlideMessage: 'Next slide',
                         firstSlideMessage: 'This is the first slide',
                         lastSlideMessage: 'This is the last slide',
-                        paginationBulletMessage: `Go to slide {{index}}`,
                     }}
                     breakpoints={{
                         // When window width is >= 1024px (desktop)
@@ -145,9 +136,19 @@ const GallerySwiper = ({
                         },
                     }}
                 >
-                    {images.map((image: any, index: number) => (
+                    <div className="swiper-button image-swiper-button-next absolute right-0 top-1/2 flex items-center justify-center z-50">
+                        <IoIosArrowForward className="text-3xl" style={{
+                            color: navigationColors
+                        }} />
+                    </div>
+                    <div className="swiper-button image-swiper-button-prev absolute left-0 top-1/2 flex items-center justify-center z-50">
+                        <IoIosArrowBack className="text-3xl" style={{
+                            color: navigationColors
+                        }} />
+                    </div>
+                    {images?.map((image: any, index: number) => (
                         <SwiperSlide
-                            key={image.id}
+                            key={image._key}
                             onClick={() => openLightbox(image?.asset?.url, index)}
                             className="mb-4 cursor-pointer"
                             aria-label={`Click to view image ${index + 1}${image?.asset?.altText ? ` of ${image?.asset?.altText}` : ''}`}
@@ -157,7 +158,7 @@ const GallerySwiper = ({
                                 alt={image?.asset?.altText}
                                 width={1000}
                                 height={800}
-                                className={`w-full object-cover aspect-square ${slideNumber < 2 ? 'md:h-[80vh] h-96' : 'h-96'}`}
+                                className={`w-full object-cover ${slideNumber === 1 ? 'md:h-[80vh] h-96' : 'h-96'}`}
                             />
                         </SwiperSlide>
                     ))}
@@ -165,19 +166,25 @@ const GallerySwiper = ({
                 {lightboxOpen && (
                     <Swiper
                         slidesPerView={1}
-                        navigation
+                        navigation={{
+                            nextEl: ".image-swiper-button-next-lightbox",
+                            enabled: true,
+                            prevEl: ".image-swiper-button-prev-lightbox",
+                            disabledClass: "swiper-button-disabled"
+                        }}
                         className="!fixed !inset-0 !flex !items-center !justify-center z-50 bg-black bg-opacity-75"
+                        initialSlide={currentIndex} // Set the initial slide index
                     >
                         {images.map((image: any, index: number) => (
                             <SwiperSlide key={image.id} className="mx-auto relative !flex !items-center !justify-center">
                                 <Image
-                                    src={selectedImage}
-                                    alt={images[currentIndex]?.asset?.altText}
+                                    src={image?.asset?.url}
+                                    alt={image?.asset?.altText}
                                     width={1000}
                                     height={800}
                                     sizes="100vw"
-                                    placeholder={images[currentIndex]?.asset?.lqip ? 'blur' : 'empty'}
-                                    blurDataURL={images[currentIndex]?.asset?.lqip}
+                                    placeholder={image?.asset?.lqip ? 'blur' : 'empty'}
+                                    blurDataURL={image?.asset?.lqip}
                                 />
                             </SwiperSlide>
                         ))}
@@ -188,8 +195,19 @@ const GallerySwiper = ({
                         >
                             <XMarkIcon className="h-8 w-8" />
                         </button>
+                        <div className="swiper-button image-swiper-button-next-lightbox absolute right-0 top-1/2 flex items-center justify-center z-50">
+                            <IoIosArrowForward className="text-3xl" style={{
+                                color: '#ffffff'
+                            }} />
+                        </div>
+                        <div className="swiper-button image-swiper-button-prev-lightbox absolute left-0 top-1/2 flex items-center justify-center z-50">
+                            <IoIosArrowBack className="text-3xl" style={{
+                                color: '#ffffff'
+                            }} />
+                        </div>
                     </Swiper>
                 )}
+
 
             </div>
         </div>

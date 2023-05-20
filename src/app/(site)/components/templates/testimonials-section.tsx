@@ -64,7 +64,7 @@ export default function TestimonialSection({
                                             {testimonial?.image &&
                                                 <Image
                                                     className="h-10 w-10 rounded-full"
-                                                    src={urlForImage(testimonial.image).url()}
+                                                    src={urlForImage(testimonial?.image).url()}
                                                     alt={testimonial?.name}
                                                     width={100}
                                                     height={100}
@@ -72,6 +72,7 @@ export default function TestimonialSection({
                                             }
                                             <div>
                                                 <div className="font-semibold text-gray-900">{testimonial.name}</div>
+                                                {testimonial?.position && <div className="text-gray-600">{testimonial?.position}</div>}
                                             </div>
                                         </figcaption>
                                     </figure>

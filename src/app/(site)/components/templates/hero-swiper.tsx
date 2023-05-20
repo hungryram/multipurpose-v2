@@ -6,11 +6,9 @@ import Link from "next/link";
 import ContentEditor from "../util/content-editor";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Navigation, A11y, EffectFade } from "swiper";
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
 // Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
 
 // Initialize Swiper modules
 SwiperCore.use([Navigation, A11y, EffectFade]);
@@ -21,6 +19,7 @@ interface Props {
     textColor: string;
     imageOverlayColor: any
     imageHeight: string;
+    navigationColors: string
     animation: string;
 }
 
@@ -30,7 +29,7 @@ export default function HeroSwiper({
     textColor,
     imageOverlayColor,
     imageHeight,
-    animation
+    navigationColors,
 }: Props) {
 
     const imageOverlay = {
@@ -41,7 +40,11 @@ export default function HeroSwiper({
         <Swiper
             modules={[EffectFade, Navigation]}
             effect={'slide'}
-            navigation
+            navigation={{
+              nextEl: ".image-swiper-button-next",
+              prevEl: ".image-swiper-button-prev",
+              disabledClass: "swiper-button-disabled"
+            }}
             spaceBetween={0}
             loop={true}
             slidesPerView={1}
@@ -50,6 +53,16 @@ export default function HeroSwiper({
                 delay: 3000
             }}
         >
+            <div className="swiper-button image-swiper-button-next absolute right-0 top-1/2 flex items-center justify-center z-50">
+                <IoIosArrowForward className="text-3xl" style={{
+                    color: navigationColors
+                }} />
+            </div>
+            <div className="swiper-button image-swiper-button-prev absolute left-0 top-1/2 flex items-center justify-center z-50">
+                <IoIosArrowBack className="text-3xl" style={{
+                    color: navigationColors
+                }} />
+            </div>
             {images?.map((slides: any) => {
 
                 // PRIMARY BUTTON STYLES
@@ -73,7 +86,7 @@ export default function HeroSwiper({
                     color: `${slides?.secondButtonLinking?.buttonTextColor?.hex}`,
                     // border: `1px solid ${slides?.buttonLinking?.buttonBorderColor?.hex}`
                 }
-                                
+
                 const buttonLinking =
                     (slides.buttonLinking?.internalLink?._type === "pages" && `/${slides.buttonLinking?.internalLink.slug}`) ||
                     (slides.buttonLinking?.internalLink?._type === "blog" && `/blog/${slides.buttonLinking?.internalLink.slug}`) ||
