@@ -62,13 +62,14 @@ export default function TestimonialSection({
                                         </blockquote>
                                         <figcaption className="mt-6 flex items-center gap-x-4">
                                             {testimonial?.image &&
-                                                <Image
-                                                    className="h-10 w-10 rounded-full"
-                                                    src={urlForImage(testimonial?.image).url()}
-                                                    alt={testimonial?.name}
-                                                    width={100}
-                                                    height={100}
-                                                />
+                                                <div className="relative w-12 h-12">
+                                                    <Image
+                                                        className="h-10 w-10 rounded-full object-cover"
+                                                        src={urlForImage(testimonial?.image).url()}
+                                                        alt={testimonial?.name}
+                                                        fill={true}
+                                                    />
+                                                </div>
                                             }
                                             <div>
                                                 <div className="font-semibold text-gray-900">{testimonial.name}</div>
