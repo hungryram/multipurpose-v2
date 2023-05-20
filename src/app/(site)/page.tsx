@@ -7,7 +7,7 @@ export default async function Home() {
 
   return (
     <Main
-      pageBuilder={data.homeAppearance.homePage.pageBuilder}
+      pageBuilder={data.homeAppearance?.homePage?.pageBuilder}
       allTestimonials={data.allTestimonial}
       allServices={data.allServices}
       allTeam={data.allTeam}

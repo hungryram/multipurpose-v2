@@ -75,7 +75,7 @@ export default function Example({
             </Link>
           </div>
           <div className={Styles.desktopMenuContainer}>
-            {navItems.map((link: any) => {
+            {navItems?.map((link: any) => {
 
               const menuLinks =
                 (link.internalLink?._type === "pages" && `/${link.internalLink.slug}`) ||
@@ -203,7 +203,7 @@ export default function Example({
 
             <Disclosure.Panel className="lg:hidden">
               <div className="space-y-1 pb-3 pt-2 px-4">
-                {navItems.map((link: any) => {
+                {navItems?.map((link: any) => {
                   const menuLinks =
                     (link.internalLink?._type === "pages" && `/${link.internalLink.slug}`) ||
                     (link.internalLink?._type === "blog" && `/blog/${link.internalLink.slug}`) ||

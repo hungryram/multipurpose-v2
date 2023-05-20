@@ -15,7 +15,7 @@ export async function generateMetadata(): Promise<Metadata> {
     title: data?.profileSettings?.seo?.title_tag,
     description: data?.profileSettings?.seo?.meta_description,
     themeColor: data?.appearances?.mainColors?.primaryColor?.hex,
-    metadataBase: new URL(data?.profileSettings?.settings?.websiteName),
+    metadataBase: new URL(data?.profileSettings?.settings?.websiteName ?? 'http://localhost:3000'),
     alternates: {
       canonical: '/'
     },
@@ -59,7 +59,7 @@ export default async function RootLayout({
     ...(data?.profileSettings?.company_name && { "name": data?.profileSettings?.company_name }),
     ...(data?.profileSettings?.seo?.meta_description && { "description": data?.profileSettings?.seo?.meta_description }),
     ...(data?.profileSettings?.settings?.websiteName && { "url": data?.profileSettings?.settings?.websiteName }),
-    ...(data.appearances.branding.logo.asset.url && { "logo": data.appearances.branding.logo.asset.url }),
+    ...(data.appearances?.branding?.logo?.asset?.url && { "logo": data.appearances?.branding?.logo?.asset?.url }),
     ...(data?.profileSettings?.seo?.imageData?.asset?.url && { "image": data?.profileSettings?.seo?.imageData?.asset?.url }),
     "address": {
       "@type": "PostalAddress",
@@ -151,22 +151,22 @@ export default async function RootLayout({
           `}
         </style>
         <Navbar
-          company_name={data.profileSettings.company_name}
-          logo={data.appearances.branding.logo.asset.url}
-          navItems={data.appearances.header?.mainNav?.navItems}
-          logoWidth={data.appearances.branding?.logoWidth}
-          mobileLogoWidth={data.appearances.branding?.mobileLogoWidth}
+          company_name={data.profileSettings?.company_name}
+          logo={data.appearances?.branding.logo?.asset?.url}
+          navItems={data.appearances?.header?.mainNav?.navItems}
+          logoWidth={data.appearances?.branding?.logoWidth}
+          mobileLogoWidth={data.appearances?.branding?.mobileLogoWidth}
           phone={data.profileSettings?.contact_information?.phone_number}
           office={data.profileSettings?.contact_information?.office_number}
           email={data.profileSettings?.contact_information?.email}
-          backgroundColor={data.appearances?.navBgColor}
+          backgroundColor={data?.appearances?.navBgColor}
           enableTopHeader={data?.appearances?.topHeaderBar?.enableTopHeaderBar}
           ctaLink={data?.appearances?.header?.ctaLink}
         />
         {children}
         <Footer
           footerText={data.appearances?.footer?.footerText}
-          company_name={data.profileSettings.company_name}
+          company_name={data.profileSettings?.company_name}
           image={data.appearances?.footer?.footerLogo?.asset?.url}
           quickLinksHeading={data.appearances?.footer?.quickLinksHeading}
           quickLinksTwoHeading={data.appearances?.footer?.quickLinksTwoHeading}
