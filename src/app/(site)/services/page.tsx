@@ -3,6 +3,7 @@ import { servicesPage } from "../../../../lib/groq-data"
 import Image from "next/image"
 import Link from "next/link"
 import { notFound } from "next/navigation"
+import ContentEditor from "../components/util/content-editor"
 
 // GENERATES SEO
 export async function generateMetadata() {
@@ -49,22 +50,22 @@ export default async function ServicesSection() {
         "@type": "WebPage",
         "name": "Services",
         "url": `${services?.profileSettings?.settings?.websiteName}/services`,
-        ...(services?.pageSetting?.services?.seo?.meta_description && {"description": services?.pageSetting?.services?.seo?.meta_description}),
+        ...(services?.pageSetting?.services?.seo?.meta_description && { "description": services?.pageSetting?.services?.seo?.meta_description }),
         "mainEntity": services?.services?.map((node: any) => ({
-          ...{
-            "@type": "Service",
-            "name": node?.title,
-            "description": node.description,
-            "image": node.imageData?.asset.url,
-            "provider": {
-              "@type": "Organization",
-              "name": services?.profileSettings?.company_name,
-              "url": `${services?.profileSettings?.settings?.websiteName}/services/${node?.slug?.current}`,
+            ...{
+                "@type": "Service",
+                "name": node?.title,
+                "description": node.description,
+                "image": node.imageData?.asset.url,
+                "provider": {
+                    "@type": "Organization",
+                    "name": services?.profileSettings?.company_name,
+                    "url": `${services?.profileSettings?.settings?.websiteName}/services/${node?.slug?.current}`,
+                },
             },
-          },
         })),
-      };
-      
+    };
+
 
     return (
         <>
@@ -73,13 +74,16 @@ export default async function ServicesSection() {
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaMarkup) }}
             />
             <div className="section">
-                <div className="mx-auto max-w-7xl px-6 lg:px-8">
-                    <div className="mx-auto max-w-2xl lg:mx-0">
-                        <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Our team</h2>
-                        <p className="mt-6 text-lg leading-8 text-gray-600">
-                            We’re a dynamic group of individuals who are passionate about what we do and dedicated to delivering the
-                            best results for our clients.
-                        </p>
+                <div className="container">
+                    <div className="mx-auto max-w-2xl text-center">
+                        <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">{services?.pageSetting?.services?.title}</h2>
+                        {services?.pageSetting?.services?.content &&
+                            <div className="mt-10">
+                                <ContentEditor
+                                    content={services?.pageSetting?.services?.content}
+                                />
+                            </div>
+                        }
                     </div>
                     <ul
                         role="list"

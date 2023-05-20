@@ -14,7 +14,6 @@ export async function generateMetadata(): Promise<Metadata> {
     title: post?.pageSetting?.blog?.seo?.title_tag,
     description: post?.pageSetting?.blog?.seo?.meta_description,
     themeColor: post?.appearances?.mainColors?.primaryColor?.hex,
-    metadataBase: new URL(post?.profileSettings?.settings?.websiteName),
     alternates: {
       canonical: 'blog/'
     },
