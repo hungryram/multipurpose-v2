@@ -1,9 +1,6 @@
 'use server'
-
 import { ServerClient } from 'postmark'
 import { redirect } from 'next/navigation';
-
-const client = new ServerClient(process.env.NEXT_PUBLIC_POSTMARK_API_TOKEN);
 
 export const submitForm = async (data) => {
 
@@ -68,23 +65,26 @@ export const submitForm = async (data) => {
   `;
 
     if (honeypot.length === 0) {
+        if (process.env.NEXT_PUBLIC_POSTMARK_API_TOKEN) {
+            const client = new ServerClient(process.env.NEXT_PUBLIC_POSTMARK_API_TOKEN);
 
-        const response = await client.sendEmail({
-            "From": data.get('sendFrom'), // must match sender signature on postmark account
-            "To": data.get('sendTo'),
-            "Bcc": data.get('bcc'),
-            "Cc": data.get('cc'),
-            "ReplyTo": email,
-            "Subject": data.get('subject'),
-            "HtmlBody": htmlBody,
-        })
-            .then((res) => res)
-            .catch((err) => console.error(err))
+            const response = await client.sendEmail({
+                "From": data.get('sendFrom'), // must match sender signature on postmark account
+                "To": data.get('sendTo'),
+                "Bcc": data.get('bcc'),
+                "Cc": data.get('cc'),
+                "ReplyTo": email,
+                "Subject": data.get('subject'),
+                "HtmlBody": htmlBody,
+            })
+                .then((res) => res)
+                .catch((err) => console.error(err))
 
-        if (response.Message == 'OK') {
-            return redirect(`/${data.get('redirectTo')}`)
+            if (response?.Message === 'OK') {
+                return redirect(`/${data.get('redirectTo')}`)
+            }
+        } else {
+            console.error("Postmark API token is missing.");
         }
-
     }
-
 }
