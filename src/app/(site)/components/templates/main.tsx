@@ -237,6 +237,7 @@ export default function Main({
                             {section.layoutType === 'banner' &&
                                 <CallToActionBanner
                                     key={section?._key}
+                                    textAlign={section?.textAlign}
                                     content={section?.content}
                                     // PRIMARY BUTTON
                                     primaryButtonText={section?.buttonLinking?.buttonText}
