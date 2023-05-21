@@ -9,7 +9,8 @@ interface Props {
   primaryButtonStyle: any;
   secondaryButtonText: string;
   secondaryButtonLink: string;
-  secondaryButtonStyle: any
+  secondaryButtonStyle: any;
+  textAlign: string;
 }
 
 export default function CallToActionBanner({
@@ -20,7 +21,8 @@ export default function CallToActionBanner({
   primaryButtonStyle,
   secondaryButtonLink,
   secondaryButtonText,
-  secondaryButtonStyle
+  secondaryButtonStyle,
+  textAlign
 }: Props) {
   return (
     <div className="section" style={backgroundStyles}>
@@ -29,7 +31,7 @@ export default function CallToActionBanner({
           {(content || primaryButtonLink || secondaryButtonLink) ? (
             <HeaderSection
               content={content}
-              textAlign={'text-center'}
+              textAlign={textAlign}
               // PRIMARY
               buttonLink={primaryButtonLink}
               primaryButtonText={primaryButtonText}
