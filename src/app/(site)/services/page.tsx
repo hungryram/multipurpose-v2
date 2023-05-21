@@ -9,6 +9,10 @@ import ContentEditor from "../components/util/content-editor"
 export async function generateMetadata() {
     const serviceMeta = await client.fetch(servicesPage, { next: { revalidate: 60 } })
 
+    const hasServices = serviceMeta?.services?.length > 0;
+
+    console.log(serviceMeta.services.length)
+
     return {
         title: serviceMeta?.pageSetting?.services?.seo?.title_tag,
         description: serviceMeta?.pageSetting?.services?.seo?.meta_description,
@@ -34,6 +38,10 @@ export async function generateMetadata() {
             shortcut: serviceMeta.appearances?.branding?.favicon?.asset?.url,
             apple: serviceMeta.appearances?.branding?.favicon?.asset?.url,
         },
+        robots: {
+            index: hasServices,
+            follow: hasServices
+        }
     }
 }
 

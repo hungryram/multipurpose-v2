@@ -7,6 +7,10 @@ import ContentEditor from "../components/util/content-editor"
 // GENERATES SEO
 export async function generateMetadata() {
     const teamMeta = await client.fetch(teamPage, { next: { revalidate: 60 } })
+
+    const hasTeam = teamMeta?.team?.length > 0;
+
+
     return {
         title: teamMeta?.pageSetting?.team?.seo?.title_tag,
         description: teamMeta?.pageSetting?.team?.seo?.meta_description,
@@ -32,6 +36,10 @@ export async function generateMetadata() {
             shortcut: teamMeta.appearances?.branding?.favicon?.asset?.url,
             apple: teamMeta.appearances?.branding?.favicon?.asset?.url,
         },
+        robots: {
+            index: hasTeam,
+            follow: hasTeam
+        }
     }
 }
 

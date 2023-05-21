@@ -7,6 +7,9 @@ import Link from 'next/link'
 export async function generateMetadata() {
     const legal = await client.fetch(legalPage, { next: { revalidate: 60 } })
 
+    const hasLegal = legal?.legal?.length > 0;
+
+
     return {
         title: legal?.pageSetting?.legal?.seo?.title_tag,
         description: legal?.pageSetting?.legal?.seo?.meta_description,
@@ -32,6 +35,10 @@ export async function generateMetadata() {
             shortcut: legal.appearances?.branding?.favicon?.asset?.url,
             apple: legal.appearances?.branding?.favicon?.asset?.url,
         },
+        robots: {
+            index: hasLegal,
+            follow: hasLegal
+        }
     }
 }
 

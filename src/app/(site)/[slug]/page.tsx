@@ -50,6 +50,10 @@ export async function generateMetadata({ params }: Meta): Promise<Metadata> {
             shortcut: page.appearances?.branding?.favicon?.asset?.url,
             apple: page.appearances?.branding?.favicon?.asset?.url,
         },
+        robots: {
+            index: true,
+            follow: true
+        }
     }
 }
 

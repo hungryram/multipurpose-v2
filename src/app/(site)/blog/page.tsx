@@ -10,6 +10,8 @@ import ContentEditor from "../components/util/content-editor"
 export async function generateMetadata(): Promise<Metadata> {
   const post = await client.fetch(blogPage, { next: { revalidate: 60 } })
 
+  const hasBlog = post?.blog?.length > 0;
+
   return {
     title: post?.pageSetting?.blog?.seo?.title_tag,
     description: post?.pageSetting?.blog?.seo?.meta_description,
@@ -37,6 +39,10 @@ export async function generateMetadata(): Promise<Metadata> {
       shortcut: post.appearances?.branding?.favicon?.asset?.url,
       apple: post.appearances?.branding?.favicon?.asset?.url,
     },
+    robots: {
+      index: hasBlog,
+      follow: hasBlog
+  }
   }
 }
 
