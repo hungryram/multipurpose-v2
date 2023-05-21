@@ -99,7 +99,7 @@ export default defineType({
                     name: 'yPadding',
                     description: 'padding to the top and bottom of the button',
                     type: 'number',
-                    validation: Rule => Rule.error().min(20).max(100)
+                    validation: Rule => Rule.error().min(10).max(100)
                 }
             ]
         },
