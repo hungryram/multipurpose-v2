@@ -110,6 +110,8 @@ export default function Main({
                             ${bg?.imageOverlayColor?.rgb.a ?? '0.2'}
                             )),
                             url(${section?.backgroundImage?.image?.asset?.url})`,
+                            backgroundPosition: 'center',
+                            backgroundSize: 'cover'
                 };
 
                 // PRIMARY BUTTON STYLES
