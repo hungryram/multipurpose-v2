@@ -38,8 +38,8 @@ export default function CalltoActionTextImage({
     return (
         <div className="section" style={backgroundStyles}>
             <div className="container">
-                <div className={`${Styles.ctaTextImageWrapper} ${reverseColumn ? 'flex-row-reverse' : ''}`}>
-                    <div className={`${Styles.ctaContent} lg:w-1/2`}>
+                <div className={`${Styles.ctaTextImageWrapper} space-y-10 ${reverseColumn ? 'flex-row-reverse' : ''}`}>
+                    <div className="lg:w-1/2">
                         {(content || primaryButtonLink || secondaryButtonLink) && (
                             <HeaderSection
                                 content={content}
