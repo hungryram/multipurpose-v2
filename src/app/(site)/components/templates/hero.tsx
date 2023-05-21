@@ -52,6 +52,7 @@ export default function Hero({
                     className={Styles.heroImage}
                     fill={true}
                     sizes="100vw"
+                    priority={true}
                 />
             }
             <div className="absolute inset-0" style={imageOverlay}></div>

@@ -41,9 +41,9 @@ export default function HeroSwiper({
             modules={[EffectFade, Navigation]}
             effect={'slide'}
             navigation={{
-              nextEl: ".image-swiper-button-next",
-              prevEl: ".image-swiper-button-prev",
-              disabledClass: "swiper-button-disabled"
+                nextEl: ".image-swiper-button-next",
+                prevEl: ".image-swiper-button-prev",
+                disabledClass: "swiper-button-disabled"
             }}
             spaceBetween={0}
             loop={true}
@@ -114,6 +114,7 @@ export default function HeroSwiper({
                                 width={2000}
                                 height={0}
                                 sizes="100vw"
+                                priority={true}
                             />
                             <div className="absolute inset-0" style={imageOverlay}></div>
                             <div className={`container relative py-10`}>
