@@ -48,7 +48,7 @@ export default function FeaturedGridImageTextInside({
                     />
                 )}
                 <div className={Styles.featureGridWrap}>
-                    <dl className={`${Styles.featureGridContainer} grid grid-cols-1 lg:grid-cols-${columnNumber} ${content && 'mt-16'}`}>
+                    <div className={`${Styles.featureGridContainer} grid grid-cols-1 lg:grid-cols-${columnNumber} ${content && 'mt-16'}`}>
                         {blocks?.map((node: any) => {
 
                             const blockLink: any = node?.blockLinking?.internalLink
@@ -100,7 +100,7 @@ export default function FeaturedGridImageTextInside({
                                 </div>
                             )
                         })}
-                    </dl>
+                    </div>
                 </div>
             </div>
         </div>
