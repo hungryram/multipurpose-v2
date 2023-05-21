@@ -7,7 +7,6 @@ body {
   background-color: var(--website-body-color);
   color: var(--website-text-color);
   font-size: 16px;
-  font-weight: 500
 }
 
 .section {
