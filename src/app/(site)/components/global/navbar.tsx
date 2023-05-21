@@ -19,7 +19,6 @@ interface Props {
   ctaLink: any;
   mobileLogoWidth: number;
   hideCta: boolean;
-  width: any;
 }
 
 export default function Example({

@@ -280,19 +280,21 @@ export default function Footer({
                     )
                   })}
                 </nav>
-                <Social
-                  facebook={facebook}
-                  youtube={youtube}
-                  instagram={instagram}
-                  twitter={twitter}
-                  reddit={reddit}
-                  linkedin={linkedin}
-                  yelp={yelp}
-                  pinterest={pinterest}
-                  tiktok={tiktok}
-                  zillow={zillow}
-                  size={size}
-                />
+                <div className="mx-auto flex justify-center">
+                  <Social
+                    facebook={facebook}
+                    youtube={youtube}
+                    instagram={instagram}
+                    twitter={twitter}
+                    reddit={reddit}
+                    linkedin={linkedin}
+                    yelp={yelp}
+                    pinterest={pinterest}
+                    tiktok={tiktok}
+                    zillow={zillow}
+                    size={size}
+                  />
+                </div>
               </div>
             </div>
           }

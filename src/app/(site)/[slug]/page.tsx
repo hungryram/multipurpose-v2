@@ -69,15 +69,15 @@ export default async function Page({ params }: Props) {
         ...page?.profileSettings?.settings?.websiteName && { "url": page.profileSettings.settings.websiteName },
         ...page?.pages?.seo?.meta_description && { "description": page.pages.seo.meta_description },
         "mainEntityOfPage": {
-          "@type": "WebPage",
-          "@id": `${page?.profileSettings?.settings?.websiteName}/${slug}`
+            "@type": "WebPage",
+            "@id": `${page?.profileSettings?.settings?.websiteName}/${slug}`
         },
         "publisher": {
-          "@type": "Organization",
-          ...page?.profileSettings?.company_name && { "name": page.profileSettings.company_name },
-          ...page?.profileSettings?.settings?.websiteName && { "url": page.profileSettings.settings.websiteName }
+            "@type": "Organization",
+            ...page?.profileSettings?.company_name && { "name": page.profileSettings.company_name },
+            ...page?.profileSettings?.settings?.websiteName && { "url": page.profileSettings.settings.websiteName }
         }
-      };
+    };
 
     return (
         <>
@@ -95,7 +95,17 @@ export default async function Page({ params }: Props) {
                 city={page?.profileSettings?.address?.city}
                 state={page?.profileSettings?.address?.state}
                 zip_code={page?.profileSettings?.address?.zip_code}
-
+                // SOCIAL
+                facebook={page?.profileSettings?.social?.facebook}
+                youtube={page?.profileSettings?.social?.youtube}
+                instagram={page?.profileSettings?.social?.instagram}
+                twitter={page?.profileSettings?.social?.twitter}
+                reddit={page?.profileSettings?.social?.reddit}
+                linkedin={page?.profileSettings?.social?.linkedin}
+                yelp={page?.profileSettings?.social?.yelp}
+                pinterest={page?.profileSettings?.social?.pinterest}
+                tiktok={page?.profileSettings?.social?.tiktok}
+                zillow={page?.profileSettings?.social?.zillow}
                 // FORMS
                 emailAlerts={page?.profileSettings?.settings?.emailAlerts}
                 sendFrom={page?.profileSettings?.settings?.sendFrom}

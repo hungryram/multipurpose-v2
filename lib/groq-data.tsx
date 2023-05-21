@@ -430,6 +430,9 @@ const metaDataProfile = groq`
       }
     }
   },
+  social {
+    ...
+  },
   settings {
     googleVerification,
     websiteName
@@ -580,6 +583,33 @@ export const legalPage = groq`
     }
   }
 `
+
+// 
+// FOR /app/home/[slug]/page.tsx
+// 
+export async function getHome(slug: string) {
+  return client.fetch(groq`
+  {
+    ${metaDataProfile}
+    ${otherDocumentSections}
+    'homeDesign': *[_type == "homeDesign" && slug.current == $slug][0]{
+      _id,
+      'imageData': featuredImage {
+        asset->{
+          url,
+        }
+      },
+      "slug": slug.current,
+      pageBuilder[]{
+        ...,
+        ${pageBuilderData}
+    }
+    }
+  }
+  `,
+    { slug }
+  )
+}
 
 
 // 

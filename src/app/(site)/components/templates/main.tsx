@@ -41,6 +41,17 @@ interface Props {
     sendFrom: string;
     emailBcc: string;
     emailCc: string;
+    // SOCIAL
+    facebook: any;
+    youtube: any;
+    instagram: any;
+    twitter: any;
+    reddit: any;
+    linkedin: any;
+    yelp: any;
+    pinterest: any;
+    tiktok: any;
+    zillow: any;
 }
 
 export default function Main({
@@ -57,6 +68,18 @@ export default function Main({
     city,
     state,
     zip_code,
+    // SOCIAL
+    facebook,
+    youtube,
+    instagram,
+    twitter,
+    reddit,
+    linkedin,
+    yelp,
+    pinterest,
+    tiktok,
+    zillow,
+    // FORM
     emailAlerts,
     sendFrom,
     emailBcc,
@@ -566,6 +589,7 @@ export default function Main({
                             content={section?.content}
                             backgroundStyles={backgroundStyles}
                             // CONTACT
+                            hideContact={section?.hideContact}
                             email={email}
                             phone_number={phone_number}
                             office_number={office_number}
@@ -573,6 +597,17 @@ export default function Main({
                             city={city}
                             state={state}
                             zip_code={zip_code}
+                            // SOCIAL
+                            facebook={facebook}
+                            youtube={youtube}
+                            instagram={instagram}
+                            twitter={twitter}
+                            reddit={reddit}
+                            linkedin={linkedin}
+                            yelp={yelp}
+                            pinterest={pinterest}
+                            tiktok={tiktok}
+                            zillow={zillow}
                             // FORMS
                             formBuilder={section?.formBuilder}
                             emailAlerts={emailAlerts}

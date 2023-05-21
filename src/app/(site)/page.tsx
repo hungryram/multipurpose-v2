@@ -20,6 +20,17 @@ export default async function Home() {
       city={data?.profileSettings?.address?.city}
       state={data?.profileSettings?.address?.state}
       zip_code={data?.profileSettings?.address?.zip_code}
+      // SOCIAL
+      facebook={data?.profileSettings?.social?.facebook}
+      youtube={data?.profileSettings?.social?.youtube}
+      instagram={data?.profileSettings?.social?.instagram}
+      twitter={data?.profileSettings?.social?.twitter}
+      reddit={data?.profileSettings?.social?.reddit}
+      linkedin={data?.profileSettings?.social?.linkedin}
+      yelp={data?.profileSettings?.social?.yelp}
+      pinterest={data?.profileSettings?.social?.pinterest}
+      tiktok={data?.profileSettings?.social?.tiktok}
+      zillow={data?.profileSettings?.social?.zillow}
       // FORM
       emailAlerts={data?.profileSettings?.settings?.emailAlerts}
       sendFrom={data?.profileSettings?.settings?.sendFrom}

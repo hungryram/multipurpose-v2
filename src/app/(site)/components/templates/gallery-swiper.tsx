@@ -175,7 +175,7 @@ const GallerySwiper = ({
                         className="!fixed !inset-0 !flex !items-center !justify-center z-50 bg-black bg-opacity-75"
                         initialSlide={currentIndex} // Set the initial slide index
                     >
-                        {images.map((image: any, index: number) => (
+                        {images?.map((image: any, index: number) => (
                             <SwiperSlide key={image.id} className="mx-auto relative !flex !items-center !justify-center">
                                 <Image
                                     src={image?.asset?.url}

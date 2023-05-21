@@ -91,6 +91,17 @@ export default async function servicesSlug({ params }: Props) {
                 city={services?.profileSettings?.address?.city}
                 state={services?.profileSettings?.address?.state}
                 zip_code={services?.profileSettings?.address?.zip_code}
+                // SOCIAL
+                facebook={services?.profileSettings?.social?.facebook}
+                youtube={services?.profileSettings?.social?.youtube}
+                instagram={services?.profileSettings?.social?.instagram}
+                twitter={services?.profileSettings?.social?.twitter}
+                reddit={services?.profileSettings?.social?.reddit}
+                linkedin={services?.profileSettings?.social?.linkedin}
+                yelp={services?.profileSettings?.social?.yelp}
+                pinterest={services?.profileSettings?.social?.pinterest}
+                tiktok={services?.profileSettings?.social?.tiktok}
+                zillow={services?.profileSettings?.social?.zillow}
                 // FORM
                 emailAlerts={services?.profileSettings?.settings?.emailAlerts}
                 sendFrom={services?.profileSettings?.settings?.sendFrom}

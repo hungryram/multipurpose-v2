@@ -6,6 +6,7 @@ import { appearance, mainLayoutProfile } from '../../../lib/groq-data'
 import { Metadata } from 'next';
 import GoogleAnalytics from './components/global/analytics'
 import { interFont } from '../fonts'
+import Pixel from './components/global/pixel'
 
 // GENERATES SEO
 export async function generateMetadata(): Promise<Metadata> {
@@ -98,14 +99,17 @@ export default async function RootLayout({
     ...(data?.profileSettings?.settings?.websiteName && { "url": data?.profileSettings?.settings?.websiteName }),
     ...(data?.profileSettings?.seo?.meta_description && { "description": data?.profileSettings?.seo?.meta_description }),
   };
-  
   return (
     <html lang="en">
-
       {data?.profileSettings?.settings?.googleID &&
         <GoogleAnalytics GA_TRACKING_ID={data?.profileSettings?.settings?.googleID} />
       }
       <body className={interFont.variable}>
+        {data?.profileSettings?.settings?.facebookPixel &&
+          <Pixel
+            facebookPixel={data?.profileSettings?.settings?.facebookPixel}
+          />
+        }
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusiness) }}

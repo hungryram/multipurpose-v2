@@ -83,7 +83,7 @@ const GalleryMasonry = ({
                     />
                 )}
                 <div className={`md:columns-3 columns-2 gap-4 ${content && 'mt-16'}`}>
-                    {images.map((image: any, index: number) => (
+                    {images?.map((image: any, index: number) => (
                         <button
                             key={image._key}
                             onClick={() => openLightbox(image?.asset?.url, index)}
@@ -115,7 +115,7 @@ const GalleryMasonry = ({
                         className="!fixed !inset-0 !flex !items-center !justify-center z-50 bg-black bg-opacity-75"
                         initialSlide={currentIndex} // Set the initial slide index
                     >
-                        {images.map((image: any) => {
+                        {images?.map((image: any) => {
                             return (
                                 <SwiperSlide key={image._key} className="mx-auto relative !flex !items-center !justify-center">
                                     <Image

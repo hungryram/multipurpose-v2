@@ -1,7 +1,7 @@
 /* SOCIAL */
 
 .socialComponent {
-  @apply flex justify-center space-x-3
+  @apply flex space-x-3
 }
 
 .socialComponent a {
