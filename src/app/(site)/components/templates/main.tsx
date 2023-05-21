@@ -257,7 +257,7 @@ export default function Main({
                                     content={section?.content}
                                     reverseColumn={section?.reverseColumn}
                                     altText={section?.imageData?.asset?.altText}
-                                    blurData={section?.imageData?.asset?.blurData}
+                                    blurData={section?.imageData?.asset?.lqip}
                                     // PRIMARY BUTTON
                                     primaryButtonText={section?.buttonLinking?.buttonText}
                                     primaryButtonLink={section?.buttonLinking}
@@ -277,7 +277,7 @@ export default function Main({
                                     content={section?.content}
                                     reverseColumn={section?.reverseColumn}
                                     altText={section?.imageData?.asset?.altText}
-                                    blurData={section?.imageData?.asset?.blurData}
+                                    blurData={section?.imageData?.asset?.lqip}
                                     textAlign={section?.textAlign}
                                     backgroundStyles={backgroundStyles}
                                     // PRIMARY BUTTON
