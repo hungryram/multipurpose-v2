@@ -2,7 +2,6 @@
     @apply inset-x-0 z-50 lg:block hidden;
     background-color: var(--header-background-color);
     color: var(--header-navigation-color);
-    transition: transform 0.3s ease-in-out;
 }
 
 .stickyHeader {
