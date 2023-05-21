@@ -99,21 +99,29 @@ export default async function ServicesSection() {
                     >
                         {services?.services?.map((node: any) => {
 
-                            const imageData = node?.imageData?.asset
-
                             return (
-                                <li key={node._id}>
-                                    <Link href={`services/${node?.slug?.current}`} aria-label={`link to ${node.title}`}>
-                                        <Image
-                                            className="w-full rounded-2xl object-cover"
-                                            src={imageData?.url}
-                                            alt={imageData?.altText}
-                                            width={800}
-                                            height={800}
-                                            placeholder={imageData?.lqip ? 'blur' : 'empty'}
-                                            blurDataURL={imageData?.lqip}
-                                        />
+                                <li key={node._id} className="relative">
+                                    <Link href={`services/${node?.slug.current}`}>
+                                        <div className="group relative block w-full h-80 overflow-hidden rounded-sm">
+                                            {node?.imageData?.asset?.url ?
+                                                <Image
+                                                    src={node?.imageData?.asset?.url}
+                                                    alt={node?.imageData?.asset?.altText}
+                                                    className="object-cover group-hover:opacity-75 transition-all duration-500"
+                                                    fill={true}
+                                                    placeholder={node?.imageData?.asset?.lqip ? 'blur' : 'empty'}
+                                                    blurDataURL={node?.imageData?.asset?.lqip}
+                                                />
+                                                :
+                                                <div></div>
+                                            }
+                                        </div>
                                         <h3 className="mt-6 text-lg font-semibold leading-8 tracking-tight text-gray-900">{node.title}</h3>
+                                        {node?.detail &&
+                                            <p className="mt-2 text-sm text-gray-500">
+                                                {node?.detail}
+                                            </p>
+                                        }
                                     </Link>
                                 </li>
                             )
