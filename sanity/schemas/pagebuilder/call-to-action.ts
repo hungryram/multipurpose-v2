@@ -36,7 +36,7 @@ export default defineType({
             options: {
                 list: [
                     {title: 'Left', value: 'text-left'},
-                    {title: 'Center', value: 'text-center mx- justify-center'},
+                    {title: 'Center', value: 'text-center mx-auto justify-center'},
                     {title: 'Right', value: 'mx-auto mr-0 text-right'},
                 ]
             },
