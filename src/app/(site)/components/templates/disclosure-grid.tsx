@@ -60,7 +60,7 @@ export default function DisclosureGrid({
     const schemaMarkup = {
         "@context": "https://schema.org",
         "@type": "FAQPage",
-        "mainEntity": disclosure.map((node: any) => ({
+        "mainEntity": disclosure?.map((node: any) => ({
             ...{
                 "@type": "Question",
                 "name": node?.heading || "",
@@ -98,7 +98,7 @@ export default function DisclosureGrid({
                             )}
                         </div>
                         <div className={`lg:col-span-7 ${content && 'mt-16'}`}>
-                            {disclosure.map((node: any) => {
+                            {disclosure?.map((node: any) => {
                                 return (
                                     <div className="w-full" key={node._key}>
                                         <div className="mx-auto w-full md:max-w-2xl rounded-2xl p-2">

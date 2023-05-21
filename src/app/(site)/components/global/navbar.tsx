@@ -132,7 +132,7 @@ export default function Example({
                           <Popover.Panel className={Styles.desktopPopOverPanel}>
                             <div className="rounded-sm shadow-lg overflow-hidden">
                               <div className={Styles.desktopDropDown}>
-                                {link.subMenu.map((sub: any) => {
+                                {link?.subMenu?.map((sub: any) => {
 
                                   const subMenuLinks =
                                     (sub.internalLink?._type === "blog" && `/blog/${sub.internalLink.slug}`) ||
@@ -270,7 +270,7 @@ export default function Example({
                               <Popover.Panel className="z-50 -ml-4 transform px-2 w-screen max-w-xs sm:px-0 lg:ml-0 lg:left-1/2 lg:-translate-x-1/2">
                                 <div className="overflow-hidden">
                                   <div className="relative grid lg:bg-white px-5 py-3">
-                                    {link.subMenu.map((sub: any) => {
+                                    {link?.subMenu?.map((sub: any) => {
 
                                       const subMenuLinks =
                                         (sub.internalLink?._type === "blog" && `/blog/${sub.internalLink.slug}`) ||

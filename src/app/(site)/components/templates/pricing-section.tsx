@@ -135,7 +135,7 @@ export default function PricingSection({
                             )
                         })
                             :
-                            pricingTiers.map((node, i) => {
+                            pricingTiers?.map((node, i) => {
                                 return (
                                     <PricingTable
                                         key={i}
