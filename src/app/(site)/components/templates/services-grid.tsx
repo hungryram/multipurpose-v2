@@ -13,7 +13,8 @@ interface Props {
     secondaryButtonText: string;
     secondaryButtonLink: string;
     secondaryButtonStyle: any;
-    backgroundStyles: any
+    backgroundStyles: any;
+    columnNumber: any;
 }
 
 export default function ServiceGrid({
@@ -26,7 +27,8 @@ export default function ServiceGrid({
     secondaryButtonLink,
     secondaryButtonText,
     secondaryButtonStyle,
-    backgroundStyles
+    backgroundStyles,
+    columnNumber
 }: Props) {
     return (
         <div className="section" style={backgroundStyles}>
@@ -45,19 +47,20 @@ export default function ServiceGrid({
                         secondaryButtonStyle={secondaryButtonStyle}
                     />
                 )}
-                <ul role="list" className={`grid md:grid-cols-2 grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-3 xl:gap-x-8 ${content && 'mt-16'}`}>
+                <ul role="list" className={`grid ${columnNumber} grid-cols-1 gap-x-4 gap-y-8 sm:gap-x-6 xl:gap-x-8 ${content && 'mt-16'}`}>
                     {services?.map((node: any) => {
                         return (
                             <li key={node._id} className="relative">
                                 <Link href={`services/${node?.slug.current}`}>
-                                    <div className="group block w-full overflow-hidden rounded-sm">
+                                    <div className="group relative block w-full h-80 overflow-hidden rounded-sm">
                                         {node?.imageData?.asset?.url ?
                                             <Image
                                                 src={node?.imageData?.asset?.url}
                                                 alt={node?.imageData?.asset?.altText}
                                                 className="object-cover group-hover:opacity-75 transition-all duration-500"
-                                                width={800}
-                                                height={800}
+                                                fill={true}
+                                                placeholder={node?.imageData?.asset?.lqip ? 'blur' : 'empty'}
+                                                blurDataURL={node?.imageData?.asset?.lqip}
                                             />
                                             :
                                             <div></div>

@@ -253,7 +253,7 @@ export const pageBuilderData = groq`
 `
 
 const homeOtherDocumentSections = groq`
-'allServices': *[_type == 'services'][0..6] {
+'allServices': *[_type == 'services'][0..5] {
   _id,
   title,
   slug,

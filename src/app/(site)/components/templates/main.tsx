@@ -527,6 +527,7 @@ export default function Main({
                                 <ServiceGrid
                                     key={section?._key}
                                     services={allServices}
+                                    columnNumber={section?.columnNumber}
                                     content={section?.content}
                                     imageData={section?.imageData?.asset?.url}
                                     textAlign={section?.textAlign}

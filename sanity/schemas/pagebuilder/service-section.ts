@@ -1,5 +1,5 @@
 import { defineType } from "sanity";
-
+// UPDATED FEATURES
 export default defineType({
     title: 'Services Display',
     name: 'servicesDisplay',
@@ -46,9 +46,9 @@ export default defineType({
             options: {
                 list: [
                     { title: "1", value: "grid-cols-1 max-w-3xl" },
-                    { title: "2", value: "grid-cols-2" },
-                    { title: "3", value: "grid-cols-3" },
-                    { title: "4", value: "grid-cols-4" },
+                    { title: "2", value: "lg:grid-cols-2" },
+                    { title: "3", value: "lg:grid-cols-3" },
+                    { title: "4", value: "lg:grid-cols-4 md:grid-cols-2" },
                 ],
             },
         },
