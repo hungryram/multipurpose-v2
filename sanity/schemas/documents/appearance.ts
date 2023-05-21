@@ -114,6 +114,12 @@ export default defineType({
             },
             fields: [
                 {
+                    title: 'Display Single Column',
+                    name: 'singleColumn',
+                    type: 'boolean',
+                    description: 'Change the footer layout to single column'
+                },
+                {
                     title: 'Footer Logo',
                     name: 'footerLogo',
                     type: 'image'
@@ -122,7 +128,8 @@ export default defineType({
                     title: 'Footer Text',
                     name: 'footerText',
                     type: 'contentEditor',
-                    description: 'Perfect for a brief bio'
+                    hidden: ({parent}) => parent?.singleColumn,
+                    description: 'You may include additional information about your business here'
                 },
                 {
                     title: 'Footer Disclaimer',
@@ -133,7 +140,8 @@ export default defineType({
                     title: 'Short Text',
                     name: 'shortText',
                     type: 'text',
-                    description: 'A brief summary of your business.'
+                    hidden: ({parent}) => parent?.singleColumn,
+                    description: 'Displays below your logo. Best for a short bio.'
                 },
                 {
                     title: 'Quick Links Heading',
@@ -149,12 +157,14 @@ export default defineType({
                 {
                     title: 'Quick Links 2 Heading',
                     name: 'quickLinksTwoHeading',
+                    hidden: ({parent}) => parent?.singleColumn,
                     type: 'string',
                 },
                 {
                     title: "Second Quick links",
                     name: "secondQuickLinks",
                     type: "array",
+                    hidden: ({parent}) => parent?.singleColumn,
                     of: [{ type: "links" }]
                 },
                 {

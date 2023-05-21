@@ -34,17 +34,14 @@ export default defineType({
             },
         },
         {
-            name: 'hamburgerMenuColor',
-            title: 'Mobile Menu Icon Color',
-            type: 'color',
-            options: {
-                disableAlpha: true
-            },
-        },
-        {
             title: "Call to Action",
             name: "cta",
             type: "subMenu",
+        },
+        {
+            title: "Hide Call to Action on Desktop",
+            name: "hideCta",
+            type: "boolean",
         },
     ]
 })

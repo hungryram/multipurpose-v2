@@ -10,6 +10,20 @@ export default defineType({
     ],
     fields: [
         {
+            title: 'Layout Type',
+            name: 'layoutType',
+            type: 'string',
+            options: {
+                list: [
+                    { title: 'Grid with Icon', value: 'featuredGridIcon' },
+                    { title: 'Grid with Image and Text Outside', value: 'gridWithImageOutside' },
+                    { title: 'Grid with Image and Text Inside', value: 'gridWithTextInside' },
+                ]
+            },
+            initialValue: "featuredGridIcon"
+
+        },
+        {
             title: 'Content',
             name: 'content',
             type: 'contentEditor',
@@ -21,9 +35,9 @@ export default defineType({
             type: 'string',
             options: {
                 list: [
-                    {title: 'Left', value: 'text-left'},
-                    {title: 'Center', value: 'text-center mx-auto justify-center'},
-                    {title: 'Right', value: 'mx-auto mr-0 text-right'},
+                    { title: 'Left', value: 'text-left' },
+                    { title: 'Center', value: 'text-center mx-auto justify-center' },
+                    { title: 'Right', value: 'mx-auto mr-0 text-right' },
                 ]
             },
             initialValue: "text-center mx-auto justify-center"
@@ -52,6 +66,12 @@ export default defineType({
                     type: 'object',
                     fields: [
                         {
+                            title: 'Image',
+                            name: 'image',
+                            type: 'image',
+                            description: 'Image will take priority over icon'
+                        },
+                        {
                             title: 'Heading',
                             name: 'value',
                             type: 'string'
@@ -60,7 +80,6 @@ export default defineType({
                             title: 'Content',
                             name: 'content',
                             type: 'text',
-                            validation: Rule => Rule.error('Keep it short and brief, under 150 characters').max(150)
                         },
                         {
                             title: 'Icon',
@@ -92,7 +111,7 @@ export default defineType({
                                     { title: 'Users', value: 'UsersIcon' },
                                     { title: 'Wallet', value: 'WalletIcon' },
                                 ]
-                            }
+                            },
                         },
                         {
                             title: 'Button',
@@ -124,22 +143,10 @@ export default defineType({
             ]
         },
         {
-            title: 'Block Text Left',
-            name: 'blockLeft',
-            type: 'boolean',
-            group: 'settings'
-        },
-        {
-            title: 'Content Text Left',
-            name: 'textLeft',
-            type: 'boolean',
-            group: 'settings',
-        },
-        {
             title: 'Number of Columns',
             name: 'columnNumber',
             type: 'number',
-            validation: Rule => Rule.min(2).max(4),
+            validation: Rule => Rule.min(1).max(4),
             group: 'settings'
         },
         {
@@ -151,14 +158,14 @@ export default defineType({
     ],
     preview: {
         select: {
-          content: 'content',
+            content: 'content',
         },
         prepare({ content }) {
-          const hasContent = content && content[0]?.children?.length > 0;
-      
-          return {
-            title: hasContent ? content[0].children[0].text : 'Featured Grid Section',
-          };
+            const hasContent = content && content[0]?.children?.length > 0;
+
+            return {
+                title: hasContent ? content[0].children[0].text : 'Featured Grid Section',
+            };
         },
-      },
+    },
 })

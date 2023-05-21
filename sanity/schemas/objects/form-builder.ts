@@ -71,6 +71,7 @@ export default defineType({
                             name: 'label',
                             type: 'string',
                             description: 'The label for the form field',
+                            validation: (Rule) => Rule.required().error('Name your input field'),
                         },
                         {
                             title: 'Type',
@@ -81,6 +82,7 @@ export default defineType({
                                 list: [
                                     { title: 'Text', value: 'text' },
                                     { title: 'Email', value: 'email' },
+                                    { title: 'Phone', value: 'phone' },
                                     { title: 'Checkbox', value: 'checkbox' },
                                     { title: 'Select', value: 'select' },
                                     { title: 'Radio Buttons', value: 'radio' },
@@ -95,12 +97,19 @@ export default defineType({
                             type: 'boolean'
                         },
                         {
+                            title: 'Display Stacked',
+                            name: 'stacked',
+                            type: 'boolean',
+                            description: 'Enable this to show stacked a stacked layout',
+                            hidden: ({ parent }) => parent?.type !== "radio" && parent?.type !== "checkbox",
+                        },
+                        {
                             title: 'Checkbox Values',
                             name: 'checkBoxValue',
                             type: 'array',
                             hidden: ({ parent }) => parent?.type !== "checkbox",
                             of: [
-                                {type: 'string'}
+                                { type: 'string' }
                             ]
                         },
                         {
@@ -109,7 +118,7 @@ export default defineType({
                             type: 'array',
                             hidden: ({ parent }) => parent?.type !== "radio",
                             of: [
-                                {type: 'string'}
+                                { type: 'string' }
                             ]
                         },
                         {
@@ -118,7 +127,7 @@ export default defineType({
                             type: 'array',
                             hidden: ({ parent }) => parent?.type !== "select",
                             of: [
-                                {type: 'string'}
+                                { type: 'string' }
                             ]
                         },
                     ],

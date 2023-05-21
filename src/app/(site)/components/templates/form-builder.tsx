@@ -1,5 +1,6 @@
 import React from 'react';
 import { submitForm } from './_formActions'
+import Styles from "./form-builder.module.css"
 
 interface FormField {
   name: string;
@@ -10,6 +11,7 @@ interface FormField {
   selectValue: string[]
   checkBoxValue: string[]
   required: boolean
+  stacked: boolean
 }
 
 interface FormSchema {
@@ -45,8 +47,8 @@ export default function FormBuilder({ formSchema }: FormBuilderProps) {
           <>
             {formSchema.fields.map((field, i) => {
               return (
-                <div key={field._key} className="mb-4">
-                  <label htmlFor={field.label.replace(/ /g, '') + i} className="block text-sm font-medium leading-6">
+                <div key={field._key} className="mb-6">
+                  <label htmlFor={field.label.replace(/ /g, '') + i} className={Styles.formLabel}>
                     {field.label}
                     {field.required && <span>*</span>}
                   </label>
@@ -54,7 +56,7 @@ export default function FormBuilder({ formSchema }: FormBuilderProps) {
                     <input
                       type="text"
                       name={field.label}
-                      className="border rounded-sm px-3 py-2 w-full"
+                      className={Styles.formDefaultInput}
                       id={field.label.replace(/ /g, '') + i}
                       required={field.required ? true : undefined}
                     />
@@ -63,16 +65,25 @@ export default function FormBuilder({ formSchema }: FormBuilderProps) {
                     <input
                       type="email"
                       name={field.label}
-                      className="border rounded-sm px-3 py-2 w-full"
+                      className={Styles.formDefaultInput}
+                      id={field.label.replace(/ /g, '') + i}
+                      required={field.required ? true : undefined}
+                    />
+                  )}
+                  {field.type === 'phone' && (
+                    <input
+                      type="tel"
+                      name={field.label}
+                      className={Styles.formDefaultInput}
                       id={field.label.replace(/ /g, '') + i}
                       required={field.required ? true : undefined}
                     />
                   )}
                   {field.type === 'radio' && (
-                    <div className="flex items-center gap-x-3 mt-4">
+                    <div className={`gap-x-6 mt-4 ${field?.stacked ? '' : 'flex items-center'}`}>
                       {field?.radioValue?.map((node) => {
                         return (
-                          <>
+                          <div className="flex items-center gap-2 my-1">
                             <input
                               type="radio"
                               name={field.label}
@@ -80,19 +91,19 @@ export default function FormBuilder({ formSchema }: FormBuilderProps) {
                               className="h-4 w-4 rounded border-gray-300"
                               required={field.required ? true : undefined}
                             />
-                            <label htmlFor={node.replace(/^[^A-Za-z0-9]+/g, '').replace(/[^A-Za-z0-9_\-:.]/g, '') + i} className="block text-sm font-medium leading-6 text-gray-900">
+                            <label htmlFor={node.replace(/^[^A-Za-z0-9]+/g, '').replace(/[^A-Za-z0-9_\-:.]/g, '') + i} className={Styles.formInputList}>
                               {node}
                             </label>
-                          </>
+                          </div>
                         )
                       })}
                     </div>
                   )}
                   {field.type === 'checkbox' && (
-                    <div className="flex items-center gap-x-3 mt-4">
+                    <div className={`gap-x-6 mt-4 ${field?.stacked ? '' : 'flex items-center'}`}>
                       {field?.checkBoxValue?.map((node) => {
                         return (
-                          <>
+                          <div className="flex items-center gap-2 my-1">
                             <input
                               type="checkbox"
                               name={field.label}
@@ -101,10 +112,10 @@ export default function FormBuilder({ formSchema }: FormBuilderProps) {
                               value={node}
                               required={field.required ? true : undefined}
                             />
-                            <label htmlFor={node.replace(/^[^A-Za-z0-9]+/g, '').replace(/[^A-Za-z0-9_\-:.]/g, '') + i} className="block text-sm font-medium leading-6 text-gray-900">
+                            <label htmlFor={node.replace(/^[^A-Za-z0-9]+/g, '').replace(/[^A-Za-z0-9_\-:.]/g, '') + i} className={Styles.formInputList}>
                               {node}
                             </label>
-                          </>
+                          </div>
                         )
                       })}
                     </div>
@@ -114,7 +125,7 @@ export default function FormBuilder({ formSchema }: FormBuilderProps) {
                       <select
                         id={field.label.replace(/ /g, '') + i}
                         name={field.label}
-                        className="block w-full rounded-md border py-1.5 text-gray-900 shadow-sm sm:max-w-xs sm:text-sm sm:leading-6"
+                        className="block w-full rounded-md border py-1.5 text-gray-900 shadow-sm sm:max-w-xs sm:text-sm sm:leading-6 bg-gray-100"
                         required={field.required ? true : undefined}
                       >
                         {field?.selectValue?.map((node, i) => {
@@ -130,7 +141,7 @@ export default function FormBuilder({ formSchema }: FormBuilderProps) {
                   {field.type === 'textarea' && (
                     <textarea
                       name={field.label}
-                      className="border rounded-sm px-3 py-2 w-full"
+                      className={Styles.formDefaultInput}
                       rows={3}
                       id={field.label.replace(/ /g, '') + i}
                       required={field.required ? true : undefined}

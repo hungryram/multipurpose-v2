@@ -1,7 +1,15 @@
 .header {
-    @apply inset-x-0 top-0 z-50;
+    @apply inset-x-0 z-50 lg:block hidden;
     background-color: var(--header-background-color);
     color: var(--header-navigation-color);
+    transition: transform 0.3s ease-in-out;
+}
+
+.stickyHeader {
+  position: fixed;
+  top: 0; /* Initial position above the viewport */
+  left: 0;
+  right: 0;
 }
 
 .topHeader {
@@ -38,7 +46,7 @@
 }
 
 .mobileHeaderMenu {
-    @apply shadow lg:hidden block;
+    @apply shadow lg:hidden block z-50;
     background-color: var(--header-background-color);
     color: var(--header-navigation-color);
 }

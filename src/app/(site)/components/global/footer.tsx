@@ -35,7 +35,8 @@ interface Props {
   secondLinks: any;
   quickLinksTwoHeading: string;
   footerText: any;
-  shortText: string
+  shortText: string;
+  singleColumn: boolean
 }
 
 export default function Footer({
@@ -70,120 +71,149 @@ export default function Footer({
   quickLinksTwoHeading,
   secondLinks,
   footerText,
-  shortText
+  shortText,
+  singleColumn
 }: Props) {
   return (
     <footer className={Styles.footer} aria-labelledby="footer-heading">
       <div className="section">
         <div className="container">
-          <div className={`grid ${footerText ? 'lg:grid-cols-5' : 'lg:grid-cols-4'} md:grid-cols-3 grid-cols-1 xl:gap-8 gap-y-10`}>
-            <div className="space-y-8">
-              {image ?
-                <div className="flex md:justify-start justify-center">
-                  <Image
-                    src={image}
-                    width={200}
-                    height="50"
-                    alt={altText}
-                    className="mb-6 justify-center flex"
-                    placeholder={blurData ? 'blur' : 'empty'}
-                    blurDataURL={blurData}
+          {singleColumn !== true ?
+            <div className={`grid ${footerText ? 'lg:grid-cols-5' : 'lg:grid-cols-4'} md:grid-cols-3 grid-cols-1 xl:gap-8 gap-y-10`}>
+              <div className="space-y-8">
+                {image ?
+                  <div className="flex md:justify-start justify-center">
+                    <Image
+                      src={image}
+                      width={200}
+                      height="50"
+                      alt={altText}
+                      className="mb-6 justify-center flex"
+                      placeholder={blurData ? 'blur' : 'empty'}
+                      blurDataURL={blurData}
+                    />
+                  </div>
+                  :
+                  <h3 className="uppercase font-semibold mb-4">{company_name}</h3>
+                }
+                {shortText &&
+                  <p className="text-sm leading-6">
+                    {shortText}
+                  </p>
+                }
+                <div className="flex">
+                  <Social
+                    facebook={facebook}
+                    youtube={youtube}
+                    instagram={instagram}
+                    twitter={twitter}
+                    reddit={reddit}
+                    linkedin={linkedin}
+                    yelp={yelp}
+                    pinterest={pinterest}
+                    tiktok={tiktok}
+                    zillow={zillow}
+                    size={size}
                   />
                 </div>
-                :
-                <h3 className="uppercase font-semibold mb-4">{company_name}</h3>
-              }
-              {shortText &&
-                <p className="text-sm leading-6">
-                  {shortText}
-                </p>
-              }
-              <div className="flex space-x-6">
-                <Social
-                  facebook={facebook}
-                  youtube={youtube}
-                  instagram={instagram}
-                  twitter={twitter}
-                  reddit={reddit}
-                  linkedin={linkedin}
-                  yelp={yelp}
-                  pinterest={pinterest}
-                  tiktok={tiktok}
-                  zillow={zillow}
-                  size={size}
-                />
               </div>
-            </div>
-            <div>
               <div>
-                <h3>Contact Information</h3>
-                <dl className="space-y-4 text-base leading-7">
-                  {address || city || state || zip_code ? (
-                    <div className={Styles.contactInfo}>
-                      <dt className="flex-none">
-                        <span>Address</span>
-                      </dt>
-                      <dd className="text-sm leading-6">
-                        {address && (
-                          <>
-                            {address}
-                            <br />
-                          </>
-                        )}
-                        {city && (
-                          <>
-                            {city ? city + ',' : ''}
-                          </>
-                        )}{' '}
-                        {state} {zip_code}
-                      </dd>
-                    </div>
-                  ) : null}
+                <div>
+                  <h3>Contact Information</h3>
+                  <dl className="space-y-4 text-base leading-7">
+                    {address || city || state || zip_code ? (
+                      <div className={Styles.contactInfo}>
+                        <dt className="flex-none">
+                          <span>Address</span>
+                        </dt>
+                        <dd className="text-sm leading-6">
+                          {address && (
+                            <>
+                              {address}
+                              <br />
+                            </>
+                          )}
+                          {city && (
+                            <>
+                              {city ? city + ',' : ''}
+                            </>
+                          )}{' '}
+                          {state} {zip_code}
+                        </dd>
+                      </div>
+                    ) : null}
 
-                  {phone_number &&
-                    <div className={Styles.contactInfo}>
-                      <dt className="flex-none">
-                        <span>Direct</span>
-                      </dt>
-                      <dd>
-                        <a className="text-sm leading-6" href={`tel:${phone_number}`}>
-                          {phone_number}
-                        </a>
-                      </dd>
-                    </div>
-                  }
-                  {office_number &&
-                    <div className={Styles.contactInfo}>
-                      <dt className="flex-none">
-                        <span>Phone</span>
-                      </dt>
-                      <dd>
-                        <a className="text-sm leading-6" href={`tel:${office_number}`}>
-                          {office_number}
-                        </a>
-                      </dd>
-                    </div>
-                  }
-                  {email &&
-                    <div className={Styles.contactInfo}>
-                      <dt className="flex-none">
-                        <span>Email</span>
-                      </dt>
-                      <dd>
-                        <a className="text-sm leading-6" href={`mailto:${email}`}>
-                          {email}
-                        </a>
-                      </dd>
-                    </div>
-                  }
-                </dl>
+                    {phone_number &&
+                      <div className={Styles.contactInfo}>
+                        <dt className="flex-none">
+                          <span>Direct</span>
+                        </dt>
+                        <dd>
+                          <a className="text-sm leading-6" href={`tel:${phone_number}`}>
+                            {phone_number}
+                          </a>
+                        </dd>
+                      </div>
+                    }
+                    {office_number &&
+                      <div className={Styles.contactInfo}>
+                        <dt className="flex-none">
+                          <span>Phone</span>
+                        </dt>
+                        <dd>
+                          <a className="text-sm leading-6" href={`tel:${office_number}`}>
+                            {office_number}
+                          </a>
+                        </dd>
+                      </div>
+                    }
+                    {email &&
+                      <div className={Styles.contactInfo}>
+                        <dt className="flex-none">
+                          <span>Email</span>
+                        </dt>
+                        <dd>
+                          <a className="text-sm leading-6" href={`mailto:${email}`}>
+                            {email}
+                          </a>
+                        </dd>
+                      </div>
+                    }
+                  </dl>
+                </div>
               </div>
-            </div>
-            <div>
               <div>
-                {quickLinksHeading && <h3>{quickLinksHeading}</h3>}
+                <div>
+                  {quickLinksHeading && <h3>{quickLinksHeading}</h3>}
+                  <ul role="list" className="space-y-4">
+                    {links?.map((link: any) => {
+
+                      const quickLinks = (link.internalLink?._type === "pages" && `/${link.internalLink.slug}`) ||
+                        (link.internalLink?._type === "blog" && `/blog/${link.internalLink.slug}`) ||
+                        (link.internalLink?._type === "legal" && `/legal/${link.internalLink.slug}`) ||
+                        (link.internalLink?._type === "services" && `/services/${link.internalLink.slug}`) ||
+                        (link.internalLink?._type === "team" && `/team/${link.internalLink.slug}`) ||
+                        (link.externalUrl && `${link.externalUrl}`)
+
+                      return (
+                        <li key={link._key}>
+                          <Link
+                            href={quickLinks}
+                            target={link.newTab && '_blank'}
+                            className="text-sm"
+                          >
+                            {link.text}
+                          </Link>
+                        </li>
+                      )
+                    })}
+                  </ul>
+                </div>
+              </div>
+              <div>
+                {quickLinksTwoHeading && <h3>{quickLinksTwoHeading}</h3>}
                 <ul role="list" className="space-y-4">
-                  {links?.map((link: any) => {
+                  {secondLinks?.map((link: any) => {
 
                     const quickLinks = (link.internalLink?._type === "pages" && `/${link.internalLink.slug}`) ||
                       (link.internalLink?._type === "blog" && `/blog/${link.internalLink.slug}`) ||
@@ -206,42 +236,112 @@ export default function Footer({
                   })}
                 </ul>
               </div>
+              {footerText &&
+                <div className="text-sm">
+                  <ContentEditor
+                    content={footerText}
+                  />
+                </div>
+              }
             </div>
-            <div>
-              {quickLinksTwoHeading && <h3>{quickLinksTwoHeading}</h3>}
-              <ul role="list" className="space-y-4">
-                {secondLinks?.map((link: any) => {
+            :
+            <div className="mx-auto max-w-7xl overflow-hidden text-center">
+              {image ?
+                <div className="flex justify-center mx-auto text-center">
+                  <Image
+                    src={image}
+                    width={200}
+                    height="50"
+                    alt={altText}
+                    className="mb-6 justify-center flex"
+                    placeholder={blurData ? 'blur' : 'empty'}
+                    blurDataURL={blurData}
+                  />
+                </div>
+                :
+                <h3 className="uppercase font-semibold mb-4">{company_name}</h3>
+              }
+              <div className="mt-6 flex justify-center flex-col">
+                <nav className="columns-2 sm:flex sm:justify-center sm:space-x-12">
+                  {links?.map((link: any) => {
+                    const quickLinks = (link.internalLink?._type === "pages" && `/${link.internalLink.slug}`) ||
+                      (link.internalLink?._type === "blog" && `/blog/${link.internalLink.slug}`) ||
+                      (link.internalLink?._type === "legal" && `/legal/${link.internalLink.slug}`) ||
+                      (link.internalLink?._type === "services" && `/services/${link.internalLink.slug}`) ||
+                      (link.internalLink?._type === "team" && `/team/${link.internalLink.slug}`) ||
+                      (link.externalUrl && `${link.externalUrl}`)
 
-                  const quickLinks = (link.internalLink?._type === "pages" && `/${link.internalLink.slug}`) ||
-                    (link.internalLink?._type === "blog" && `/blog/${link.internalLink.slug}`) ||
-                    (link.internalLink?._type === "legal" && `/legal/${link.internalLink.slug}`) ||
-                    (link.internalLink?._type === "services" && `/services/${link.internalLink.slug}`) ||
-                    (link.internalLink?._type === "team" && `/team/${link.internalLink.slug}`) ||
-                    (link.externalUrl && `${link.externalUrl}`)
-
-                  return (
-                    <li key={link._key}>
-                      <Link
-                        href={quickLinks}
-                        target={link.newTab && '_blank'}
-                        className="text-sm"
-                      >
-                        {link.text}
-                      </Link>
-                    </li>
-                  )
-                })}
-              </ul>
-            </div>
-            {footerText &&
-              <div className="text-sm">
-                <ContentEditor
-                  content={footerText}
+                    return (
+                      <div key={link._key} className="pb-6">
+                        <Link href={quickLinks} className="text-sm leading-6">
+                          {link.text}
+                        </Link>
+                      </div>
+                    )
+                  })}
+                </nav>
+                <Social
+                  facebook={facebook}
+                  youtube={youtube}
+                  instagram={instagram}
+                  twitter={twitter}
+                  reddit={reddit}
+                  linkedin={linkedin}
+                  yelp={yelp}
+                  pinterest={pinterest}
+                  tiktok={tiktok}
+                  zillow={zillow}
+                  size={size}
                 />
               </div>
+            </div>
+          }
+          <div className="border-t border-white/10 pt-8 mt-12">
+            {singleColumn &&
+              <div className="leading-7 md:flex items-center text-sm md:space-x-10">
+                {address || city || state || zip_code ? (
+                  <div className="space-x-2">
+                    <span>Address:</span>
+                    {address && (
+                      <>
+                        {address}
+                      </>
+                    )}
+                    {city && (
+                      <>
+                        {city ? city + ',' : ''}
+                      </>
+                    )}{' '}
+                    {state} {zip_code}
+                  </div>
+                ) : null}
+
+                {phone_number &&
+                  <div className="space-x-2">
+                    <span>Direct:</span>
+                    <a href={`tel:${phone_number}`}>
+                      {phone_number}
+                    </a>
+                  </div>
+                }
+                {office_number &&
+                  <div className="space-x-2">
+                    <span>Phone:</span>
+                    <a href={`tel:${office_number}`}>
+                      {office_number}
+                    </a>
+                  </div>
+                }
+                {email &&
+                  <div className="space-x-2">
+                    <span>Email:</span>
+                    <a href={`mailto:${email}`}>
+                      {email}
+                    </a>
+                  </div>
+                }
+              </div>
             }
-          </div>
-          <div className="border-t border-white/10 pt-8 mt-16">
             {footerDisclaimer &&
               <div className="text text-xs my-2">
                 <ContentEditor

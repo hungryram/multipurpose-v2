@@ -85,7 +85,7 @@ const GalleryMasonry = ({
                 <div className={`md:columns-3 columns-2 gap-4 ${content && 'mt-16'}`}>
                     {images.map((image: any, index: number) => (
                         <button
-                            key={image.id}
+                            key={image._key}
                             onClick={() => openLightbox(image?.asset?.url, index)}
                             className="w-full h-full cursor-pointer"
                             aria-label={`View Image ${index + 1} ${image?.asset?.altText ? `of ${image?.asset?.altText}` : ''}`}
@@ -97,6 +97,8 @@ const GalleryMasonry = ({
                                 height={800}
                                 className={`w-full mb-4 rounded-sm ${index % 2 === 0 ? 'aspect-video' : 'aspect-square'
                                     }`}
+                                placeholder={image?.asset?.lqip ? 'blur' : 'empty'}
+                                blurDataURL={image?.asset?.lqip}
                             />
                         </button>
                     ))}
@@ -113,19 +115,21 @@ const GalleryMasonry = ({
                         className="!fixed !inset-0 !flex !items-center !justify-center z-50 bg-black bg-opacity-75"
                         initialSlide={currentIndex} // Set the initial slide index
                     >
-                        {images.map((image: any, index: number) => (
-                            <SwiperSlide key={image.id} className="mx-auto relative !flex !items-center !justify-center">
-                                <Image
-                                    src={image?.asset?.url}
-                                    alt={image?.asset?.altText}
-                                    width={1000}
-                                    height={800}
-                                    sizes="100vw"
-                                    placeholder={image?.asset?.lqip ? 'blur' : 'empty'}
-                                    blurDataURL={image?.asset?.lqip}
-                                />
-                            </SwiperSlide>
-                        ))}
+                        {images.map((image: any) => {
+                            return (
+                                <SwiperSlide key={image._key} className="mx-auto relative !flex !items-center !justify-center">
+                                    <Image
+                                        src={image?.asset?.url}
+                                        alt={image?.asset?.altText}
+                                        width={1000}
+                                        height={800}
+                                        sizes="100vw"
+                                        placeholder={image?.asset?.lqip ? 'blur' : 'empty'}
+                                        blurDataURL={image?.asset?.lqip}
+                                    />
+                                </SwiperSlide>
+                            )
+                        })}
                         <button
                             className="absolute top-0 right-0 m-4 text-white cursor-pointer z-50"
                             onClick={closeLightbox}

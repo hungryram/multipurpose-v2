@@ -1,9 +1,9 @@
 'use client'
-import { Popover, Transition, Disclosure, Menu } from '@headlessui/react'
-import { Bars3Icon, XMarkIcon, ChevronDownIcon, BellIcon } from '@heroicons/react/24/outline'
+import { Popover, Transition, Disclosure } from '@headlessui/react'
+import { Bars3Icon, XMarkIcon, ChevronDownIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Fragment } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import Styles from "./navbar.module.css"
 
 interface Props {
@@ -17,7 +17,9 @@ interface Props {
   backgroundColor: string;
   enableTopHeader: boolean;
   ctaLink: any;
-  mobileLogoWidth: number
+  mobileLogoWidth: number;
+  hideCta: boolean;
+  width: any;
 }
 
 export default function Example({
@@ -30,11 +32,24 @@ export default function Example({
   office,
   enableTopHeader,
   ctaLink,
-  mobileLogoWidth
+  mobileLogoWidth,
+  hideCta
 }: Props) {
 
 
+  const [scroll, setScroll] = useState(false);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setScroll(window.scrollY > 500);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   const ctaLinking =
     (ctaLink?.internalLink?._type === "pages" && `/${ctaLink?.internalLink.slug}`) ||
@@ -44,14 +59,20 @@ export default function Example({
     (ctaLink?.internalLink?._type === "team" && `/team/${ctaLink?.internalLink.slug}`) ||
     (ctaLink?.externalUrl && `${ctaLink?.externalUrl}`)
 
+  // Sets logo condition based on scroll events. When scrolling, logo decreases by 30%
+  const logoScroll = scroll ? (logoWidth ?? '200') * 0.7 : logoWidth ?? '200';
+
+  // Sets mobile logo condition based on scroll events. When scrolling, logo decreases by 30%
+  const mobileLogoScroll = scroll ? (mobileLogoWidth ?? '140') * 0.7 : mobileLogoWidth ?? '140';
+
   return (
     <>
-      <header className={`${Styles.header} hidden lg:block`}>
+      <header className={`${Styles.header} ${scroll ? Styles.stickyHeader : '-top-52'} ease-in-out transition-all duration-700`}>
         {enableTopHeader &&
-          <div className={Styles.topHeader}>
+          <div className={`${Styles.topHeader} ${scroll && 'hidden'}`}>
             <div className={Styles.topHeaderContainer}>
               <div />
-              <div className="flex items-center space-x-6 text-white">
+              <div className="flex items-center space-x-6">
                 {email && <a href={`mailto:${email}`} className="text-sm">{email}</a>}
                 {phone && <a href={`tel:${phone}`} className="text-sm">Direct: {phone}</a>}
                 {office && <a href={`tel:${office}`} className="text-sm">Office: {office}</a>}
@@ -65,7 +86,7 @@ export default function Example({
               {logo ?
                 <Image
                   src={logo}
-                  width={logoWidth ? logoWidth : '200'}
+                  width={logoScroll}
                   height={10}
                   alt={company_name}
                 />
@@ -154,7 +175,7 @@ export default function Example({
               }
             })}
           </div>
-          {ctaLinking &&
+          {!hideCta && ctaLinking &&
             <div className="hidden lg:flex lg:flex-1 lg:justify-end">
               <Link href={ctaLinking ?? '/'} className="primary-button">
                 {ctaLink?.text} <span aria-hidden="true">&rarr;</span>
@@ -166,9 +187,20 @@ export default function Example({
 
       {/* MOBILE */}
 
-      <Disclosure as="nav" className={Styles.mobileHeaderMenu}>
+      <Disclosure as="nav" className={`${Styles.mobileHeaderMenu} ${scroll ? Styles.stickyHeader : '-top-52'} ease-in-out transition-all duration-700`}>
         {({ open }) => (
           <>
+            {enableTopHeader &&
+              <div className={`${Styles.topHeader} ${scroll && 'hidden'}`}>
+                <div className={ctaLinking ? 'flex items-center space-x-6 h-full justify-end' : 'py-4'}>
+                  {ctaLinking &&
+                    <Link href={ctaLinking ?? '/'} className="h-full px-8 py-2 font-normal">
+                      {ctaLink?.text} <span aria-hidden="true">&rarr;</span>
+                    </Link>
+                  }
+                </div>
+              </div>
+            }
             <div className="mx-auto max-w-7xl py-2 px-4 sm:px-6 lg:px-8">
               <div className="flex justify-between">
                 <div className="flex items-center">
@@ -177,7 +209,7 @@ export default function Example({
                       {logo ?
                         <Image
                           src={logo}
-                          width={mobileLogoWidth ? mobileLogoWidth : '130'}
+                          width={mobileLogoScroll}
                           height={10}
                           alt={company_name}
                         />

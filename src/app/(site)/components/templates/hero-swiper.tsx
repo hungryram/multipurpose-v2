@@ -18,7 +18,7 @@ interface Props {
     textAlign: string;
     textColor: string;
     imageOverlayColor: any
-    imageHeight: string;
+    imageHeight: any;
     navigationColors: string
     animation: string;
 }

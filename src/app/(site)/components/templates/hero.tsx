@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { heroData } from "../../../../../sample/data";
 import Styles from "./hero.module.css"
 import HeaderSection from "./header-section";
 
@@ -17,6 +16,7 @@ interface Props {
     textAlign: string;
     textColor: string;
     imageOverlayColor: any
+    imageHeight: any
 }
 
 export default function Hero({
@@ -32,7 +32,8 @@ export default function Hero({
     secondaryButtonStyle,
     textAlign,
     textColor,
-    imageOverlayColor
+    imageOverlayColor,
+    imageHeight
 }: Props) {
 
     const imageOverlay = {
@@ -41,23 +42,25 @@ export default function Hero({
     };
 
     return (
-        <div className={`relative isolate inset-0`}>
-            <Image
-                src={image ? image : heroData.image}
-                alt={altText}
-                placeholder={blurData ? 'blur' : 'empty'}
-                blurDataURL={blurData}
-                className={Styles.heroImage}
-                width={2000}
-                height={0}
-                sizes="100vw"
-            />
+        <div className={`relative isolate inset-0 ${imageHeight}`}>
+            {image &&
+                <Image
+                    src={image}
+                    alt={altText}
+                    placeholder={blurData ? 'blur' : 'empty'}
+                    blurDataURL={blurData}
+                    className={Styles.heroImage}
+                    fill={true}
+                    sizes="100vw"
+                />
+            }
             <div className="absolute inset-0" style={imageOverlay}></div>
-            <div className={`container ${Styles.heroInnerContainer}`}>
-                <div style={{
-                    color: textColor
-                }}>
-                    {(content || primaryButtonLink || secondaryButtonLink) ? (
+            {(content || primaryButtonLink || secondaryButtonLink) && (
+                <div className={`container ${Styles.heroInnerContainer}`}>
+                    <div style={{
+                        color: textColor
+                    }}>
+
                         <HeaderSection
                             content={content}
                             textAlign={textAlign}
@@ -70,11 +73,10 @@ export default function Hero({
                             secondaryButtonText={secondaryButtonText}
                             secondaryButtonStyle={secondaryButtonStyle}
                         />
-                    ) :
-                        <div dangerouslySetInnerHTML={{ __html: heroData.content }} />
-                    }
+                    </div>
                 </div>
-            </div>
+            )
+            }
         </div>
     )
 }

@@ -46,9 +46,9 @@ export async function generateMetadata({ params }: Meta): Promise<Metadata> {
             creator: '@' + page?.profileSettings?.seo?.twitterHandle,
         },
         icons: {
-            icon: page.appearances.branding.favicon.asset.url,
-            shortcut: page.appearances.branding.favicon.asset.url,
-            apple: page.appearances.branding.favicon.asset.url,
+            icon: page.appearances?.branding?.favicon?.asset?.url,
+            shortcut: page.appearances?.branding?.favicon?.asset?.url,
+            apple: page.appearances?.branding?.favicon?.asset?.url,
         },
     }
 }

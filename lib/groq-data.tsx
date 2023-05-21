@@ -36,6 +36,7 @@ export const appearance = groq`
       'topHeaderBarTextColor': topHeaderBarTextColor.hex
     },
     'header': header {
+      hideCta,
       'ctaLink': cta {
         newTab,
         _key,
@@ -76,7 +77,10 @@ export const appearance = groq`
       }
     },
     'footer': footer {
-      ...,
+      singleColumn,
+      footerText,
+      footerDisclaimer,
+      shortText,
       'footerLogo': footerLogo {
         asset->{
           url,

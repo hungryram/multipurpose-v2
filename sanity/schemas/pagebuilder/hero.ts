@@ -25,6 +25,7 @@ export default defineType({
             title: "Image Height",
             name: "imageHeight",
             type: "string",
+            validation: Rule => Rule.required().error('Specify Image Height'),
             options: {
                 list: [
                     { title: "Full Screen", value: "h-screen" },

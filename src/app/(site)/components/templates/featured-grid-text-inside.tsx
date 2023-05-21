@@ -1,5 +1,5 @@
+import Image from "next/image";
 import Styles from "./feature-section.module.css"
-import * as HeroIcons from '@heroicons/react/24/outline';
 import HeaderSection from "./header-section";
 import Link from "next/link";
 
@@ -17,7 +17,7 @@ interface Props {
     secondaryButtonStyle: any
 }
 
-export default function FeatureSection({
+export default function FeaturedGridImageTextInside({
     backgroundStyles,
     columnNumber,
     blocks,
@@ -51,7 +51,6 @@ export default function FeatureSection({
                     <dl className={`${Styles.featureGridContainer} grid grid-cols-1 lg:grid-cols-${columnNumber} ${content && 'mt-16'}`}>
                         {blocks?.map((node: any) => {
 
-                            const IconComponent = HeroIcons[node.icon as keyof typeof HeroIcons];
                             const blockLink: any = node?.blockLinking?.internalLink
                             const linkUrl =
                                 (blockLink?._type === "pages" && `/${node.blockLinking?.internalLink.slug}`) ||
@@ -61,32 +60,43 @@ export default function FeatureSection({
                                 (blockLink?._type === "team" && `/team/${node.blockLinking?.internalLink.slug}`) ||
                                 (blockLink?._type === "team" && `/team/${node.blockLinking?.internalLink.slug}`) ||
                                 (node.blockLinking?.externalUrl && `${node.blockLinking?.externalUrl}`);
+
                             return (
-                                <div key={node._key} className={Styles.featureCardContainer}>
-                                    <dt className={Styles.featureCard} style={{
-                                        color: node?.headingColor?.hex
-                                    }}>
-                                        {IconComponent && (
-                                            <IconComponent className="h-5 w-5 flex-none" style={{
-                                                color: node?.iconColor?.hex
-                                            }} aria-hidden="true" />
-                                        )}
-                                        {node.value}
-                                    </dt>
-                                    <dd className={Styles.featureCardContent}>
-                                        <p className="flex-auto" style={{
+                                <div className="relative isolate flex flex-col bg-black justify-end overflow-hidden rounded-sm px-8 pb-8 pt-80 sm:pt-48 lg:pt-80">
+                                    {node?.image?.asset?.url ?
+                                        <Image
+                                            src={node?.image?.asset?.url}
+                                            alt={node?.image?.asset?.altText}
+                                            placeholder={node?.image?.asset?.lqip ? 'blur' : 'empty'}
+                                            blurDataURL={node?.image?.asset?.lqip}
+                                            className="absolute inset-0 -z-10 h-full w-full object-cover"
+                                            width={800}
+                                            height={800}
+                                        />
+                                        :
+                                        <div className="w-full h-full"></div>
+                                    }
+                                    <div className="absolute inset-0 -z-10 bg-gradient-to-t from-gray-900 via-gray-900/40" />
+                                    <div className="absolute inset-0 -z-10 rounded-2xl ring-1 ring-inset ring-gray-900/10" />
+                                    {node?.value &&
+                                        <h3 className={`${Styles.featureCard} mb-4`} style={{
+                                            color: node?.headingColor?.hex
+                                        }}>{node.value}</h3>
+                                    }
+                                    <div >
+                                        <p style={{
                                             color: node?.contentColor?.hex
-                                        }}>{node.content}</p>
-                                        {node?.button?.text &&
-                                            <p className="mt-6">
-                                                <Link href={linkUrl ?? '/'} className={`${Styles.featureCardCta}`} aria-label={`Link to ${node?.value}`} style={{
-                                                    color: node?.linkColor?.hex
-                                                }}>
-                                                    {node?.button?.text} <span aria-hidden="true">→</span>
-                                                </Link>
-                                            </p>
-                                        }
-                                    </dd>
+                                        }}>
+                                            {node.content}
+                                        </p>
+                                    </div>
+                                    {node?.button?.text &&
+                                        <Link href={linkUrl ?? '/'} className="absolute inset-0" aria-label={`Link to ${node?.value}`} style={{
+                                            color: node?.linkColor?.hex
+                                        }}>
+                                            <span className="sr-only">{node?.button?.text}</span>
+                                        </Link>
+                                    }
                                 </div>
                             )
                         })}

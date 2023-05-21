@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--body-font);
   background-color: var(--website-body-color);
   color: var(--website-text-color);
   font-size: 16px;
@@ -20,6 +20,10 @@ body {
 
 .accent {
   color: var(--primary-accent)
+}
+
+.bg-accent {
+  background-color: var(--primary-button-background);
 }
 
 .primary-button {
@@ -88,4 +92,33 @@ body .content h6 {
 .swiper-button-disabled {
   opacity: 0.5;
   pointer-events: none;
+}
+
+/*  FORM  */
+
+input[type="radio"]:checked:focus {
+  background-color: var(--radio-color);
+}
+
+input[type="radio"]:checked:hover {
+  background-color: var(--radio-color);
+  @apply outline-none
+
+}
+
+
+input[type="radio"]:checked {
+  /* Change the background color of the radio button circle when checked */
+  background-color: var(--radio-color);
+  background-image: none;
+  @apply outline-none
+
+}
+
+.slide-up {
+  transform: translateY(-100%);
+}
+
+.slide-down {
+  transform: translateY(0%);
 }

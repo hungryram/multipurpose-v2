@@ -1,10 +1,10 @@
 /* SOCIAL */
 
-ul.socialComponent {
-  @apply ml-0
+.socialComponent {
+  @apply flex justify-center space-x-3
 }
 
-.socialComponent li {
+.socialComponent a {
     @apply inline-block mr-2 text-2xl;
   }
 

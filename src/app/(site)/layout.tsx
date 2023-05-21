@@ -5,7 +5,7 @@ import './globals.css'
 import { appearance, mainLayoutProfile } from '../../../lib/groq-data'
 import { Metadata } from 'next';
 import GoogleAnalytics from './components/global/analytics'
-
+import { interFont } from '../fonts'
 
 // GENERATES SEO
 export async function generateMetadata(): Promise<Metadata> {
@@ -98,14 +98,14 @@ export default async function RootLayout({
     ...(data?.profileSettings?.settings?.websiteName && { "url": data?.profileSettings?.settings?.websiteName }),
     ...(data?.profileSettings?.seo?.meta_description && { "description": data?.profileSettings?.seo?.meta_description }),
   };
-
+  
   return (
     <html lang="en">
 
       {data?.profileSettings?.settings?.googleID &&
         <GoogleAnalytics GA_TRACKING_ID={data?.profileSettings?.settings?.googleID} />
       }
-      <body>
+      <body className={interFont.variable}>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusiness) }}
@@ -121,6 +121,7 @@ export default async function RootLayout({
                   --top-header-background: ${data.appearances?.topHeaderBar?.topHeaderBarBgColor};
                   --top-header-text-color: ${data.appearances?.topHeaderBar?.topHeaderBarTextColor};
                   --primary-accent: ${data.appearances?.primaryAccent ?? '#cccccc'};
+                  --radio-color: ${data.appearances?.primaryAccent ?? '#cccccc'};
 
                   --footer-background-color: ${data.appearances?.footerBg ?? '#0d1321'};
                   --footer-header-color: ${data.appearances?.footerHeader ?? '#ffffff'};
@@ -162,9 +163,11 @@ export default async function RootLayout({
           backgroundColor={data?.appearances?.navBgColor}
           enableTopHeader={data?.appearances?.topHeaderBar?.enableTopHeaderBar}
           ctaLink={data?.appearances?.header?.ctaLink}
+          hideCta={data?.appearances?.header?.hideCta}
         />
         {children}
         <Footer
+          singleColumn={data?.appearances?.footer?.singleColumn}
           footerText={data.appearances?.footer?.footerText}
           company_name={data.profileSettings?.company_name}
           image={data.appearances?.footer?.footerLogo?.asset?.url}

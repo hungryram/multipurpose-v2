@@ -20,6 +20,8 @@ import GalleryMasonry from "./gallery-masonry";
 import GallerySwiper from "./gallery-swiper";
 import HeroSwiper from "./hero-swiper";
 import TestimonialSwiper from "./testimonial-swiper";
+import FeaturedGridImageTextOutside from "./featured-grid-image";
+import FeaturedGridImageTextInside from "./featured-grid-text-inside";
 
 interface Props {
     pageBuilder: any[];
@@ -131,6 +133,7 @@ export default function Main({
                                     secondaryButtonText={section?.secondButtonLinking?.buttonText}
                                     secondaryButtonStyle={secondaryButton}
                                     imageOverlayColor={section?.imageOverlayColor}
+                                    imageHeight={section?.imageHeight}
                                 />
                                 :
                                 <HeroSwiper
@@ -368,22 +371,62 @@ export default function Main({
 
                 if (section._type === 'featuredGrid') {
                     return (
-                        <FeatureSection
-                            key={section?._key}
-                            columnNumber={section?.columnNumber}
-                            blocks={section?.childBlocks}
-                            backgroundStyles={backgroundStyles}
-                            content={section?.content}
-                            textAlign={section?.textAlign}
-                            // PRIMARY BUTTON
-                            primaryButtonText={section?.buttonLinking?.buttonText}
-                            primaryButtonLink={section?.buttonLinking}
-                            primaryButtonStyle={primaryButton}
-                            // SECONDARY BUTTON
-                            secondaryButtonLink={section?.secondButtonLinking}
-                            secondaryButtonText={section?.secondButtonLinking?.buttonText}
-                            secondaryButtonStyle={secondaryButton}
-                        />
+                        <>
+                            {section?.layoutType === 'gridWithImageOutside' &&
+                                <FeaturedGridImageTextOutside
+                                    key={section?._key}
+                                    columnNumber={section?.columnNumber}
+                                    blocks={section?.childBlocks}
+                                    backgroundStyles={backgroundStyles}
+                                    content={section?.content}
+                                    textAlign={section?.textAlign}
+                                    // PRIMARY BUTTON
+                                    primaryButtonText={section?.buttonLinking?.buttonText}
+                                    primaryButtonLink={section?.buttonLinking}
+                                    primaryButtonStyle={primaryButton}
+                                    // SECONDARY BUTTON
+                                    secondaryButtonLink={section?.secondButtonLinking}
+                                    secondaryButtonText={section?.secondButtonLinking?.buttonText}
+                                    secondaryButtonStyle={secondaryButton}
+                                />
+                            }
+                            {section?.layoutType === 'featuredGridIcon' &&
+                                <FeatureSection
+                                    key={section?._key}
+                                    columnNumber={section?.columnNumber}
+                                    blocks={section?.childBlocks}
+                                    backgroundStyles={backgroundStyles}
+                                    content={section?.content}
+                                    textAlign={section?.textAlign}
+                                    // PRIMARY BUTTON
+                                    primaryButtonText={section?.buttonLinking?.buttonText}
+                                    primaryButtonLink={section?.buttonLinking}
+                                    primaryButtonStyle={primaryButton}
+                                    // SECONDARY BUTTON
+                                    secondaryButtonLink={section?.secondButtonLinking}
+                                    secondaryButtonText={section?.secondButtonLinking?.buttonText}
+                                    secondaryButtonStyle={secondaryButton}
+                                />
+                            }
+                            {section?.layoutType === 'gridWithTextInside' &&
+                                <FeaturedGridImageTextInside
+                                    key={section?._key}
+                                    columnNumber={section?.columnNumber}
+                                    blocks={section?.childBlocks}
+                                    backgroundStyles={backgroundStyles}
+                                    content={section?.content}
+                                    textAlign={section?.textAlign}
+                                    // PRIMARY BUTTON
+                                    primaryButtonText={section?.buttonLinking?.buttonText}
+                                    primaryButtonLink={section?.buttonLinking}
+                                    primaryButtonStyle={primaryButton}
+                                    // SECONDARY BUTTON
+                                    secondaryButtonLink={section?.secondButtonLinking}
+                                    secondaryButtonText={section?.secondButtonLinking?.buttonText}
+                                    secondaryButtonStyle={secondaryButton}
+                                />
+                            }
+                        </>
                     );
                 }
 

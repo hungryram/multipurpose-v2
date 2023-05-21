@@ -3,11 +3,11 @@
 }
 
 .featureGridWrap {
-    @apply mx-auto mt-16 sm:mt-20 lg:mt-24
+    @apply mx-auto
 }
 
 .featureCard {
-    @apply flex items-center gap-x-3 text-base font-semibold leading-7
+    @apply flex items-center gap-x-3 font-semibold leading-7 text-lg
 }
 
 .featureCardContainer {
