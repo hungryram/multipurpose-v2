@@ -44,19 +44,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: new Date(),
     },
     {
-      url: `${websiteName}/blog`,
+      url: `${websiteName}/blog/`,
       lastModified: new Date(),
     },
     {
-      url: `${websiteName}/legal`,
+      url: `${websiteName}/legal/`,
       lastModified: new Date(),
     },
     {
-      url: `${websiteName}/team`,
+      url: `${websiteName}/team/`,
       lastModified: new Date(),
     },
     {
-      url: `${websiteName}/services`,
+      url: `${websiteName}/services/`,
       lastModified: new Date(),
     },
   ];
