@@ -40,7 +40,7 @@ export default function Example({
 
   useEffect(() => {
     const handleScroll = () => {
-      setScroll(window.scrollY > 500);
+      setScroll(window.scrollY > 300);
     };
 
     window.addEventListener('scroll', handleScroll);

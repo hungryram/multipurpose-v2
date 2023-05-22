@@ -16,6 +16,7 @@ export default defineType({
             options: {
                 list: [
                     { title: 'Grid with Icon', value: 'featuredGridIcon' },
+                    { title: 'Grid with Colored Containers', value: 'featuredBox' },
                     { title: 'Grid with Image and Text Outside', value: 'gridWithImageOutside' },
                     { title: 'Grid with Image and Text Inside', value: 'gridWithTextInside' },
                 ]
@@ -148,6 +149,23 @@ export default defineType({
             type: 'number',
             validation: Rule => Rule.min(1).max(4),
             group: 'settings'
+        },
+        {
+            title: 'Grid Background Color',
+            name: 'gridBackgroundColor',
+            type: 'color',
+            options: {
+                disableAlpha: true
+            },
+            hidden: ({parent}) => parent?.layoutType !== 'featuredBox',
+            group: 'settings'
+        },
+        {
+            title: 'Offset Top',
+            name: 'offsetTop',
+            type: 'boolean',
+            description: 'This makes the section overlay any top section.',
+            hidden: ({parent}) => parent?.layoutType !== 'featuredBox',
         },
         {
             title: 'Background Options',

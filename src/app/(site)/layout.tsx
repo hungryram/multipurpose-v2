@@ -10,7 +10,7 @@ import Pixel from './components/global/pixel'
 
 // GENERATES SEO
 export async function generateMetadata(): Promise<Metadata> {
-  const data = await client.fetch(mainLayoutProfile, { next: { revalidate: 60 } })
+  const data = await client.fetch(appearance, { next: { revalidate: 60 } })
 
   return {
     title: data?.profileSettings?.seo?.title_tag,
@@ -103,6 +103,8 @@ export default async function RootLayout({
     ...(data?.profileSettings?.settings?.websiteName && { "url": data?.profileSettings?.settings?.websiteName }),
     ...(data?.profileSettings?.seo?.meta_description && { "description": data?.profileSettings?.seo?.meta_description }),
   };
+
+
   return (
     <html lang="en">
       {data?.profileSettings?.settings?.googleID &&
@@ -182,7 +184,7 @@ export default async function RootLayout({
           quickLinksHeading={data.appearances?.footer?.quickLinksHeading}
           quickLinksTwoHeading={data.appearances?.footer?.quickLinksTwoHeading}
           altText={data.appearances?.footer?.footerLogo?.asset?.altText}
-          blurData={data.ablurDatappearances?.footer?.footerLogo?.asset?.lqip}
+          blurData={data.appearances?.footer?.footerLogo?.asset?.lqip}
           email={data.profileSettings?.contact_information?.email}
           phone_number={data.profileSettings?.contact_information?.phone_number}
           office_number={data.profileSettings?.contact_information?.office_number}

@@ -79,14 +79,14 @@ export default function Footer({
       <div className="section">
         <div className="container">
           {singleColumn !== true ?
-            <div className={`grid ${footerText ? 'lg:grid-cols-5' : 'lg:grid-cols-4'} md:grid-cols-3 grid-cols-1 xl:gap-8 gap-y-10`}>
-              <div className="space-y-8">
+            <div className={`lg:flex md:grid md:grid-cols-3 grid-cols-1 xl:gap-8 gap-y-10 space-y-10`}>
+              <div className="space-y-8 flex-1">
                 {image ?
                   <div className="flex md:justify-start justify-center">
                     <Image
                       src={image}
                       width={200}
-                      height="50"
+                      height={50}
                       alt={altText}
                       className="mb-6 justify-center flex"
                       placeholder={blurData ? 'blur' : 'empty'}
@@ -117,7 +117,7 @@ export default function Footer({
                   />
                 </div>
               </div>
-              <div>
+              <div className=" flex-1">
                 <div>
                   <h3>Contact Information</h3>
                   <dl className="space-y-4 text-base leading-7">
@@ -182,11 +182,41 @@ export default function Footer({
                   </dl>
                 </div>
               </div>
-              <div>
-                <div>
-                  {quickLinksHeading && <h3>{quickLinksHeading}</h3>}
+              {links &&
+                <div className=" flex-1">
+                  <div>
+                    {quickLinksHeading && <h3>{quickLinksHeading}</h3>}
+                    <ul role="list" className="space-y-4">
+                      {links?.map((link: any) => {
+
+                        const quickLinks = (link.internalLink?._type === "pages" && `/${link.internalLink.slug}`) ||
+                          (link.internalLink?._type === "blog" && `/blog/${link.internalLink.slug}`) ||
+                          (link.internalLink?._type === "legal" && `/legal/${link.internalLink.slug}`) ||
+                          (link.internalLink?._type === "services" && `/services/${link.internalLink.slug}`) ||
+                          (link.internalLink?._type === "team" && `/team/${link.internalLink.slug}`) ||
+                          (link.externalUrl && `${link.externalUrl}`)
+
+                        return (
+                          <li key={link._key}>
+                            <Link
+                              href={quickLinks}
+                              target={link.newTab && '_blank'}
+                              className="text-sm"
+                            >
+                              {link.text}
+                            </Link>
+                          </li>
+                        )
+                      })}
+                    </ul>
+                  </div>
+                </div>
+              }
+              {secondLinks &&
+                <div className=" flex-1">
+                  {quickLinksTwoHeading && <h3>{quickLinksTwoHeading}</h3>}
                   <ul role="list" className="space-y-4">
-                    {links?.map((link: any) => {
+                    {secondLinks?.map((link: any) => {
 
                       const quickLinks = (link.internalLink?._type === "pages" && `/${link.internalLink.slug}`) ||
                         (link.internalLink?._type === "blog" && `/blog/${link.internalLink.slug}`) ||
@@ -209,35 +239,9 @@ export default function Footer({
                     })}
                   </ul>
                 </div>
-              </div>
-              <div>
-                {quickLinksTwoHeading && <h3>{quickLinksTwoHeading}</h3>}
-                <ul role="list" className="space-y-4">
-                  {secondLinks?.map((link: any) => {
-
-                    const quickLinks = (link.internalLink?._type === "pages" && `/${link.internalLink.slug}`) ||
-                      (link.internalLink?._type === "blog" && `/blog/${link.internalLink.slug}`) ||
-                      (link.internalLink?._type === "legal" && `/legal/${link.internalLink.slug}`) ||
-                      (link.internalLink?._type === "services" && `/services/${link.internalLink.slug}`) ||
-                      (link.internalLink?._type === "team" && `/team/${link.internalLink.slug}`) ||
-                      (link.externalUrl && `${link.externalUrl}`)
-
-                    return (
-                      <li key={link._key}>
-                        <Link
-                          href={quickLinks}
-                          target={link.newTab && '_blank'}
-                          className="text-sm"
-                        >
-                          {link.text}
-                        </Link>
-                      </li>
-                    )
-                  })}
-                </ul>
-              </div>
+              }
               {footerText &&
-                <div className="text-sm">
+                <div className="text-sm flex-1">
                   <ContentEditor
                     content={footerText}
                   />

@@ -22,6 +22,7 @@ import HeroSwiper from "./hero-swiper";
 import TestimonialSwiper from "./testimonial-swiper";
 import FeaturedGridImageTextOutside from "./featured-grid-image";
 import FeaturedGridImageTextInside from "./featured-grid-text-inside";
+import FeaturedGridBox from "./feature-grid-box";
 
 interface Props {
     pageBuilder: any[];
@@ -110,8 +111,8 @@ export default function Main({
                             ${bg?.imageOverlayColor?.rgb.a ?? '0.2'}
                             )),
                             url(${section?.backgroundImage?.image?.asset?.url})`,
-                            backgroundPosition: 'center',
-                            backgroundSize: 'cover'
+                    backgroundPosition: 'center',
+                    backgroundSize: 'cover'
                 };
 
                 // PRIMARY BUTTON STYLES
@@ -452,6 +453,26 @@ export default function Main({
                                     secondaryButtonStyle={secondaryButton}
                                 />
                             }
+                            {section?.layoutType === 'featuredBox' &&
+                                <FeaturedGridBox
+                                    key={section?._key}
+                                    gridBackgroundColor={section?.gridBackgroundColor?.hex}
+                                    offsetTop={section?.offsetTop}
+                                    columnNumber={section?.columnNumber}
+                                    blocks={section?.childBlocks}
+                                    backgroundStyles={backgroundStyles}
+                                    content={section?.content}
+                                    textAlign={section?.textAlign}
+                                    // PRIMARY BUTTON
+                                    primaryButtonText={section?.buttonLinking?.buttonText}
+                                    primaryButtonLink={section?.buttonLinking}
+                                    primaryButtonStyle={primaryButton}
+                                    // SECONDARY BUTTON
+                                    secondaryButtonLink={section?.secondButtonLinking}
+                                    secondaryButtonText={section?.secondButtonLinking?.buttonText}
+                                    secondaryButtonStyle={secondaryButton}
+                                />
+                            }
                         </>
                     );
                 }
@@ -527,9 +548,9 @@ export default function Main({
                                 <ServiceGrid
                                     key={section?._key}
                                     services={allServices}
-                                    columnNumber={section?.columnNumber}
                                     content={section?.content}
                                     imageData={section?.imageData?.asset?.url}
+                                    columnNumber={section?.columnNumber}
                                     textAlign={section?.textAlign}
                                     backgroundStyles={backgroundStyles}
                                     // PRIMARY BUTTON
