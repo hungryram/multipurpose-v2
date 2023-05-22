@@ -163,7 +163,7 @@ export default async function RootLayout({
         </style>
         <Navbar
           company_name={data.profileSettings?.company_name}
-          logo={data.appearances?.branding.logo?.asset?.url}
+          logo={data.appearances?.branding?.logo?.asset?.url}
           navItems={data.appearances?.header?.mainNav?.navItems}
           logoWidth={data.appearances?.branding?.logoWidth}
           mobileLogoWidth={data.appearances?.branding?.mobileLogoWidth}
