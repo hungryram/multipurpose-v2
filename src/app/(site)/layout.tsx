@@ -10,7 +10,7 @@ import Pixel from './components/global/pixel'
 
 // GENERATES SEO
 export async function generateMetadata(): Promise<Metadata> {
-  const data = await client.fetch(appearance, { next: { revalidate: 60 } })
+  const data = await client.fetch(mainLayoutProfile, { next: { revalidate: 60 } })
 
   return {
     title: data?.profileSettings?.seo?.title_tag,

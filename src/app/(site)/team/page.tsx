@@ -6,7 +6,7 @@ import ContentEditor from "../components/util/content-editor"
 
 // GENERATES SEO
 export async function generateMetadata() {
-    const teamMeta = await client.fetch(teamPage, { next: { revalidate: 60 } })
+    const teamMeta = await client.fetch(teamPage)
 
     const hasTeam = teamMeta?.team?.length > 0;
 
