@@ -52,7 +52,7 @@ export const submitForm = async (data) => {
     });
 
     const htmlBody = `
-    <h1>Contact Form Submission</h1>
+    <h2>Contact Form Submission</h2>
     <table>
       <tbody>
         ${tableRows.join('')}
