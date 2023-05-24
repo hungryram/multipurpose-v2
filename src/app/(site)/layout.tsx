@@ -74,13 +74,19 @@ export default async function RootLayout({
       ...(data?.profileSettings?.address?.zip_code && { "postalCode": data?.profileSettings?.address?.zip_code }),
       ...(data?.profileSettings?.address?.addressCountry && { "addressCountry": data?.profileSettings?.address?.addressCountry })
     },
-    "contactPoint": {
-      "@type": "ContactPoint",
-      ...(data?.profileSettings?.contact_information?.office_number && { "officeNumber": data?.profileSettings?.contact_information?.office_number }),
-      ...(data?.profileSettings?.contact_information?.phone_number && { "directNumber": data?.profileSettings?.contact_information?.phone_number }),
-      ...(data?.profileSettings?.contact_information?.email && { "email": data?.profileSettings?.contact_information?.email }),
-      "contactType": "Customer Support"
-    },
+    "contactPoint": [
+      {
+        "@type": "ContactPoint",
+        ...(data?.profileSettings?.contact_information?.office_number && { "telephone": data?.profileSettings?.contact_information?.office_number }),
+        ...(data?.profileSettings?.contact_information?.office_number && { "ContactType": "Office Phone" }),
+        ...(data?.profileSettings?.contact_information?.email && { "email": data?.profileSettings?.contact_information?.email }),
+      },
+      {
+        "@type": "ContactPoint",
+        ...(data?.profileSettings?.contact_information?.phone_number && { "telephone": data?.profileSettings?.contact_information?.phone_number }),
+        ...(data?.profileSettings?.contact_information?.phone_number && { "ContactType": "Direct Phone" }),
+      },
+    ],
     "sameAs": [
       ...(data?.profileSettings?.social?.facebook ? [data.profileSettings.social.facebook] : []),
       ...(data?.profileSettings?.social?.twitter ? [data.profileSettings.social.twitter] : []),
