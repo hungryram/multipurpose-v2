@@ -14,8 +14,20 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }));
 
   // Generate the sitemap for legal
-  const legalUrl = pages?.blog?.map((page: any) => ({
+  const legalUrl = pages?.legal?.map((page: any) => ({
     url: `${websiteName}/legal/${page.slug}`,
+    lastModified: page?._updatedAt,
+  }));
+
+  // Generate the sitemap for team
+  const teamUrl = pages?.team?.map((page: any) => ({
+    url: `${websiteName}/team/${page.slug}`,
+    lastModified: page?._updatedAt,
+  }));
+
+  // Generate the sitemap for services
+  const servicesUrl = pages?.services?.map((page: any) => ({
+    url: `${websiteName}/services/${page.slug}`,
     lastModified: page?._updatedAt,
   }));
 
@@ -25,17 +37,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     lastModified: page?._updatedAt,
   }));
 
-  // Generate the sitemap for team
-  const teamUrl = pages?.team?.map((page: any) => ({
-    url: `${websiteName}/${page.slug}`,
-    lastModified: page?._updatedAt,
-  }));
-
-  // Generate the sitemap for services
-  const servicesUrl = pages?.services?.map((page: any) => ({
-    url: `${websiteName}/${page.slug}`,
-    lastModified: page?._updatedAt,
-  }));
 
   // Add additional static sitemap entries if needed
   const staticEntries = [
