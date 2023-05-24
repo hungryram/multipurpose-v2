@@ -28,9 +28,9 @@ export default defineType({
             validation: Rule => Rule.required().error('Specify Image Height'),
             options: {
                 list: [
-                    { title: "Full Screen", value: "h-screen" },
-                    { title: "Medium", value: "h-[70vh]" },
-                    { title: "Small", value: "h-[50vh]" },
+                    { title: "Full Screen", value: "min-h-screen" },
+                    { title: "Medium", value: "min-h-[70vh]" },
+                    { title: "Small", value: "min-h-[50vh]" },
                 ],
             },
             initialValue: "h-[70vh]"
