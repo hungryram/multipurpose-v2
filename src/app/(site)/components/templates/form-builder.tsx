@@ -81,9 +81,9 @@ export default function FormBuilder({ formSchema }: FormBuilderProps) {
                   )}
                   {field.type === 'radio' && (
                     <div className={`gap-x-6 mt-4 ${field?.stacked ? '' : 'flex items-center'}`}>
-                      {field?.radioValue?.map((node) => {
+                      {field?.radioValue?.map((node, i) => {
                         return (
-                          <div className="flex items-center gap-2 my-1">
+                          <div className="flex items-center gap-2 my-1" key={i}>
                             <input
                               type="radio"
                               name={field.label}
@@ -101,9 +101,9 @@ export default function FormBuilder({ formSchema }: FormBuilderProps) {
                   )}
                   {field.type === 'checkbox' && (
                     <div className={`gap-x-6 mt-4 ${field?.stacked ? '' : 'flex items-center'}`}>
-                      {field?.checkBoxValue?.map((node) => {
+                      {field?.checkBoxValue?.map((node, i) => {
                         return (
-                          <div className="flex items-center gap-2 my-1">
+                          <div className="flex items-center gap-2 my-1" key={i}>
                             <input
                               type="checkbox"
                               name={field.label}

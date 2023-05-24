@@ -62,7 +62,7 @@ export default function FeaturedGridImageTextInside({
                                 (node.blockLinking?.externalUrl && `${node.blockLinking?.externalUrl}`);
 
                             return (
-                                <div className="relative isolate flex flex-col bg-black justify-end overflow-hidden rounded-sm px-8 pb-8 pt-80 sm:pt-48 lg:pt-80">
+                                <div className="relative isolate flex flex-col bg-black justify-end overflow-hidden rounded-sm px-8 pb-8 pt-80 sm:pt-48 lg:pt-80" key={node._key}>
                                     {node?.image?.asset?.url ?
                                         <Image
                                             src={node?.image?.asset?.url}
