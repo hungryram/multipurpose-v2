@@ -389,7 +389,7 @@ export default function Main({
                                     secondaryButtonText={section?.secondButtonLinking?.buttonText}
                                     secondaryButtonStyle={secondaryButton}
                                     slideNumber={section?.slideNumber}
-                                    navigationColors={section?.navigationColors.hex}
+                                    navigationColors={section?.navigationColors?.hex}
                                 />
                             }
                         </>
