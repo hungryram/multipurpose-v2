@@ -1,16 +1,19 @@
-'use client'
+import { NextPage } from 'next';
 
-export default async function IdxPage() {
+type IdxPageProps = {
+    idx_body: string;
+  };
+  
+  const IdxPage: NextPage<IdxPageProps> = ({ idx_body }) => {
     return (
-        <div>
-            <div className="section">
-                <div className="container">
-                    <h1>IDX PAGE</h1>
-                </div>
-            </div>
-            <div 
-                dangerouslySetInnerHTML={{ __html: `{idx_body}` }}
-            />
+      <div className='container'>
+        <div className="section content">
+            <h1>Test</h1>
         </div>
-    )
-}
+        {idx_body}
+      </div>
+    );
+  };
+  
+  export default IdxPage;
+  
