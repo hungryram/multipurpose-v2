@@ -1,4 +1,4 @@
-'use server'
+'use client'
 
 export default async function IdxPage() {
     return (
