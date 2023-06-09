@@ -1,6 +1,6 @@
-'use client'
+'use server'
 
-export default function IdxPage() {
+export default async function IdxPage() {
     return (
         <div>
             <div className="section">
