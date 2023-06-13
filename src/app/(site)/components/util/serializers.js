@@ -35,6 +35,11 @@ const serializers = {
                 <a href={value.href} target={value.newTab ? '_blank' : '_self'} className="accent">{children}</a>
             )
         },
+        color: ({ value, children }) => {
+            return (
+                <span style={{ color: value?.hex }}>{children}</span>
+            )
+        }
     }
 }
 

@@ -40,10 +40,11 @@ import React from 'react'
             { "title": "Strong", "value": "strong" },
             { "title": "Emphasis", "value": "em" },
             { "title": "Underline", "value": "underline" },
-            { "title": "Strike", "value": "strike-through" }
+            { "title": "Strike", "value": "strike-through" },
           ],
           // Annotations can be any object structure – e.g. a link or a footnote.
           annotations: [
+            {name: 'color', title: 'Color', type: 'color'},
             {
               title: 'URL',
               name: 'link',
@@ -99,6 +100,5 @@ import React from 'react'
       },
       {type: 'youtube'},
       {type: 'coding'},
-      
     ],
   })
