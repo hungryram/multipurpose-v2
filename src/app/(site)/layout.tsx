@@ -157,6 +157,7 @@ export default async function RootLayout({
 
                   --website-body-color: ${data.appearances?.websiteBodyColor ?? '#fff'};
                   --website-text-color: ${data.appearances?.websiteTextColor ?? '#222'};
+                  --website-heading-color: ${data.appearances?.websiteHeadingColor};
 
                   --button-radius: ${`${data.appearances?.buttonRadius ?? 6}px`};
                   --button-y-padding: ${`${data.appearances?.buttonYPadding ?? 8}px`};

@@ -67,6 +67,14 @@ export default defineType({
             }
         },
         {
+            title: 'Website Heading Color',
+            name: 'websiteHeadingColor',
+            type: 'color',
+            options: {
+                disableAlpha: true
+            }
+        },
+        {
             title: 'Website Text Color',
             name: 'websiteTextColor',
             type: 'color',

@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 module.exports = {
-    assetPrefix: 'https://multipurpose-v2.vercel.app',
+    // assetPrefix: 'https://multipurpose-v2.vercel.app',
     images: {
         remotePatterns: [
             { hostname: 'cdn.sanity.io' },

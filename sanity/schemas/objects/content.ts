@@ -1,6 +1,5 @@
 import { defineType } from "sanity"
-import { AiFillHighlight } from "react-icons/ai"
-import React from 'react'
+import { AiOutlineFontColors } from "react-icons/ai"
 /**
  * This is the schema definition for the rich text fields used for
  * for this blog studio. When you import it in schemas.js it can be
@@ -44,7 +43,7 @@ import React from 'react'
           ],
           // Annotations can be any object structure – e.g. a link or a footnote.
           annotations: [
-            {name: 'color', title: 'Color', type: 'color'},
+            {name: 'color', title: 'Color', type: 'color', icon: AiOutlineFontColors},
             {
               title: 'URL',
               name: 'link',
