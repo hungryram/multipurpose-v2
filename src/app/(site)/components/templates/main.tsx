@@ -23,6 +23,10 @@ import TestimonialSwiper from "./testimonial-swiper";
 import FeaturedGridImageTextOutside from "./featured-grid-image";
 import FeaturedGridImageTextInside from "./featured-grid-text-inside";
 import FeaturedGridBox from "./feature-grid-box";
+import HeroSidebySide from "./hero-sidebyside";
+import HeroBasic from "./hero-basic";
+import DisclosureSeparate from "./disclosure-separate";
+import TestimonialsColumn from "./testimonials-column";
 
 interface Props {
     pageBuilder: any[];
@@ -141,7 +145,7 @@ export default function Main({
                 if (section._type === 'hero') {
                     return (
                         <>
-                            {section?.layoutType === 'static' ?
+                            {section?.layoutType === 'static' &&
                                 <Hero
                                     key={section?._key}
                                     content={section?.content}
@@ -161,7 +165,8 @@ export default function Main({
                                     imageOverlayColor={section?.imageOverlayColor}
                                     imageHeight={section?.imageHeight}
                                 />
-                                :
+                            }
+                            {section?.layoutType === "heroSwiper" &&
                                 <HeroSwiper
                                     key={section?._key}
                                     images={section?.childImage}
@@ -171,6 +176,44 @@ export default function Main({
                                     imageHeight={section?.imageHeight}
                                     animation={section?.animation}
                                     navigationColors={section?.navigationColors?.hex}
+                                />
+                            }
+                            {section?.layoutType === "sideByside" &&
+                                <HeroSidebySide
+                                    key={section?._key}
+                                    content={section?.content}
+                                    image={section?.imageData?.asset?.url}
+                                    altText={section?.imageData?.asset?.altText}
+                                    blurData={section?.imageData?.asset?.lqip}
+                                    textAlign={section?.textAlign}
+                                    textColor={section?.textColor?.hex}
+                                    // PRIMARY BUTTON
+                                    primaryButtonText={section?.buttonLinking?.buttonText}
+                                    primaryButtonLink={section?.buttonLinking}
+                                    primaryButtonStyle={primaryButton}
+                                    // SECONDARY BUTTON
+                                    secondaryButtonLink={section?.secondButtonLinking}
+                                    secondaryButtonText={section?.secondButtonLinking?.buttonText}
+                                    secondaryButtonStyle={secondaryButton}
+                                />
+                            }
+                            {section?.layoutType === "basic" &&
+                                <HeroBasic
+                                    key={section?._key}
+                                    content={section?.content}
+                                    image={section?.imageData?.asset?.url}
+                                    altText={section?.imageData?.asset?.altText}
+                                    blurData={section?.imageData?.asset?.lqip}
+                                    textAlign={section?.textAlign}
+                                    textColor={section?.textColor?.hex}
+                                    // PRIMARY BUTTON
+                                    primaryButtonText={section?.buttonLinking?.buttonText}
+                                    primaryButtonLink={section?.buttonLinking}
+                                    primaryButtonStyle={primaryButton}
+                                    // SECONDARY BUTTON
+                                    secondaryButtonLink={section?.secondButtonLinking}
+                                    secondaryButtonText={section?.secondButtonLinking?.buttonText}
+                                    secondaryButtonStyle={secondaryButton}
                                 />
                             }
                         </>
@@ -392,6 +435,25 @@ export default function Main({
                                     navigationColors={section?.navigationColors?.hex}
                                 />
                             }
+                            {section?.layoutType == 'column' &&
+                                <TestimonialsColumn
+                                    key={section?._key}
+                                    testimonials={allTestimonials}
+                                    content={section?.content}
+                                    textAlign={section?.textAlign}
+                                    backgroundStyles={backgroundStyles}
+                                    // PRIMARY BUTTON
+                                    primaryButtonText={section?.buttonLinking?.buttonText}
+                                    primaryButtonLink={section?.buttonLinking}
+                                    primaryButtonStyle={primaryButton}
+                                    // SECONDARY BUTTON
+                                    secondaryButtonLink={section?.secondButtonLinking}
+                                    secondaryButtonText={section?.secondButtonLinking?.buttonText}
+                                    secondaryButtonStyle={secondaryButton}
+                                    slideNumber={section?.slideNumber}
+                                    navigationColors={section?.navigationColors?.hex}
+                                />
+                            }
                         </>
                     );
                 }
@@ -480,7 +542,7 @@ export default function Main({
                 if (section._type === 'disclosureSection') {
                     return (
                         <>
-                            {section?.layoutType === 'twoColumn' ?
+                            {section?.layoutType === 'twoColumn' &&
                                 <DisclosureGrid
                                     key={section?._key}
                                     disclosure={section?.disclosures}
@@ -499,8 +561,29 @@ export default function Main({
                                     secondaryButtonText={section?.secondButtonLinking?.buttonText}
                                     secondaryButtonStyle={secondaryButton}
                                 />
-                                :
+                            }
+                            {section?.layoutType === 'fullWidth' &&
                                 <DisclosureSection
+                                    key={section?._key}
+                                    disclosure={section?.disclosures}
+                                    disclosureBackgroundColor={section?.disclosureBackgroundColor}
+                                    disclosureTextColor={section?.disclosureTextColor}
+                                    disclosureContentColor={section?.disclosureContentColor}
+                                    backgroundStyles={backgroundStyles}
+                                    content={section?.content}
+                                    textAlign={section?.textAlign}
+                                    // PRIMARY BUTTON
+                                    primaryButtonText={section?.buttonLinking?.buttonText}
+                                    primaryButtonLink={section?.buttonLinking}
+                                    primaryButtonStyle={primaryButton}
+                                    // SECONDARY BUTTON
+                                    secondaryButtonLink={section?.secondButtonLinking}
+                                    secondaryButtonText={section?.secondButtonLinking?.buttonText}
+                                    secondaryButtonStyle={secondaryButton}
+                                />
+                            }
+                            {section?.layoutType === 'separated' &&
+                                <DisclosureSeparate
                                     key={section?._key}
                                     disclosure={section?.disclosures}
                                     disclosureBackgroundColor={section?.disclosureBackgroundColor}

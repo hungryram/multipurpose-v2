@@ -1,4 +1,5 @@
 import { defineType } from "sanity";
+import { colorOptions, primaryButton, secondaryButton, textAlign } from "../lib/classes";
 
 export default defineType({
     title: 'Featured Grid',
@@ -35,27 +36,11 @@ export default defineType({
             name: 'textAlign',
             type: 'string',
             options: {
-                list: [
-                    { title: 'Left', value: 'text-left' },
-                    { title: 'Center', value: 'text-center mx-auto justify-center' },
-                    { title: 'Right', value: 'mx-auto mr-0 text-right' },
-                ]
+                list: textAlign
             },
-            initialValue: "text-center mx-auto justify-center"
-
         },
-        {
-            title: 'Primary Button',
-            name: 'button',
-            type: 'buttonSettings',
-            group: 'content'
-        },
-        {
-            title: 'Secondary Button',
-            name: 'secondaryButton',
-            type: 'secondaryButton',
-            group: 'content'
-        },
+        primaryButton,
+        secondaryButton,
         {
             title: 'Blocks',
             name: 'blocks',
@@ -167,12 +152,7 @@ export default defineType({
             description: 'This makes the section overlay any top section.',
             hidden: ({parent}) => parent?.layoutType !== 'featuredBox',
         },
-        {
-            title: 'Background Options',
-            name: 'background',
-            group: 'settings',
-            type: 'backgroundOptions',
-        }
+        colorOptions,
     ],
     preview: {
         select: {

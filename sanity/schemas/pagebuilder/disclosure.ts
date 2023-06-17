@@ -1,4 +1,5 @@
 import { defineType } from "sanity";
+import { colorOptions, primaryButton, secondaryButton, textAlign } from "../lib/classes";
 
 export default defineType({
     title: 'Disclosure Section',
@@ -16,6 +17,8 @@ export default defineType({
             options: {
                 list: [
                     { title: "Two Column", value: "twoColumn" },
+                    { title: "Full Width", value: "fullWidth" },
+                    { title: "Separate", value: "separated" },
                 ],
             },
         },
@@ -30,27 +33,11 @@ export default defineType({
             name: 'textAlign',
             type: 'string',
             options: {
-                list: [
-                    {title: 'Left', value: 'text-left'},
-                    {title: 'Center', value: 'text-center mx-auto justify-center'},
-                    {title: 'Right', value: 'mx-auto mr-0 text-right'},
-                ]
+                list: textAlign
             },
-            initialValue: "text-center mx-auto justify-center"
-
         },
-        {
-            title: 'Primary Button',
-            name: 'button',
-            type: 'buttonSettings',
-            group: 'content'
-        },
-        {
-            title: 'Secondary Button',
-            name: 'secondaryButton',
-            type: 'secondaryButton',
-            group: 'content'
-        },
+        primaryButton,
+        secondaryButton,
         {
             title: 'Disclosures',
             name: 'disclosures',
@@ -81,6 +68,7 @@ export default defineType({
             title: 'Disclosure Background Color',
             name: 'disclosureBackgroundColor',
             type: 'color',
+            hidden: ({ parent }) => parent?.layoutType === "separated",
             options: {
                 disableAlpha: true
             },
@@ -104,12 +92,7 @@ export default defineType({
             },
             group: 'settings'
         },
-        {
-            title: 'Background Options',
-            name: 'background',
-            group: 'settings',
-            type: 'backgroundOptions',
-        }
+        colorOptions,
     ],
     preview: {
         select: {

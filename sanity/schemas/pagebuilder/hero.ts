@@ -1,4 +1,5 @@
 import { defineType } from "sanity";
+import { textAlign } from "../lib/classes";
 
 export default defineType({
     title: 'Hero',
@@ -17,6 +18,8 @@ export default defineType({
                 list: [
                     { title: "Slider", value: "heroSwiper" },
                     { title: "Static Hero", value: "static" },
+                    { title: "Side by Side", value: "sideByside" },
+                    { title: "Basic", value: "basic" },
                 ],
             },
             initialValue: "static"
@@ -25,7 +28,7 @@ export default defineType({
             title: "Image Height",
             name: "imageHeight",
             type: "string",
-            validation: Rule => Rule.required().error('Specify Image Height'),
+            hidden: ({ parent }) => parent?.layoutType !== 'static',
             options: {
                 list: [
                     { title: "Full Screen", value: "min-h-screen" },
@@ -47,20 +50,14 @@ export default defineType({
             name: 'textAlign',
             type: 'string',
             options: {
-                list: [
-                    { title: 'Left', value: 'text-left' },
-                    { title: 'Center', value: 'text-center mx-auto justify-center' },
-                    { title: 'Right', value: 'mx-auto mr-0 text-right' },
-                ]
+                list: textAlign
             },
-            initialValue: "text-center mx-auto justify-center"
-
         },
         {
             title: 'Images',
             name: 'images',
             type: 'array',
-            hidden: ({ parent }) => parent?.layoutType === 'static',
+            hidden: ({ parent }) => parent?.layoutType !== 'heroSwiper',
             of: [
                 {
                     title: 'Image',
@@ -111,6 +108,7 @@ export default defineType({
         {
             title: 'Image Overlay Color',
             name: 'imageOverlayColor',
+            hidden: ({ parent }) => parent?.layoutType === 'heroSwiper' || parent?.layoutType === 'sideByside' || parent?.layoutType === 'basic',
             type: 'color',
         },
         {
@@ -129,13 +127,13 @@ export default defineType({
             title: 'Disable Navigation Arrows',
             name: 'disableNavigation',
             type: 'boolean',
-            hidden: ({ parent }) => parent?.layoutType === 'static',
+            hidden: ({ parent }) => parent?.layoutType !== 'heroSwiper',
             group: 'settings',
         },
         {
             title: 'Navigation Arrow Colors',
             name: 'navigationColors',
-            hidden: ({ parent }) => parent?.layoutType === 'static',
+            hidden: ({ parent }) => parent?.layoutType !== 'heroSwiper',
             type: 'color',
             group: 'settings'
         },

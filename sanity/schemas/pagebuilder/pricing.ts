@@ -1,4 +1,5 @@
 import { defineType } from "sanity";
+import { colorOptions, primaryButton, secondaryButton, textAlign } from "../lib/classes";
 
 export default defineType({
     title: 'Packages',
@@ -20,26 +21,11 @@ export default defineType({
             name: 'textAlign',
             type: 'string',
             options: {
-                list: [
-                    {title: 'Left', value: 'text-left'},
-                    {title: 'Center', value: 'text-center mx-auto justify-center'},
-                    {title: 'Right', value: 'mx-auto mr-0 text-right'},
-                ]
+                list: textAlign
             },
-            initialValue: "text-center mx-auto justify-center"
         },
-        {
-            title: 'Primary Button',
-            name: 'button',
-            type: 'buttonSettings',
-            group: 'content'
-        },
-        {
-            title: 'Secondary Button',
-            name: 'secondaryButton',
-            type: 'secondaryButton',
-            group: 'content'
-        },
+        primaryButton,
+        secondaryButton,
         {
             title: 'Packages',
             name: 'packages',
@@ -117,12 +103,7 @@ export default defineType({
             type: 'color',
             group: 'settings',
         },
-        {
-            title: 'Background Options',
-            name: 'background',
-            type: 'backgroundOptions',
-            group: 'settings'
-        },
+        colorOptions,
     ],
     preview: {
         select: {

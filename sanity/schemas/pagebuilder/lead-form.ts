@@ -1,4 +1,5 @@
 import { defineType } from "sanity";
+import { colorOptions, primaryButton, secondaryButton, textAlign } from "../lib/classes";
 
 export default defineType({
     title: 'Lead Form',
@@ -20,33 +21,12 @@ export default defineType({
             name: 'textAlign',
             type: 'string',
             options: {
-                list: [
-                    {title: 'Left', value: 'text-left'},
-                    {title: 'Center', value: 'text-center mx-auto justify-center'},
-                    {title: 'Right', value: 'mx-auto mr-0 text-right'},
-                ]
+                list: textAlign
             },
-            initialValue: "text-center mx-auto justify-center"
-
         },
-        {
-            title: 'Primary Button',
-            name: 'button',
-            type: 'buttonSettings',
-            group: 'content'
-        },
-        {
-            title: 'Secondary Button',
-            name: 'secondaryButton',
-            type: 'secondaryButton',
-            group: 'content'
-        },
-        {
-            title: 'Color Options',
-            name: 'background',
-            group: 'settings',
-            type: 'backgroundOptions',
-        },
+        primaryButton,
+        secondaryButton,
+        colorOptions,
         {
             title: 'Form Builder',
             name: 'formBuilder',
