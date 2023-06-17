@@ -24,3 +24,19 @@ export const colorOptions = {
     group: 'settings',
     type: 'backgroundOptions'
 }
+
+export const paddingTop = {
+    title: 'Padding Top',
+    name: 'paddingTop',
+    type: 'string',
+    group: 'settings',
+    description: 'Add top padding using px, em, rem, or percentages'
+}
+
+export const paddingBottom = {
+    title: 'Padding Bottom',
+    name: 'paddingBottom',
+    type: 'string',
+    group: 'settings',
+    description: 'Add bottom padding using px, em, rem, or percentages'
+}

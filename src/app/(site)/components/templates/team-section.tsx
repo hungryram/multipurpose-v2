@@ -11,7 +11,9 @@ interface Props {
     secondaryButtonText: string;
     secondaryButtonLink: string;
     secondaryButtonStyle: any;
-    backgroundStyles: any
+    backgroundStyles: any;
+    paddingTop: string;
+    paddingBottom: string;
 }
 
 export default function TeamComponent({
@@ -24,11 +26,20 @@ export default function TeamComponent({
     secondaryButtonLink,
     secondaryButtonText,
     secondaryButtonStyle,
-    backgroundStyles
+    backgroundStyles,
+    paddingTop,
+    paddingBottom,
 }: Props) {
 
+    const styles = {
+        paddingTop: paddingTop ?? '5rem',
+        paddingBottom: paddingBottom ?? '5rem',
+      }
+    
+      const allStyles = { ...backgroundStyles, ...styles }
+
     return (
-        <div className="section" style={backgroundStyles}>
+        <div style={allStyles}>
             <div className="container">
             {(content || primaryButtonLink || secondaryButtonLink) && (
                     <HeaderSection

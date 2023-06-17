@@ -1,5 +1,5 @@
 import { defineType } from "sanity";
-import { colorOptions, primaryButton, secondaryButton, textAlign } from "../lib/classes";
+import { colorOptions, paddingBottom, paddingTop, primaryButton, secondaryButton, textAlign } from "../lib/classes";
 
 export default defineType({
     title: 'Content Field',
@@ -29,9 +29,16 @@ export default defineType({
             type: 'string',
             hidden: ({ parent }) => parent?.layoutType === 'simpleFullWidth' || parent?.layoutType === 'narrowContainer' || parent?.layoutType === undefined
         },
+        {
+          title: 'Content',
+          name: 'content',
+          type: 'contentEditor'
+        },
         primaryButton,
         secondaryButton,
-        colorOptions
+        colorOptions,
+        paddingTop,
+        paddingBottom,
     ],
     preview: {
         select: {

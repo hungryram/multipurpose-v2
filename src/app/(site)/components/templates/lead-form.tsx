@@ -11,7 +11,9 @@ interface Props {
     secondaryButtonLink: string;
     secondaryButtonStyle: any;
     textAlign: string;
-    formSchema: any
+    formSchema: any;
+    paddingTop: string;
+    paddingBottom: string;
 }
 
 export default function LeadForm({
@@ -24,10 +26,20 @@ export default function LeadForm({
     secondaryButtonText,
     secondaryButtonStyle,
     textAlign,
-    formSchema
+    formSchema,
+    paddingTop,
+    paddingBottom,
 }: Props) {
+
+    const styles = {
+        paddingTop: paddingTop ?? '5rem',
+        paddingBottom: paddingBottom ?? '5rem',
+      }
+    
+      const allStyles = { ...backgroundStyles, ...styles }
+      
     return (
-        <div className="section" style={backgroundStyles}>
+        <div style={allStyles}>
             <div className="mx-auto max-w-2xl">
                 {(content || primaryButtonLink || secondaryButtonLink) && (
                     <HeaderSection

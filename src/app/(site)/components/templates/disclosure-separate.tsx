@@ -14,7 +14,9 @@ interface Props {
     primaryButtonStyle: any;
     secondaryButtonText: string;
     secondaryButtonLink: string;
-    secondaryButtonStyle: any
+    secondaryButtonStyle: any;
+    paddingTop: string;
+    paddingBottom: string;
 }
 
 export default function DisclosureSeparate({
@@ -28,10 +30,21 @@ export default function DisclosureSeparate({
     primaryButtonStyle,
     secondaryButtonLink,
     secondaryButtonText,
-    secondaryButtonStyle
+    secondaryButtonStyle,
+    paddingTop,
+    paddingBottom,
+    backgroundStyles
 }: Props) {
+
+    const styles = {
+        paddingTop: paddingTop ?? '5rem',
+        paddingBottom: paddingBottom ?? '5rem',
+      }
+    
+      const allStyles = { ...backgroundStyles, ...styles }
+
     return (
-        <div className="section">
+        <div style={allStyles}>
             <div className="container">
                 {(content || primaryButtonLink || secondaryButtonLink) && (
                     <HeaderSection

@@ -1,5 +1,5 @@
 import { defineType } from "sanity";
-import { colorOptions, primaryButton, secondaryButton, textAlign } from "../lib/classes";
+import { colorOptions, paddingBottom, paddingTop, primaryButton, secondaryButton, textAlign } from "../lib/classes";
 
 export default defineType({
     title: 'Team Display',
@@ -27,6 +27,8 @@ export default defineType({
         primaryButton,
         secondaryButton,
         colorOptions,
+        paddingTop,
+        paddingBottom,
     ],
     preview: {
         select: {

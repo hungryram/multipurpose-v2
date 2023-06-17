@@ -16,7 +16,9 @@ interface Props {
     secondaryButtonLink: string;
     secondaryButtonStyle: any;
     gridBackgroundColor: any;
-    offsetTop: boolean
+    offsetTop: boolean;
+    paddingTop: string;
+    paddingBottom: string;
 }
 
 export default function FeaturedGridBox({
@@ -32,10 +34,20 @@ export default function FeaturedGridBox({
     secondaryButtonText,
     secondaryButtonStyle,
     gridBackgroundColor,
-    offsetTop
+    offsetTop,
+    paddingTop,
+    paddingBottom,
 }: Props) {
+
+    const styles = {
+        paddingTop: paddingTop ?? '5rem',
+        paddingBottom: paddingBottom ?? '5rem',
+      }
+    
+      const allStyles = { ...backgroundStyles, ...styles }
+
     return (
-        <div className={`${offsetTop ? '-mt-32 relative' : 'section'}`} style={backgroundStyles}>
+        <div className={`${offsetTop && '-mt-32 relative'}`} style={allStyles}>
             <div className={`container`}>
                 {(content || primaryButtonLink || secondaryButtonLink) && (
                     <HeaderSection

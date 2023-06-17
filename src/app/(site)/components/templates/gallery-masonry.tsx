@@ -25,7 +25,9 @@ interface Props {
     secondaryButtonLink: string;
     secondaryButtonStyle: any;
     backgroundStyles: any;
-    disablePagination: boolean
+    disablePagination: boolean;
+    paddingTop: string;
+    paddingBottom: string;
 }
 
 const GalleryMasonry = ({
@@ -39,7 +41,9 @@ const GalleryMasonry = ({
     secondaryButtonStyle,
     backgroundStyles,
     images,
-    disablePagination
+    disablePagination,
+    paddingTop,
+    paddingBottom,
 }: Props) => {
     const [lightboxOpen, setLightboxOpen] = useState(false);
     const [selectedImage, setSelectedImage] = useState("");
@@ -65,8 +69,15 @@ const GalleryMasonry = ({
         }
     }, [lightboxOpen]);
 
+    const styles = {
+        paddingTop: paddingTop ?? '5rem',
+        paddingBottom: paddingBottom ?? '5rem',
+      }
+    
+      const allStyles = { ...backgroundStyles, ...styles }
+
     return (
-        <div className="section" style={backgroundStyles}>
+        <div style={allStyles}>
             <div className="container">
                 {(content || primaryButtonLink || secondaryButtonLink) && (
                     <HeaderSection

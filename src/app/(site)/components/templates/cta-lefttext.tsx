@@ -11,7 +11,8 @@ interface Props {
     primaryButtonStyle: any;
     secondaryButtonStyle: any;
     secondaryButtonText: string;
-
+    paddingTop: string,
+    paddingBottom: string
 }
 
 export default function CalltoActionLeftText({
@@ -22,7 +23,9 @@ export default function CalltoActionLeftText({
     primaryButtonText,
     primaryButtonStyle,
     secondaryButtonStyle,
-    secondaryButtonText
+    secondaryButtonText,
+    paddingTop,
+    paddingBottom,
 }: Props) {
 
     const primaryButtonLinking =
@@ -41,8 +44,15 @@ export default function CalltoActionLeftText({
         (secondaryButtonLink?.internalLink?._type === "team" && `/team/${secondaryButtonLink?.internalLink.slug}`) ||
         (secondaryButtonLink?.externalUrl && `${buttonLink?.externalUrl}`)
 
+        const styles = {
+            paddingTop: paddingTop ?? '5rem',
+            paddingBottom: paddingBottom ?? '5rem',
+          }
+        
+          const allStyles = { ...backgroundStyles, ...styles }
+
     return (
-        <div className="section" style={backgroundStyles}>
+        <div style={allStyles}>
             <div className="container lg:flex lg:items-center lg:justify-between">
                 <div className="content lg:w-1/2">
                     {content ?

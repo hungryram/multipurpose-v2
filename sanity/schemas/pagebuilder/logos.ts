@@ -1,5 +1,5 @@
 import { defineType } from "sanity";
-import { colorOptions, textAlign } from "../lib/classes";
+import { colorOptions, paddingBottom, paddingTop, textAlign } from "../lib/classes";
 
 export default defineType({
   title: 'Logos',
@@ -40,6 +40,8 @@ export default defineType({
       },
     },
     colorOptions,
+    paddingTop,
+    paddingBottom,
   ],
   preview: {
     select: {

@@ -11,6 +11,8 @@ interface Props {
   secondaryButtonLink: string;
   secondaryButtonStyle: any;
   textAlign: string;
+  paddingTop: string,
+  paddingBottom: string
 }
 
 export default function CallToActionBanner({
@@ -22,10 +24,20 @@ export default function CallToActionBanner({
   secondaryButtonLink,
   secondaryButtonText,
   secondaryButtonStyle,
+  paddingTop,
+  paddingBottom,
   textAlign
 }: Props) {
+
+  const styles = {
+    paddingTop: paddingTop ?? '5rem',
+    paddingBottom: paddingBottom ?? '5rem',
+  }
+
+  const allStyles = { ...backgroundStyles, ...styles }
+
   return (
-    <div className="section" style={backgroundStyles}>
+    <div style={allStyles}>
       <div className="container">
         <div className="mx-auto max-w-4xl text-center">
           {(content || primaryButtonLink || secondaryButtonLink) ? (
@@ -42,7 +54,7 @@ export default function CallToActionBanner({
               secondaryButtonStyle={secondaryButtonStyle}
             />
           ) :
-          <div dangerouslySetInnerHTML={{ __html: ctaData.content }} />
+            <div dangerouslySetInnerHTML={{ __html: ctaData.content }} />
           }
         </div>
       </div>

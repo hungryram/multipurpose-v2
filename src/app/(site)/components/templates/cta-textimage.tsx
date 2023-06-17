@@ -18,6 +18,8 @@ interface Props {
     secondaryButtonLink: string;
     secondaryButtonStyle: any;
     textAlign: string;
+    paddingTop: string;
+    paddingBottom: string;
 }
 
 export default function CalltoActionTextImage({
@@ -33,10 +35,20 @@ export default function CalltoActionTextImage({
     secondaryButtonLink,
     secondaryButtonText,
     secondaryButtonStyle,
+    paddingTop,
+    paddingBottom,
     textAlign
 }: Props) {
+
+    const styles = {
+        paddingTop: paddingTop ?? '5rem',
+        paddingBottom: paddingBottom ?? '5rem',
+      }
+    
+      const allStyles = { ...backgroundStyles, ...styles }
+
     return (
-        <div className="section" style={backgroundStyles}>
+        <div style={allStyles}>
             <div className="container">
                 <div className={`${Styles.ctaTextImageWrapper} space-y-10 ${reverseColumn ? 'flex-row-reverse' : ''}`}>
                     <div className="lg:w-1/2">

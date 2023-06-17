@@ -1,13 +1,13 @@
 import { defineType } from "sanity";
-import { colorOptions, primaryButton, secondaryButton, textAlign } from "../lib/classes";
+import { colorOptions, paddingBottom, paddingTop, primaryButton, secondaryButton, textAlign } from "../lib/classes";
 
 export default defineType({
     title: 'Call to Action',
     name: 'ctaSection',
     type: 'object',
     groups: [
-        {title: 'Content', name: 'content'},
-        {title: 'Settings', name: 'settings'},
+        { title: 'Content', name: 'content' },
+        { title: 'Settings', name: 'settings' },
     ],
     fields: [
         {
@@ -53,18 +53,20 @@ export default defineType({
         },
         primaryButton,
         secondaryButton,
-        colorOptions
+        colorOptions,
+        paddingTop,
+        paddingBottom,
     ],
     preview: {
         select: {
-          content: 'content',
+            content: 'content',
         },
         prepare({ content }) {
-          const hasContent = content && content[0]?.children?.length > 0;
-      
-          return {
-            title: hasContent ? content[0].children[0].text : 'Call to Action',
-          };
+            const hasContent = content && content[0]?.children?.length > 0;
+
+            return {
+                title: hasContent ? content[0].children[0].text : 'Call to Action',
+            };
         },
-      },
+    },
 })

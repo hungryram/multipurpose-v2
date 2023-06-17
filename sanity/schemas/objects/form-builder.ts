@@ -134,5 +134,10 @@ export default defineType({
                 },
             ],
         },
+        {
+            title: 'Form Disclaimer',
+            name: 'formDisclaimer',
+            type: 'contentEditor',
+        },
     ],
 })

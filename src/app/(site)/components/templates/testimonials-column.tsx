@@ -18,7 +18,9 @@ interface Props {
     secondaryButtonText: string;
     secondaryButtonLink: string;
     backgroundStyles: any;
-    secondaryButtonStyle: any
+    secondaryButtonStyle: any;
+    paddingTop: string;
+    paddingBottom: string;
 }
 
 export default function TestimonialsColumn({
@@ -31,10 +33,20 @@ export default function TestimonialsColumn({
     secondaryButtonLink,
     secondaryButtonText,
     secondaryButtonStyle,
-    backgroundStyles
+    backgroundStyles,
+    paddingTop,
+    paddingBottom,
 }: Props) {
+
+    const styles = {
+        paddingTop: paddingTop ?? '5rem',
+        paddingBottom: paddingBottom ?? '5rem',
+      }
+    
+      const allStyles = { ...backgroundStyles, ...styles }
+
     return (
-        <div className="section">
+        <div style={allStyles}>
             <div className="container">
                 {(content || primaryButtonLink || secondaryButtonLink) && (
                     <HeaderSection
@@ -66,7 +78,7 @@ export default function TestimonialsColumn({
                                 </div>
                             </div>
 
-                            <div className="mt-6 flex items-center text-sm lg:col-span-4 lg:col-start-1 lg:row-start-1 lg:mt-0 lg:flex-col lg:items-start xl:col-span-3">
+                            <div className="mt-6 flex items-center lg:col-span-4 lg:col-start-1 lg:row-start-1 lg:mt-0 lg:flex-col lg:items-start xl:col-span-3">
                                 <figcaption className="mt-6 flex items-center gap-x-4">
                                     {testimonial?.image &&
                                         <div className="relative w-12 h-12">
@@ -79,7 +91,7 @@ export default function TestimonialsColumn({
                                         </div>
                                     }
                                     <div>
-                                        <div className="font-semibold text-gray-900">{testimonial.name}</div>
+                                        <div className="font-semibold">{testimonial.name}</div>
                                         {testimonial?.position && <div className="text-gray-600">{testimonial?.position}</div>}
                                     </div>
                                 </figcaption>

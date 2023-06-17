@@ -1,5 +1,5 @@
 import { defineType } from "sanity";
-import { colorOptions, primaryButton, secondaryButton, textAlign } from "../lib/classes";
+import { colorOptions, paddingBottom, paddingTop, primaryButton, secondaryButton, textAlign } from "../lib/classes";
 
 export default defineType({
     title: 'Disclosure Section',
@@ -93,6 +93,8 @@ export default defineType({
             group: 'settings'
         },
         colorOptions,
+        paddingTop,
+        paddingBottom,
     ],
     preview: {
         select: {

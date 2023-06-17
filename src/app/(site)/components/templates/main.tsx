@@ -141,6 +141,21 @@ export default function Main({
                     border: `1px solid ${section?.secondaryButton?.buttonBorderColor?.hex}`
                 }
 
+                const settingsSchema = {
+                    // PRIMARY BUTTON
+                    primaryButtonText: section?.buttonLinking?.buttonText,
+                    primaryButtonLink: section?.buttonLinking,
+                    primaryButtonStyle: primaryButton,
+                    // SECONDARY BUTTON
+                    secondaryButtonLink: section?.secondButtonLinking,
+                    secondaryButtonText: section?.secondButtonLinking?.buttonText,
+                    secondaryButtonStyle: secondaryButton,
+                    // SETTINGS SCHEMA
+                    backgroundStyles: backgroundStyles,
+                    paddingTop: section?.paddingTop,
+                    paddingBottom: section?.paddingBottom
+                }
+
 
                 if (section._type === 'hero') {
                     return (
@@ -187,14 +202,7 @@ export default function Main({
                                     blurData={section?.imageData?.asset?.lqip}
                                     textAlign={section?.textAlign}
                                     textColor={section?.textColor?.hex}
-                                    // PRIMARY BUTTON
-                                    primaryButtonText={section?.buttonLinking?.buttonText}
-                                    primaryButtonLink={section?.buttonLinking}
-                                    primaryButtonStyle={primaryButton}
-                                    // SECONDARY BUTTON
-                                    secondaryButtonLink={section?.secondButtonLinking}
-                                    secondaryButtonText={section?.secondButtonLinking?.buttonText}
-                                    secondaryButtonStyle={secondaryButton}
+                                    {...settingsSchema}
                                 />
                             }
                             {section?.layoutType === "basic" &&
@@ -206,14 +214,7 @@ export default function Main({
                                     blurData={section?.imageData?.asset?.lqip}
                                     textAlign={section?.textAlign}
                                     textColor={section?.textColor?.hex}
-                                    // PRIMARY BUTTON
-                                    primaryButtonText={section?.buttonLinking?.buttonText}
-                                    primaryButtonLink={section?.buttonLinking}
-                                    primaryButtonStyle={primaryButton}
-                                    // SECONDARY BUTTON
-                                    secondaryButtonLink={section?.secondButtonLinking}
-                                    secondaryButtonText={section?.secondButtonLinking?.buttonText}
-                                    secondaryButtonStyle={secondaryButton}
+                                    {...settingsSchema}
                                 />
                             }
                         </>
@@ -227,8 +228,8 @@ export default function Main({
                             content={section?.content}
                             layoutType={section?.layoutType}
                             heading={section?.heading}
-                            backgroundStyles={backgroundStyles}
-                        />
+                            {...settingsSchema}
+                            />
                     );
                 }
 
@@ -241,15 +242,8 @@ export default function Main({
                                     images={section?.childImage}
                                     disablePagination={section?.disablePagination}
                                     textAlign={section?.textAlign}
-                                    backgroundStyles={backgroundStyles}
-                                    // PRIMARY BUTTON
-                                    primaryButtonText={section?.buttonLinking?.buttonText}
-                                    primaryButtonLink={section?.buttonLinking}
-                                    primaryButtonStyle={primaryButton}
-                                    // SECONDARY BUTTON
-                                    secondaryButtonLink={section?.secondButtonLinking}
-                                    secondaryButtonText={section?.secondButtonLinking?.buttonText}
-                                    secondaryButtonStyle={secondaryButton}
+                                    {...settingsSchema}
+
                                 />
                                 :
                                 <GallerySwiper
@@ -259,15 +253,7 @@ export default function Main({
                                     disableNavigation={section?.disableNavigation}
                                     slideNumber={section?.slideNumber}
                                     textAlign={section?.textAlign}
-                                    backgroundStyles={backgroundStyles}
-                                    // PRIMARY BUTTON
-                                    primaryButtonText={section?.buttonLinking?.buttonText}
-                                    primaryButtonLink={section?.buttonLinking}
-                                    primaryButtonStyle={primaryButton}
-                                    // SECONDARY BUTTON
-                                    secondaryButtonLink={section?.secondButtonLinking}
-                                    secondaryButtonText={section?.secondButtonLinking?.buttonText}
-                                    secondaryButtonStyle={secondaryButton}
+                                    {...settingsSchema}
                                     navigationColors={section?.navigationColors?.hex}
                                 />
                             }
@@ -283,15 +269,8 @@ export default function Main({
                                     key={section?._key}
                                     textAlign={section?.textAlign}
                                     content={section?.content}
-                                    // PRIMARY BUTTON
-                                    primaryButtonText={section?.buttonLinking?.buttonText}
-                                    primaryButtonLink={section?.buttonLinking}
-                                    primaryButtonStyle={primaryButton}
-                                    // SECONDARY BUTTON
-                                    secondaryButtonLink={section?.secondButtonLinking}
-                                    secondaryButtonText={section?.secondButtonLinking?.buttonText}
-                                    secondaryButtonStyle={secondaryButton}
-                                    backgroundStyles={backgroundStyles}
+                                    {...settingsSchema}
+
                                 />
                             }
                             {section.layoutType === 'textAndImage' &&
@@ -302,15 +281,7 @@ export default function Main({
                                     reverseColumn={section?.reverseColumn}
                                     altText={section?.imageData?.asset?.altText}
                                     blurData={section?.imageData?.asset?.lqip}
-                                    // PRIMARY BUTTON
-                                    primaryButtonText={section?.buttonLinking?.buttonText}
-                                    primaryButtonLink={section?.buttonLinking}
-                                    primaryButtonStyle={primaryButton}
-                                    // SECONDARY BUTTON
-                                    secondaryButtonLink={section?.secondButtonLinking}
-                                    secondaryButtonText={section?.secondButtonLinking?.buttonText}
-                                    secondaryButtonStyle={secondaryButton}
-                                    backgroundStyles={backgroundStyles}
+                                    {...settingsSchema}
                                     textAlign={section?.textAlign}
                                 />
                             }
@@ -323,15 +294,7 @@ export default function Main({
                                     altText={section?.imageData?.asset?.altText}
                                     blurData={section?.imageData?.asset?.lqip}
                                     textAlign={section?.textAlign}
-                                    backgroundStyles={backgroundStyles}
-                                    // PRIMARY BUTTON
-                                    primaryButtonText={section?.buttonLinking?.buttonText}
-                                    primaryButtonLink={section?.buttonLinking}
-                                    primaryButtonStyle={primaryButton}
-                                    // SECONDARY BUTTON
-                                    secondaryButtonLink={section?.secondButtonLinking}
-                                    secondaryButtonText={section?.secondButtonLinking?.buttonText}
-                                    secondaryButtonStyle={secondaryButton}
+                                    {...settingsSchema}
                                 />
                             }
                             {section.layoutType === 'ButtonRightTextLeft' &&
@@ -358,17 +321,9 @@ export default function Main({
                         <LogoCloudSection
                             key={section?._key}
                             content={section?.content}
-                            backgroundStyles={backgroundStyles}
                             images={section?.childImage}
                             textAlign={section?.textAlign}
-                            // PRIMARY BUTTON
-                            primaryButtonText={section?.buttonLinking?.buttonText}
-                            primaryButtonLink={section?.buttonLinking}
-                            primaryButtonStyle={primaryButton}
-                            // SECONDARY BUTTON
-                            secondaryButtonLink={section?.secondButtonLinking}
-                            secondaryButtonText={section?.secondButtonLinking?.buttonText}
-                            secondaryButtonStyle={secondaryButton}
+                            {...settingsSchema}
                         />
                     );
                 }
@@ -383,15 +338,7 @@ export default function Main({
                             columnNumber={section?.columnNumber}
                             content={section?.content}
                             textAlign={section?.textAlign}
-                            backgroundStyles={backgroundStyles}
-                            // PRIMARY BUTTON
-                            primaryButtonText={section?.buttonLinking?.buttonText}
-                            primaryButtonLink={section?.buttonLinking}
-                            primaryButtonStyle={primaryButton}
-                            // SECONDARY BUTTON
-                            secondaryButtonLink={section?.secondButtonLinking}
-                            secondaryButtonText={section?.secondButtonLinking?.buttonText}
-                            secondaryButtonStyle={secondaryButton}
+                            {...settingsSchema}
                         />
                     );
                 }
@@ -405,15 +352,7 @@ export default function Main({
                                     testimonials={allTestimonials}
                                     content={section?.content}
                                     textAlign={section?.textAlign}
-                                    backgroundStyles={backgroundStyles}
-                                    // PRIMARY BUTTON
-                                    primaryButtonText={section?.buttonLinking?.buttonText}
-                                    primaryButtonLink={section?.buttonLinking}
-                                    primaryButtonStyle={primaryButton}
-                                    // SECONDARY BUTTON
-                                    secondaryButtonLink={section?.secondButtonLinking}
-                                    secondaryButtonText={section?.secondButtonLinking?.buttonText}
-                                    secondaryButtonStyle={secondaryButton}
+                                    {...settingsSchema}
                                 />
                             }
                             {section?.layoutType == 'slider' &&
@@ -422,15 +361,7 @@ export default function Main({
                                     testimonials={allTestimonials}
                                     content={section?.content}
                                     textAlign={section?.textAlign}
-                                    backgroundStyles={backgroundStyles}
-                                    // PRIMARY BUTTON
-                                    primaryButtonText={section?.buttonLinking?.buttonText}
-                                    primaryButtonLink={section?.buttonLinking}
-                                    primaryButtonStyle={primaryButton}
-                                    // SECONDARY BUTTON
-                                    secondaryButtonLink={section?.secondButtonLinking}
-                                    secondaryButtonText={section?.secondButtonLinking?.buttonText}
-                                    secondaryButtonStyle={secondaryButton}
+                                    {...settingsSchema}
                                     slideNumber={section?.slideNumber}
                                     navigationColors={section?.navigationColors?.hex}
                                 />
@@ -441,17 +372,7 @@ export default function Main({
                                     testimonials={allTestimonials}
                                     content={section?.content}
                                     textAlign={section?.textAlign}
-                                    backgroundStyles={backgroundStyles}
-                                    // PRIMARY BUTTON
-                                    primaryButtonText={section?.buttonLinking?.buttonText}
-                                    primaryButtonLink={section?.buttonLinking}
-                                    primaryButtonStyle={primaryButton}
-                                    // SECONDARY BUTTON
-                                    secondaryButtonLink={section?.secondButtonLinking}
-                                    secondaryButtonText={section?.secondButtonLinking?.buttonText}
-                                    secondaryButtonStyle={secondaryButton}
-                                    slideNumber={section?.slideNumber}
-                                    navigationColors={section?.navigationColors?.hex}
+                                    {...settingsSchema}
                                 />
                             }
                         </>
@@ -466,17 +387,9 @@ export default function Main({
                                     key={section?._key}
                                     columnNumber={section?.columnNumber}
                                     blocks={section?.childBlocks}
-                                    backgroundStyles={backgroundStyles}
                                     content={section?.content}
                                     textAlign={section?.textAlign}
-                                    // PRIMARY BUTTON
-                                    primaryButtonText={section?.buttonLinking?.buttonText}
-                                    primaryButtonLink={section?.buttonLinking}
-                                    primaryButtonStyle={primaryButton}
-                                    // SECONDARY BUTTON
-                                    secondaryButtonLink={section?.secondButtonLinking}
-                                    secondaryButtonText={section?.secondButtonLinking?.buttonText}
-                                    secondaryButtonStyle={secondaryButton}
+                                    {...settingsSchema}
                                 />
                             }
                             {section?.layoutType === 'featuredGridIcon' &&
@@ -484,17 +397,9 @@ export default function Main({
                                     key={section?._key}
                                     columnNumber={section?.columnNumber}
                                     blocks={section?.childBlocks}
-                                    backgroundStyles={backgroundStyles}
                                     content={section?.content}
                                     textAlign={section?.textAlign}
-                                    // PRIMARY BUTTON
-                                    primaryButtonText={section?.buttonLinking?.buttonText}
-                                    primaryButtonLink={section?.buttonLinking}
-                                    primaryButtonStyle={primaryButton}
-                                    // SECONDARY BUTTON
-                                    secondaryButtonLink={section?.secondButtonLinking}
-                                    secondaryButtonText={section?.secondButtonLinking?.buttonText}
-                                    secondaryButtonStyle={secondaryButton}
+                                    {...settingsSchema}
                                 />
                             }
                             {section?.layoutType === 'gridWithTextInside' &&
@@ -502,17 +407,9 @@ export default function Main({
                                     key={section?._key}
                                     columnNumber={section?.columnNumber}
                                     blocks={section?.childBlocks}
-                                    backgroundStyles={backgroundStyles}
                                     content={section?.content}
                                     textAlign={section?.textAlign}
-                                    // PRIMARY BUTTON
-                                    primaryButtonText={section?.buttonLinking?.buttonText}
-                                    primaryButtonLink={section?.buttonLinking}
-                                    primaryButtonStyle={primaryButton}
-                                    // SECONDARY BUTTON
-                                    secondaryButtonLink={section?.secondButtonLinking}
-                                    secondaryButtonText={section?.secondButtonLinking?.buttonText}
-                                    secondaryButtonStyle={secondaryButton}
+                                    {...settingsSchema}
                                 />
                             }
                             {section?.layoutType === 'featuredBox' &&
@@ -522,17 +419,9 @@ export default function Main({
                                     offsetTop={section?.offsetTop}
                                     columnNumber={section?.columnNumber}
                                     blocks={section?.childBlocks}
-                                    backgroundStyles={backgroundStyles}
                                     content={section?.content}
                                     textAlign={section?.textAlign}
-                                    // PRIMARY BUTTON
-                                    primaryButtonText={section?.buttonLinking?.buttonText}
-                                    primaryButtonLink={section?.buttonLinking}
-                                    primaryButtonStyle={primaryButton}
-                                    // SECONDARY BUTTON
-                                    secondaryButtonLink={section?.secondButtonLinking}
-                                    secondaryButtonText={section?.secondButtonLinking?.buttonText}
-                                    secondaryButtonStyle={secondaryButton}
+                                    {...settingsSchema}
                                 />
                             }
                         </>
@@ -549,17 +438,9 @@ export default function Main({
                                     disclosureBackgroundColor={section?.disclosureBackgroundColor}
                                     disclosureTextColor={section?.disclosureTextColor}
                                     disclosureContentColor={section?.disclosureContentColor}
-                                    backgroundStyles={backgroundStyles}
                                     content={section?.content}
                                     textAlign={section?.textAlign}
-                                    // PRIMARY BUTTON
-                                    primaryButtonText={section?.buttonLinking?.buttonText}
-                                    primaryButtonLink={section?.buttonLinking}
-                                    primaryButtonStyle={primaryButton}
-                                    // SECONDARY BUTTON
-                                    secondaryButtonLink={section?.secondButtonLinking}
-                                    secondaryButtonText={section?.secondButtonLinking?.buttonText}
-                                    secondaryButtonStyle={secondaryButton}
+                                    {...settingsSchema}
                                 />
                             }
                             {section?.layoutType === 'fullWidth' &&
@@ -569,17 +450,9 @@ export default function Main({
                                     disclosureBackgroundColor={section?.disclosureBackgroundColor}
                                     disclosureTextColor={section?.disclosureTextColor}
                                     disclosureContentColor={section?.disclosureContentColor}
-                                    backgroundStyles={backgroundStyles}
                                     content={section?.content}
                                     textAlign={section?.textAlign}
-                                    // PRIMARY BUTTON
-                                    primaryButtonText={section?.buttonLinking?.buttonText}
-                                    primaryButtonLink={section?.buttonLinking}
-                                    primaryButtonStyle={primaryButton}
-                                    // SECONDARY BUTTON
-                                    secondaryButtonLink={section?.secondButtonLinking}
-                                    secondaryButtonText={section?.secondButtonLinking?.buttonText}
-                                    secondaryButtonStyle={secondaryButton}
+                                    {...settingsSchema}
                                 />
                             }
                             {section?.layoutType === 'separated' &&
@@ -589,17 +462,9 @@ export default function Main({
                                     disclosureBackgroundColor={section?.disclosureBackgroundColor}
                                     disclosureTextColor={section?.disclosureTextColor}
                                     disclosureContentColor={section?.disclosureContentColor}
-                                    backgroundStyles={backgroundStyles}
                                     content={section?.content}
                                     textAlign={section?.textAlign}
-                                    // PRIMARY BUTTON
-                                    primaryButtonText={section?.buttonLinking?.buttonText}
-                                    primaryButtonLink={section?.buttonLinking}
-                                    primaryButtonStyle={primaryButton}
-                                    // SECONDARY BUTTON
-                                    secondaryButtonLink={section?.secondButtonLinking}
-                                    secondaryButtonText={section?.secondButtonLinking?.buttonText}
-                                    secondaryButtonStyle={secondaryButton}
+                                    {...settingsSchema}
                                 />
                             }
                         </>
@@ -617,15 +482,7 @@ export default function Main({
                                     content={section?.content}
                                     imageData={section?.imageData?.asset?.url}
                                     textAlign={section?.textAlign}
-                                    backgroundStyles={backgroundStyles}
-                                    // PRIMARY BUTTON
-                                    primaryButtonText={section?.buttonLinking?.buttonText}
-                                    primaryButtonLink={section?.buttonLinking}
-                                    primaryButtonStyle={primaryButton}
-                                    // SECONDARY BUTTON
-                                    secondaryButtonLink={section?.secondButtonLinking}
-                                    secondaryButtonText={section?.secondButtonLinking?.buttonText}
-                                    secondaryButtonStyle={secondaryButton}
+                                    {...settingsSchema}
                                 />
                                 :
                                 <ServiceGrid
@@ -635,15 +492,7 @@ export default function Main({
                                     imageData={section?.imageData?.asset?.url}
                                     columnNumber={section?.columnNumber}
                                     textAlign={section?.textAlign}
-                                    backgroundStyles={backgroundStyles}
-                                    // PRIMARY BUTTON
-                                    primaryButtonText={section?.buttonLinking?.buttonText}
-                                    primaryButtonLink={section?.buttonLinking}
-                                    primaryButtonStyle={primaryButton}
-                                    // SECONDARY BUTTON
-                                    secondaryButtonLink={section?.secondButtonLinking}
-                                    secondaryButtonText={section?.secondButtonLinking?.buttonText}
-                                    secondaryButtonStyle={secondaryButton}
+                                    {...settingsSchema}
                                 />
                             }
                         </>
@@ -657,15 +506,7 @@ export default function Main({
                             team={allTeam}
                             content={section?.content}
                             textAlign={section?.textAlign}
-                            backgroundStyles={backgroundStyles}
-                            // PRIMARY BUTTON
-                            primaryButtonText={section?.buttonLinking?.buttonText}
-                            primaryButtonLink={section?.buttonLinking}
-                            primaryButtonStyle={primaryButton}
-                            // SECONDARY BUTTON
-                            secondaryButtonLink={section?.secondButtonLinking}
-                            secondaryButtonText={section?.secondButtonLinking?.buttonText}
-                            secondaryButtonStyle={secondaryButton}
+                            {...settingsSchema}
                         />
                     );
                 }
@@ -677,15 +518,7 @@ export default function Main({
                             blog={allBlog}
                             content={section?.content}
                             textAlign={section?.textAlign}
-                            backgroundStyles={backgroundStyles}
-                            // PRIMARY BUTTON
-                            primaryButtonText={section?.buttonLinking?.buttonText}
-                            primaryButtonLink={section?.buttonLinking}
-                            primaryButtonStyle={primaryButton}
-                            // SECONDARY BUTTON
-                            secondaryButtonLink={section?.secondButtonLinking}
-                            secondaryButtonText={section?.secondButtonLinking?.buttonText}
-                            secondaryButtonStyle={secondaryButton}
+                            {...settingsSchema}
                         />
                     );
                 }
@@ -732,16 +565,8 @@ export default function Main({
                             key={section?._key}
                             formSchema={section?.formBuilder}
                             content={section?.content}
-                            backgroundStyles={backgroundStyles}
                             textAlign={section?.textAlign}
-                            // PRIMARY BUTTON
-                            primaryButtonText={section?.buttonLinking?.buttonText}
-                            primaryButtonLink={section?.buttonLinking}
-                            primaryButtonStyle={primaryButton}
-                            // SECONDARY BUTTON
-                            secondaryButtonLink={section?.secondButtonLinking}
-                            secondaryButtonText={section?.secondButtonLinking?.buttonText}
-                            secondaryButtonStyle={secondaryButton}
+                            {...settingsSchema}
                         />
                     );
                 }

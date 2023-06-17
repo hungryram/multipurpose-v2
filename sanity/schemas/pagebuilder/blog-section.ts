@@ -1,5 +1,5 @@
 import { defineType } from "sanity";
-import { colorOptions, primaryButton, secondaryButton, textAlign } from "../lib/classes";
+import { colorOptions, paddingBottom, paddingTop, primaryButton, secondaryButton, textAlign } from "../lib/classes";
 
 
 export default defineType({
@@ -27,7 +27,9 @@ export default defineType({
         },
         primaryButton,
         secondaryButton,
-        colorOptions
+        colorOptions,
+        paddingTop,
+        paddingBottom,
     ],
     preview: {
         select: {

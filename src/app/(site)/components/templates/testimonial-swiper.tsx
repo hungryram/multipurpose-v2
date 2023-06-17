@@ -19,7 +19,9 @@ interface Props {
   backgroundStyles: any;
   secondaryButtonStyle: any
   slideNumber: number;
-  navigationColors: string
+  navigationColors: string;
+  paddingTop: string;
+  paddingBottom: string;
 }
 
 export default function TestimonialSwiper({
@@ -34,10 +36,20 @@ export default function TestimonialSwiper({
   secondaryButtonLink,
   secondaryButtonText,
   secondaryButtonStyle,
-  navigationColors
+  navigationColors,
+  paddingTop,
+  paddingBottom,
 }: Props) {
+
+  const styles = {
+    paddingTop: paddingTop ?? '5rem',
+    paddingBottom: paddingBottom ?? '5rem',
+  }
+
+  const allStyles = { ...backgroundStyles, ...styles }
+
   return (
-    <div className="section" style={backgroundStyles}>
+    <div style={allStyles}>
       <div className="container">
         {(content || primaryButtonLink || secondaryButtonLink) && (
           <HeaderSection

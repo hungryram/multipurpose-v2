@@ -1,6 +1,7 @@
 import React from 'react';
 import { submitForm } from './_formActions'
 import Styles from "./form-builder.module.css"
+import ContentEditor from '../util/content-editor';
 
 interface FormField {
   name: string;
@@ -25,6 +26,7 @@ interface FormSchema {
   buttonLabel: string;
   buttonBackgroundColor: any;
   buttonTextColor: any;
+  formDisclaimer: any;
 }
 
 interface FormBuilderProps {
@@ -33,7 +35,7 @@ interface FormBuilderProps {
 
 export default function FormBuilder({ formSchema }: FormBuilderProps) {
   return (
-    <div className="py-2 px-4">
+    <div className="py-2">
       <form action={submitForm}>
         <label className="hidden" htmlFor="name-honey" />
         <input className="hidden" type="text" name="name-honey" />
@@ -152,6 +154,11 @@ export default function FormBuilder({ formSchema }: FormBuilderProps) {
             })}
           </>
         )}
+        {formSchema?.formDisclaimer &&
+          <ContentEditor 
+            content={formSchema?.formDisclaimer}
+          />
+        }
         <button type="submit" className="primary-button" style={{
           backgroundColor: formSchema?.buttonBackgroundColor?.hex,
           color: formSchema?.buttonTextColor?.hex

@@ -17,7 +17,9 @@ interface Props {
     primaryButtonStyle: any;
     secondaryButtonText: string;
     secondaryButtonLink: string;
-    secondaryButtonStyle: any
+    secondaryButtonStyle: any;
+    paddingTop: string;
+    paddingBottom: string;
 }
 
 interface Block {
@@ -42,7 +44,9 @@ export default function DisclosureGrid({
     primaryButtonStyle,
     secondaryButtonLink,
     secondaryButtonText,
-    secondaryButtonStyle
+    secondaryButtonStyle,
+    paddingTop,
+    paddingBottom,
 }: Props) {
 
     function toPlainText(blocks: Block[] = []): string {
@@ -72,13 +76,20 @@ export default function DisclosureGrid({
         }))
     };
 
+    const styles = {
+        paddingTop: paddingTop ?? '5rem',
+        paddingBottom: paddingBottom ?? '5rem',
+      }
+    
+      const allStyles = { ...backgroundStyles, ...styles }
+
     return (
         <>
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaMarkup) }}
             />
-            <div className="section" style={backgroundStyles}>
+            <div style={allStyles}>
                 <div className="container">
                     <div className="lg:grid lg:grid-cols-12 lg:gap-8">
                         <div className="lg:col-span-5">

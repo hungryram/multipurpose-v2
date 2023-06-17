@@ -25,7 +25,9 @@ interface Props {
     disablePagination: boolean;
     disableNavigation: boolean;
     slideNumber: number
-    navigationColors: string
+    navigationColors: string;
+    paddingTop: string;
+    paddingBottom: string;
 }
 
 const GallerySwiper = ({
@@ -42,7 +44,9 @@ const GallerySwiper = ({
     disablePagination,
     navigationColors,
     disableNavigation,
-    slideNumber
+    slideNumber,
+    paddingTop,
+    paddingBottom,
 }: Props) => {
     const [lightboxOpen, setLightboxOpen] = useState(false);
     const [selectedImage, setSelectedImage] = useState("");
@@ -81,8 +85,15 @@ const GallerySwiper = ({
         }
     }, [lightboxOpen]);
 
+    const styles = {
+        paddingTop: paddingTop ?? '5rem',
+        paddingBottom: paddingBottom ?? '5rem',
+      }
+    
+      const allStyles = { ...backgroundStyles, ...styles }
+
     return (
-        <div className="section" style={backgroundStyles}>
+        <div style={allStyles}>
             <div className="container">
                 {(content || primaryButtonLink || secondaryButtonLink) && (
                     <HeaderSection
