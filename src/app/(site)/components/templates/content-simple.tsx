@@ -5,8 +5,8 @@ interface Props {
     layoutType: string,
     heading: string,
     backgroundStyles: any,
-    paddingTop: string,
-    paddingBottom: string
+    paddingTop?: string,
+    paddingBottom?: string
 }
 
 export default function ContentSimple({

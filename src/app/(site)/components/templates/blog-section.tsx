@@ -13,8 +13,8 @@ interface Props {
     secondaryButtonLink: string;
     secondaryButtonStyle: any;
     backgroundStyles: any
-    paddingTop: string
-    paddingBottom: string
+    paddingTop?: string,
+    paddingBottom?: string
 }
 
 export default function BlogSection({

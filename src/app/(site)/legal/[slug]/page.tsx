@@ -2,6 +2,7 @@ import { notFound } from "next/navigation"
 import { getLegal } from "../../../../../lib/groq-data"
 import ContentSimple from "../../components/templates/content-simple"
 import { Metadata } from 'next';
+import ContentEditor from "../../components/util/content-editor";
 
 interface Props {
     params: {
@@ -61,7 +62,7 @@ export default async function LegalSlug({ params }: Props) {
             <div className="mx-auto max-w-3xl text-base leading-7 text-gray-700 content">
                 <h1>{legal?.legal?.title}</h1>
                 <hr />
-                <ContentSimple
+                <ContentEditor
                     content={legal?.legal?.content}
                 />
             </div>

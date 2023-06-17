@@ -11,8 +11,8 @@ interface Props {
     primaryButtonStyle: any;
     secondaryButtonStyle: any;
     secondaryButtonText: string;
-    paddingTop: string,
-    paddingBottom: string
+    paddingTop?: string,
+    paddingBottom?: string
 }
 
 export default function CalltoActionLeftText({
