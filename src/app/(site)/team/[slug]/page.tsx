@@ -29,12 +29,12 @@ export async function generateMetadata({ params }: Meta): Promise<Metadata> {
         title: teamMetaData?.team?.seo?.title_tag,
         description: teamMetaData?.team?.seo?.meta_description,
         alternates: {
-            canonical: teamMetaData?.team?.slug
+            canonical: 'team/' + teamMetaData?.team?.slug
         },
         openGraph: {
             title: teamMetaData?.team?.seo?.title_tag,
             description: teamMetaData?.team?.seo?.meta_description,
-            url: teamMetaData?.team?.slug,
+            url: 'team/' + teamMetaData?.team?.slug,
             siteName: teamMetaData?.profileSettings?.company_name,
             locale: 'en-US',
             type: 'website',

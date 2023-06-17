@@ -5,6 +5,7 @@ import ShareSocial from '../../components/templates/share-social'
 import { notFound } from 'next/navigation'
 import { Metadata } from 'next';
 import { format, parseISO } from 'date-fns'
+import ContentEditor from '../../components/util/content-editor'
 
 type Props = {
     params: {
@@ -124,7 +125,7 @@ export default async function BlogSlug({ params }: Props) {
                         height={800}
                     />
                     <div className="content">
-                        <ContentSimple
+                        <ContentEditor
                             content={post?.blog?.content}
                         />
                     </div>
