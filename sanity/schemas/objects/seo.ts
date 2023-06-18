@@ -18,6 +18,11 @@ export default defineType({
             title: 'Meta Description',
             name: 'meta_description',
             type: 'text'
+        },
+        {
+            title: 'No Index Page',
+            name: 'noIndex',
+            type: 'boolean'
         }
     ]
 })

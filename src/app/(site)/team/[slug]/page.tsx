@@ -50,6 +50,10 @@ export async function generateMetadata({ params }: Meta): Promise<Metadata> {
             shortcut: teamMetaData.appearances.branding.favicon.asset.url,
             apple: teamMetaData.appearances.branding.favicon.asset.url,
         },
+        robots: {
+            index: teamMetaData?.team?.seo?.noIndex ? false : true,
+            follow: teamMetaData?.team?.seo?.noIndex ? false : true,
+        }
     }
 }
 

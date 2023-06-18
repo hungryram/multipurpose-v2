@@ -49,6 +49,10 @@ export async function generateMetadata({ params }: Meta): Promise<Metadata> {
             shortcut: post.appearances?.branding?.favicon?.asset?.url,
             apple: post.appearances?.branding?.favicon?.asset?.url,
         },
+        robots: {
+            index: post?.blog?.seo?.noIndex ? false : true,
+            follow: post?.blog?.seo?.noIndex ? false : true,
+        }
     }
 }
 

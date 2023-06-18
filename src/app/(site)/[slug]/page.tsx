@@ -51,8 +51,8 @@ export async function generateMetadata({ params }: Meta): Promise<Metadata> {
             apple: page.appearances?.branding?.favicon?.asset?.url,
         },
         robots: {
-            index: true,
-            follow: true
+            index: page?.pages?.seo?.noIndex ? false : true,
+            follow: page?.pages?.seo?.noIndex ? false : true,
         }
     }
 }
