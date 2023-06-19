@@ -10,28 +10,55 @@ export const submitForm = async (data) => {
 
     data.forEach((value, name) => {
         if (
-            !name.includes('$ACTION_ID') &&
-            name !== 'bcc' &&
-            name !== 'cc' &&
-            name !== 'name-honey' &&
-            name !== 'sendTo' &&
-            name !== 'sendFrom' &&
-            name !== 'subject' &&
-            name !== 'redirectTo'
+          !name.includes('$ACTION_ID') &&
+          name !== 'bcc' &&
+          name !== 'cc' &&
+          name !== 'name-honey' &&
+          name !== 'sendTo' &&
+          name !== 'sendFrom' &&
+          name !== 'subject' &&
+          name !== 'redirectTo'
         ) {
-            if (name === 'Email') {
-                email = value;
+          if (name === 'Email') {
+            email = value;
+          } else {
+            if (formData[name]) {
+              formData[name] = Array.isArray(formData[name])
+                ? [...formData[name], value]
+                : [formData[name], value];
             } else {
-                if (formData[name]) {
-                    formData[name] = Array.isArray(formData[name])
-                        ? [...formData[name], value]
-                        : [formData[name], value];
-                } else {
-                    formData[name] = value;
-                }
+              formData[name] = value;
             }
+      
+            // Check if the field is a file input
+            const field = data.get(name);
+            if (field instanceof FileList) {
+              const files = Array.from(field);
+              files.forEach((file) => {
+                
+                // Read the file data and convert it to Base64 encoding
+                const fileData = fs.readFileSync(file.path);
+                const base64FileData = fileData.toString('base64');
+      
+                // Add the file as an attachment to the Postmark email
+                const fileAttachment = {
+                  Name: file.name,
+                  Content: base64FileData,
+                  ContentType: file.type,
+                };
+      
+                // Add the attachment to the formData
+                if (formData[name].attachments) {
+                  formData[name].attachments.push(fileAttachment);
+                } else {
+                  formData[name].attachments = [fileAttachment];
+                }
+              });
+            }
+          }
         }
-    });
+      });
+      
 
     const tableRows = Object.entries(formData).map(([key, value]) => {
         if (Array.isArray(value)) {
@@ -76,12 +103,13 @@ export const submitForm = async (data) => {
                 "ReplyTo": email,
                 "Subject": data.get('subject'),
                 "HtmlBody": htmlBody,
+                "Attachments": [fileAttachment],
             })
                 .then((res) => res)
                 .catch((err) => console.error(err))
 
             if (response?.Message === 'OK') {
-                return redirect(`/${data.get('redirectTo')}`)
+                return redirect(`${data.get('redirectTo')}`)
             }
         } else {
             console.error("Postmark API token is missing.");

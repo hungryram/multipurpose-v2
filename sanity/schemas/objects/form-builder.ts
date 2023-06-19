@@ -86,7 +86,8 @@ export default defineType({
                                     { title: 'Checkbox', value: 'checkbox' },
                                     { title: 'Select', value: 'select' },
                                     { title: 'Radio Buttons', value: 'radio' },
-                                    { title: 'Textarea', value: 'textarea' }
+                                    { title: 'Textarea', value: 'textarea' },
+                                    { title: 'File Attachments', value: 'file' }
                                     // Add more field types as needed
                                 ],
                             },

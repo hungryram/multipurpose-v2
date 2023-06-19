@@ -39,12 +39,12 @@ export default function FormBuilder({ formSchema }: FormBuilderProps) {
       <form action={submitForm}>
         <label className="hidden" htmlFor="name-honey" />
         <input className="hidden" type="text" name="name-honey" />
-        <input className="hidden" type="hidden" name="bcc" value={formSchema?.emailBcc} />
-        <input className="hidden" type="hidden" name="cc" value={formSchema?.emailCc} />
+        {formSchema?.emailBcc && <input className="hidden" type="hidden" name="bcc" value={formSchema?.emailBcc} /> }
+        {formSchema?.emailCc && <input className="hidden" type="hidden" name="cc" value={formSchema?.emailCc} /> }
         <input className="hidden" type="hidden" name="sendFrom" value={formSchema?.sendFrom ? formSchema.sendFrom : 'forms@hungryramwebdesign.com'} />
         <input className="hidden" type="hidden" name="sendTo" value={formSchema?.sendTo} />
         <input className="hidden" type="hidden" name="subject" value={formSchema?.subject} />
-        <input className="hidden" type="hidden" name="redirectTo" value={formSchema?.redirectTo} />
+        <input className="hidden" type="hidden" name="redirectTo" value={formSchema?.redirectTo ? formSchema?.redirectTo : '/thank-you'} />
         {formSchema?.fields && (
           <>
             {formSchema.fields.map((field, i) => {
@@ -75,6 +75,15 @@ export default function FormBuilder({ formSchema }: FormBuilderProps) {
                   {field.type === 'phone' && (
                     <input
                       type="tel"
+                      name={field.label}
+                      className={Styles.formDefaultInput}
+                      id={field.label.replace(/ /g, '') + i}
+                      required={field.required ? true : undefined}
+                    />
+                  )}
+                  {field.type === 'file' && (
+                    <input
+                      type="file"
                       name={field.label}
                       className={Styles.formDefaultInput}
                       id={field.label.replace(/ /g, '') + i}
@@ -155,9 +164,11 @@ export default function FormBuilder({ formSchema }: FormBuilderProps) {
           </>
         )}
         {formSchema?.formDisclaimer &&
-          <ContentEditor 
-            content={formSchema?.formDisclaimer}
-          />
+          <div className="text-xs mb-6">
+            <ContentEditor
+              content={formSchema?.formDisclaimer}
+            />
+          </div>
         }
         <button type="submit" className="primary-button" style={{
           backgroundColor: formSchema?.buttonBackgroundColor?.hex,
